@@ -1,0 +1,119 @@
+/******************* Navbar for large screens ***************/
+$large-screen: 992px;
+
+@media (min-width: $large-screen) {
+  /********* Top Nav **************/
+  .topNav {
+    display: block;
+    // background-color: #f7f8f7;
+    box-shadow: none;
+    z-index: 1000;
+    position: fixed;
+    margin: 0;
+    width: 100%;
+    height: 144px;
+  }
+
+  .innerTopNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f7f8f7;
+    box-shadow: none;
+    margin: 0;
+    padding: 15px 80px;
+  }
+
+  .langImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .topMenu {
+    display: flex;
+    font-size: 24px;
+    color: #212529;
+    gap: 20px;
+  }
+
+  .topMenu > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .topMenu_icon_title {
+    font-size: 12px;
+    margin: 0;
+    color: #565656;
+  }
+
+  /*************** Main Nav *****************/
+  .mainNav {
+    display: flex;
+    margin: 0;
+    align-items: center;
+    gap: 100px;
+    // border-bottom: 2px solid #eee;
+    font-size: 19px;
+    font-weight: 200;
+    color: #484848;
+    padding: 0 80px;
+    border-radius: 0;
+    // margin-bottom: 10px;
+    // box-shadow: none !important;
+    box-shadow: 0px 12px 10px -15px #484848;
+  }
+
+  .mainNav > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    height: 60px;
+  }
+
+  .addNewAds {
+    background-color: #e30b1c;
+    height: 50px;
+    color: #fff;
+    border-radius: 10px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .menu {
+    border: 3px solid #fff;
+  }
+
+  .menu:hover,
+  .active {
+    font-weight: 700;
+    border-bottom: 3px solid #e30b1c;
+    border-radius: 3px;
+    transition: 100ms all ease-in-out;
+    cursor: pointer;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-left: -30px;
+  }
+
+  .websiteTitle {
+    width: 130px;
+    height: 60px;
+    margin-right: 80px;
+    padding: 0;
+    cursor: pointer;
+  }
+}

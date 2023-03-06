@@ -1,0 +1,67 @@
+<ion-content>
+  <!-- Header for Large screen -->
+
+  <app-navbar class="topNav"></app-navbar>
+  <!-- ---------------------------------- -->
+
+  <ion-card class="advertisement">
+    <ion-label class="adTitle">Add new advertisement</ion-label>
+    <ion-card-content class="cancelAd" (click)="goBack()">
+      <ion-label>Back</ion-label>
+      <ion-icon class="cancelIcon" name="chevron-forward"></ion-icon>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="navigationBar">
+    <div style="background-color: #e30b1c"></div>
+    <div style="background-color: #e30b1c"></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- -------- Categories Section -------- -->
+  <div class="adContent">
+    <ion-card class="categories">
+      <ion-card-header>
+        <ion-card-title class="catTitle"
+          >Real Estate Information</ion-card-title
+        >
+      </ion-card-header>
+
+      <ion-card-content class="selectOption">
+        <div *ngFor="let item of items">
+          <div [innerHTML]="item | safeHtml"></div>
+          <!-- <ion-text>Size of realestate</ion-text>
+          <ion-input
+            type="number"
+            placeholder="Size of realestate"
+            class="inputAdTitle"
+          /> -->
+        </div>
+
+        <ion-button
+          class="nextBtn"
+          color="danger"
+          expand="block"
+          (click)="goToUploadImage()"
+          >Next Step</ion-button
+        >
+      </ion-card-content>
+    </ion-card>
+
+    <div class="adImg">
+      <img src="../../../assets/images/advertisement.jpg" />
+    </div>
+  </div>
+
+  <!-- ------------ FOOTER Section --------- -->
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    id="floatingChatIcon"
+  >
+    <ion-icon name="chatbubble"></ion-icon>
+  </ion-fab>
+</ion-content>

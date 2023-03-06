@@ -1,0 +1,7 @@
+{
+  "name": "fabapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

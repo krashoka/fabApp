@@ -1,0 +1,342 @@
+<ion-content>
+  <!-- Header for Large screen -->
+
+  <app-navbar class="topNav"></app-navbar>
+
+  <!------------------------------>
+  <ion-card class="ion-no-margin header_card">
+    <ion-card-header>
+      <ion-img
+        id="fabLogoImg"
+        src="../../../assets/images/fabLogo.png"
+      ></ion-img>
+      <div>
+        <ion-icon
+          class="header_icon"
+          name="search"
+          (click)="goToStickyAds()"
+        ></ion-icon>
+        <ion-icon class="header_icon" name="notifications"></ion-icon>
+      </div>
+    </ion-card-header>
+    <div id="header_tabs">
+      <div
+        class="compSelect"
+        id="homePageTab"
+        (click)="onHomeClick()"
+        [ngClass]="{'clicked': onHomeSelect, 'select': homeNotSelect}"
+      >
+        Home Page
+      </div>
+      <div
+        id="commercialTab"
+        class="compSelect"
+        (click)="onCommercialClick()"
+        [ngClass]="{'clicked': onCommercialSelect}"
+      >
+        Commercial ads
+      </div>
+    </div>
+  </ion-card>
+
+  <!--  [ngClass]="{'clicked': homeTabComponent}" -->
+
+  <!-- ---------- Crousel --------- -->
+  <div id="homeTab">
+    <div
+      class="crousel homeTabComponent"
+      [ngClass]="{'clicked': homeTabComponent}"
+    >
+      <ion-slides [options]="option" class="topCrousel">
+        <!-- <ion-slides [options]="option" class="topCrousel" *ngIf="showHomeContent"> -->
+        <ion-slide *ngFor="let image of imageUrl">
+          <ion-card (click)="topCrousel(image.cr_id)">
+            <ion-img [src]="image.cr_img" />
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+
+      <!------------  SEARCH SECTION ------------>
+      <ion-card class="search">
+        <div class="searchTitle">
+          <ion-icon class="searchIcon" name="search"></ion-icon>
+          <ion-text>Search in FaB</ion-text>
+        </div>
+        <div class="searchFor">
+          <ion-input placeholder="Search For..." />
+          <ion-icon class="searchIcon" name="search"></ion-icon>
+        </div>
+
+        <ion-select
+          interface="popover"
+          class="selectCategory"
+          placeholder="Category"
+        >
+          <ion-select-option>fasdf</ion-select-option>
+          <ion-select-option>fasdf</ion-select-option>
+          <ion-select-option>fasdf</ion-select-option>
+        </ion-select>
+
+        <ion-select
+          interface="popover"
+          class="selectCategory"
+          placeholder="City"
+        >
+          <ion-select-option>fasdf</ion-select-option>
+          <ion-select-option>fasdf</ion-select-option>
+          <ion-select-option>fasdf</ion-select-option>
+        </ion-select>
+        <div class="searchBtn">Search</div>
+      </ion-card>
+    </div>
+
+    <div
+      class="grid homeTabComponent"
+      [ngClass]="{'clicked': homeTabComponent}"
+    >
+      <!-- <div class="grid" *ngIf="showHomeContent"> -->
+      <div (click)="goToStickyAds()" *ngFor="let category of categories">
+        <ion-card class="icons" [innerHTML]="category.icon | safeHtml">
+        </ion-card>
+        <p class="icon_title">{{ category.title }}</p>
+      </div>
+    </div>
+  </div>
+  <!-- ------- COMMERCIAL ADS SECTION for Desktop --------- -->
+  <div class="commercial">
+    <ion-card class="commercialAdsTitle">
+      <div>
+        <ion-icon style="font-size: 28px" name="megaphone"></ion-icon>
+        <ion-text>Commercials Ads</ion-text>
+      </div>
+      <div
+        style="color: #007bff; cursor: pointer"
+        (click)="goToCommercialAds()"
+      >
+        <ion-text>Read More</ion-text>
+        <ion-icon style="font-size: 24px" name="chevron-forward"></ion-icon>
+      </div>
+    </ion-card>
+
+    <ion-slides [options]="option2" class="commercialSlide">
+      <ion-slide *ngFor="let image of imageUrl">
+        <ion-card>
+          <img [src]="image" />
+          <div class="contactCommercial">
+            <div style="border-right: 1px solid #dcdcdc">
+              <ion-text>WhatsApp</ion-text>
+              <ion-img
+                class="whatsapp"
+                src="../../../assets/images/whatsapp.png"
+              />
+            </div>
+            <div>
+              <ion-text>Call</ion-text>
+              <ion-icon name="call" class="call"></ion-icon>
+            </div>
+          </div>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <!-- ---------- STICKY ADS for Desktop -------------- -->
+  <div class="commercial">
+    <ion-card class="commercialAdsTitle">
+      <div>
+        <ion-icon style="font-size: 28px" name="flash"></ion-icon>
+        <ion-text>Sticky Ads</ion-text>
+      </div>
+      <div style="color: #007bff; cursor: pointer" (click)="goToStickyAds()">
+        <ion-text>Read More</ion-text>
+        <ion-icon style="font-size: 28px" name="chevron-forward"></ion-icon>
+      </div>
+    </ion-card>
+
+    <ion-slides [options]="option2" class="stickySlide">
+      <ion-slide *ngFor="let image of imageUrl">
+        <ion-card>
+          <img [src]="image" />
+          <div class="stickyContentHeight">
+            <div class="dayAndHeart">
+              <div>
+                <ion-label>2 days ago</ion-label>
+                <ion-label class="locationSticky">Abu Dhabi</ion-label>
+              </div>
+
+              <ion-icon class="heart" name="heart-outline"></ion-icon>
+            </div>
+            <p class="adsTitle">Easy to disassemble and install</p>
+            <div class="adsPrice">
+              <ion-label>25000</ion-label>
+              <ion-label class="currency">AED</ion-label>
+            </div>
+          </div>
+          <div class="contactSticky">
+            <div style="border-right: 1px solid #dcdcdc">
+              <ion-icon name="call" class="call"></ion-icon>
+            </div>
+            <div>
+              <ion-img
+                class="whatsapp"
+                src="../../../assets/images/whatsapp.png"
+              />
+            </div>
+          </div>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <!-- --------- Sticky Ads for Mobile --------- -->
+  <div
+    id="stickyTab"
+    class="homeTabComponent"
+    [ngClass]="{'clicked': homeTabComponent}"
+  >
+    <!-- <div id="stickyTab" *ngIf="showHomeContent"> -->
+    <ion-card id="stickyAds">
+      <ion-label>Sticky Ads</ion-label>
+      <ion-icon
+        name="arrow-forward-outline"
+        (click)="goToStickyAds()"
+      ></ion-icon>
+    </ion-card>
+
+    <!------------------------ SLIDER  ------------------>
+
+    <ion-slides
+      [options]="option3"
+      style="margin-bottom: 60px"
+      id="stickySlider"
+    >
+      <ion-slide *ngFor="let image of imageUrl">
+        <div class="adsCrousel">
+          <div class="adsBorder">
+            <img class="imgHeight" [src]="image" />
+            <div class="dayAndHeart">
+              <ion-label>2 days ago</ion-label>
+              <ion-icon name="heart-outline"></ion-icon>
+            </div>
+            <p class="adsTitle">Easy to disassemble and install</p>
+            <div class="adsPrice">
+              <ion-label>2500</ion-label>
+              <ion-label class="currency">AED</ion-label>
+            </div>
+            <div class="adsButton">
+              <div class="callBtn">
+                <ion-icon name="call"></ion-icon>
+              </div>
+              <div class="whatsappBtn">
+                <ion-icon name="logo-whatsapp"></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <!-- <ion-card
+    class="commercialComponent"
+    (click)="onButtonClick()"
+    [ngClass]="{'clicked': commercialTabComponent}"
+  >
+    Something went wrong!
+  </ion-card> -->
+
+  <!-- --------- Commercial Ads for Mobile ---------- -->
+
+  <div
+    class="commercialTabComponent"
+    [ngClass]="{'clicked': commercialTabComponent}"
+  >
+    <div class="navigationText">
+      <p class="stickyCatTitle">You have 2 commercial ads</p>
+    </div>
+
+    <!-- tabs scroll code here -->
+    <div class="tabs">
+      <ion-label
+        class="tabsSlide"
+        style="background-color: #e30b1c; color: #fff"
+        >All</ion-label
+      >
+      <ion-label class="tabsSlide">Mix ads</ion-label>
+      <ion-label class="tabsSlide">Real Estate property</ion-label>
+      <ion-label class="tabsSlide">Moving furniture</ion-label>
+      <ion-label class="tabsSlide">Clean and sterilize</ion-label>
+      <ion-label class="tabsSlide">Services</ion-label>
+    </div>
+
+    <!-- ------------------ Commercial Ads -------------- -->
+    <div class="commercialAdsDisplay">
+      <ion-card *ngFor="let images of commercialImageUrl">
+        <div>
+          <img class="commercialImg" [src]="images" />
+        </div>
+        <div class="contactCommercial">
+          <div style="border-right: 1px solid #dcdcdc">
+            <ion-icon name="call" class="call"></ion-icon>
+          </div>
+          <div>
+            <ion-img
+              class="whatsapp"
+              src="../../../assets/images/whatsapp.png"
+            />
+          </div>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+  <!-- ----------------------------------------------- -->
+
+  <!-- Footer Section -->
+  <ion-footer id="footerMob">
+    <div class="footerIcons">
+      <div>
+        <div>
+          <ion-icon name="home"></ion-icon>
+        </div>
+        <p class="icon_title">Home</p>
+      </div>
+
+      <div>
+        <div>
+          <ion-icon name="person-circle"></ion-icon>
+        </div>
+        <p class="icon_title">My account</p>
+      </div>
+
+      <div id="addButton">
+        <div id="addIcon" (click)="goToAddNewAd()">
+          <ion-icon name="close-outline" color="light"></ion-icon>
+        </div>
+        <p class="icon_title" style="padding-top: 20px">Add your ad</p>
+      </div>
+
+      <div>
+        <div>
+          <ion-icon name="chatbubbles"></ion-icon>
+        </div>
+        <p class="icon_title">Chats</p>
+      </div>
+
+      <div>
+        <div>
+          <ion-icon name="menu"></ion-icon>
+        </div>
+        <p class="icon_title">More</p>
+      </div>
+    </div>
+  </ion-footer>
+
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    id="floatingChatIcon"
+  >
+    <ion-icon name="chatbubble" routerLink="/signup"></ion-icon>
+  </ion-fab>
+</ion-content>

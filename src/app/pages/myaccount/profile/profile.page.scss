@@ -1,0 +1,139 @@
+$small-screen: 576px;
+$medium-screen: 768px;
+$large-screen: 992px;
+$extra-large-screen: 1200px;
+
+@media (max-width: $small-screen) {
+  /************** Hiding elements in Mobile View **************/
+  .topNav {
+    display: none;
+  }
+}
+
+@media (min-width: $large-screen) {
+  .profile {
+    box-shadow: none !important;
+    margin: 160px 4% 0;
+  }
+  .editProfile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 26px;
+    font-weight: 700;
+    color: #484848;
+    margin-bottom: 30px;
+  }
+
+  .editIcon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    font-size: 22px;
+    padding: 12px 12px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .edit {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  //**************** Profile Details Section **************
+  .profileDetails {
+    margin: 0 4% 30px;
+    display: flex;
+    gap: 20px;
+    box-shadow: none !important;
+  }
+
+  .profileDetails > div {
+    border: 1px solid #acafb3;
+    border-radius: 5px;
+    // height: 200px;
+    width: 100%;
+    padding: 25px 20px 100px;
+    position: relative;
+  }
+
+  .username {
+    font-size: 20px;
+    font-weight: 700;
+    color: #484848;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .username > ion-icon {
+    font-size: 24px;
+  }
+
+  .usernameTip {
+    font-size: 14px;
+    color: #959c9c;
+  }
+
+  .name {
+    font-size: 16px;
+    font-weight: 700;
+    color: #484848;
+    padding-top: 20px;
+  }
+
+  .currentName {
+    border: 1px solid #acafb3;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 700;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    margin-bottom: 20px;
+    color: #484848;
+    cursor: not-allowed;
+    background-color: #e9ecef;
+  }
+
+  .inputField {
+    border: 1px solid #acafb3;
+    border-radius: 5px;
+    font-size: 16px;
+    // font-weight: 700;
+    margin-bottom: 20px;
+    color: #484848;
+  }
+
+  .save_empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    gap: 25px;
+    margin-top: 50px;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+  }
+
+  .save {
+    background-color: #e30b1c;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 13px 50px;
+    border-radius: 4px;
+  }
+
+  .empty {
+    padding: 13px 30px;
+    background-color: #f5f5f5;
+    color: #484848;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 4px;
+  }
+}

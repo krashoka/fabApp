@@ -1,0 +1,357 @@
+$small-screen: 576px;
+$medium-screen: 768px;
+$large-screen: 992px;
+$extra-large-screen: 1200px;
+
+@media (max-width: $small-screen) {
+  /************* Hiding Elements in mobile view *******************/
+  .topNav,
+  .adImg {
+    display: none;
+  }
+  //********** Advertisement title *****
+  .advertisement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: none !important;
+    margin: 60px 10px 20px;
+    color: #484848;
+    font-weight: 700;
+  }
+
+  .adTitle {
+    font-size: 15px;
+  }
+
+  .cancelAd {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 0;
+  }
+
+  .cancelIcon {
+    font-size: 16px;
+  }
+
+  .navigationBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px 40px;
+    // gap: 5px;
+  }
+
+  .navigationBar > div {
+    border-radius: 5px;
+    background-color: #eee;
+    height: 0.25rem;
+    width: 18%;
+  }
+
+  //************ Categories Section ***********
+  .categories {
+    // padding: 20px 10px;
+    border: 1px solid #eee;
+    box-shadow: none !important;
+    border-radius: 10px;
+  }
+
+  .selectOption {
+    color: #484848;
+    font-weight: 700;
+  }
+
+  .catTitle {
+    color: #484848;
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .inputAdTitle {
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-weight: lighter;
+    height: 35px;
+    font-size: 12px;
+  }
+
+  .adDetails {
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-bottom: 30px;
+    font-weight: lighter;
+  }
+
+  .nextBtn {
+    text-transform: none;
+  }
+
+  // *********** Floating Chat Icon
+  #floatingChatIcon {
+    margin: 33px 10px;
+    position: fixed;
+    background-color: #d90036;
+    color: #fff;
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/******************* Styling for large screens ***************/
+
+@media (min-width: $large-screen) {
+  /************* Hiding Elements in Desktop view *******************/
+  // .header_card,
+  // #stickyAds,
+  // #stickySlider,
+  // #footerMob {
+  //   display: none;
+  // }
+
+  /********* Top Nav **************/
+  .topNav {
+    display: block;
+    // background-color: #f7f8f7;
+    box-shadow: none;
+    z-index: 1000;
+    position: fixed;
+    margin: 0;
+    width: 100%;
+    height: 144px;
+  }
+
+  .innerTopNav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f7f8f7;
+    box-shadow: none;
+    margin: 0;
+    padding: 15px 80px;
+  }
+
+  .langImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .topMenu {
+    display: flex;
+    font-size: 24px;
+    color: #212529;
+    gap: 20px;
+  }
+
+  .topMenu > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .topMenu_icon_title {
+    font-size: 12px;
+    margin: 0;
+    color: #565656;
+  }
+
+  /*************** Main Nav *****************/
+  .mainNav {
+    display: flex;
+    margin: 0;
+    align-items: center;
+    gap: 100px;
+    // border-bottom: 2px solid #eee;
+    font-size: 19px;
+    font-weight: 200;
+    color: #484848;
+    padding: 0 80px;
+    border-radius: 0;
+    // margin-bottom: 10px;
+    // box-shadow: none !important;
+    box-shadow: 0px 12px 10px -15px #484848;
+  }
+
+  .mainNav > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+    height: 60px;
+  }
+
+  .menu {
+    border: 3px solid #fff;
+  }
+
+  .menu:hover {
+    font-weight: 700;
+    border-bottom: 3px solid #e30b1c;
+    border-radius: 3px;
+    transition: 100ms all ease-in-out;
+    cursor: pointer;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    margin-left: -30px;
+  }
+
+  .websiteTitle {
+    width: 130px;
+    height: 60px;
+    margin-right: 80px;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .addNewAds {
+    background-color: #e30b1c;
+    height: 50px;
+    color: #fff;
+    border-radius: 10px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  //********** Advertisement title *****
+  .advertisement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: none !important;
+    margin: 190px 6% 20px;
+    color: #212529;
+    font-weight: 700;
+  }
+
+  .adTitle {
+    font-size: 28px;
+  }
+
+  .cancelAd {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 0;
+    font-size: 18px;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  .cancelIcon {
+    font-size: 22px;
+  }
+
+  .navigationBar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 6% 40px;
+    gap: 25px;
+  }
+
+  .navigationBar > div {
+    border-radius: 5px;
+    background-color: #eee;
+    height: 0.3rem;
+    width: 20%;
+  }
+
+  .adContent {
+    display: flex;
+    margin: 20px 0;
+    width: 88%;
+    margin: auto;
+  }
+
+  //************* Advertisement Img ************
+  .adImg {
+    width: 45%;
+  }
+  .adImg > img {
+    padding: 0 0 0 20px;
+  }
+
+  //************ Categories Section ***********
+  .categories {
+    padding: 35px 25px;
+    border: 1px solid #d9d9d9;
+    box-shadow: none !important;
+    border-radius: 10px;
+    width: 55%;
+  }
+
+  .catTitle {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 20px;
+  }
+
+  .selectOption {
+    color: #484848;
+    font-weight: 700;
+  }
+
+  .selectOption > ion-text {
+    font-size: 16px;
+  }
+
+  .inputAdTitle {
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    font-weight: lighter;
+  }
+
+  .adDetails {
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 30px;
+    font-weight: lighter;
+  }
+
+  .nextBtn {
+    text-transform: none;
+    height: 50px;
+  }
+
+  /********** Floating Chat Icon ************/
+  #floatingChatIcon {
+    // margin: 33px 10px;
+    position: fixed;
+    right: 55px;
+    bottom: 25px;
+    background-color: #d90036;
+    color: #fff;
+    border-radius: 100%;
+    width: 80px;
+    height: 80px;
+    font-size: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}

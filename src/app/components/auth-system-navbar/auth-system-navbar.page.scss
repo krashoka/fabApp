@@ -1,0 +1,58 @@
+$small-screen: 576px;
+$medium-screen: 768px;
+$large-screen: 992px;
+$extra-large-screen: 1200px;
+
+@media (max-width: $small-screen) {
+  .header_card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    border-radius: 0;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 6px, rgba(0, 0, 0, 0.5) 0px 0px 0px;
+    padding: 5px 10px 10px;
+  }
+
+  .header_card > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    font-size: 12px;
+    color: #007bff;
+  }
+
+  #fabLogoImg {
+    width: 70px;
+    height: 40px;
+  }
+}
+
+@media (min-width: $large-screen) {
+  .header_card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+    border-radius: 0;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 6px, rgba(0, 0, 0, 0.5) 0px 0px 0px;
+    padding: 5px 4% 10px;
+  }
+
+  .header_card > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    color: #007bff;
+    cursor: pointer;
+  }
+
+  #fabLogoImg {
+    width: 130px;
+    height: 60px;
+    cursor: pointer;
+  }
+}

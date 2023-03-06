@@ -1,0 +1,64 @@
+<ion-content>
+  <!-- Header for Large screen -->
+
+  <app-navbar class="topNav"></app-navbar>
+  <!-- ---------------------------------- -->
+
+  <ion-card class="advertisement">
+    <ion-label class="adTitle">Add new advertisement</ion-label>
+    <ion-card-content class="cancelAd" (click)="goBack()">
+      <ion-label>Back</ion-label>
+      <ion-icon class="cancelIcon" name="chevron-forward"></ion-icon>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="navigationBar">
+    <div style="background-color: #e30b1c"></div>
+    <div style="background-color: #e30b1c"></div>
+    <div style="background-color: #e30b1c"></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <!-- -------- Categories Section -------- -->
+  <div class="adContent">
+    <ion-card class="categories">
+      <ion-card-header>
+        <ion-card-title class="catTitle"
+          >Upload images for the Ad</ion-card-title
+        >
+      </ion-card-header>
+
+      <ion-card-content class="selectOption">
+        <p>
+          Advertising with pictures becomes more attractive, which means more
+          contacts and views
+        </p>
+
+        <ion-card class="upload">
+          <ion-card-content class="uploadImg">
+            <ion-icon name="images" class="uploadIcon"></ion-icon>
+            <p class="uploadText">Upload Images</p>
+          </ion-card-content>
+        </ion-card>
+
+        <p style="color: #e30b1c">* You can add 12 photos</p>
+
+        <p class="skipBtn"><ion-text (click)="goToAdInfo()">Skip</ion-text></p>
+      </ion-card-content>
+    </ion-card>
+    <div class="adImg">
+      <img src="../../../assets/images/advertisement.jpg" />
+    </div>
+  </div>
+
+  <!-- ------------ FOOTER Section --------- -->
+  <ion-fab
+    slot="fixed"
+    vertical="bottom"
+    horizontal="end"
+    id="floatingChatIcon"
+  >
+    <ion-icon name="chatbubble"></ion-icon>
+  </ion-fab>
+</ion-content>

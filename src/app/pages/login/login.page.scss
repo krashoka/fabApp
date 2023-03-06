@@ -1,0 +1,269 @@
+$small-screen: 576px;
+$medium-screen: 768px;
+$large-screen: 992px;
+$extra-large-screen: 1200px;
+
+@media (max-width: $small-screen) {
+  // ************* Hiding Element in Mobile View **********
+  .phoneNumberLabel,
+  .footerBottom > p:nth-child(2) {
+    display: none;
+  }
+  // ***************************************************
+
+  .header_card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    border-radius: 0;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 6px, rgba(0, 0, 0, 0.5) 0px 0px 0px;
+    padding: 5px 10px 10px;
+  }
+
+  .header_card > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    font-size: 12px;
+    color: #007bff;
+  }
+
+  #fabLogoImg {
+    width: 70px;
+    height: 40px;
+  }
+
+  .signupImg {
+    width: 100%;
+  }
+
+  .signupImg > img {
+    // height: 200px;
+    width: 100%;
+    object-fit: scale-down;
+  }
+
+  .create {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 30px;
+  }
+
+  p {
+    padding: 0 20px;
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .mobNumber {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    height: 45px;
+    color: #484848;
+    font-size: 12px;
+    margin: 30px 20px;
+  }
+
+  .password {
+    display: flex;
+    align-items: center;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    height: 45px;
+    color: #484848;
+    font-size: 12px;
+    margin: 30px 20px 0;
+  }
+
+  .countryCode {
+    border-right: 1px solid #eee;
+    padding: 0;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .signinBtn {
+    margin: 0 20px;
+    font-size: 12px;
+    text-transform: none;
+    background-color: #e30b1c;
+    border-radius: 5px;
+  }
+
+  .forgotPassword {
+    text-decoration: underline;
+    text-align: right;
+    margin-top: 5px;
+    margin-bottom: 30px;
+  }
+
+  .signinDifficulty {
+    color: #e30b1c;
+    text-decoration: underline;
+  }
+
+  .footerText {
+    font-size: 12px;
+  }
+
+  .footerText > p {
+    margin: 25px 0;
+  }
+}
+
+@media (min-width: $large-screen) {
+  // ************* Hiding Element in Desktop View **********
+  // *******************************************************
+  .header_card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+    border-radius: 0;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 6px, rgba(0, 0, 0, 0.5) 0px 0px 0px;
+    padding: 5px 4% 10px;
+  }
+
+  .header_card > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    color: #007bff;
+    cursor: pointer;
+  }
+
+  #fabLogoImg {
+    width: 130px;
+    height: 60px;
+    cursor: pointer;
+  }
+
+  .loginLayout {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+  }
+
+  .loginLayout > div {
+    width: 50%;
+    // height: 600px;
+    padding: 0;
+    text-align: center;
+  }
+
+  .loginLayout > div:nth-child(2) {
+    padding-top: 77px;
+    padding-left: 7%;
+    padding-right: 7%;
+  }
+
+  .loginImg {
+    display: flex;
+    justify-content: center;
+  }
+
+  .loginImg > img {
+    object-fit: contain;
+    width: 100%;
+  }
+
+  .create {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #212529;
+  }
+
+  .phoneNumberLabel {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #212529;
+    margin: 30px 0 10px;
+  }
+
+  .mobNumber {
+    border: 1px solid #eee;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    color: #484848;
+    font-size: 18px;
+    text-align: left;
+  }
+
+  .countryCode {
+    border-right: 1px solid #eee;
+    padding: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .password {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    height: 60px;
+    color: #484848;
+    font-size: 18px;
+    margin: 10px 0 0;
+    text-align: left;
+  }
+
+  .signinBtn {
+    margin: 50px 0 0px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: none;
+    background-color: #e30b1c;
+    border-radius: 5px;
+    height: 60px;
+  }
+
+  .forgotPassword {
+    text-decoration: underline;
+    text-align: right;
+    cursor: pointer;
+  }
+
+  .footerText {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px 7%;
+    font-size: 14px;
+  }
+
+  .signinDifficulty {
+    color: #e30b1c;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .footerBottom {
+    text-align: center;
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #f7f8f7;
+    font-size: 14px;
+  }
+}

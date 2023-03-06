@@ -1,0 +1,37 @@
+<ion-content>
+  <!-- Header for Large screen -->
+  <app-navbar class="topNav"></app-navbar>
+  <!-- ------------------------------------------------ -->
+
+  <ion-card class="account">
+    <ion-card-header>
+      <ion-card-title class="userName">
+        <ion-text>Yusuf</ion-text>
+        <div class="editIcon" (click)="goToProfile()">
+          <ion-icon name="pencil-sharp" />
+          <ion-text class="edit">Edit my account</ion-text>
+        </div>
+      </ion-card-title>
+      <ion-card-subtitle class="contactNum">
+        <ion-icon name="call" class="call"></ion-icon>
+        <ion-text>9000099998</ion-text>
+      </ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-segment value="default" class="segment">
+    <div class="segmentBorder">
+      <ion-segment-button value="default">
+        <ion-label>My Ads(0)</ion-label>
+      </ion-segment-button>
+      <ion-segment-button>
+        <ion-label>My Comments(0)</ion-label>
+      </ion-segment-button>
+      <ion-segment-button>
+        <ion-label>My Favorites(0)</ion-label> </ion-segment-button
+      ><ion-segment-button>
+        <ion-label>Block List (0)</ion-label>
+      </ion-segment-button>
+    </div>
+  </ion-segment>
+</ion-content>

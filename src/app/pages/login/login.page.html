@@ -1,0 +1,86 @@
+<ion-content>
+  <ion-card class="ion-no-margin header_card">
+    <ion-img
+      id="fabLogoImg"
+      src="../../../assets/images/fabLogo.png"
+      (click)="goToHome()"
+    ></ion-img>
+    <div>
+      <ion-text>English</ion-text>
+      <ion-icon name="caret-down"></ion-icon>
+    </div>
+  </ion-card>
+
+  <div class="loginLayout">
+    <div class="loginImg">
+      <img src="../../../assets/images/signup.jpg" />
+    </div>
+
+    <div>
+      <h1 class="create">Sign in</h1>
+
+      <div class="phoneNumberLabel">
+        <ion-icon name="call"></ion-icon>
+        <ion-text>Phone Number</ion-text>
+      </div>
+
+      <div class="mobNumber">
+        <div class="countryCode">
+          <ion-select interface="popover" [(ngModel)]="phonecode">
+            <ion-select-option
+              *ngFor="let countryCode of countries"
+              [value]="countryCode"
+              >+{{countryCode}}</ion-select-option
+            >
+          </ion-select>
+        </div>
+        <ion-input
+          type="text"
+          placeholder="Enter a mobile number"
+          [(ngModel)]="user_mob"
+        ></ion-input>
+      </div>
+
+      <div class="phoneNumberLabel">
+        <ion-icon name="key"></ion-icon>
+        <ion-text>Password</ion-text>
+      </div>
+      <div class="password">
+        <ion-input
+          type="text"
+          [(ngModel)]="user_pwd"
+          placeholder="Enter the password"
+        ></ion-input>
+      </div>
+
+      <p class="forgotPassword" routerLink="/forgot-password">
+        Forgot your password?
+      </p>
+
+      <ion-button
+        color="danger"
+        expand="block"
+        class="signinBtn"
+        (click)="loginUser()"
+        >Sign in</ion-button
+      >
+    </div>
+  </div>
+
+  <div class="footerText">
+    <p>
+      Don't have an account?
+      <ion-text class="signinDifficulty" routerLink="/signup"
+        >Create your account now</ion-text
+      >
+    </p>
+    <p class="signinDifficulty">Are you facing any problem or difficulties?</p>
+  </div>
+
+  <div class="footerBottom">
+    <p style="text-decoration: underline; cursor: pointer">
+      Terms of Use and Privacy Policy
+    </p>
+    <p>Copyright © fab.net 2023 All Rights Reserved</p>
+  </div>
+</ion-content>

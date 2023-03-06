@@ -1,0 +1,79 @@
+<ion-content>
+  <!-- Header for Large screen -->
+  <app-navbar class="topNav"></app-navbar>
+  <!-- ------------------------------------------------ -->
+
+  <ion-card class="profile">
+    <ion-card-header>
+      <ion-card-title class="editProfile">
+        <ion-text>Edit Profile</ion-text>
+        <div class="editIcon" (click)="goToMyAccount()">
+          <ion-text class="edit">Back to my account</ion-text>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </div>
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card class="profileDetails">
+    <div>
+      <div class="username">
+        <ion-icon name="person-circle-sharp"></ion-icon>
+        <ion-text>User name</ion-text>
+      </div>
+      <p class="usernameTip">Enter your full name, nickname or business name</p>
+
+      <p class="name">Current name</p>
+      <div class="currentName">Yusuf</div>
+
+      <p class="name">New name</p>
+      <ion-input
+        type="text"
+        class="inputField"
+        placeholder="Enter your new name"
+      />
+
+      <div class="save_empty">
+        <div class="save">save</div>
+        <div class="empty">Empty fields</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="username">
+        <ion-icon name="lock-closed"></ion-icon>
+        <ion-text>Password</ion-text>
+      </div>
+      <p class="usernameTip">
+        It's a good idea to use a strong password that you don't use anywhere
+        else
+      </p>
+
+      <p class="name">Current Password</p>
+      <ion-input
+        type="text"
+        class="inputField"
+        placeholder="Enter the password"
+      />
+
+      <p class="name">New Password</p>
+      <ion-input
+        type="text"
+        class="inputField"
+        placeholder="Enter the password"
+      />
+
+      <p class="name">Confirm the new password</p>
+      <ion-input
+        type="text"
+        class="inputField"
+        placeholder="Confirm the new password"
+      />
+
+      <div class="save_empty">
+        <div class="save">save</div>
+        <div class="empty">Empty fields</div>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>

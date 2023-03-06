@@ -1,0 +1,65 @@
+<ion-card class="topNav">
+  <ion-card class="innerTopNav">
+    <ion-img
+      class="langImg"
+      src="../../../assets/images/arabicLang.png"
+    ></ion-img>
+    <div class="topMenu">
+      <ion-button (click)="logout()">Logout</ion-button>
+      <div *ngIf="showLogin" (click)="goToLogin()">
+        <div>
+          <ion-icon name="person-circle"></ion-icon>
+        </div>
+        <p class="topMenu_icon_title">Login</p>
+      </div>
+
+      <div *ngIf="showAccount">
+        <div>
+          <ion-icon name="person-circle"></ion-icon>
+        </div>
+        <p class="topMenu_icon_title">My account</p>
+      </div>
+
+      <div>
+        <div>
+          <ion-icon name="notifications"></ion-icon>
+        </div>
+        <p class="topMenu_icon_title">Notification</p>
+      </div>
+    </div>
+  </ion-card>
+
+  <ion-card class="mainNav">
+    <div class="logo">
+      <ion-img
+        class="websiteTitle"
+        src="../../../assets/images/fabLogo.png"
+        (click)="goToHome()"
+      ></ion-img>
+    </div>
+    <div
+      class="menu"
+      [ngClass]="{'active': isElementActive('/home')}"
+      (click)="goToHome()"
+    >
+      Home Page
+    </div>
+    <div
+      class="menu"
+      [ngClass]="{'active': isElementActive('/products')}"
+      (click)="goToStickyAds()"
+    >
+      Sticky Ads
+    </div>
+    <div
+      class="menu"
+      [ngClass]="{'active': isElementActive('/commercialads')}"
+      (click)="goToCommercialAds()"
+    >
+      Commercials Ads
+    </div>
+    <div>
+      <div class="addNewAds" (click)="goToAddNewAd()">Add Your Ad Now</div>
+    </div>
+  </ion-card>
+</ion-card>
