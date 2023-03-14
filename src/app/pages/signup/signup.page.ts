@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; 
-import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { ApiService } from 'src/app/api.service';
 
 @Component({

@@ -45,10 +45,19 @@ export class CategoriesPage implements OnInit {
 
   goToCategories(datas: any, titles: any){
     let data = {cid: datas};
+    
+    this.storage.get('admin').then((val)=>{
+        let userid = val.userid
+    
 
     this._apiService.sendCategory(data).subscribe((res:any)=>{
       console.log("check empty: ",res);
       if(res == 'empty'){
+        let newData = {
+          cid:datas,
+          userid: userid
+        }
+        this.storage.set('catDetails', newData)
         this.router.navigate(['item-info']);
         console.log("give res",res)
       }else{
@@ -67,7 +76,7 @@ export class CategoriesPage implements OnInit {
 
         location.reload();
       } 
-    });
+    });});
   }
 
   ngOnInit() {

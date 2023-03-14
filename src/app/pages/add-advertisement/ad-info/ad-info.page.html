@@ -33,12 +33,14 @@
           type="text"
           placeholder="Enter ad title"
           class="inputAdTitle"
+          [(ngModel)]="adTitle"
         />
         <ion-text>Ad Details</ion-text>
         <ion-textarea
           type="text"
           autoGrow="true"
           class="adDetails"
+          [(ngModel)]="adDescription"
           placeholder="Write here..."
         />
 

@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HttpClient} from '@angular/common/http';
 import * as $ from 'jquery';
+import { Storage } from '@ionic/storage-angular';
 // import 'select2';
 // import '../../../assets/select2.css';
 
@@ -14,14 +15,20 @@ import * as $ from 'jquery';
 export class ItemInfoPage implements OnInit {
 
   items: any = [];
+  catTitle: any;
 
-  constructor(private router: Router, private navCtrl: NavController, public http: HttpClient) { 
-    this.http.get("https://specbits.com/class2/fab/newform").subscribe((res: any) => {
+  constructor(private router: Router, private navCtrl: NavController, public http: HttpClient, private storage: Storage) {
 
-    // for(let i=0; i<res.length; i++){
-    //   let index = res.findIndex(array=> Array.isArray(array));
+    this.storage.create();
 
-    // }
+    this.storage.get('catDetails').then((val)=>{
+
+      let newValue = {
+        cid: val.cid
+      }
+    
+    this.http.post("https://specbits.com/class2/fab/newform", newValue).subscribe((res: any) => {
+
     console.log(res)
 
       const indices = res.reduce((acc, cur, index) => {
@@ -31,12 +38,8 @@ export class ItemInfoPage implements OnInit {
         return acc;
       }, []);
 
-      console.log(indices)
-
       for(let i=0; i<res.length; i++){
         if(res[i].type == "select"){
-
-          console.log(i);
 
           for(let m=0; m<indices.length; m++){
             let options: any = [];
@@ -46,31 +49,36 @@ export class ItemInfoPage implements OnInit {
 
             if(res[i].form_field_id == res[indices[m]][0].form_fields_id){
               for(let j=0; j<res[indices[m]].length; j++){
-                options.push('<option>'+res[indices[m]][j].value+'</option>');
+                options.push(res[indices[m]][j].value);
               }
 
-              this.items.push(
-                '<p style="font-size:18px; font-weight:700">'+res[i].label+'</p><select style="width:100%;border: 1px solid #d9d9d9; font-size: 16px; padding:0 5px; height: 40px; font-weight: normal; margin-bottom: 20px; border-radius: 5px" '+res[i].label+'><option>Select</option>'+options+'</select>')
+              // this.items.push(
+              //   '<p style="font-size:18px; font-weight:700">'+res[i].label+'</p><select style="width:100%;border: 1px solid #d9d9d9; font-size: 16px; padding:0 5px; height: 40px; font-weight: normal; margin-bottom: 20px; border-radius: 5px" '+res[i].label+'><option>Select</option>'+options+'</select>')
               // break;
+
+              this.items.push({selectType: res[i].type, value: res[i].label, label: res[i].label, optionElement: options})
             }
           }
           
           
         }else if(res[i].type == "input"){
-          this.items.push(
-          '<p style="font-size:18px; font-weight:700">'+res[i].label+'</p><ion-input type="'+ res[i].type+'"  placeholder="'+res[i].label+'" style="width:100%;border: 1px solid #d9d9d9; font-size: 16px; font-weight: normal; margin-bottom: 20px; border-radius: 5px"/>')
+          // this.items.push(
+          // '<p style="font-size:18px; font-weight:700">'+res[i].label+'</p><ion-input type="'+ res[i].type+'"  placeholder="'+res[i].label+'" style="width:100%;border: 1px solid #d9d9d9; font-size: 16px; font-weight: normal; margin-bottom: 20px; border-radius: 5px"/>')
+
+          this.items.push({inputType: res[i].type, label: res[i].label, value:""})
         }else if(res[i].type == "checkbox"){
-          this.items.push(
-            '<div style="display:flex; align-items:center; gap:10px; margin-bottom: 15px; font-weight:normal; font-size: 16px"><ion-checkbox slot="start"></ion-checkbox><ion-label>'+res[i].label+'</ion-label></div>'
-          )
+          // this.items.push(
+          //   '<div style="display:flex; align-items:center; gap:10px; margin-bottom: 15px; font-weight:normal; font-size: 16px"><ion-checkbox slot="start"></ion-checkbox><ion-label>'+res[i].label+'</ion-label></div>'
+          // )
+
+          this.items.push({checkType: res[i].type, label: res[i].label, value: false})
         }
       }
-
-      console.log(res);
 
     },(error:any) => {
       console.log("ErrorMessage: ", error)
     });
+  });
   }
 
   goToCommercialAds() {  
@@ -97,33 +105,37 @@ export class ItemInfoPage implements OnInit {
     this.router.navigate(['add-new-advertisement']);  
   }
 
-  
+  goToNextStep(){
+    let itemVal: any =[];
+    for(let i=0; i<this.items.length; i++){
+      itemVal.push(this.items[i].value);
+    }
+
+    this.storage.get('catDetails').then((val)=>{
+
+      let adData = {
+        cid: val.cid,
+        uid: val.userid,
+        formData: itemVal
+      }
+
+      this.http.post("https://specbits.com/class2/fab/partialSave", adData).subscribe((res:any) => {
+        console.log("response Data:", res);
+        let data= {
+          aid: res[0].add_id,
+          uid: res[1].user_id
+        }
+        this.storage.set("adDetails", data);
+        this.router.navigate(['uploadimage-page']);
+      })
+      console.log(adData);
+    });
+  }
 
   ngOnInit() {
-    // $(document).ready(() => {
-    //   $('#mySelect').select2({
-    //     placeholder: 'Select an option',
-    //     data: this.data.map((option) => ({ id: option.id, text: option.text }))
-    //   });
-    // });
-    
-    // $(document).ready(() => {
-    //   $('#mySelect').select2({
-    //     placeholder: 'Select an option',
-    //     minimumInputLength: 2,
-    //     ajax: {
-    //       url: 'http://example.com/data',
-    //       dataType: 'json',
-    //       processResults: (data) => {
-    //         return {
-    //           results: data.items.map((item) => {
-    //             return { id: item.id, text: item.name };
-    //           })
-    //         };
-    //       }
-    //     }
-    //   });
-    // });
+    this.storage.get('catTitle').then((val) => {
+      this.catTitle = val;
+    })
   }
 
 }

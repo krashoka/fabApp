@@ -46,6 +46,8 @@ export class AddNewAdvertisementPage implements OnInit {
 
     let data = {cid: datas};
 
+    this.storage.set("catTitle", titles);
+
     this._apiService.sendCategory(data).subscribe((res:any)=>{
       console.log("check empty: ",res);
       if(res == 'empty'){

@@ -24,27 +24,39 @@
   <div class="adContent">
     <ion-card class="categories">
       <ion-card-header>
-        <ion-card-title class="catTitle"
-          >Real Estate Information</ion-card-title
-        >
+        <ion-card-title class="catTitle">{{catTitle}}</ion-card-title>
       </ion-card-header>
 
       <ion-card-content class="selectOption">
         <div *ngFor="let item of items">
-          <div [innerHTML]="item | safeHtml"></div>
-          <!-- <ion-text>Size of realestate</ion-text>
-          <ion-input
-            type="number"
-            placeholder="Size of realestate"
-            class="inputAdTitle"
-          /> -->
+          <!-- <div [innerHTML]="item | safeHtml"></div> -->
+          <div *ngIf="item.selectType" class="selectStyle">
+            <ion-text>{{item.label}}</ion-text>
+            <select [(ngModel)]="item.value">
+              <option
+                *ngFor="let option of item.optionElement"
+                [value]="option"
+              >
+                {{option}}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="item.inputType" class="inputStyle">
+            <ion-text>{{item.label}}</ion-text>
+            <input [placeholder]="item.label" [(ngModel)]="item.value" />
+          </div>
+
+          <div *ngIf="item.checkType" class="checkStyle">
+            <ion-checkbox slot="start" [(ngModel)]="item.value"></ion-checkbox>
+            <ion-text>{{item.label}}</ion-text>
+          </div>
         </div>
 
         <ion-button
           class="nextBtn"
           color="danger"
           expand="block"
-          (click)="goToUploadImage()"
+          (click)="goToNextStep()"
           >Next Step</ion-button
         >
       </ion-card-content>
