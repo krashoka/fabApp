@@ -6,7 +6,7 @@
   <ion-card class="account">
     <ion-card-header>
       <ion-card-title class="userName">
-        <ion-text>Yusuf</ion-text>
+        <ion-text>{{username}}</ion-text>
         <div class="editIcon" (click)="goToProfile()">
           <ion-icon name="pencil-sharp" />
           <ion-text class="edit">Edit my account</ion-text>
@@ -14,24 +14,37 @@
       </ion-card-title>
       <ion-card-subtitle class="contactNum">
         <ion-icon name="call" class="call"></ion-icon>
-        <ion-text>9000099998</ion-text>
+        <ion-text>{{mobNumber}}</ion-text>
       </ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 
-  <ion-segment value="default" class="segment">
+  <ion-segment
+    value="default"
+    class="segment"
+    [(ngModel)]="selectedSegment"
+    (ionChange)="segmentChanged($event)"
+  >
     <div class="segmentBorder">
-      <ion-segment-button value="default">
+      <ion-segment-button value="ads" default>
         <ion-label>My Ads(0)</ion-label>
       </ion-segment-button>
-      <ion-segment-button>
+      <ion-segment-button value="comments">
         <ion-label>My Comments(0)</ion-label>
       </ion-segment-button>
-      <ion-segment-button>
-        <ion-label>My Favorites(0)</ion-label> </ion-segment-button
-      ><ion-segment-button>
+      <ion-segment-button value="favorites">
+        <ion-label>My Favorites(0)</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="blockList">
         <ion-label>Block List (0)</ion-label>
       </ion-segment-button>
     </div>
   </ion-segment>
+
+  <div class="myData">
+    <div *ngIf="selectedSegment === 'ads'"><h1>eena</h1></div>
+    <div *ngIf="selectedSegment === 'comments'"><h1>meena</h1></div>
+    <div *ngIf="selectedSegment === 'favorites'"><h1>deena</h1></div>
+    <div *ngIf="selectedSegment === 'blockList'"><h1>teena</h1></div>
+  </div>
 </ion-content>

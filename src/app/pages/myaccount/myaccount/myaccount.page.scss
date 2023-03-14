@@ -88,4 +88,15 @@ $extra-large-screen: 1200px;
       --background-checked: #faeaea;
     }
   }
+
+  .myData {
+    margin: 20px 4%;
+  }
+
+  .myData div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
 }

@@ -788,6 +788,47 @@ $extra-large-screen: 1200px;
     cursor: pointer;
   }
 
+  .userComment {
+    margin: 50px 6%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .userComment > div {
+    width: 70%;
+    border-radius: 5px;
+    border: 1px solid #dedede;
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+  }
+
+  .adminComment {
+    margin: 50px 6%;
+    width: 50%;
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+  }
+
+  .adminComment > div {
+    width: 70%;
+    border-radius: 5px;
+    border: 1px solid #dedede;
+    padding: 15px;
+    display: flex;
+    float: right;
+    justify-content: right;
+    gap: 15px;
+    // margin: -30%;
+  }
+
+  .avatar {
+    font-size: 36px;
+  }
+
   // .imgHeight {
   //   height: 200px;
   //   object-fit: inherit;

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-profile',
@@ -7,14 +8,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage implements OnInit {
+  username: any;
 
-  constructor(private router: Router) { }
+  newName: any;
+  currentPassword: any;
+  newPassword: any;
+  confirmPassword: any;
 
-  goToMyAccount(){
+  constructor(private router: Router, private storage: Storage) {
+    this.storage.create();
+
+    this.storage.get('admin').then((val) => {
+      console.log(val);
+      this.username = val.username;
+    });
+  }
+
+  goToMyAccount() {
     this.router.navigate(['myaccount']);
   }
 
-  ngOnInit() {
+  emptyName() {
+    this.newName = '';
   }
 
+  emptyPassword() {
+    this.currentPassword = '';
+    this.newPassword = '';
+    this.confirmPassword = '';
+  }
+
+  ngOnInit() {}
 }
