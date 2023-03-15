@@ -35,20 +35,32 @@
           contacts and views
         </p>
 
-        <div id="container">
-          <img [src]="imageSrc" *ngIf="imageSrc" />
+        <div class="showUpload">
+          <div *ngFor="let file of images; let i = index">
+            <!-- <ion-thumbnail slot="start"> -->
+            <ion-img [src]="file.data"></ion-img>
+
+            <ion-icon
+              name="close-circle"
+              class="deletePic"
+              (click)="deleteImage(file)"
+            ></ion-icon>
+            <!-- </ion-thumbnail> -->
+
+            <ion-button (click)="startUpload(file)">upload</ion-button>
+          </div>
         </div>
 
-        <input type="file" (change)="onFileSelected($event)" />
-
         <ion-card class="upload">
-          <ion-card-content class="uploadImg">
+          <ion-card-content class="uploadImg" (click)="selectImage()">
             <ion-icon name="images" class="uploadIcon"></ion-icon>
             <p class="uploadText">Upload Images</p>
           </ion-card-content>
         </ion-card>
 
         <p style="color: #e30b1c">* You can add 12 photos</p>
+
+        <ion-button color="danger">Send Photos</ion-button>
 
         <p class="skipBtn"><ion-text (click)="goToAdInfo()">Skip</ion-text></p>
       </ion-card-content>

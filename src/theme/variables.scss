@@ -8,6 +8,7 @@ $medium-screen: 768px;
 $large-screen: 992px;
 $extra-large-screen: 1200px;
 
+$dark-mode-enabled: false;
 
 :root {
   /** primary **/
@@ -196,7 +197,6 @@ $extra-large-screen: 1200px;
 //     --ion-toolbar-background: var(--ion-color-step-150);
 //     --ion-toolbar-border-color: var(--ion-color-step-250);
 //   }
-
 
 //   /*
 //    * Material Design Dark Theme
