@@ -29,16 +29,38 @@
 
       <ion-card-content class="selectOption">
         <ion-text>Phone Number</ion-text>
-        <div class="mobNumber">
-          <p class="countryCode" #countryCode></p>
+        <!-- <div class="mobNumber">
+          <ion-input type="number" class="countryCode" #countryCode></ion-input>
           <ion-input
             type="number"
             placeholder="Enter a mobile number"
             [(ngModel)]="mobileNumber"
           ></ion-input>
+        </div> -->
+
+        <div class="mobNumber">
+          <div class="countryCode">
+            <ion-select interface="popover" [(ngModel)]="phonecode">
+              <ion-select-option
+                *ngFor="let countryCode of countries"
+                [value]="countryCode"
+                #countryCode
+                >+{{countryCode}}</ion-select-option
+              >
+            </ion-select>
+          </div>
+          <ion-input
+            type="text"
+            placeholder="Enter a mobile number"
+            [(ngModel)]="user_mob"
+          ></ion-input>
         </div>
 
-        <ion-button class="nextBtn" color="danger" expand="block"
+        <ion-button
+          class="nextBtn"
+          color="danger"
+          expand="block"
+          (click)="postMyAd()"
           >Post my Ad</ion-button
         >
       </ion-card-content>

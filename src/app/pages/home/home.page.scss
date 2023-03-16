@@ -64,14 +64,6 @@ $extra-large-screen: 1200px;
       color: #cecece;
       border-bottom: 3px solid #fff;
     }
-
-    .homeTabComponent.clicked {
-      display: none;
-    }
-
-    .commercialComponent.clicked {
-      display: none;
-    }
   }
 
   /// slider styling
@@ -363,7 +355,7 @@ $extra-large-screen: 1200px;
   #stickyAds,
   #stickySlider,
   #footerMob,
-  .commercialTabSection {
+  .commercialTabComponent {
     display: none;
   }
 
@@ -675,6 +667,10 @@ $extra-large-screen: 1200px;
     height: 24px;
     cursor: pointer;
   }
+
+  // .homeTabComponent{
+  //   display: block;
+  // }
 
   #floatingChatIcon {
     // margin: 33px 10px;

@@ -52,6 +52,24 @@ $large-screen: 992px;
     color: #565656;
   }
 
+  .myAccount {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .accountDropdown {
+    position: absolute;
+    top: 60px;
+    // bottom: 0;
+    right: 150px;
+    z-index: 1000;
+    border: 1px solid #dedede;
+  }
+
   /*************** Main Nav *****************/
   .mainNav {
     display: flex;

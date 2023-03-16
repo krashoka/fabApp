@@ -12,7 +12,7 @@ export class HomePage {
   // showCommercial= false;
   // showHomeContent = true;
 
-  imageUrl: any = [];
+  imageUrl: any;
   commercialImageUrl: string[] = [];
 
   categories: any = [];
@@ -27,13 +27,15 @@ export class HomePage {
     this.http.get('http://localhost/fabapp/backend/crouselImg.php').subscribe(
       (res: any) => {
         console.log('Data fetched successfully: ', res);
-        for (let i = 0; i < res.length; i++) {
-          let data = {
-            cr_id: res[i].cr_id,
-            cr_img: 'http://localhost/fabapp/crouselimg/' + res[i].cr_img,
-          };
-          this.imageUrl.push(data);
-        }
+        // for (let i = 0; i < res.length; i++) {
+        //   let data = {
+        //     cr_id: res[i].cr_id,
+        //     cr_img: 'http://localhost/fabapp/crouselimg/' + res[i].cr_img,
+        //   };
+        //   this.imageUrl.push(data);
+        // }
+
+        this.imageUrl = res;
 
         console.log(this.imageUrl);
       },
@@ -91,37 +93,34 @@ export class HomePage {
       });
   }
 
-  onCommercialSelect = false;
   onHomeSelect = true;
   homeNotSelect = false;
-  commercialTabComponent = false;
-  homeTabComponent = false;
+  onCommercialSelect = false;
 
-  onButtonClick() {
-    this.commercialTabComponent = true;
-  }
+  homeTabComponent = true;
+  commerceTab = false;
 
   onCommercialClick() {
     this.onCommercialSelect = true;
     this.onHomeSelect = false;
     this.homeNotSelect = true;
-    this.homeTabComponent = true;
-    this.commercialTabComponent = false;
+    this.homeTabComponent = false;
+    this.commerceTab = true;
   }
 
   onHomeClick() {
     this.onCommercialSelect = false;
     this.onHomeSelect = true;
     this.homeNotSelect = false;
-    this.commercialTabComponent = true;
-    this.homeTabComponent = false;
+    this.commerceTab = false;
+    this.homeTabComponent = true;
   }
 
   option = {
     slidesPerView: 1,
     centeredSlides: true,
     loop: true,
-    spaceBetween: 2,
+    // spaceBetween: 2,
     autoplay: true,
   };
 
@@ -154,5 +153,18 @@ export class HomePage {
 
   goToCommercialAds() {
     this.router.navigate(['commercialads']);
+  }
+
+  ngOnInit() {
+    window.addEventListener('resize', this.onResize.bind(this));
+  }
+
+  onResize() {
+    if (window.innerWidth >= 992) {
+      this.homeTabComponent = true;
+    } else {
+      if (this.commerceTab) this.homeTabComponent = false;
+      else this.homeTabComponent = !this.homeTabComponent;
+    }
   }
 }

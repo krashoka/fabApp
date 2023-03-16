@@ -43,15 +43,14 @@
 
   <!-- ---------- Crousel --------- -->
   <div id="homeTab">
-    <div
-      class="crousel homeTabComponent"
-      [ngClass]="{'clicked': homeTabComponent}"
-    >
+    <div class="crousel" *ngIf="homeTabComponent">
       <ion-slides [options]="option" class="topCrousel">
         <!-- <ion-slides [options]="option" class="topCrousel" *ngIf="showHomeContent"> -->
         <ion-slide *ngFor="let image of imageUrl">
           <ion-card (click)="topCrousel(image.cr_id)">
-            <ion-img [src]="image.cr_img" />
+            <ion-img
+              [src]="'http://localhost/fabapp/crouselimg/' + image.cr_img"
+            />
           </ion-card>
         </ion-slide>
       </ion-slides>
@@ -90,10 +89,7 @@
       </ion-card>
     </div>
 
-    <div
-      class="grid homeTabComponent"
-      [ngClass]="{'clicked': homeTabComponent}"
-    >
+    <div class="grid homeTabComponent" *ngIf="homeTabComponent">
       <!-- <div class="grid" *ngIf="showHomeContent"> -->
       <div (click)="goToStickyAds()" *ngFor="let category of categories">
         <ion-card class="icons" [innerHTML]="category.icon | safeHtml">
@@ -121,7 +117,7 @@
     <ion-slides [options]="option2" class="commercialSlide">
       <ion-slide *ngFor="let image of imageUrl">
         <ion-card>
-          <img [src]="image" />
+          <img [src]="'http://localhost/fabapp/crouselimg/' + image.cr_img" />
           <div class="contactCommercial">
             <div style="border-right: 1px solid #dcdcdc">
               <ion-text>WhatsApp</ion-text>
@@ -156,7 +152,7 @@
     <ion-slides [options]="option2" class="stickySlide">
       <ion-slide *ngFor="let image of imageUrl">
         <ion-card>
-          <img [src]="image" />
+          <img [src]="'http://localhost/fabapp/crouselimg/' + image.cr_img" />
           <div class="stickyContentHeight">
             <div class="dayAndHeart">
               <div>
@@ -189,11 +185,7 @@
   </div>
 
   <!-- --------- Sticky Ads for Mobile --------- -->
-  <div
-    id="stickyTab"
-    class="homeTabComponent"
-    [ngClass]="{'clicked': homeTabComponent}"
-  >
+  <div id="stickyTab" *ngIf="homeTabComponent">
     <!-- <div id="stickyTab" *ngIf="showHomeContent"> -->
     <ion-card id="stickyAds">
       <ion-label>Sticky Ads</ion-label>
@@ -213,7 +205,10 @@
       <ion-slide *ngFor="let image of imageUrl">
         <div class="adsCrousel">
           <div class="adsBorder">
-            <img class="imgHeight" [src]="image" />
+            <img
+              class="imgHeight"
+              [src]="'http://localhost/fabapp/crouselimg/' + image.cr_img"
+            />
             <div class="dayAndHeart">
               <ion-label>2 days ago</ion-label>
               <ion-icon name="heart-outline"></ion-icon>
@@ -247,10 +242,7 @@
 
   <!-- --------- Commercial Ads for Mobile ---------- -->
 
-  <div
-    class="commercialTabComponent"
-    [ngClass]="{'clicked': commercialTabComponent}"
-  >
+  <div class="commercialTabComponent" *ngIf="commerceTab">
     <div class="navigationText">
       <p class="stickyCatTitle">You have 2 commercial ads</p>
     </div>

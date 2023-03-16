@@ -14,10 +14,12 @@
       </div>
 
       <div *ngIf="showAccount">
-        <div>
-          <ion-icon name="person-circle"></ion-icon>
+        <div class="myAccount">
+          <div>
+            <ion-icon name="person-circle"></ion-icon>
+          </div>
+          <p class="topMenu_icon_title">My account</p>
         </div>
-        <p class="topMenu_icon_title">My account</p>
       </div>
 
       <div>
@@ -62,4 +64,12 @@
       <div class="addNewAds" (click)="goToAddNewAd()">Add Your Ad Now</div>
     </div>
   </ion-card>
+  <!-- <div class="accountDropdown">
+    <ion-list>
+      <ion-item>My Ads</ion-item>
+      <ion-item>My Comments</ion-item>
+      <ion-item>My Favorites</ion-item>
+      <ion-item>Block List</ion-item>
+    </ion-list>
+  </div> -->
 </ion-card>

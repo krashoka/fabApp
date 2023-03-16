@@ -643,7 +643,7 @@ $extra-large-screen: 1200px;
 
   // ///////// Comment Styling /////////////
   .commentSection {
-    margin: 50px 6%;
+    margin: 50px 6% 0;
     width: 50%;
   }
 
@@ -678,9 +678,19 @@ $extra-large-screen: 1200px;
     font-weight: 700;
   }
 
+  .seeComments {
+    font-size: 18px;
+    color: #1d76de;
+    margin: 0 6% 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+  }
+
   //************* Related Posts **********
   .relatedPost {
-    margin: 0 6%;
+    margin: 60px 6% 0;
   }
 
   /******************* STICKY ADS **************/
@@ -789,7 +799,7 @@ $extra-large-screen: 1200px;
   }
 
   .userComment {
-    margin: 50px 6%;
+    margin: 20px 6%;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -797,16 +807,17 @@ $extra-large-screen: 1200px;
   }
 
   .userComment > div {
-    width: 70%;
-    border-radius: 5px;
+    max-width: 70%;
+    border-radius: 0 25px 25px;
     border: 1px solid #dedede;
     padding: 15px;
     display: flex;
     gap: 15px;
+    background-color: #e6e9eb;
   }
 
   .adminComment {
-    margin: 50px 6%;
+    margin: 20px 6%;
     width: 50%;
     display: flex;
     justify-content: right;
@@ -814,59 +825,42 @@ $extra-large-screen: 1200px;
   }
 
   .adminComment > div {
-    width: 70%;
-    border-radius: 5px;
+    max-width: 70%;
+    border-radius: 25px 0 25px 25px;
     border: 1px solid #dedede;
     padding: 15px;
     display: flex;
     float: right;
     justify-content: right;
     gap: 15px;
-    // margin: -30%;
+    background-color: #f8bdcc;
   }
 
   .avatar {
     font-size: 36px;
   }
 
-  // .imgHeight {
-  //   height: 200px;
-  //   object-fit: inherit;
-  // }
+  .replySection {
+    margin: 20px 6%;
+    width: 50%;
+    display: flex;
+    gap: 10px;
+  }
 
-  // .locationSticky {
-  //   font-size: 10px;
-  //   padding-left: 10px;
-  // }
+  .reply {
+    border: 1px solid #dedede;
+    border-radius: 5px;
+  }
 
-  // .heart {
-  //   font-size: 24px;
-  //   font-weight: bolder;
-  // }
-
-  // .adsTitle {
-  //   text-align: left;
-  //   font-size: 18px;
-  //   font-weight: 700;
-  //   color: #484848;
-  //   padding: 10px;
-  //   margin: 0;
-  // }
-
-  // .adsPrice {
-  //   display: flex;
-  //   justify-content: left;
-  //   align-items: first baseline;
-  //   gap: 5px;
-  //   font-size: 18px;
-  //   font-weight: bolder;
-  //   padding: 10px;
-  // }
-
-  // .currency {
-  //   font-size: 12px;
-  //   font-weight: lighter;
-  // }
+  .replyBtn {
+    background-color: #e30b1c;
+    color: #fff;
+    width: 13%;
+    font-size: 18px;
+    padding: 18px 10px;
+    border-radius: 5px;
+    font-weight: 700;
+  }
 
   //*********** Floating Chat Icon **************
 

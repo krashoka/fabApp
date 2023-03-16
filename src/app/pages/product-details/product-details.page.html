@@ -156,29 +156,54 @@
     </div>
   </div>
 
-  <div class="userComment">
-    <div>
-      <ion-icon class="avatar" name="person-circle"></ion-icon>
-      <div>
-        <ion-text>Yusuf</ion-text>
-        <p>Hi, this is my comment</p>
-        <ion-icon name="arrow-undo"></ion-icon>
-        &nbsp;
-        <ion-icon name="thumbs-up"></ion-icon>
-      </div>
-    </div>
+  <div class="seeComments" *ngIf="show" (click)="showComment()">
+    <p>See Comments</p>
+    <ion-icon name="caret-down"></ion-icon>
+  </div>
+  <div class="seeComments" *ngIf="hide" (click)="showComment()">
+    <p>Hide Comments</p>
+    <ion-icon name="caret-up"></ion-icon>
   </div>
 
-  <div class="adminComment">
-    <div>
-      <ion-icon class="avatar" name="person-circle"></ion-icon>
+  <div *ngIf="commentDisplay">
+    <div class="userComment">
       <div>
-        <ion-text>Admin</ion-text>
-        <p>Hi, this is my comment</p>
-        <ion-icon name="arrow-undo"></ion-icon>
+        <div>
+          <ion-icon class="avatar" name="person-circle"></ion-icon>
+        </div>
+
+        <div>
+          <ion-text>Yusuf</ion-text>
+          <p>Hi, this is my comment</p>
+          <!-- <ion-icon name="arrow-undo"></ion-icon>
         &nbsp;
-        <ion-icon name="thumbs-up"></ion-icon>
+        <ion-icon name="thumbs-up"></ion-icon> -->
+        </div>
       </div>
+    </div>
+
+    <div class="adminComment">
+      <div>
+        <div>
+          <ion-icon class="avatar" name="person-circle"></ion-icon>
+        </div>
+        <div>
+          <ion-text>Admin</ion-text>
+          <p>
+            Hi, this is my comment. this is my comment. this is my comment. this
+            is my comment. this is my comment. this is my comment. this is my
+            comment. this is my comment. this is my comment.
+          </p>
+          <!-- <ion-icon name="arrow-undo"></ion-icon>
+        &nbsp;
+        <ion-icon name="thumbs-up"></ion-icon> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="replySection">
+      <ion-input type="text" class="reply" placeholder="Type a message" />
+      <button class="replyBtn">Reply</button>
     </div>
   </div>
 
