@@ -17,6 +17,8 @@ export class HomePage {
 
   categories: any = [];
 
+  adDetails: any = [];
+
   constructor(
     private router: Router,
     public http: HttpClient,
@@ -27,17 +29,8 @@ export class HomePage {
     this.http.get('http://localhost/fabapp/backend/crouselImg.php').subscribe(
       (res: any) => {
         console.log('Data fetched successfully: ', res);
-        // for (let i = 0; i < res.length; i++) {
-        //   let data = {
-        //     cr_id: res[i].cr_id,
-        //     cr_img: 'http://localhost/fabapp/crouselimg/' + res[i].cr_img,
-        //   };
-        //   this.imageUrl.push(data);
-        // }
 
         this.imageUrl = res;
-
-        console.log(this.imageUrl);
       },
       (error: any) => {
         console.log('ErrorMessage: ', error);
@@ -155,8 +148,51 @@ export class HomePage {
     this.router.navigate(['commercialads']);
   }
 
+  goToProductDetails(ad) {
+    this.storage.set('adId', ad);
+    this.router.navigate(['product-details']);
+  }
+
   ngOnInit() {
     window.addEventListener('resize', this.onResize.bind(this));
+
+    this.http
+      .get('https://specbits.com/class2/fab/adds')
+      .subscribe((res: any) => {
+        console.log('Show Ad details:', res);
+
+        // Displaying ads from database
+        let dataLength = res.length;
+        for (let i = 0; i < dataLength; i++) {
+          let adTitle = '';
+          let itemInfo: any = [];
+          let ad_id;
+          for (let key in res[i]) {
+            if (key === 'addHeadings') {
+              adTitle = res[i][key].add_title;
+            }
+            if (key === 'addData') {
+              for (let j = 0; j < res[i][key].length; j++) {
+                // if (j == 4) {
+                for (let val in res[i][key][j]) {
+                  if (val == 'main_data') itemInfo.push(res[i][key][j][val]);
+
+                  if (val == 'add_id') ad_id = res[i][key][j][val];
+                }
+                // }
+              }
+            }
+          }
+
+          let data = {
+            adTitle: adTitle,
+            itemInfo: itemInfo,
+            ad_id: ad_id,
+          };
+
+          this.adDetails.push(data);
+        }
+      });
   }
 
   onResize() {

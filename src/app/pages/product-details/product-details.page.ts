@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-product-details',
@@ -8,7 +9,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-details.page.scss'],
 })
 export class ProductDetailsPage implements OnInit {
-  constructor(private router: Router, private navCtrl: NavController) {}
+  adTitle: any;
+  price: any;
+
+  constructor(
+    private router: Router,
+    private navCtrl: NavController,
+    private storage: Storage
+  ) {
+    this.storage.create();
+  }
 
   goToCommercialAds() {
     this.router.navigate(['commercialads']);
@@ -45,13 +55,19 @@ export class ProductDetailsPage implements OnInit {
     // autoplay:true,
   };
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.storage.get('adId').then((val) => {
+      console.log('aDiD:', val);
+      this.adTitle = val.adTitle;
+      this.price = val.itemInfo[4];
+    });
+  }
 
   show = true;
   hide = false;
   commentDisplay = false;
 
-  showComment(){
+  showComment() {
     this.show = !this.show;
     this.hide = !this.hide;
     this.commentDisplay = !this.commentDisplay;

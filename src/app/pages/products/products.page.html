@@ -51,12 +51,12 @@
         <div
           class="adsCrousel"
           routerLink="/product-details"
-          *ngFor="let image of imageUrl"
+          *ngFor="let ad of adDetails"
         >
           <div class="adsBorder">
             <div class="prodImgAndDetails">
               <div class="prodImage">
-                <img class="imgHeight" [src]="'http://localhost/fabapp/crouselimg/' + image.cr_img" />
+                <img class="imgHeight" src="img" />
               </div>
 
               <div class="productDetails">
@@ -64,9 +64,9 @@
                   <ion-label>2 days ago</ion-label>
                   <ion-icon name="heart-outline"></ion-icon>
                 </div>
-                <p class="adsTitle">Easy to disassemble and install</p>
+                <p class="adsTitle">{{ad.adTitle}}</p>
                 <div class="adsPrice">
-                  <ion-label>2500</ion-label>
+                  <ion-label>{{ad.itemInfo[4]}}</ion-label>
                   <ion-label class="currency">AED</ion-label>
                 </div>
               </div>

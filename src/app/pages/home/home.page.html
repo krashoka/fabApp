@@ -39,13 +39,10 @@
     </div>
   </ion-card>
 
-  <!--  [ngClass]="{'clicked': homeTabComponent}" -->
-
   <!-- ---------- Crousel --------- -->
   <div id="homeTab">
     <div class="crousel" *ngIf="homeTabComponent">
       <ion-slides [options]="option" class="topCrousel">
-        <!-- <ion-slides [options]="option" class="topCrousel" *ngIf="showHomeContent"> -->
         <ion-slide *ngFor="let image of imageUrl">
           <ion-card (click)="topCrousel(image.cr_id)">
             <ion-img
@@ -150,9 +147,10 @@
     </ion-card>
 
     <ion-slides [options]="option2" class="stickySlide">
-      <ion-slide *ngFor="let image of imageUrl">
+      <ion-slide *ngFor="let ad of adDetails"
+      (click)="goToProductDetails(ad)">
         <ion-card>
-          <img [src]="'http://localhost/fabapp/crouselimg/' + image.cr_img" />
+          <img src="image" />
           <div class="stickyContentHeight">
             <div class="dayAndHeart">
               <div>
@@ -162,9 +160,9 @@
 
               <ion-icon class="heart" name="heart-outline"></ion-icon>
             </div>
-            <p class="adsTitle">Easy to disassemble and install</p>
+            <p class="adsTitle">{{ad.adTitle}}</p>
             <div class="adsPrice">
-              <ion-label>25000</ion-label>
+              <ion-label>{{ad.itemInfo[4]}}</ion-label>
               <ion-label class="currency">AED</ion-label>
             </div>
           </div>
@@ -202,20 +200,20 @@
       style="margin-bottom: 60px"
       id="stickySlider"
     >
-      <ion-slide *ngFor="let image of imageUrl">
+      <ion-slide
+        *ngFor="let ad of adDetails"
+        (click)="goToProductDetails(ad)"
+      >
         <div class="adsCrousel">
           <div class="adsBorder">
-            <img
-              class="imgHeight"
-              [src]="'http://localhost/fabapp/crouselimg/' + image.cr_img"
-            />
+            <img class="imgHeight" src="img" />
             <div class="dayAndHeart">
               <ion-label>2 days ago</ion-label>
               <ion-icon name="heart-outline"></ion-icon>
             </div>
-            <p class="adsTitle">Easy to disassemble and install</p>
+            <p class="adsTitle">{{ad.adTitle}}</p>
             <div class="adsPrice">
-              <ion-label>2500</ion-label>
+              <ion-label>{{ad.itemInfo[4]}}</ion-label>
               <ion-label class="currency">AED</ion-label>
             </div>
             <div class="adsButton">
