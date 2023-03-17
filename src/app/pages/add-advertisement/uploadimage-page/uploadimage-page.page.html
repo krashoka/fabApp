@@ -47,7 +47,7 @@
             ></ion-icon>
             <!-- </ion-thumbnail> -->
 
-            <ion-button (click)="startUpload(file)">upload</ion-button>
+            <!-- <ion-button (click)="startUpload(file)">upload</ion-button> -->
           </div>
         </div>
 
@@ -61,7 +61,10 @@
         <p style="color: #e30b1c">* You can add 12 photos</p>
 
         <div style="display: flex; justify-content: center">
-          <ion-button color="danger" style="margin: auto"
+          <ion-button
+            color="danger"
+            style="margin: auto"
+            (click)="startUpload()"
             >Send Photos</ion-button
           >
         </div>

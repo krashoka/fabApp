@@ -8,6 +8,7 @@ import { ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
 import { Directory, Filesystem } from '@capacitor/filesystem';
+import axios from 'axios';
 
 import {
   Camera,
@@ -200,34 +201,60 @@ export class UploadimagePagePage implements OnInit {
     }
   }
 
-  async startUpload(file: Localfile) {
-    const response = await fetch(file.data);
-    console.log("Resppppp:", response);
-    const blob = await response.blob();
-    console.log("blob data: ", blob);
-    const formData = new FormData();
-    formData.append('file', blob, file.name);
-    this.uploadData(formData);
-  }
+  // async startUpload(file: any) {
+  //   console.log('newFile:', file);
+  //   console.log('imageName:', file.name);
+  //   const response = await fetch(file.data);
+  //   console.log('Resppppp:', response);
+  //   const blob = await response.blob();
+  //   console.log('blobData: ', blob);
 
-  // async startUpload() {
-  //   let file = this.images;
-  //   let blobs: Blob[] = [];
-  //   for (let i = 0; i < file.length; i++) {
-  //     const response = await fetch(file[i].data);
-  //     const blob = await response.blob();
-  //     blobs.push(blob);
-  //   }
-
-  //   const mergedBlob = new Blob(blobs, { type: blobs[0].type });
-  //   const formData = new FormData();
-  //   formData.append('file', mergedBlob);
-
-  //   this.uploadData(formData);
+  //   const formData: FormData = new FormData();
+  //   formData.append('file', blob, file.name.name);
+  //   setTimeout(() => {
+  //     this.uploadData(formData);
+  //   }, 1000);
   // }
 
+  async startUpload() {
+    let files: any = this.images;
+    // let blobs: Blob[] = [];
+    console.log('FilesName:', this.images);
+    for (let i = 0; i < files.length; i++) {
+      const response = await fetch(files[i].data);
+      const blob = await response.blob();
+      const formData = new FormData();
+      formData.append('file', blob, files[i].name.name);
+
+      this.uploadData(formData);
+      // console.log('Uolols:', upData.__zone_symbol__state);
+      // // blobs.push(blob);
+      // upData.then((state) => {
+      //   console.log('Uolols:', state);
+      // });
+    }
+
+    // let delFile = this.images;
+
+    for (let i = 0; i < this.images.length; i++) {
+      await Filesystem.deleteFile({
+        directory: Directory.Data,
+        path: this.images[i].path,
+      });
+    }
+
+    // const mergedBlob = new Blob(blobs, { type: blobs[0].type });
+
+    // console.log('mergedBlobs:', mergedBlob);
+
+    // const formData = new FormData();
+    // formData.append('file', mergedBlob);
+
+    // this.uploadData(formData);
+  }
+
   async uploadData(formData: FormData) {
-    console.log(formData);
+    console.log('FormDataaaaa: ', formData);
 
     // const loading = await this.loadingCtrl.create({
     //   message: 'Loading data...',
@@ -235,29 +262,58 @@ export class UploadimagePagePage implements OnInit {
 
     // await loading.present();
 
-    const url = 'https://specbits.com/class2/fab/imageUpload';
+    const url = 'https://specbits.com/class2/fab/storeImg';
+
+    try {
+      const uploadResponse = await axios.post(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('Upload response:', uploadResponse);
+      this.successToast('Images UP');
+    } catch (error) {
+      console.error('Upload error:', error);
+    }
+
+    const url2 = 'https://specbits.com/class2/fab/aiduid';
 
     this.storage.get('adDetails').then((val) => {
       let data = {
         aid: val.aid,
         uid: val.uid,
-        simage: formData,
       };
 
       // let simage = formData;
-      this.http.post(url, data).subscribe((res) => {
-        console.log(res);
-      });
+      this.http.post(url2, data).subscribe(
+        (res) => {
+          console.log('Image Upload response: ', res);
+        },
+        (error) => {
+          console.log('Something went wrong in uploading image:', error);
+        }
+      );
     });
   }
 
   async deleteImage(file: Localfile) {
+    console.log(file);
     await Filesystem.deleteFile({
       directory: Directory.Data,
       path: file.path,
     });
 
     this.loadFiles();
+  }
+
+  async errorToast(a) {
+    const toast = await this.toastCtrl.create({
+      message: a,
+      duration: 1500,
+      position: 'top',
+      cssClass: 'errorToast',
+    });
+    toast.present();
   }
 }
 

@@ -51,7 +51,7 @@ $extra-large-screen: 1200px;
   .imgProd {
     width: 100% !important;
     // height: 180px;
-    object-fit: fill;
+    object-fit: contain;
   }
 
   // *************** Product Title **********
@@ -515,7 +515,7 @@ $extra-large-screen: 1200px;
     border-radius: 20px;
     width: 100%;
     height: 400px;
-    // object-fit: fill;
+    object-fit: contain;
   }
 
   .imgAndPriceDiv > div:nth-child(2) {

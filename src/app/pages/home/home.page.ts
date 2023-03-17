@@ -165,31 +165,55 @@ export class HomePage {
         let dataLength = res.length;
         for (let i = 0; i < dataLength; i++) {
           let adTitle = '';
+          let adDetail = '';
           let itemInfo: any = [];
+          let itemLabel: any = [];
+          let imagesArray: any = [];
           let ad_id;
           for (let key in res[i]) {
             if (key === 'addHeadings') {
               adTitle = res[i][key].add_title;
+              adDetail = res[i][key].add_detail;
             }
             if (key === 'addData') {
               for (let j = 0; j < res[i][key].length; j++) {
                 // if (j == 4) {
                 for (let val in res[i][key][j]) {
                   if (val == 'main_data') itemInfo.push(res[i][key][j][val]);
-
+                  if (val == 'label') itemLabel.push(res[i][key][j][val]);
                   if (val == 'add_id') ad_id = res[i][key][j][val];
+                }
+                // }
+              }
+            }
+
+            if (key === 'addImage') {
+              for (let j = 0; j < res[i][key].length; j++) {
+                // if (j == 4) {
+                for (let val in res[i][key][j]) {
+                  if (val == 'image_name')
+                    imagesArray.push(res[i][key][j][val]);
                 }
                 // }
               }
             }
           }
 
+          let itemObj = {};
+
+          for (let k = 0; k < itemInfo.length; k++) {
+            itemObj[itemLabel[k]] = itemInfo[k];
+          }
+
           let data = {
             adTitle: adTitle,
-            itemInfo: itemInfo,
+            itemObj: itemObj,
+            adDetail: adDetail,
+            imagesArray: imagesArray,
             ad_id: ad_id,
           };
 
+          console.log('Whole Data: ', data.imagesArray[0]);
           this.adDetails.push(data);
         }
       });

@@ -147,10 +147,9 @@
     </ion-card>
 
     <ion-slides [options]="option2" class="stickySlide">
-      <ion-slide *ngFor="let ad of adDetails"
-      (click)="goToProductDetails(ad)">
+      <ion-slide (click)="goToProductDetails(ad)" *ngFor="let ad of adDetails">
         <ion-card>
-          <img src="image" />
+          <img [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]" />
           <div class="stickyContentHeight">
             <div class="dayAndHeart">
               <div>
@@ -162,7 +161,7 @@
             </div>
             <p class="adsTitle">{{ad.adTitle}}</p>
             <div class="adsPrice">
-              <ion-label>{{ad.itemInfo[4]}}</ion-label>
+              <ion-label>{{ad.itemObj.Price}}</ion-label>
               <ion-label class="currency">AED</ion-label>
             </div>
           </div>
@@ -200,20 +199,20 @@
       style="margin-bottom: 60px"
       id="stickySlider"
     >
-      <ion-slide
-        *ngFor="let ad of adDetails"
-        (click)="goToProductDetails(ad)"
-      >
+      <ion-slide *ngFor="let ad of adDetails" (click)="goToProductDetails(ad)">
         <div class="adsCrousel">
           <div class="adsBorder">
-            <img class="imgHeight" src="img" />
+            <img
+              class="imgHeight"
+              [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
+            />
             <div class="dayAndHeart">
               <ion-label>2 days ago</ion-label>
               <ion-icon name="heart-outline"></ion-icon>
             </div>
             <p class="adsTitle">{{ad.adTitle}}</p>
             <div class="adsPrice">
-              <ion-label>{{ad.itemInfo[4]}}</ion-label>
+              <ion-label>{{ad.itemObj.Price}}</ion-label>
               <ion-label class="currency">AED</ion-label>
             </div>
             <div class="adsButton">

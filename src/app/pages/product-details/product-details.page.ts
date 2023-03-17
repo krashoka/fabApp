@@ -10,7 +10,10 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class ProductDetailsPage implements OnInit {
   adTitle: any;
+  adDetail: any;
   price: any;
+  prodDetails: any;
+  adImage: any;
 
   constructor(
     private router: Router,
@@ -59,7 +62,10 @@ export class ProductDetailsPage implements OnInit {
     this.storage.get('adId').then((val) => {
       console.log('aDiD:', val);
       this.adTitle = val.adTitle;
-      this.price = val.itemInfo[4];
+      this.price = val.itemObj.Price;
+      this.prodDetails = val.itemObj;
+      this.adDetail = val.adDetail;
+      this.adImage = val.imagesArray[0];
     });
   }
 

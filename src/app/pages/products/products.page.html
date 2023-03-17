@@ -50,13 +50,16 @@
       <div class="productDisplay">
         <div
           class="adsCrousel"
-          routerLink="/product-details"
+          (click)="goToProductDetails(ad)"
           *ngFor="let ad of adDetails"
         >
           <div class="adsBorder">
             <div class="prodImgAndDetails">
               <div class="prodImage">
-                <img class="imgHeight" src="img" />
+                <img
+                  class="imgHeight"
+                  [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
+                />
               </div>
 
               <div class="productDetails">
@@ -66,7 +69,7 @@
                 </div>
                 <p class="adsTitle">{{ad.adTitle}}</p>
                 <div class="adsPrice">
-                  <ion-label>{{ad.itemInfo[4]}}</ion-label>
+                  <ion-label>{{ad.itemObj.Price}}</ion-label>
                   <ion-label class="currency">AED</ion-label>
                 </div>
               </div>

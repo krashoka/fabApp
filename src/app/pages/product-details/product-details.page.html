@@ -15,7 +15,7 @@
     </ion-card>
 
     <!-- Image -->
-    <img class="imgProd" src="../../../assets/images/pool.jpg" />
+    <img class="imgProd" [src]="'https://specbits.com/class2/fab/'+adImage" />
 
     <p class="navigationProd">
       Home > Real Estate > Properties For Rent > Residential / investment >
@@ -40,14 +40,9 @@
 
     <!-- Product Details -->
     <div style="margin-left: 10px; margin-right: 10px">
-      <div class="prodDescription">
-        <p class="prodAttribute">Bedrooms:</p>
-        <p class="prodValue">5</p>
-      </div>
-
-      <div class="prodDescription">
-        <p class="prodAttribute">Bedrooms:</p>
-        <p class="prodValue">5</p>
+      <div class="prodDescription" *ngFor="let item of prodDetails | keyvalue">
+        <p class="prodAttribute">{{item.key}} :</p>
+        <p class="prodValue">{{item.value}}</p>
       </div>
     </div>
   </div>
@@ -65,7 +60,10 @@
     <div class="imgAndPriceDiv">
       <div>
         <!-- Image -->
-        <img class="imgProd" src="../../../assets/images/pool.jpg" />
+        <img
+          class="imgProd"
+          [src]="'https://specbits.com/class2/fab/'+adImage"
+        />
       </div>
       <div>
         <div>
@@ -99,37 +97,17 @@
     </div>
 
     <div class="itemDetails">
-      <div>
-        <ion-text>Bedrooms: </ion-text>
-        <ion-text>1</ion-text>
-      </div>
-      <div>
-        <ion-text>Size of realEstate: </ion-text>
-        <ion-text>100</ion-text>
-      </div>
-      <div>
-        <ion-text>Price: </ion-text>
-        <ion-text>16000 AED</ion-text>
+      <div *ngFor="let details of prodDetails | keyvalue">
+        <ion-text>{{details.key}} : </ion-text>
+        <ion-text>{{details.value}}</ion-text>
       </div>
     </div>
   </div>
 
   <!-- Produce Description -->
   <div class="description">
-    <p class="descLang">arabic Description</p>
-    <p class="details">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Est velit egestas dui
-      id. Duis ut diam quam nulla porttitor. Scelerisque varius morbi enim nunc
-      faucibus. Suspendisse faucibus interdum posuere lorem ipsum dolor sit
-      amet. Risus nullam eget felis eget nunc. Dolor sit amet consectetur
-      adipiscing elit pellentesque habitant. Massa eget egestas purus viverra
-      accumsan in. Integer feugiat scelerisque varius morbi enim. Sodales ut
-      etiam sit amet nisl purus in mollis. Euismod elementum nisi quis eleifend
-      quam adipiscing. Posuere morbi leo urna molestie at elementum. Malesuada
-      proin libero nunc consequat interdum varius sit amet. Quis auctor elit sed
-      vulputate mi.
-    </p>
+    <p class="descLang">Description</p>
+    <p class="details">{{adDetail}}</p>
   </div>
   <div class="read">
     <button class="readBtn">Read more</button>
