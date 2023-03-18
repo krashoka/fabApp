@@ -151,6 +151,7 @@ $extra-large-screen: 1200px;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
   }
 
   .caret {
@@ -704,7 +705,7 @@ $extra-large-screen: 1200px;
     justify-content: center;
     align-items: center;
     width: 50%;
-    margin: 0 6%;
+    margin: 0 6% 20px;
     // padding: 5px 0;
   }
 

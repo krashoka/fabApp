@@ -22,6 +22,9 @@ export class ProductDetailsPage implements OnInit {
   userid: any;
   comments: any = [];
 
+  canComment = true;
+  allComments = false;
+
   constructor(
     private router: Router,
     private navCtrl: NavController,
@@ -76,7 +79,11 @@ export class ProductDetailsPage implements OnInit {
       this.adDetail = val.adINFO.adDetail;
       this.adImage = val.adINFO.imagesArray[0];
 
-      this.comments = val.comment;
+      if (val.comment != 'blank') {
+        this.canComment = false;
+        this.allComments = true;
+        this.comments = val.comment;
+      }
     });
 
     this.storage.get('admin').then((val) => {
