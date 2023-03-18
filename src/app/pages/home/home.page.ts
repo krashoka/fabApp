@@ -111,9 +111,6 @@ export class HomePage {
 
   option = {
     slidesPerView: 1,
-    centeredSlides: true,
-    loop: true,
-    // spaceBetween: 2,
     autoplay: true,
   };
 
@@ -225,9 +222,10 @@ export class HomePage {
             ad_id: ad_id,
           };
 
-          console.log('Whole Data: ', data.imagesArray[0]);
           this.adDetails.push(data);
         }
+
+        console.log('Total ad Data:', this.adDetails);
       });
   }
 
