@@ -59,6 +59,14 @@
         ></ion-input>
       </div>
 
+      <div class="verify" *ngIf="showSendVerify">
+        <ion-input
+          type="text"
+          placeholder="Enter Referal code"
+          [(ngModel)]="referalCode"
+        ></ion-input>
+      </div>
+
       <ion-button
         color="danger"
         expand="block"
