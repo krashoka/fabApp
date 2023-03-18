@@ -149,8 +149,17 @@ export class HomePage {
   }
 
   goToProductDetails(ad) {
-    this.storage.set('adId', ad);
-    this.router.navigate(['product-details']);
+    let value = { aid: ad.ad_id };
+    this.http
+      .post('https://specbits.com/class2/fab/display-comment', value)
+      .subscribe((res: any) => {
+        let data = {
+          adINFO: ad,
+          comment: res,
+        };
+        this.storage.set('adId', data);
+        this.router.navigate(['product-details']);
+      });
   }
 
   ngOnInit() {
@@ -170,10 +179,12 @@ export class HomePage {
           let itemLabel: any = [];
           let imagesArray: any = [];
           let ad_id;
+          let adAdmin;
           for (let key in res[i]) {
             if (key === 'addHeadings') {
               adTitle = res[i][key].add_title;
               adDetail = res[i][key].add_detail;
+              adAdmin = res[i][key].user_id;
             }
             if (key === 'addData') {
               for (let j = 0; j < res[i][key].length; j++) {
@@ -206,6 +217,7 @@ export class HomePage {
           }
 
           let data = {
+            adAdmin: adAdmin,
             adTitle: adTitle,
             itemObj: itemObj,
             adDetail: adDetail,

@@ -127,10 +127,12 @@
       class="addComment"
       placeholder="Add a comment..."
       type="text"
+      [disabled]="commentDisabled"
       autoGrow="true"
+      [(ngModel)]="commentValue"
     ></ion-textarea>
     <div class="addCommentBtn">
-      <button>Add comment</button>
+      <button (click)="addComment()">Add comment</button>
     </div>
   </div>
 
@@ -143,38 +145,38 @@
     <ion-icon name="caret-up"></ion-icon>
   </div>
 
-  <div *ngIf="commentDisplay">
-    <div class="userComment">
-      <div>
-        <div>
-          <ion-icon class="avatar" name="person-circle"></ion-icon>
-        </div>
+  <div *ngIf="commentDisplay" class="commentWidth">
+    <div class="commentFlow">
+      <div *ngFor="let comment of comments">
+        <div class="userComment" *ngIf="comment.commenter=='user'">
+          <div>
+            <div>
+              <ion-icon class="avatar" name="person-circle"></ion-icon>
+            </div>
 
-        <div>
-          <ion-text>Yusuf</ion-text>
-          <p>Hi, this is my comment</p>
-          <!-- <ion-icon name="arrow-undo"></ion-icon>
+            <div>
+              <ion-text>User</ion-text>
+              <p>{{comment.comment_msg}}</p>
+              <!-- <ion-icon name="arrow-undo"></ion-icon>
         &nbsp;
         <ion-icon name="thumbs-up"></ion-icon> -->
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
 
-    <div class="adminComment">
-      <div>
-        <div>
-          <ion-icon class="avatar" name="person-circle"></ion-icon>
-        </div>
-        <div>
-          <ion-text>Admin</ion-text>
-          <p>
-            Hi, this is my comment. this is my comment. this is my comment. this
-            is my comment. this is my comment. this is my comment. this is my
-            comment. this is my comment. this is my comment.
-          </p>
-          <!-- <ion-icon name="arrow-undo"></ion-icon>
+        <div class="adminComment" *ngIf="comment.commenter=='owner'">
+          <div>
+            <div>
+              <ion-icon class="avatar" name="person-circle"></ion-icon>
+            </div>
+            <div>
+              <ion-text>Owner</ion-text>
+              <p>{{comment.comment_msg}}</p>
+              <!-- <ion-icon name="arrow-undo"></ion-icon>
         &nbsp;
         <ion-icon name="thumbs-up"></ion-icon> -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
