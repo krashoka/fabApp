@@ -43,10 +43,10 @@
   <div id="homeTab">
     <div class="crousel" *ngIf="homeTabComponent">
       <ion-slides [options]="option" class="topCrousel">
-        <ion-slide *ngFor="let image of imageUrl">
-          <ion-card (click)="topCrousel(image.cr_id)">
+        <ion-slide *ngFor="let ad of adDetails">
+          <ion-card>
             <ion-img
-              [src]="'http://localhost/fabapp/crouselimg/' + image.cr_img"
+              [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
             />
           </ion-card>
         </ion-slide>
@@ -112,9 +112,9 @@
     </ion-card>
 
     <ion-slides [options]="option2" class="commercialSlide">
-      <ion-slide *ngFor="let image of imageUrl">
+      <ion-slide *ngFor="let ad of adDetails">
         <ion-card>
-          <img [src]="'http://localhost/fabapp/crouselimg/' + image.cr_img" />
+          <img [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]" />
           <div class="contactCommercial">
             <div style="border-right: 1px solid #dcdcdc">
               <ion-text>WhatsApp</ion-text>
@@ -229,14 +229,6 @@
     </ion-slides>
   </div>
 
-  <!-- <ion-card
-    class="commercialComponent"
-    (click)="onButtonClick()"
-    [ngClass]="{'clicked': commercialTabComponent}"
-  >
-    Something went wrong!
-  </ion-card> -->
-
   <!-- --------- Commercial Ads for Mobile ---------- -->
 
   <div class="commercialTabComponent" *ngIf="commerceTab">
@@ -260,9 +252,12 @@
 
     <!-- ------------------ Commercial Ads -------------- -->
     <div class="commercialAdsDisplay">
-      <ion-card *ngFor="let images of commercialImageUrl">
+      <ion-card *ngFor="let ad of adDetails">
         <div>
-          <img class="commercialImg" [src]="images" />
+          <img
+            class="commercialImg"
+            [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
+          />
         </div>
         <div class="contactCommercial">
           <div style="border-right: 1px solid #dcdcdc">

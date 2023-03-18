@@ -79,21 +79,28 @@ export class ProductDetailsPage implements OnInit {
       this.adDetail = val.adINFO.adDetail;
       this.adImage = val.adINFO.imagesArray[0];
 
-      if (val.comment != 'blank') {
-        this.canComment = false;
-        this.allComments = true;
-        this.comments = val.comment;
-      }
-    });
+      this.storage.get('admin').then((session) => {
+        console.log('admin session:', session);
+        if (session != null) {
+          console.log('User is in session');
+          if (val.comment != 'blank') {
+            this.canComment = false;
+            this.allComments = true;
+            this.comments = val.comment;
+          } else {
+            this.commentDisabled = false;
+            this.canComment = true;
+            this.allComments = false;
+          }
 
-    this.storage.get('admin').then((val) => {
-      console.log('admin session:', val);
-      if (val.userid) {
-        console.log('User is in session');
-        this.commentDisabled = false;
-        this.sessionVal = true;
-        this.userid = val.userid;
-      }
+          this.sessionVal = true;
+          this.userid = session.userid;
+        } else {
+          this.commentDisabled = true;
+          this.canComment = true;
+          this.allComments = false;
+        }
+      });
     });
   }
 
