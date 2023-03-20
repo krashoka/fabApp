@@ -18,4 +18,8 @@ export class FooterTabsPage implements OnInit {
       else this.router.navigate(['login']);
     });
   }
+
+  goToHome() {
+    this.router.navigate(['/']);
+  }
 }

@@ -39,61 +39,53 @@
 
   <!-- tabs scroll code here -->
   <div class="tabs">
-    <ion-label class="tabsSlide">Real Estate property</ion-label>
-    <ion-label class="tabsSlide">Real Estate property</ion-label>
-    <ion-label class="tabsSlide">Real Estate property</ion-label>
+    <ion-label
+      class="tabsSlide"
+      *ngFor="let category of categories"
+      (click)="goToSticky(category.cid, category.title)"
+      >{{category.title}}</ion-label
+    >
   </div>
 
-  <!-- infinite scroll tabs -->
-  <ion-content>
-    <ion-list *ngFor="let item of items; let index">
-      <div class="productDisplay">
-        <div
-          class="adsCrousel"
-          (click)="goToProductDetails(ad)"
-          *ngFor="let ad of adDetails"
-        >
-          <div class="adsBorder">
-            <div class="prodImgAndDetails">
-              <div class="prodImage">
-                <img
-                  class="imgHeight"
-                  [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
-                />
-              </div>
+  <div class="productDisplay">
+    <div
+      class="adsCrousel"
+      (click)="goToProductDetails(ad)"
+      *ngFor="let ad of adDetails"
+    >
+      <div class="adsBorder">
+        <div class="prodImgAndDetails">
+          <div class="prodImage">
+            <img
+              class="imgHeight"
+              [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
+            />
+          </div>
 
-              <div class="productDetails">
-                <div class="dayAndHeart">
-                  <ion-label>2 days ago</ion-label>
-                  <ion-icon name="heart-outline"></ion-icon>
-                </div>
-                <p class="adsTitle">{{ad.adTitle}}</p>
-                <div class="adsPrice">
-                  <ion-label>{{ad.itemObj.Price}}</ion-label>
-                  <ion-label class="currency">AED</ion-label>
-                </div>
-              </div>
+          <div class="productDetails">
+            <div class="dayAndHeart">
+              <ion-label>2 days ago</ion-label>
+              <ion-icon name="heart-outline"></ion-icon>
             </div>
-
-            <div class="adsButton">
-              <div class="callBtn">
-                <ion-icon name="call"></ion-icon>
-              </div>
-              <div class="whatsappBtn">
-                <ion-icon name="logo-whatsapp"></ion-icon>
-              </div>
+            <p class="adsTitle">{{ad.adTitle}}</p>
+            <div class="adsPrice">
+              <ion-label>{{ad.itemObj.Price}}</ion-label>
+              <ion-label class="currency">AED</ion-label>
             </div>
           </div>
         </div>
-      </div>
-    </ion-list>
 
-    <ion-infinite-scroll>
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles"
-      ></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </ion-content>
+        <div class="adsButton">
+          <div class="callBtn">
+            <ion-icon name="call"></ion-icon>
+          </div>
+          <div class="whatsappBtn">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer Section -->
   <ion-footer id="footer">

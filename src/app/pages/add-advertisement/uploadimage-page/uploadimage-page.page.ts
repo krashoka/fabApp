@@ -155,31 +155,30 @@ export class UploadimagePagePage implements OnInit {
   async loadFiles() {
     this.images = [];
 
-    const loading = await this.loadingCtrl.create({
-      message: 'Loading data...',
-    });
+    // const loading = await this.loadingCtrl.create({
+    //   message: 'Loading data...',
+    // });
 
-    await loading.present();
+    // await loading.present();
 
     Filesystem.readdir({
       directory: Directory.Data,
       path: IMAGE_DIR,
-    })
-      .then(
-        (result) => {
-          console.log('result:', result);
-          this.loadFileData(result.files);
-        },
-        async (err) => {
-          await Filesystem.mkdir({
-            directory: Directory.Data,
-            path: IMAGE_DIR,
-          });
-        }
-      )
-      .then((_) => {
-        loading.dismiss();
-      });
+    }).then(
+      (result) => {
+        console.log('result:', result);
+        this.loadFileData(result.files);
+      },
+      async (err) => {
+        await Filesystem.mkdir({
+          directory: Directory.Data,
+          path: IMAGE_DIR,
+        });
+      }
+    );
+    // .then((_) => {
+    //   loading.dismiss();
+    // });
   }
 
   async loadFileData(fileNames: any[]) {

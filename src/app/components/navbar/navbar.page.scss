@@ -62,7 +62,12 @@ $large-screen: 992px;
   }
 
   .accountDropdown {
-    position: absolute;
+    display: none;
+  }
+
+  .dropDown {
+    display: block;
+    position: fixed;
     top: 60px;
     // bottom: 0;
     right: 150px;

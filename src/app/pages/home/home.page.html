@@ -88,7 +88,10 @@
 
     <div class="grid homeTabComponent" *ngIf="homeTabComponent">
       <!-- <div class="grid" *ngIf="showHomeContent"> -->
-      <div (click)="goToStickyAds()" *ngFor="let category of categories">
+      <div
+        (click)="goToSticky(category.cid, category.title)"
+        *ngFor="let category of categories"
+      >
         <ion-card class="icons" [innerHTML]="category.icon | safeHtml">
         </ion-card>
         <p class="icon_title">{{ category.title }}</p>
@@ -120,7 +123,11 @@
           />
           <div class="contactCommercial">
             <div style="border-right: 1px solid #dcdcdc">
-              <ion-button class="whatsapp" target="_blank" [href]="waLink + ad.adMobile">
+              <ion-button
+                class="whatsapp"
+                target="_blank"
+                [href]="waLink + ad.adMobile"
+              >
                 <ion-text class="contactColor">WhatsApp</ion-text>
                 <ion-icon name="logo-whatsapp"></ion-icon>
               </ion-button>
@@ -180,7 +187,11 @@
               </ion-button>
             </div>
             <div>
-              <ion-button class="whatsapp" target="_blank" [href]="waLink + ad.adMobile">
+              <ion-button
+                class="whatsapp"
+                target="_blank"
+                [href]="waLink + ad.adMobile"
+              >
                 <ion-icon name="logo-whatsapp"></ion-icon>
               </ion-button>
             </div>
@@ -232,7 +243,11 @@
                 </ion-button>
               </div>
               <div>
-                <ion-button class="whatsappBtn" target="_blank" [href]="waLink + ad.adMobile">
+                <ion-button
+                  class="whatsappBtn"
+                  target="_blank"
+                  [href]="waLink + ad.adMobile"
+                >
                   <ion-icon name="logo-whatsapp"></ion-icon>
                 </ion-button>
               </div>

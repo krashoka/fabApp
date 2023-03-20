@@ -252,7 +252,6 @@ $extra-large-screen: 1200px;
     display: none;
   }
 
-
   // ////////// Search Styling //////////
   .navigationAndSearch {
     padding-top: 80px;
@@ -327,7 +326,7 @@ $extra-large-screen: 1200px;
   /****************** INFINITE Product Page in Desktop View ********/
   .productDisplay {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     width: 100%;
     margin: 0 3% 50px;
   }

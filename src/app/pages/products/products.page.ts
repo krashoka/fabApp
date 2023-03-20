@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { ApiService } from 'src/app/api.service';
 
 @Component({
   selector: 'app-products',
@@ -10,9 +11,11 @@ import { Storage } from '@ionic/storage-angular';
   styleUrls: ['./products.page.scss'],
 })
 export class ProductsPage implements OnInit {
-  items: any[] = [];
-
   adDetails: any = [];
+
+  categoryTitle: any;
+
+  categories: any = [];
 
   // imageUrl: any;
 
@@ -20,26 +23,11 @@ export class ProductsPage implements OnInit {
     private navCtrl: NavController,
     private router: Router,
     public http: HttpClient,
-    private storage: Storage
+    private storage: Storage,
+    public _apiService: ApiService
   ) {
     this.storage.create();
-
-    // this.http.get('http://localhost/fabapp/backend/crouselImg.php').subscribe(
-    //   (res: any) => {
-    //     console.log('Data fetched: ', res);
-    //     this.imageUrl = res;
-    //   },
-    //   (error: any) => {
-    //     console.log('ErrorMessage: ', error);
-    //   }
-    // );
   }
-
-  option = {
-    slidesPerView: 2,
-    // centeredSlides: true,
-    spaceBetween: 4,
-  };
 
   goBack() {
     this.navCtrl.back();
@@ -58,16 +46,42 @@ export class ProductsPage implements OnInit {
       });
   }
 
+  goToSticky(datas: any, titles: any) {
+    let data = { cid: datas };
+
+    // this.storage.get('admin').then((val) => {
+    //   let userid = val.userid;
+
+    this._apiService.sendCategory(data).subscribe((res: any) => {
+      console.log('check empty: ', res);
+      if (res == 'empty') {
+        // let newData = {
+        //   cid: datas,
+        //   userid: userid,
+        // };
+        // this.storage.set('catDetails', newData);
+        // this.router.navigate(['item-info']);
+        console.log('give res', res);
+      } else {
+        let value = {
+          newData: datas,
+          title: titles,
+        };
+        this.storage.set('homeCategory', value);
+        location.reload();
+      }
+    });
+    // });
+  }
+
   ngOnInit() {
     this.http
       .get('https://specbits.com/class2/fab/adds')
       .subscribe((res: any) => {
         console.log('Show Ad details:', res);
-
         // Displaying ads from database
         let dataLength = res.length;
         for (let i = 0; i < dataLength; i++) {
-          this.items.push(i);
           let adTitle = '';
           let adDetail = '';
           let itemInfo: any = [];
@@ -124,11 +138,23 @@ export class ProductsPage implements OnInit {
             adDetail: adDetail,
             imagesArray: imagesArray,
             ad_id: ad_id,
-            adMobile: adMobile
+            adMobile: adMobile,
           };
 
           this.adDetails.push(data);
         }
       });
+
+    this.navCtrl.navigateForward('products', { replaceUrl: true });
+    this.storage.get('homeCategory').then((value) => {
+      let data = { cid: value.newData };
+
+      this.categoryTitle = value.title;
+
+      this._apiService.sendCategory(data).subscribe((res: any) => {
+        this.categories = res;
+        console.log("What's response:", res);
+      });
+    });
   }
 }

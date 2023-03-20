@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { ApiService } from 'src/app/api.service';
 
 @Component({
   selector: 'app-home',
@@ -24,32 +25,10 @@ export class HomePage {
   constructor(
     private router: Router,
     public http: HttpClient,
-    private storage: Storage
+    private storage: Storage,
+    public _apiService: ApiService
   ) {
     this.storage.create();
-
-    this.http.get('http://localhost/fabapp/backend/crouselImg.php').subscribe(
-      (res: any) => {
-        console.log('Data fetched successfully: ', res);
-
-        this.imageUrl = res;
-      },
-      (error: any) => {
-        console.log('ErrorMessage: ', error);
-      }
-    );
-
-    // **************** For Commercial tab image *****************
-    this.http.get('http://localhost/fabapp/backend/commerceImg.php').subscribe(
-      (res: any) => {
-        this.commercialImageUrl = res.map(
-          (imageName) => 'http://localhost/fabapp/crouselimg/' + imageName
-        );
-      },
-      (error: any) => {
-        console.log('ErrorMessage: ', error);
-      }
-    );
 
     // **************** For Categories Icons Section *****************
     this.http.get('https://specbits.com/class2/fab/index').subscribe(
@@ -131,6 +110,26 @@ export class HomePage {
     spaceBetween: 2,
     autoplay: true,
   };
+
+  goToSticky(datas: any, titles: any) {
+    let data = { cid: datas };
+
+    this.storage.set('catTitle', titles);
+
+    this._apiService.sendCategory(data).subscribe((res: any) => {
+      console.log('check empty: ', res);
+      if (res == 'empty') {
+        this.router.navigate(['home']);
+      } else {
+        let value = {
+          newData: datas,
+          title: titles,
+        };
+        this.storage.set('homeCategory', value);
+        this.router.navigate(['products']);
+      }
+    });
+  }
 
   goToStickyAds() {
     this.router.navigate(['products']);
