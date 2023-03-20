@@ -8,8 +8,8 @@ import { ProductsPageRoutingModule } from './products-routing.module';
 
 import { ProductsPage } from './products.page';
 
-import {NavbarPageModule} from '../../components/navbar/navbar.module';
-
+import { NavbarPageModule } from '../../components/navbar/navbar.module';
+import { FooterTabsPageModule } from '../../components/footer-tabs/footer-tabs.module';
 
 @NgModule({
   imports: [
@@ -17,8 +17,9 @@ import {NavbarPageModule} from '../../components/navbar/navbar.module';
     FormsModule,
     IonicModule,
     ProductsPageRoutingModule,
-    NavbarPageModule
+    NavbarPageModule,
+    FooterTabsPageModule,
   ],
-  declarations: [ProductsPage]
+  declarations: [ProductsPage],
 })
 export class ProductsPageModule {}

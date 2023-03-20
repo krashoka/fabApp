@@ -79,8 +79,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/myaccount/profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'commercial',
-    loadChildren: () => import('./pages/commercial/commercial.module').then( m => m.CommercialPageModule)
+    path: 'footer-tabs',
+    loadChildren: () => import('./components/footer-tabs/footer-tabs.module').then( m => m.FooterTabsPageModule)
   }
 ];
 

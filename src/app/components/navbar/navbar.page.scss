@@ -106,6 +106,16 @@ $large-screen: 992px;
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .adIcon {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
   }
 
   .menu {
@@ -114,11 +124,15 @@ $large-screen: 992px;
 
   .menu:hover,
   .active {
-    font-weight: 700;
     border-bottom: 3px solid #e30b1c;
     border-radius: 3px;
     transition: 100ms all ease-in-out;
     cursor: pointer;
+  }
+
+  .menuInnerText:hover,
+  .active {
+    font-weight: 700;
   }
 
   .logo {

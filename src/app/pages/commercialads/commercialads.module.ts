@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { CommercialadsPageRoutingModule } from './commercialads-routing.module';
 
 import { CommercialadsPage } from './commercialads.page';
-import {NavbarPageModule} from '../../components/navbar/navbar.module';
+import { FooterTabsPageModule } from '../../components/footer-tabs/footer-tabs.module';
+import { NavbarPageModule } from '../../components/navbar/navbar.module';
 
 @NgModule({
   imports: [
@@ -15,8 +16,9 @@ import {NavbarPageModule} from '../../components/navbar/navbar.module';
     FormsModule,
     IonicModule,
     CommercialadsPageRoutingModule,
-    NavbarPageModule
+    NavbarPageModule,
+    FooterTabsPageModule,
   ],
-  declarations: [CommercialadsPage]
+  declarations: [CommercialadsPage],
 })
 export class CommercialadsPageModule {}
