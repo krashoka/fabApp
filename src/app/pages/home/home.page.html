@@ -117,15 +117,16 @@
           <img [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]" />
           <div class="contactCommercial">
             <div style="border-right: 1px solid #dcdcdc">
-              <ion-text>WhatsApp</ion-text>
-              <ion-img
-                class="whatsapp"
-                src="../../../assets/images/whatsapp.png"
-              />
+              <ion-button class="whatsapp" href="tel:12345">
+                <ion-text class="contactColor">WhatsApp</ion-text>
+                <ion-icon name="logo-whatsapp"></ion-icon>
+              </ion-button>
             </div>
             <div>
-              <ion-text>Call</ion-text>
-              <ion-icon name="call" class="call"></ion-icon>
+              <ion-button class="call" href="tel:ad.adMobile">
+                <ion-text class="contactColor">Call</ion-text>
+                <ion-icon name="call"></ion-icon>
+              </ion-button>
             </div>
           </div>
         </ion-card>
@@ -166,14 +167,15 @@
             </div>
           </div>
           <div class="contactSticky">
-            <div style="border-right: 1px solid #dcdcdc">
-              <ion-icon name="call" class="call"></ion-icon>
+            <div>
+              <ion-button class="call" href="tel:ad.adMobile">
+                <ion-icon name="call"></ion-icon>
+              </ion-button>
             </div>
             <div>
-              <ion-img
-                class="whatsapp"
-                src="../../../assets/images/whatsapp.png"
-              />
+              <ion-button class="whatsapp">
+                <ion-icon name="logo-whatsapp"></ion-icon>
+              </ion-button>
             </div>
           </div>
         </ion-card>
@@ -199,11 +201,12 @@
       style="margin-bottom: 60px"
       id="stickySlider"
     >
-      <ion-slide *ngFor="let ad of adDetails" (click)="goToProductDetails(ad)">
+      <ion-slide *ngFor="let ad of adDetails">
         <div class="adsCrousel">
           <div class="adsBorder">
             <img
               class="imgHeight"
+              (click)="goToProductDetails(ad)"
               [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
             />
             <div class="dayAndHeart">
@@ -216,11 +219,15 @@
               <ion-label class="currency">AED</ion-label>
             </div>
             <div class="adsButton">
-              <div class="callBtn">
-                <ion-icon name="call"></ion-icon>
+              <div>
+                <ion-button class="callBtn" href="tel:ad.adMobile">
+                  <ion-icon name="call"></ion-icon>
+                </ion-button>
               </div>
-              <div class="whatsappBtn">
-                <ion-icon name="logo-whatsapp"></ion-icon>
+              <div>
+                <ion-button class="whatsappBtn">
+                  <ion-icon name="logo-whatsapp"></ion-icon>
+                </ion-button>
               </div>
             </div>
           </div>

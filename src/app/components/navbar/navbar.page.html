@@ -39,26 +39,32 @@
         (click)="goToHome()"
       ></ion-img>
     </div>
-    <div
-      class="menu"
-      [ngClass]="{'active': isElementActive('/home')}"
-      (click)="goToHome()"
-    >
-      <div class="menuInnerText">Home Page</div>
+    <div>
+      <div
+        class="menuInnerText"
+        [ngClass]="{'active': isElementActive('/home')}"
+        (click)="goToHome()"
+      >
+        Home Page
+      </div>
     </div>
-    <div
-      class="menu"
-      [ngClass]="{'active': isElementActive('/products')}"
-      (click)="goToStickyAds()"
-    >
-      <div class="menuInnerText">Sticky Ads</div>
+    <div>
+      <div
+        class="menuInnerText"
+        [ngClass]="{'active': isElementActive('/products')}"
+        (click)="goToStickyAds()"
+      >
+        Sticky Ads
+      </div>
     </div>
-    <div
-      class="menu"
-      [ngClass]="{'active': isElementActive('/commercialads')}"
-      (click)="goToCommercialAds()"
-    >
-      <div class="menuInnerText">Commercials Ads</div>
+    <div>
+      <div
+        class="menuInnerText"
+        [ngClass]="{'active': isElementActive('/commercialads')}"
+        (click)="goToCommercialAds()"
+      >
+        Commercials Ads
+      </div>
     </div>
     <div>
       <div class="addNewAds" (click)="goToAddNewAd()">

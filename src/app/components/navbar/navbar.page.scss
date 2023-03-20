@@ -75,8 +75,7 @@ $large-screen: 992px;
     display: flex;
     margin: 0;
     align-items: center;
-    gap: 100px;
-    // border-bottom: 2px solid #eee;
+    justify-content: space-between;
     font-size: 19px;
     font-weight: 200;
     color: #484848;
@@ -91,7 +90,7 @@ $large-screen: 992px;
     display: flex;
     align-items: center;
     margin-bottom: 0;
-    height: 60px;
+    width: 240px;
   }
 
   .addNewAds {
@@ -118,21 +117,33 @@ $large-screen: 992px;
     color: #fff;
   }
 
-  .menu {
-    border: 3px solid #fff;
-  }
+  // .menu {
+  //   border-bottom: 3px solid #fff;
+  // }
 
-  .menu:hover,
-  .active {
-    border-bottom: 3px solid #e30b1c;
-    border-radius: 3px;
-    transition: 100ms all ease-in-out;
-    cursor: pointer;
+  // .menu:hover,
+  // .active {
+  //   font-weight: 700;
+  //   border-bottom: 3px solid #e30b1c;
+  //   border-radius: 3px;
+  //   transition: 100ms all ease-in-out;
+  //   cursor: pointer;
+  // }
+
+  .menuInnerText {
+    border-bottom: 3px solid fff;
+    display: flex;
+    align-items: center;
+    height: 60px;
   }
 
   .menuInnerText:hover,
   .active {
     font-weight: 700;
+    border-bottom: 3px solid #e30b1c;
+    border-radius: 3px;
+    transition: 100ms all ease-in-out;
+    cursor: pointer;
   }
 
   .logo {

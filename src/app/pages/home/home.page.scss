@@ -138,7 +138,7 @@ $extra-large-screen: 1200px;
   }
 
   .adsBorder {
-    border: 1px solid #ffc107;
+    border: 1px solid #6c757d;
   }
 
   .dayAndHeart {
@@ -180,21 +180,38 @@ $extra-large-screen: 1200px;
     width: 100%;
   }
 
-  .callBtn {
+  .adsButton > div:nth-child(1) {
+    border-top: 1px solid #6c757d;
+    border-right: 1px solid #6c757d;
+    display: flex;
+    justify-content: center;
     width: 50%;
-    border: 1px solid #6c757d;
-    border-right: 0px;
+  }
+
+  .adsButton > div:nth-child(2) {
+    border-top: 1px solid #6c757d;
+    width: 50%;
+
+    display: flex;
+    justify-content: center;
+  }
+
+  .callBtn {
+    width: 95%;
     padding: 5px 0;
     margin: auto;
     color: #007bff;
+    --background: #fff !important;
+    --box-shadow: none !important;
   }
 
   .whatsappBtn {
-    width: 50%;
-    border: 1px solid #6c757d;
+    width: 95%;
     padding: 5px 0;
     margin: auto;
     color: #28a745;
+    --background: #fff !important;
+    --box-shadow: none !important;
   }
 
   .imgHeight {
@@ -648,29 +665,58 @@ $extra-large-screen: 1200px;
     border-top: 1px solid #dcdcdc;
   }
 
-  .contactSticky > div {
+  .contactSticky > div:nth-child(1) {
+    border-top: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: 50%;
     font-size: 16px;
   }
 
+  .contactSticky > div:nth-child(2) {
+    border-top: 1px solid #dcdcdc;
+    width: 50%;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .call {
+    width: 95%;
+    padding: 5px 0;
+    // font-size: 24px;
+    margin: auto;
     color: #007bff;
-    font-size: 20px;
-    cursor: pointer;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
   }
 
   .whatsapp {
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
+    width: 95%;
+    padding: 5px 0;
+    margin: auto;
+    color: #28a745;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
   }
 
-  // .homeTabComponent{
-  //   display: block;
-  // }
+  .contactColor{
+    color: #484848;
+    margin-right: 10px;
+  }
 
   #floatingChatIcon {
     // margin: 33px 10px;

@@ -75,12 +75,18 @@ export class ProductsPage implements OnInit {
           let imagesArray: any = [];
           let ad_id;
           let adAdmin;
+          let adMobile;
           for (let key in res[i]) {
             if (key === 'addHeadings') {
               adTitle = res[i][key].add_title;
               adDetail = res[i][key].add_detail;
               adAdmin = res[i][key].user_id;
             }
+
+            if (key === 'addPersonalInfo') {
+              adMobile = '+' + res[i][key].phonecode + ' ' + res[i][key].mobile;
+            }
+
             if (key === 'addData') {
               for (let j = 0; j < res[i][key].length; j++) {
                 // if (j == 4) {
@@ -118,6 +124,7 @@ export class ProductsPage implements OnInit {
             adDetail: adDetail,
             imagesArray: imagesArray,
             ad_id: ad_id,
+            adMobile: adMobile
           };
 
           this.adDetails.push(data);
