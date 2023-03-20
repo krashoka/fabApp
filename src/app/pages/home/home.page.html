@@ -114,16 +114,19 @@
     <ion-slides [options]="option2" class="commercialSlide">
       <ion-slide *ngFor="let ad of adDetails">
         <ion-card>
-          <img [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]" />
+          <img
+            style="cursor: pointer"
+            [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
+          />
           <div class="contactCommercial">
             <div style="border-right: 1px solid #dcdcdc">
-              <ion-button class="whatsapp" href="tel:12345">
+              <ion-button class="whatsapp" [href]="waLink + ad.adMobile">
                 <ion-text class="contactColor">WhatsApp</ion-text>
                 <ion-icon name="logo-whatsapp"></ion-icon>
               </ion-button>
             </div>
             <div>
-              <ion-button class="call" href="tel:ad.adMobile">
+              <ion-button class="call" [href]="'tel:' + ad.adMobile">
                 <ion-text class="contactColor">Call</ion-text>
                 <ion-icon name="call"></ion-icon>
               </ion-button>
@@ -148,9 +151,13 @@
     </ion-card>
 
     <ion-slides [options]="option2" class="stickySlide">
-      <ion-slide (click)="goToProductDetails(ad)" *ngFor="let ad of adDetails">
+      <ion-slide *ngFor="let ad of adDetails">
         <ion-card>
-          <img [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]" />
+          <img
+            (click)="goToProductDetails(ad)"
+            style="cursor: pointer"
+            [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
+          />
           <div class="stickyContentHeight">
             <div class="dayAndHeart">
               <div>
@@ -168,12 +175,12 @@
           </div>
           <div class="contactSticky">
             <div>
-              <ion-button class="call" href="tel:ad.adMobile">
+              <ion-button class="call" [href]="'tel:' + ad.adMobile">
                 <ion-icon name="call"></ion-icon>
               </ion-button>
             </div>
             <div>
-              <ion-button class="whatsapp">
+              <ion-button class="whatsapp" [href]="waLink + ad.adMobile">
                 <ion-icon name="logo-whatsapp"></ion-icon>
               </ion-button>
             </div>
@@ -220,12 +227,12 @@
             </div>
             <div class="adsButton">
               <div>
-                <ion-button class="callBtn" href="tel:ad.adMobile">
+                <ion-button class="callBtn" [href]="'tel:' + ad.adMobile">
                   <ion-icon name="call"></ion-icon>
                 </ion-button>
               </div>
               <div>
-                <ion-button class="whatsappBtn">
+                <ion-button class="whatsappBtn" [href]="waLink + ad.adMobile">
                   <ion-icon name="logo-whatsapp"></ion-icon>
                 </ion-button>
               </div>

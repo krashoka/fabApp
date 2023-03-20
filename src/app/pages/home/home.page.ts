@@ -19,6 +19,8 @@ export class HomePage {
 
   adDetails: any = [];
 
+  waLink = 'https://wa.me/';
+
   constructor(
     private router: Router,
     public http: HttpClient,
@@ -186,7 +188,7 @@ export class HomePage {
             }
 
             if (key === 'addPersonalInfo') {
-              adMobile = '+' + res[i][key].phonecode + ' ' + res[i][key].mobile;
+              adMobile = res[i][key].phonecode + res[i][key].mobile;
             }
 
             if (key === 'addData') {
