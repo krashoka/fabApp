@@ -42,7 +42,7 @@
     <ion-label
       class="tabsSlide"
       *ngFor="let category of categories"
-      (click)="goToSticky(category.cid, category.title)"
+      (click)="goToSticky(category.cid, category.title, category.slug)"
       >{{category.title}}</ion-label
     >
   </div>

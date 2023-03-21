@@ -35,36 +35,12 @@ export class HomePage {
       (res: any) => {
         this.categories = res;
 
-        console.log(res);
+        console.log('IconCat:', res);
       },
       (error: any) => {
         console.log('ErrorMessage: ', error);
       }
     );
-  }
-
-  topCrousel(data) {
-    console.log(data);
-
-    this.http
-      .get('http://localhost/fabapp/backend/crouselImg.php', data)
-      .subscribe((res: any) => {
-        let newData = { cid: data };
-
-        // this._apiService.sendCategory(data).subscribe((res:any)=>{
-        //   console.log("check empty: ",res);
-        //   if(res == 'empty'){
-        //     this.router.navigate(['item-info']);
-        //   }else{
-        // let value = {
-        //   newData: datas,
-        //   title: titles
-        // }
-        this.storage.set('homeCrousel', newData);
-        this.router.navigate(['commercialads']);
-        //   }
-        // });
-      });
   }
 
   onHomeSelect = true;
@@ -111,13 +87,13 @@ export class HomePage {
     autoplay: true,
   };
 
-  goToSticky(datas: any, titles: any) {
+  goToSticky(datas: any, titles: any, slug: any) {
     let data = { cid: datas };
 
     this.storage.set('catTitle', titles);
 
     this._apiService.sendCategory(data).subscribe((res: any) => {
-      console.log('check empty: ', res);
+      // console.log('check empty: ', res);
       if (res == 'empty') {
         this.router.navigate(['home']);
       } else {
@@ -126,9 +102,15 @@ export class HomePage {
           title: titles,
         };
         this.storage.set('homeCategory', value);
-        this.router.navigate(['products']);
+        this.router.navigateByUrl(`products/${slug}`);
       }
     });
+
+    // this._apiService.fetchAds(data).subscribe((res: any) => {
+    //   console.log('Dikhao data:', res);
+      this.storage.set('fetchAdsData', data);
+      console.log("homeIconCID:", data)
+    // });
   }
 
   goToStickyAds() {

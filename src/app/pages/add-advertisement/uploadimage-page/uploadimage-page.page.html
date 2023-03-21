@@ -69,6 +69,21 @@
           >
         </div>
 
+        <!-- Video Section -->
+
+        <div>
+          <div>
+            <!-- <video width="320" height="240" controls>
+              <source [src]="video+'.mp4'" type="video/mp4" />
+            </video> -->
+            {{video}}
+          </div>
+          <ion-input type="file" [value]="videoUrl" />
+          <ion-button (click)="uploadVideo()">Upload Video</ion-button>
+        </div>
+
+        <!-- ------------------- -->
+
         <p class="skipBtn"><ion-text (click)="goToAdInfo()">Skip</ion-text></p>
       </ion-card-content>
     </ion-card>

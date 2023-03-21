@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { ApiService } from 'src/app/api.service';
+import { ActivatedRoute } from '@angular/router';
+// import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-products',
@@ -17,6 +19,8 @@ export class ProductsPage implements OnInit {
 
   categories: any = [];
 
+  newUrl: any = [];
+
   // imageUrl: any;
 
   constructor(
@@ -24,7 +28,8 @@ export class ProductsPage implements OnInit {
     private router: Router,
     public http: HttpClient,
     private storage: Storage,
-    public _apiService: ApiService
+    public _apiService: ApiService,
+    private route: ActivatedRoute
   ) {
     this.storage.create();
   }
@@ -46,21 +51,14 @@ export class ProductsPage implements OnInit {
       });
   }
 
-  goToSticky(datas: any, titles: any) {
+  goToSticky(datas: any, titles: any, slug: any) {
     let data = { cid: datas };
 
-    // this.storage.get('admin').then((val) => {
-    //   let userid = val.userid;
+    console.log('cidData:', data);
 
     this._apiService.sendCategory(data).subscribe((res: any) => {
       console.log('check empty: ', res);
       if (res == 'empty') {
-        // let newData = {
-        //   cid: datas,
-        //   userid: userid,
-        // };
-        // this.storage.set('catDetails', newData);
-        // this.router.navigate(['item-info']);
         console.log('give res', res);
       } else {
         let value = {
@@ -68,16 +66,22 @@ export class ProductsPage implements OnInit {
           title: titles,
         };
         this.storage.set('homeCategory', value);
-        location.reload();
+        this.router.navigateByUrl(`products/${slug}`);
       }
     });
-    // });
+
+    this.storage.set('fetchAdsData', data);
   }
 
   ngOnInit() {
-    this.http
-      .get('https://specbits.com/class2/fab/adds')
-      .subscribe((res: any) => {
+    const slug = this.route.snapshot.paramMap.get('slug');
+
+    this.storage.get('fetchAdsData').then((val) => {
+      let cidData = {
+        cid: val.cid,
+      };
+
+      this._apiService.fetchAds(cidData).subscribe((res: any) => {
         console.log('Show Ad details:', res);
         // Displaying ads from database
         let dataLength = res.length;
@@ -144,8 +148,8 @@ export class ProductsPage implements OnInit {
           this.adDetails.push(data);
         }
       });
+    });
 
-    this.navCtrl.navigateForward('products', { replaceUrl: true });
     this.storage.get('homeCategory').then((value) => {
       let data = { cid: value.newData };
 

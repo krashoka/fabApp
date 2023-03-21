@@ -77,6 +77,18 @@ export class ItemInfoPage implements OnInit {
                   label: res[i].label,
                   value: false,
                 });
+              } else if (res[i].type == 'radio') {
+                this.items.push({
+                  radioType: res[i].type,
+                  label: res[i].label,
+                  value: false,
+                });
+              } else if (res[i].type == 'textarea') {
+                this.items.push({
+                  textArea: res[i].type,
+                  label: res[i].label,
+                  value: '',
+                });
               }
             }
           },

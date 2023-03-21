@@ -220,6 +220,7 @@ $extra-large-screen: 1200px;
   // //////////////// Tabs Styling /////////////////////
   .tabs {
     display: flex;
+    // flex-wrap: wrap;
     gap: 10px;
     height: fit-content;
     overflow-x: auto;
@@ -306,9 +307,10 @@ $extra-large-screen: 1200px;
 
   .tabs {
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     padding: 20px 3%;
-    overflow-x: auto;
+    // overflow-x: auto;
     white-space: nowrap;
   }
 

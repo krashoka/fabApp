@@ -29,7 +29,9 @@
       </div>
 
       <div class="subCategories" *ngFor="let category of categories">
-        <div (click)="goToCategories(category.cid, category.title)">
+        <div
+          (click)="goToCategories(category.cid, category.title, category.slug)"
+        >
           <ion-text>{{category.title}}</ion-text>
           <ion-icon name="chevron-forward"></ion-icon>
         </div>

@@ -50,13 +50,23 @@
             <ion-checkbox slot="start" [(ngModel)]="item.value"></ion-checkbox>
             <ion-text>{{item.label}}</ion-text>
           </div>
+
+          <div *ngIf="item.radioType" class="checkStyle">
+            <ion-radio slot="start" [(ngModel)]="item.value"></ion-radio>
+            <ion-text>{{item.label}}</ion-text>
+          </div>
+
+          <div *ngIf="item.textArea" class="inputStyle">
+            <ion-text>{{item.label}}</ion-text>
+            <ion-textarea slot="start"  [placeholder]="item.label" [(ngModel)]="item.value"></ion-textarea>
+          </div>
         </div>
 
         <ion-button
           class="nextBtn"
           color="danger"
           expand="block"
-          *ngIf = "showNextBtn"
+          *ngIf="showNextBtn"
           (click)="goToNextStep()"
           >Next Step</ion-button
         >

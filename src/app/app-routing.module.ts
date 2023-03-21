@@ -5,89 +5,151 @@ import { AuthImplementsGuard } from './guards/auth---implements.guard';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule),
+    loadChildren: () =>
+      import('./pages/home/home.module').then((m) => m.HomePageModule),
     // canLoad: [AuthImplementsGuard]
   },
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'products',
-    loadChildren: () => import('./pages/products/products.module').then( m => m.ProductsPageModule)
+    loadChildren: () =>
+      import('./pages/products/products.module').then(
+        (m) => m.ProductsPageModule
+      ),
+  },
+  {
+    path: 'products/:slug',
+    loadChildren: () =>
+      import('./pages/products/products.module').then(
+        (m) => m.ProductsPageModule
+      ),
   },
   {
     path: 'product-details',
-    loadChildren: () => import('./pages/product-details/product-details.module').then( m => m.ProductDetailsPageModule)
+    loadChildren: () =>
+      import('./pages/product-details/product-details.module').then(
+        (m) => m.ProductDetailsPageModule
+      ),
   },
   {
     path: 'add-new-advertisement',
-    loadChildren: () => import('./pages/add-advertisement/add-new-advertisement/add-new-advertisement.module').then( m => m.AddNewAdvertisementPageModule),
-    canLoad: [AuthImplementsGuard]
+    loadChildren: () =>
+      import(
+        './pages/add-advertisement/add-new-advertisement/add-new-advertisement.module'
+      ).then((m) => m.AddNewAdvertisementPageModule),
+    canLoad: [AuthImplementsGuard],
   },
   {
     path: 'categories',
-    loadChildren: () => import('./pages/add-advertisement/categories/categories.module').then( m => m.CategoriesPageModule)
+    loadChildren: () =>
+      import('./pages/add-advertisement/categories/categories.module').then(
+        (m) => m.CategoriesPageModule
+      ),
+  },
+  {
+    path: 'categories/:slug',
+    loadChildren: () =>
+      import('./pages/add-advertisement/categories/categories.module').then(
+        (m) => m.CategoriesPageModule
+      ),
   },
   {
     path: 'item-info',
-    loadChildren: () => import('./pages/add-advertisement/item-info/item-info.module').then( m => m.ItemInfoPageModule)
+    loadChildren: () =>
+      import('./pages/add-advertisement/item-info/item-info.module').then(
+        (m) => m.ItemInfoPageModule
+      ),
   },
   {
     path: 'signup',
-    loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
+    loadChildren: () =>
+      import('./pages/signup/signup.module').then((m) => m.SignupPageModule),
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () =>
+      import('./pages/login/login.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'uploadimage-page',
-    loadChildren: () => import('./pages/add-advertisement/uploadimage-page/uploadimage-page.module').then( m => m.UploadimagePagePageModule)
+    loadChildren: () =>
+      import(
+        './pages/add-advertisement/uploadimage-page/uploadimage-page.module'
+      ).then((m) => m.UploadimagePagePageModule),
   },
   {
     path: 'ad-info',
-    loadChildren: () => import('./pages/add-advertisement/ad-info/ad-info.module').then( m => m.AdInfoPageModule)
+    loadChildren: () =>
+      import('./pages/add-advertisement/ad-info/ad-info.module').then(
+        (m) => m.AdInfoPageModule
+      ),
   },
   {
     path: 'personal-info',
-    loadChildren: () => import('./pages/add-advertisement/personal-info/personal-info.module').then( m => m.PersonalInfoPageModule)
+    loadChildren: () =>
+      import(
+        './pages/add-advertisement/personal-info/personal-info.module'
+      ).then((m) => m.PersonalInfoPageModule),
   },
   {
     path: 'commercialads',
-    loadChildren: () => import('./pages/commercialads/commercialads.module').then( m => m.CommercialadsPageModule)
+    loadChildren: () =>
+      import('./pages/commercialads/commercialads.module').then(
+        (m) => m.CommercialadsPageModule
+      ),
   },
   {
     path: 'navbar',
-    loadChildren: () => import('./components/navbar/navbar.module').then( m => m.NavbarPageModule)
+    loadChildren: () =>
+      import('./components/navbar/navbar.module').then(
+        (m) => m.NavbarPageModule
+      ),
   },
   {
     path: 'forgot-password',
-    loadChildren: () => import('./pages/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
+    loadChildren: () =>
+      import('./pages/forgot-password/forgot-password.module').then(
+        (m) => m.ForgotPasswordPageModule
+      ),
   },
   {
     path: 'auth-system-navbar',
-    loadChildren: () => import('./components/auth-system-navbar/auth-system-navbar.module').then( m => m.AuthSystemNavbarPageModule)
+    loadChildren: () =>
+      import('./components/auth-system-navbar/auth-system-navbar.module').then(
+        (m) => m.AuthSystemNavbarPageModule
+      ),
   },
   {
     path: 'myaccount',
-    loadChildren: () => import('./pages/myaccount/myaccount/myaccount.module').then( m => m.MyaccountPageModule)
+    loadChildren: () =>
+      import('./pages/myaccount/myaccount/myaccount.module').then(
+        (m) => m.MyaccountPageModule
+      ),
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/myaccount/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () =>
+      import('./pages/myaccount/profile/profile.module').then(
+        (m) => m.ProfilePageModule
+      ),
   },
   {
     path: 'footer-tabs',
-    loadChildren: () => import('./components/footer-tabs/footer-tabs.module').then( m => m.FooterTabsPageModule)
-  }
+    loadChildren: () =>
+      import('./components/footer-tabs/footer-tabs.module').then(
+        (m) => m.FooterTabsPageModule
+      ),
+  },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

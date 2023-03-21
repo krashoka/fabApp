@@ -7,7 +7,11 @@ import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage-angular';
-import { Directory, Filesystem } from '@capacitor/filesystem';
+import {
+  Directory,
+  Filesystem,
+  FilesystemDirectory,
+} from '@capacitor/filesystem';
 import axios from 'axios';
 
 import {
@@ -25,6 +29,8 @@ interface Localfile {
   data: string;
 }
 
+const VIDEO_DIR = 'stored-video';
+
 @Component({
   selector: 'app-uploadimage-page',
   templateUrl: './uploadimage-page.page.html',
@@ -32,6 +38,9 @@ interface Localfile {
 })
 export class UploadimagePagePage implements OnInit {
   images: Localfile[] = [];
+
+  videoUrl: any;
+  video: any;
 
   constructor(
     private router: Router,
@@ -47,6 +56,49 @@ export class UploadimagePagePage implements OnInit {
     this.storage.create();
   }
 
+  async loadVideos() {
+    const videoData = await this.storage.get('videos');
+    this.video = JSON.parse(videoData.value);
+    return this.video;
+  }
+
+  async uploadVideo() {
+    const fileUrl = this.videoUrl;
+    console.log('FileUrl issss:', fileUrl);
+    const response = await fetch(fileUrl);
+    const blob = await response.blob();
+    const base64Data = (await this.convertBlobToBase64(blob)) as string;
+    const fileName = new Date().getTime() + '.mp4';
+
+    const savedFile = await Filesystem.writeFile({
+      path: `${VIDEO_DIR}/${fileName}`,
+      data: base64Data,
+      directory: Directory.Data,
+    });
+
+    this.video = savedFile.uri;
+    console.log('my Video: ', this.video);
+
+    return this.storage.set('videos', JSON.stringify(this.video));
+  }
+
+  // async uploadVideo() {
+  //   const videoFileName = this.videoUrl;
+  //   console.log('Video Name:', videoFileName);
+
+  //   await Filesystem.writeFile({
+  //     path: `${VIDEO_DIR}/${videoFileName}`,
+  //     directory: Directory.data,
+  //   });
+
+  //   const videoFile = await Filesystem.readFile({
+  //     path: `${VIDEO_DIR}/${videoFileName}`,
+  //     directory: Directory.External,
+  //   });
+  //   console.log(`data:video/mp4;base64,${videoFile.data}`);
+  // }
+
+  // BELOW CODE FOR IMAGE SELECTION ON BUTTON CLICK ************
   async selectImage() {
     const image = await Camera.getPhoto({
       quality: 90,

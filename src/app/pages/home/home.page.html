@@ -89,7 +89,7 @@
     <div class="grid homeTabComponent" *ngIf="homeTabComponent">
       <!-- <div class="grid" *ngIf="showHomeContent"> -->
       <div
-        (click)="goToSticky(category.cid, category.title)"
+        (click)="goToSticky(category.cid, category.title, category.slug)"
         *ngFor="let category of categories"
       >
         <ion-card class="icons" [innerHTML]="category.icon | safeHtml">
