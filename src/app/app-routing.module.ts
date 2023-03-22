@@ -144,6 +144,10 @@ const routes: Routes = [
         (m) => m.FooterTabsPageModule
       ),
   },
+  {
+    path: 'complete-profile',
+    loadChildren: () => import('./pages/complete-profile/complete-profile.module').then( m => m.CompleteProfilePageModule)
+  },
 ];
 
 @NgModule({

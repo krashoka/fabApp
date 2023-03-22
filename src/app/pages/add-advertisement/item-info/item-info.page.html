@@ -58,7 +58,14 @@
 
           <div *ngIf="item.textArea" class="inputStyle">
             <ion-text>{{item.label}}</ion-text>
-            <ion-textarea slot="start"  [placeholder]="item.label" [(ngModel)]="item.value"></ion-textarea>
+            <ion-textarea
+              type="text"
+              autoGrow="true"
+              slot="start"
+              class="textArea"
+              [placeholder]="item.label"
+              [(ngModel)]="item.value"
+            ></ion-textarea>
           </div>
         </div>
 

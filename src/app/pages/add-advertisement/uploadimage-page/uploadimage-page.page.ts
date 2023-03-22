@@ -192,9 +192,9 @@ export class UploadimagePagePage implements OnInit {
     this.navCtrl.back();
   }
 
-  goToAdInfo() {
-    this.router.navigate(['ad-info']);
-  }
+  // goToAdInfo() {
+  //   this.router.navigate(['ad-info']);
+  // }
 
   goToAddNewAd() {
     this.router.navigate(['add-new-advertisement']);

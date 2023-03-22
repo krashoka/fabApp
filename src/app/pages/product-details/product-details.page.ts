@@ -21,6 +21,9 @@ export class ProductDetailsPage implements OnInit {
   sessionVal = false;
   userid: any;
   comments: any = [];
+  adMobile: any;
+
+  waLink = 'https://wa.me/';
 
   canComment = true;
   allComments = false;
@@ -78,6 +81,7 @@ export class ProductDetailsPage implements OnInit {
       this.prodDetails = val.adINFO.itemObj;
       this.adDetail = val.adINFO.adDetail;
       this.adImage = val.adINFO.imagesArray[0];
+      this.adMobile = val.adINFO.adMobile;
 
       this.storage.get('admin').then((session) => {
         console.log('admin session:', session);

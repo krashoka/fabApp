@@ -71,15 +71,23 @@ $extra-large-screen: 1200px;
     margin: 30px 20px;
   }
 
-  .password {
+  .passwordField {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
     border: 1px solid #eee;
     border-radius: 5px;
-    height: 45px;
-    color: #484848;
     font-size: 12px;
+    height: 45px;
     margin: 30px 20px 0;
+    color: #484848;
+    text-align: left;
+  }
+
+  .passwordField ion-icon {
+    font-size: 20px;
   }
 
   .countryCode {
@@ -216,18 +224,25 @@ $extra-large-screen: 1200px;
     justify-content: center;
   }
 
-  .password {
+  .passwordField {
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
+    padding-left: 15px;
+    padding-right: 15px;
     border: 1px solid #eee;
     border-radius: 5px;
+    font-size: 16px;
     height: 60px;
+    margin-bottom: 20px;
     color: #484848;
-    font-size: 18px;
-    margin: 10px 0 0;
     text-align: left;
   }
+
+  .passwordField ion-icon {
+    font-size: 20px;
+  }
+
 
   .signinBtn {
     margin: 50px 0 0px;

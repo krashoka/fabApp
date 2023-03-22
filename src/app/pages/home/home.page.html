@@ -121,7 +121,7 @@
             style="cursor: pointer"
             [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
           />
-          <div class="contactCommercial">
+          <!-- <div class="contactCommercial">
             <div style="border-right: 1px solid #dcdcdc">
               <ion-button
                 class="whatsapp"
@@ -136,6 +136,29 @@
               <ion-button class="call" [href]="'tel:+' + ad.adMobile">
                 <ion-text class="contactColor">Call</ion-text>
                 <ion-icon name="call"></ion-icon>
+              </ion-button>
+            </div>
+          </div> -->
+
+          <div class="contactSticky">
+            <div>
+              <ion-button class="call" [href]="'tel:+' + ad.adMobile">
+                <ion-icon name="call"></ion-icon>
+              </ion-button>
+            </div>
+            <div>
+              <ion-button
+                class="whatsapp"
+                target="_blank"
+                [href]="waLink + ad.adMobile"
+              >
+                <ion-icon name="logo-whatsapp"></ion-icon>
+              </ion-button>
+            </div>
+
+            <div>
+              <ion-button class="share" target="_blank">
+                <ion-icon name="share-social"></ion-icon>
               </ion-button>
             </div>
           </div>
@@ -195,6 +218,12 @@
                 <ion-icon name="logo-whatsapp"></ion-icon>
               </ion-button>
             </div>
+
+            <div>
+              <ion-button class="share" target="_blank">
+                <ion-icon name="share-social"></ion-icon>
+              </ion-button>
+            </div>
           </div>
         </ion-card>
       </ion-slide>
@@ -251,6 +280,11 @@
                   <ion-icon name="logo-whatsapp"></ion-icon>
                 </ion-button>
               </div>
+              <div>
+                <ion-button class="shareBtn" target="_blank">
+                  <ion-icon name="share-social"></ion-icon>
+                </ion-button>
+              </div>
             </div>
           </div>
         </div>
@@ -288,7 +322,7 @@
             [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
           />
         </div>
-        <div class="contactCommercial">
+        <!-- <div class="contactCommercial">
           <div style="border-right: 1px solid #dcdcdc">
             <ion-icon name="call" class="call"></ion-icon>
           </div>
@@ -297,6 +331,28 @@
               class="whatsapp"
               src="../../../assets/images/whatsapp.png"
             />
+          </div>
+        </div> -->
+
+        <div class="adsButton">
+          <div>
+            <ion-button class="callBtn" [href]="'tel:+' + ad.adMobile">
+              <ion-icon name="call"></ion-icon>
+            </ion-button>
+          </div>
+          <div>
+            <ion-button
+              class="whatsappBtn"
+              target="_blank"
+              [href]="waLink + ad.adMobile"
+            >
+              <ion-icon name="logo-whatsapp"></ion-icon>
+            </ion-button>
+          </div>
+          <div>
+            <ion-button class="shareBtn" target="_blank">
+              <ion-icon name="share-social"></ion-icon>
+            </ion-button>
           </div>
         </div>
       </ion-card>

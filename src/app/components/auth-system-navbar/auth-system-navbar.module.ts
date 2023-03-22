@@ -13,8 +13,9 @@ import { AuthSystemNavbarPage } from './auth-system-navbar.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    AuthSystemNavbarPageRoutingModule
+    AuthSystemNavbarPageRoutingModule,
   ],
-  declarations: [AuthSystemNavbarPage]
+  declarations: [AuthSystemNavbarPage],
+  exports: [AuthSystemNavbarPage],
 })
 export class AuthSystemNavbarPageModule {}

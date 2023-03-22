@@ -38,50 +38,66 @@
   </ion-card>
 
   <!-- tabs scroll code here -->
-  <div class="tabs">
-    <ion-label
-      class="tabsSlide"
-      *ngFor="let category of categories"
-      (click)="goToSticky(category.cid, category.title, category.slug)"
-      >{{category.title}}</ion-label
-    >
+  <div class="tabScroll">
+    <div class="tabs">
+      <ion-label
+        class="tabsSlide"
+        *ngFor="let category of categories"
+        (click)="goToSticky(category.cid, category.title, category.slug)"
+        >{{category.title}}</ion-label
+      >
+      <ion-icon name="chevron-back" class="arrowBack"></ion-icon>
+      <ion-icon name="chevron-forward" class="arrowForward"></ion-icon>
+    </div>
   </div>
 
   <div class="productDisplay">
     <div
-      class="adsCrousel"
+      class="adsBorder"
       (click)="goToProductDetails(ad)"
       *ngFor="let ad of adDetails"
     >
-      <div class="adsBorder">
-        <div class="prodImgAndDetails">
-          <div class="prodImage">
-            <img
-              class="imgHeight"
-              [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
-            />
-          </div>
-
-          <div class="productDetails">
-            <div class="dayAndHeart">
-              <ion-label>2 days ago</ion-label>
-              <ion-icon name="heart-outline"></ion-icon>
-            </div>
-            <p class="adsTitle">{{ad.adTitle}}</p>
-            <div class="adsPrice">
-              <ion-label>{{ad.itemObj.Price}}</ion-label>
-              <ion-label class="currency">AED</ion-label>
-            </div>
-          </div>
+      <div class="prodImgAndDetails">
+        <div class="prodImage">
+          <img
+            class="imgHeight"
+            [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
+          />
         </div>
 
-        <div class="adsButton">
-          <div class="callBtn">
+        <div class="productDetails">
+          <div class="dayAndHeart">
+            <ion-label>2 days ago</ion-label>
+            <ion-icon name="heart-outline"></ion-icon>
+          </div>
+          <p class="adsTitle">{{ad.adTitle}}</p>
+          <div class="adsPrice">
+            <ion-label>{{ad.itemObj.Price}}</ion-label>
+            <ion-label class="currency">AED</ion-label>
+          </div>
+        </div>
+      </div>
+
+      <div class="contactSticky">
+        <div>
+          <ion-button class="call" [href]="'tel:+' + ad.adMobile">
             <ion-icon name="call"></ion-icon>
-          </div>
-          <div class="whatsappBtn">
+          </ion-button>
+        </div>
+        <div>
+          <ion-button
+            class="whatsapp"
+            target="_blank"
+            [href]="waLink + ad.adMobile"
+          >
             <ion-icon name="logo-whatsapp"></ion-icon>
-          </div>
+          </ion-button>
+        </div>
+
+        <div>
+          <ion-button class="share" target="_blank">
+            <ion-icon name="share-social"></ion-icon>
+          </ion-button>
         </div>
       </div>
     </div>

@@ -123,6 +123,7 @@ $extra-large-screen: 1200px;
   .inputStyle ion-text {
     font-size: 18px;
     color: #484848;
+    margin-top: 15px;
   }
 
   .inputStyle input {
@@ -137,6 +138,13 @@ $extra-large-screen: 1200px;
     margin-bottom: 20px;
     padding-left: 10px;
     padding-right: 10px;
+  }
+
+  .textArea {
+    border: 1px solid #d9d9d9 !important;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding-left: 0px;
   }
 
   .inputStyle input:focus {
@@ -437,6 +445,7 @@ $extra-large-screen: 1200px;
   .inputStyle ion-text {
     font-size: 18px;
     color: #484848;
+    margin-top: 15px;
   }
 
   .inputStyle input {
@@ -455,6 +464,13 @@ $extra-large-screen: 1200px;
 
   .inputStyle input:focus {
     outline: none;
+  }
+
+  .textArea {
+    border: 1px solid #d9d9d9 !important;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding-left: 0px;
   }
 
   .checkStyle {

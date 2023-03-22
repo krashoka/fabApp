@@ -66,14 +66,34 @@
         />
       </div>
       <div>
-        <div>
-          <ion-label class="price">{{price}}</ion-label>
-          <ion-label class="currency">AED</ion-label>
+        <div class="priceOffer">
+          <div>
+            <ion-label class="price">{{price}}</ion-label>
+            <ion-label class="currency">AED</ion-label>
+          </div>
+          <div class="makeOffer">
+            <ion-text>Make an Offer</ion-text>
+          </div>
         </div>
 
-        <ion-button expand="block" color="primary" class="showNumber"
-          >Show phone number</ion-button
-        >
+        <div class="displayContact">
+          <div>
+            <ion-button class="callDisplay" [href]="'tel:+' + adMobile">
+              <ion-icon name="call"></ion-icon>
+              <ion-text class="contactColor">+{{adMobile}}</ion-text>
+            </ion-button>
+          </div>
+          <div>
+            <ion-button
+              class="whatsappDisplay"
+              target="_blank"
+              [href]="waLink + adMobile"
+            >
+              <ion-icon name="logo-whatsapp"></ion-icon>
+              <ion-text class="contactColor">WhatsApp</ion-text>
+            </ion-button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -122,17 +142,17 @@
 
   <!-- ----------- Comment -------------- -->
   <div class="commentSection" *ngIf="canComment">
-    <p class="comment">Comments</p>
+    <p class="comment">Chat</p>
     <ion-textarea
       class="addComment"
-      placeholder="Add a comment..."
+      placeholder="Type to chat..."
       type="text"
       [disabled]="commentDisabled"
       autoGrow="true"
       [(ngModel)]="commentValue"
     ></ion-textarea>
     <div class="addCommentBtn">
-      <button (click)="addComment()">Add comment</button>
+      <button (click)="addComment()">Start Chat</button>
     </div>
   </div>
 
@@ -389,8 +409,8 @@
       <ion-label class="contact">Call</ion-label>
     </div>
     <div>
-      <ion-img src="../../../assets/images/whatsapp.png"></ion-img>
-      <ion-label class="contact">whatsapp</ion-label>
+      <ion-icon class="whatsappIcon" name="logo-whatsapp"></ion-icon>
+      <ion-label class="contact">WhatsApp</ion-label>
     </div>
   </div>
 

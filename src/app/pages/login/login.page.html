@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-card class="ion-no-margin header_card">
+  <!-- <ion-card class="ion-no-margin header_card">
     <ion-img
       id="fabLogoImg"
       src="../../../assets/images/fabLogo.png"
@@ -9,7 +9,9 @@
       <ion-text>English</ion-text>
       <ion-icon name="caret-down"></ion-icon>
     </div>
-  </ion-card>
+  </ion-card> -->
+
+  <app-auth-system-navbar></app-auth-system-navbar>
 
   <div class="loginLayout">
     <div class="loginImg">
@@ -45,12 +47,25 @@
         <ion-icon name="key"></ion-icon>
         <ion-text>Password</ion-text>
       </div>
-      <div class="password">
+
+      <div class="passwordField">
         <ion-input
-          type="text"
+          [type]="typePassword"
           [(ngModel)]="user_pwd"
           placeholder="Enter the password"
         ></ion-input>
+        <ion-icon
+          slot="end"
+          name="eye"
+          *ngIf="showPassword"
+          (click)="togglePasswordVisibility()"
+        ></ion-icon>
+        <ion-icon
+          slot="end"
+          name="eye-off"
+          *ngIf="!showPassword"
+          (click)="togglePasswordVisibility()"
+        ></ion-icon>
       </div>
 
       <p class="forgotPassword" routerLink="/forgot-password">

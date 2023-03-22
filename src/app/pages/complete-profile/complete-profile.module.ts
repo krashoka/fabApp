@@ -4,24 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { CompleteProfilePageRoutingModule } from './complete-profile-routing.module';
 
-import { LoginPage } from './login.page';
+import { CompleteProfilePage } from './complete-profile.page';
 import { AuthSystemNavbarPageModule } from '../../components/auth-system-navbar/auth-system-navbar.module';
-
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule,
-    AuthSystemNavbarPageModule
+    CompleteProfilePageRoutingModule,
+    AuthSystemNavbarPageModule,
   ],
-  declarations: [LoginPage],
-  providers: [
-    Storage
-  ]
-  
+  declarations: [CompleteProfilePage],
 })
-export class LoginPageModule {}
+export class CompleteProfilePageModule {}

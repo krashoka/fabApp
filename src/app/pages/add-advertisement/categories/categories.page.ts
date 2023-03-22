@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { DataService } from 'src/app/data.service';
 import { Storage } from '@ionic/storage-angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-categories',
@@ -22,7 +23,8 @@ export class CategoriesPage implements OnInit {
     private navCtrl: NavController,
     public _apiService: ApiService,
     private dataService: DataService,
-    private storage: Storage
+    private storage: Storage,
+    private route: ActivatedRoute
   ) {
     this.storage.create();
   }
@@ -72,8 +74,8 @@ export class CategoriesPage implements OnInit {
             newData: datas,
             title: titles,
           };
-          this.storage.set('category', value);
-          this.router.navigateByUrl(`categories/${slug}`);
+          // this.storage.set('category', value);
+          this.router.navigateByUrl(`categories/${datas}`);
           // this.router.navigate(['categories']);
           // this.navCtrl.navigateForward('categories', { replaceUrl: true });
 
@@ -87,15 +89,19 @@ export class CategoriesPage implements OnInit {
   }
 
   ngOnInit() {
-    this.storage.get('category').then((value) => {
-      let data = { cid: value.newData };
+    const slug = this.route.snapshot.paramMap.get('slug');
+    console.log('SlugValue:', slug);
 
+    let data = { cid: slug };
+
+    this.storage.get('category').then((value)=>{
       this.categoryTitle = value.title;
+    })
+    
 
-      this._apiService.sendCategory(data).subscribe((res: any) => {
-        this.categories = res;
-        console.log("What's response:", res);
-      });
+    this._apiService.sendCategory(data).subscribe((res: any) => {
+      this.categories = res;
+      console.log("What's response:", res);
     });
   }
 }

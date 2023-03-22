@@ -142,17 +142,13 @@ $extra-large-screen: 1200px;
   .productDisplay {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    width: 100%;
+    // width: 100%;
+    margin: 30px 3% 50px;
+    gap: 20px;
   }
 
-  .adsCrousel {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
-
-    .adsBorder {
-      border: 1px solid #6c757d;
-    }
+  .adsBorder {
+    border: 1px solid #dcdcdc;
   }
 
   .dayAndHeart {
@@ -195,21 +191,82 @@ $extra-large-screen: 1200px;
     text-align: center;
   }
 
-  .callBtn {
-    width: 50%;
-    border-top: 1px solid #6c757d;
-    border-right: 1px solid #6c757d;
+  .contactSticky {
+    display: flex;
+    width: 100%;
+    height: 35px;
+    border-top: 1px solid #dcdcdc;
+  }
+
+  .contactSticky > div:nth-child(1) {
+    border-top: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 33%;
+    font-size: 14px;
+  }
+
+  .contactSticky > div:nth-child(2) {
+    border-top: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    width: 33%;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contactSticky > div:nth-child(3) {
+    border-top: 1px solid #dcdcdc;
+    width: 33%;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .call {
+    width: 95%;
     padding: 5px 0;
     margin: auto;
     color: #007bff;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
   }
 
-  .whatsappBtn {
-    width: 50%;
-    border-top: 1px solid #6c757d;
+  .whatsapp {
+    width: 95%;
     padding: 5px 0;
     margin: auto;
     color: #28a745;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
+  }
+
+  .share {
+    width: 95%;
+    padding: 5px 0;
+    margin: auto;
+    color: #484848;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
   }
 
   .imgHeight {
@@ -225,6 +282,8 @@ $extra-large-screen: 1200px;
     height: fit-content;
     overflow-x: auto;
     white-space: nowrap;
+    margin-left: 6%;
+    margin-right: 6%;
   }
 
   .tabs::-webkit-scrollbar {
@@ -240,6 +299,29 @@ $extra-large-screen: 1200px;
     font-weight: normal;
     border-radius: 10rem;
     width: auto;
+  }
+
+  .tabScroll {
+    position: relative;
+    height: max-content;
+    margin-left: 3%;
+    margin-right: 3%;
+  }
+
+  .arrowForward {
+    position: absolute;
+    right: 0;
+    top: 25%;
+    color: #6c757d;
+    font-size: 18px;
+  }
+
+  .arrowBack {
+    position: absolute;
+    left: 0;
+    top: 25%;
+    color: #6c757d;
+    font-size: 18px;
   }
 }
 
@@ -325,22 +407,25 @@ $extra-large-screen: 1200px;
     cursor: pointer;
   }
 
+  .arrowForward {
+    display: none;
+  }
+
+  .arrowBack {
+    display: none;
+  }
+
   /****************** INFINITE Product Page in Desktop View ********/
   .productDisplay {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    width: 100%;
+    // width: 94%;
     margin: 0 3% 50px;
-  }
-
-  .adsCrousel {
-    display: flex;
-    gap: 10px;
-    padding: 10px;
+    gap: 20px;
   }
 
   .adsBorder {
-    border: 1px solid #6c757d;
+    border: 1px solid #dcdcdc;
     border-radius: 5px;
     width: 100%;
   }
@@ -385,25 +470,82 @@ $extra-large-screen: 1200px;
     text-align: center;
   }
 
-  .callBtn {
-    width: 50%;
-    border-top: 1px solid #6c757d;
-    border-right: 1px solid #6c757d;
+  .contactSticky {
+    display: flex;
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid #dcdcdc;
+  }
+
+  .contactSticky > div:nth-child(1) {
+    border-top: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 33%;
+    font-size: 16px;
+  }
+
+  .contactSticky > div:nth-child(2) {
+    border-top: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    width: 33%;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contactSticky > div:nth-child(3) {
+    border-top: 1px solid #dcdcdc;
+    width: 33%;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .call {
+    width: 95%;
     padding: 5px 0;
     margin: auto;
     color: #007bff;
-    font-size: 18px;
-    cursor: pointer;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
   }
 
-  .whatsappBtn {
-    width: 50%;
-    border-top: 1px solid #6c757d;
+  .whatsapp {
+    width: 95%;
     padding: 5px 0;
     margin: auto;
     color: #28a745;
-    font-size: 18px;
-    cursor: pointer;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
+  }
+
+  .share {
+    width: 95%;
+    padding: 5px 0;
+    margin: auto;
+    color: #484848;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
   }
 
   .imgHeight {

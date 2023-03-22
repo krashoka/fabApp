@@ -101,16 +101,11 @@ export class HomePage {
           newData: datas,
           title: titles,
         };
-        this.storage.set('homeCategory', value);
-        this.router.navigateByUrl(`products/${slug}`);
+        this.router.navigateByUrl(`products/${datas}`);
       }
     });
 
-    // this._apiService.fetchAds(data).subscribe((res: any) => {
-    //   console.log('Dikhao data:', res);
-      this.storage.set('fetchAdsData', data);
-      console.log("homeIconCID:", data)
-    // });
+    console.log('homeIconCID:', data);
   }
 
   goToStickyAds() {

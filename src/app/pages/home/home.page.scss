@@ -138,7 +138,7 @@ $extra-large-screen: 1200px;
   }
 
   .adsBorder {
-    border: 1px solid #6c757d;
+    border: 1px solid #dcdcdc;
   }
 
   .dayAndHeart {
@@ -181,17 +181,24 @@ $extra-large-screen: 1200px;
   }
 
   .adsButton > div:nth-child(1) {
-    border-top: 1px solid #6c757d;
-    border-right: 1px solid #6c757d;
+    border-top: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
     display: flex;
     justify-content: center;
-    width: 50%;
+    width: 33%;
   }
 
   .adsButton > div:nth-child(2) {
-    border-top: 1px solid #6c757d;
-    width: 50%;
+    border-top: 1px solid #dcdcdc;
+    border-right: 1px solid #dcdcdc;
+    width: 33%;
+    display: flex;
+    justify-content: center;
+  }
 
+  .adsButton > div:nth-child(3) {
+    border-top: 1px solid #dcdcdc;
+    width: 33%;
     display: flex;
     justify-content: center;
   }
@@ -210,6 +217,15 @@ $extra-large-screen: 1200px;
     padding: 5px 0;
     margin: auto;
     color: #28a745;
+    --background: #fff !important;
+    --box-shadow: none !important;
+  }
+
+  .shareBtn {
+    width: 95%;
+    padding: 5px 0;
+    margin: auto;
+    color: #484848;
     --background: #fff !important;
     --box-shadow: none !important;
   }
@@ -248,8 +264,6 @@ $extra-large-screen: 1200px;
 
   .commercialImg {
     object-fit: contain;
-    // margin-bottom: 0;
-    // height: 180px;
   }
 
   .contactCommercial {
@@ -549,7 +563,7 @@ $extra-large-screen: 1200px;
 
   .commercialSlide ion-card {
     width: 100%;
-    height: 400px;
+    // height: 400px;
     box-shadow: none;
     border: 1px solid #dcdcdc;
     border-radius: 12px;
@@ -565,20 +579,20 @@ $extra-large-screen: 1200px;
     transition: 600ms all ease-in-out;
   }
 
-  .contactCommercial {
-    display: flex;
-    width: 100%;
-    height: 60px;
-  }
+  // .contactCommercial {
+  //   display: flex;
+  //   width: 100%;
+  //   height: 60px;
+  // }
 
-  .contactCommercial > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    width: 50%;
-    font-size: 14px;
-  }
+  // .contactCommercial > div {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   gap: 10px;
+  //   width: 50%;
+  //   font-size: 14px;
+  // }
 
   /******************* STICKY ADS **************/
 
@@ -671,14 +685,24 @@ $extra-large-screen: 1200px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 33%;
     font-size: 16px;
   }
 
   .contactSticky > div:nth-child(2) {
     border-top: 1px solid #dcdcdc;
-    width: 50%;
-    font-size: 16px;
+    border-right: 1px solid #dcdcdc;
+    width: 33%;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contactSticky > div:nth-child(3) {
+    border-top: 1px solid #dcdcdc;
+    width: 33%;
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -687,7 +711,6 @@ $extra-large-screen: 1200px;
   .call {
     width: 95%;
     padding: 5px 0;
-    // font-size: 24px;
     margin: auto;
     color: #007bff;
     --background: #fff !important;
@@ -713,7 +736,21 @@ $extra-large-screen: 1200px;
     text-transform: none !important;
   }
 
-  .contactColor{
+  .share {
+    width: 95%;
+    padding: 5px 0;
+    margin: auto;
+    color: #484848;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
+  }
+
+  .contactColor {
     color: #484848;
     margin-right: 10px;
   }

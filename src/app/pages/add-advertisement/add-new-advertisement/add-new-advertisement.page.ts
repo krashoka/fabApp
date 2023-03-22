@@ -63,7 +63,7 @@ export class AddNewAdvertisementPage implements OnInit {
           title: titles,
         };
         this.storage.set('category', value);
-        this.router.navigateByUrl(`categories/${slug}`);
+        this.router.navigateByUrl(`categories/${datas}`);
       }
     });
   }

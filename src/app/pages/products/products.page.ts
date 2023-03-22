@@ -21,6 +21,10 @@ export class ProductsPage implements OnInit {
 
   newUrl: any = [];
 
+  waLink = 'https://wa.me/';
+
+  // isArrow = true;
+
   // imageUrl: any;
 
   constructor(
@@ -65,100 +69,96 @@ export class ProductsPage implements OnInit {
           newData: datas,
           title: titles,
         };
-        this.storage.set('homeCategory', value);
-        this.router.navigateByUrl(`products/${slug}`);
+
+        this.router.navigateByUrl(`products/${datas}`);
       }
     });
-
-    this.storage.set('fetchAdsData', data);
   }
 
   ngOnInit() {
+    // window.addEventListener('resize', this.onResize.bind(this));
+
     const slug = this.route.snapshot.paramMap.get('slug');
+    console.log('SlugValue:', slug);
 
-    this.storage.get('fetchAdsData').then((val) => {
-      let cidData = {
-        cid: val.cid,
-      };
+    let cidData = {
+      cid: slug,
+    };
 
-      this._apiService.fetchAds(cidData).subscribe((res: any) => {
-        console.log('Show Ad details:', res);
-        // Displaying ads from database
-        let dataLength = res.length;
-        for (let i = 0; i < dataLength; i++) {
-          let adTitle = '';
-          let adDetail = '';
-          let itemInfo: any = [];
-          let itemLabel: any = [];
-          let imagesArray: any = [];
-          let ad_id;
-          let adAdmin;
-          let adMobile;
-          for (let key in res[i]) {
-            if (key === 'addHeadings') {
-              adTitle = res[i][key].add_title;
-              adDetail = res[i][key].add_detail;
-              adAdmin = res[i][key].user_id;
-            }
+    this._apiService.fetchAds(cidData).subscribe((res: any) => {
+      console.log('Show Ad details:', res);
+      // Displaying ads from database
+      let dataLength = res.length;
+      for (let i = 0; i < dataLength; i++) {
+        let adTitle = '';
+        let adDetail = '';
+        let itemInfo: any = [];
+        let itemLabel: any = [];
+        let imagesArray: any = [];
+        let ad_id;
+        let adAdmin;
+        let adMobile;
+        for (let key in res[i]) {
+          if (key === 'addHeadings') {
+            adTitle = res[i][key].add_title;
+            adDetail = res[i][key].add_detail;
+            adAdmin = res[i][key].user_id;
+          }
 
-            if (key === 'addPersonalInfo') {
-              adMobile = '+' + res[i][key].phonecode + ' ' + res[i][key].mobile;
-            }
+          if (key === 'addPersonalInfo') {
+            adMobile = '+' + res[i][key].phonecode + ' ' + res[i][key].mobile;
+          }
 
-            if (key === 'addData') {
-              for (let j = 0; j < res[i][key].length; j++) {
-                // if (j == 4) {
-                for (let val in res[i][key][j]) {
-                  if (val == 'main_data') itemInfo.push(res[i][key][j][val]);
-                  if (val == 'label') itemLabel.push(res[i][key][j][val]);
-                  if (val == 'add_id') ad_id = res[i][key][j][val];
-                }
-                // }
-              }
-            }
-
-            if (key === 'addImage') {
-              for (let j = 0; j < res[i][key].length; j++) {
-                // if (j == 4) {
-                for (let val in res[i][key][j]) {
-                  if (val == 'image_name')
-                    imagesArray.push(res[i][key][j][val]);
-                }
-                // }
+          if (key === 'addData') {
+            for (let j = 0; j < res[i][key].length; j++) {
+              for (let val in res[i][key][j]) {
+                if (val == 'main_data') itemInfo.push(res[i][key][j][val]);
+                if (val == 'label') itemLabel.push(res[i][key][j][val]);
+                if (val == 'add_id') ad_id = res[i][key][j][val];
               }
             }
           }
 
-          let itemObj = {};
-
-          for (let k = 0; k < itemInfo.length; k++) {
-            itemObj[itemLabel[k]] = itemInfo[k];
+          if (key === 'addImage') {
+            for (let j = 0; j < res[i][key].length; j++) {
+              for (let val in res[i][key][j]) {
+                if (val == 'image_name') imagesArray.push(res[i][key][j][val]);
+              }
+            }
           }
-
-          let data = {
-            adAdmin: adAdmin,
-            adTitle: adTitle,
-            itemObj: itemObj,
-            adDetail: adDetail,
-            imagesArray: imagesArray,
-            ad_id: ad_id,
-            adMobile: adMobile,
-          };
-
-          this.adDetails.push(data);
         }
-      });
+
+        let itemObj = {};
+
+        for (let k = 0; k < itemInfo.length; k++) {
+          itemObj[itemLabel[k]] = itemInfo[k];
+        }
+
+        let data = {
+          adAdmin: adAdmin,
+          adTitle: adTitle,
+          itemObj: itemObj,
+          adDetail: adDetail,
+          imagesArray: imagesArray,
+          ad_id: ad_id,
+          adMobile: adMobile,
+        };
+
+        this.adDetails.push(data);
+      }
     });
 
-    this.storage.get('homeCategory').then((value) => {
-      let data = { cid: value.newData };
-
-      this.categoryTitle = value.title;
-
-      this._apiService.sendCategory(data).subscribe((res: any) => {
-        this.categories = res;
-        console.log("What's response:", res);
-      });
+    this._apiService.sendCategory(cidData).subscribe((res: any) => {
+      this.categories = res;
+      console.log("What's response:", res);
     });
   }
+
+  // onResize() {
+  //   if (window.innerWidth >= 992) {
+  //     this.isArrow = false;
+  //   }else{
+  //     this.isArrow = true;
+  //   }
+  // }
 }

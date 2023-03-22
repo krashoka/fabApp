@@ -18,6 +18,9 @@ export class LoginPage implements OnInit {
   user_mob: any;
   user_pwd: any;
 
+  typePassword = 'password';
+  showPassword: boolean = false;
+
   constructor(
     private router: Router,
     public _apiService: ApiService,
@@ -36,6 +39,13 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+    this.typePassword === 'password'
+      ? (this.typePassword = 'text')
+      : (this.typePassword = 'password');
+  }
 
   loginUser() {
     let data = {
