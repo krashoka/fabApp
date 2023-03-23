@@ -14,7 +14,7 @@
         <ion-icon
           class="header_icon"
           name="search"
-          (click)="goToStickyAds()"
+          (click)="goToStickyAds(0, 'All/Newest')"
         ></ion-icon>
         <ion-icon class="header_icon" name="notifications"></ion-icon>
       </div>
@@ -89,7 +89,7 @@
     <div class="grid homeTabComponent" *ngIf="homeTabComponent">
       <!-- <div class="grid" *ngIf="showHomeContent"> -->
       <div
-        (click)="goToSticky(category.cid, category.title, category.slug)"
+        (click)="goToSticky(category.cid, category.title)"
         *ngFor="let category of categories"
       >
         <ion-card class="icons" [innerHTML]="category.icon | safeHtml">
@@ -174,7 +174,10 @@
         <ion-icon style="font-size: 28px" name="flash"></ion-icon>
         <ion-text>Sticky Ads</ion-text>
       </div>
-      <div style="color: #007bff; cursor: pointer" (click)="goToStickyAds()">
+      <div
+        style="color: #007bff; cursor: pointer"
+        (click)="goToStickyAds(0, 'All/Newest')"
+      >
         <ion-text>Read More</ion-text>
         <ion-icon style="font-size: 28px" name="chevron-forward"></ion-icon>
       </div>
@@ -237,7 +240,7 @@
       <ion-label>Sticky Ads</ion-label>
       <ion-icon
         name="arrow-forward-outline"
-        (click)="goToStickyAds()"
+        (click)="goToStickyAds(0, 'All/Newest')"
       ></ion-icon>
     </ion-card>
 

@@ -1,16 +1,4 @@
 <ion-content>
-  <!-- <ion-card class="ion-no-margin header_card">
-    <ion-img
-      id="fabLogoImg"
-      src="../../../assets/images/fabLogo.png"
-      (click)="goToHome()"
-    ></ion-img>
-    <div>
-      <ion-text>English</ion-text>
-      <ion-icon name="caret-down"></ion-icon>
-    </div>
-  </ion-card> -->
-
   <app-auth-system-navbar></app-auth-system-navbar>
 
   <div class="signupLayout">
@@ -32,17 +20,13 @@
 
       <div class="mobNumber">
         <div class="countryCode">
-          <ion-select
-            interface="popover"
-            [disabled]="isInputDisabled"
-            [(ngModel)]="phonecode"
+          <select2
+            [overlay]="overlay"
+            [data]="countries"
+            (search)="search('search1')"
+            [(ngModel)]="selectedCountry"
           >
-            <ion-select-option
-              *ngFor="let countryCode of countries"
-              [value]="countryCode"
-              >+{{countryCode}}</ion-select-option
-            >
-          </ion-select>
+          </select2>
         </div>
 
         <ion-input

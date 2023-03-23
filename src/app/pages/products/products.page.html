@@ -14,7 +14,9 @@
   </ion-card>
 
   <ion-card class="stickyCat">
-    <div class="stickyCatTitle">You have 65358 All/Newest in All Cities</div>
+    <div class="stickyCatTitle">
+      You have {{totalAds}} {{categoryTitle}} in All Cities
+    </div>
   </ion-card>
 
   <ion-card class="stickyAds">
@@ -33,7 +35,7 @@
   </div>
 
   <ion-card class="stickyAds">
-    <ion-label>You have 25555 Real Estate in all cities</ion-label>
+    <ion-label>You have {{totalAds}} {{categoryTitle}} in all cities</ion-label>
     <div id="chngProdView"><ion-icon name="list"></ion-icon></div>
   </ion-card>
 
@@ -43,7 +45,7 @@
       <ion-label
         class="tabsSlide"
         *ngFor="let category of categories"
-        (click)="goToSticky(category.cid, category.title, category.slug)"
+        (click)="goToSticky(category.cid, category.title, category.parent)"
         >{{category.title}}</ion-label
       >
       <ion-icon name="chevron-back" class="arrowBack"></ion-icon>

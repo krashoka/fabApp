@@ -23,6 +23,8 @@ export class ProductsPage implements OnInit {
 
   waLink = 'https://wa.me/';
 
+  totalAds: any;
+
   // isArrow = true;
 
   // imageUrl: any;
@@ -55,24 +57,22 @@ export class ProductsPage implements OnInit {
       });
   }
 
-  goToSticky(datas: any, titles: any, slug: any) {
+  goToSticky(datas: any, titles: any, parent: any) {
     let data = { cid: datas };
 
-    console.log('cidData:', data);
-
-    this._apiService.sendCategory(data).subscribe((res: any) => {
-      console.log('check empty: ', res);
-      if (res == 'empty') {
-        console.log('give res', res);
-      } else {
-        let value = {
-          newData: datas,
-          title: titles,
-        };
-
-        this.router.navigateByUrl(`products/${datas}`);
-      }
-    });
+    if (parent == '0') {
+      this.storage.set('catTitle', titles);
+      this.router.navigateByUrl(`products/${datas}`);
+    } else {
+      this._apiService.sendCategory(data).subscribe((res: any) => {
+        console.log('check empty: ', res);
+        if (res == 'empty') {
+          console.log('give res', res);
+        } else {
+          this.router.navigateByUrl(`products/${datas}`);
+        }
+      });
+    }
   }
 
   ngOnInit() {
@@ -89,6 +89,9 @@ export class ProductsPage implements OnInit {
       console.log('Show Ad details:', res);
       // Displaying ads from database
       let dataLength = res.length;
+
+      this.totalAds = dataLength;
+
       for (let i = 0; i < dataLength; i++) {
         let adTitle = '';
         let adDetail = '';
@@ -148,10 +151,31 @@ export class ProductsPage implements OnInit {
       }
     });
 
-    this._apiService.sendCategory(cidData).subscribe((res: any) => {
-      this.categories = res;
-      console.log("What's response:", res);
-    });
+    if (slug == '0') {
+      this.http.get('https://specbits.com/class2/fab/index').subscribe(
+        (res: any) => {
+          this.categories = res;
+
+          console.log('product from home:', res);
+        },
+        (error: any) => {
+          console.log('ErrorMessage: ', error);
+        }
+      );
+
+      this.storage.get('catTitle').then((val) => {
+        this.categoryTitle = val;
+      });
+    } else {
+      this._apiService.sendCategory(cidData).subscribe((res: any) => {
+        this.categories = res;
+        console.log("What's response:", res);
+      });
+
+      this.storage.get('catTitle').then((val) => {
+        this.categoryTitle = val;
+      });
+    }
   }
 
   // onResize() {

@@ -87,7 +87,7 @@ export class HomePage {
     autoplay: true,
   };
 
-  goToSticky(datas: any, titles: any, slug: any) {
+  goToSticky(datas: any, titles: any) {
     let data = { cid: datas };
 
     this.storage.set('catTitle', titles);
@@ -97,10 +97,6 @@ export class HomePage {
       if (res == 'empty') {
         this.router.navigate(['home']);
       } else {
-        let value = {
-          newData: datas,
-          title: titles,
-        };
         this.router.navigateByUrl(`products/${datas}`);
       }
     });
@@ -108,8 +104,9 @@ export class HomePage {
     console.log('homeIconCID:', data);
   }
 
-  goToStickyAds() {
-    this.router.navigate(['products']);
+  goToStickyAds(datas: any, title: any) {
+    this.storage.set('catTitle', title);
+    this.router.navigateByUrl(`products/${datas}`);
   }
 
   goToAddNewAd() {

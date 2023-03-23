@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { PersonalInfoPageRoutingModule } from './personal-info-routing.module';
 
 import { PersonalInfoPage } from './personal-info.page';
-import {NavbarPageModule} from '../../../components/navbar/navbar.module';
+import { NavbarPageModule } from '../../../components/navbar/navbar.module';
+import { Select2Module } from 'ng-select2-component';
 
 @NgModule({
   imports: [
@@ -15,8 +16,9 @@ import {NavbarPageModule} from '../../../components/navbar/navbar.module';
     FormsModule,
     IonicModule,
     PersonalInfoPageRoutingModule,
-    NavbarPageModule
+    NavbarPageModule,
+    Select2Module,
   ],
-  declarations: [PersonalInfoPage]
+  declarations: [PersonalInfoPage],
 })
 export class PersonalInfoPageModule {}

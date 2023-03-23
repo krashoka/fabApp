@@ -14,6 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class NavbarPage implements OnInit {
   showAccount = false;
   showLogin = true;
+  username: any;
 
   constructor(
     private router: Router,
@@ -25,8 +26,18 @@ export class NavbarPage implements OnInit {
       console.log('SessionVal:', val);
       if (val != null) {
         this.storage.create();
+        this.username = val.username;
       }
     });
+  }
+
+  onDropdownSelect = false;
+  openMyAccountTab() {
+    this.onDropdownSelect = !this.onDropdownSelect;
+  }
+
+  dismissSideMenu() {
+    this.onDropdownSelect = !this.onDropdownSelect;
   }
 
   logout() {
@@ -80,8 +91,9 @@ export class NavbarPage implements OnInit {
     this.router.navigate(['home']);
   }
 
-  goToStickyAds() {
-    this.router.navigate(['products']);
+  goToStickyAds(datas: any, title: any) {
+    this.storage.set('catTitle', title);
+    this.router.navigateByUrl(`products/${datas}`);
   }
 
   goToCommercialAds() {

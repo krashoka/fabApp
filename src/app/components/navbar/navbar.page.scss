@@ -12,6 +12,7 @@ $large-screen: 992px;
     margin: 0;
     width: 100%;
     height: 144px;
+    // position: relative;
   }
 
   .innerTopNav {
@@ -58,21 +59,97 @@ $large-screen: 992px;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    position: relative;
   }
+
+  // .newAccount {
+  //   position: relative;
+  // }
+
+  // .accountDropdown {
+  //   display: block;
+  // }
 
   .accountDropdown {
-    display: none;
+    // display: none;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    // top: 60px;
+    // bottom: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 1000;
+    // border: 1px solid #dedede;
   }
 
-  .dropDown {
-    display: block;
+  .accountDropdown > div:nth-child(1) {
+    width: 75%;
+    height: 100vh;
+  }
+
+  .accountDropdown > div:nth-child(2) {
+    // display: none;
+    width: 25%;
+    background-color: #fff;
+    top: 0;
     position: fixed;
-    top: 60px;
+    // top: 60px;
     // bottom: 0;
-    right: 150px;
-    z-index: 1000;
+    right: 0;
+    height: 100vh;
     border: 1px solid #dedede;
+  }
+
+  .welcome {
+    color: #484848;
+    font-weight: 700;
+    font-size: 24px;
+    border-bottom: 2px solid #484848;
+    margin-bottom: 10px;
+    padding-bottom: 15px;
+  }
+
+  .accountMenu {
+    padding: 20px;
+  }
+
+  .accountMenu > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #484848;
+    border-bottom: 1px solid #dfdcdc;
+    padding: 15px 0;
+    cursor: pointer;
+  }
+
+  .accountMenu > div > div {
+    display: flex;
+    align-items: center;
+  }
+
+  .accountMenu ion-icon {
+    margin-right: 10px;
+    // color: #484848;
+    font-size: 22px;
+    display: flex;
+    // flex-direction: column;
+    align-items: center;
+  }
+
+  .logOut {
+    display: flex;
+    color: #484848;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid #dfdcdc;
+    padding-bottom: 15px;
+  }
+
+  .logOut > ion-icon {
+    color: #e30b1c;
+    font-size: 26px;
   }
 
   /*************** Main Nav *****************/

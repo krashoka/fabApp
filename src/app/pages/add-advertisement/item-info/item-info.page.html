@@ -32,14 +32,24 @@
           <!-- <div [innerHTML]="item | safeHtml"></div> -->
           <div *ngIf="item.selectType" class="selectStyle">
             <ion-text>{{item.label}}</ion-text>
-            <select [(ngModel)]="item.value">
+            <!-- <select [(ngModel)]="item.value">
               <option
                 *ngFor="let option of item.optionElement"
                 [value]="option"
               >
                 {{option}}
               </option>
-            </select>
+            </select> -->
+
+            <select2
+              [overlay]="overlay"
+              [data]="item.optionElement"
+              (search)="search('search1')"
+              [(ngModel)]="item.value"
+              placeholder="Select"
+              class="selecStyle"
+            >
+            </select2>
           </div>
           <div *ngIf="item.inputType" class="inputStyle">
             <ion-text>{{item.label}}</ion-text>

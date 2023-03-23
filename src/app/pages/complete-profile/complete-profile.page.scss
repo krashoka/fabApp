@@ -46,9 +46,10 @@ $extra-large-screen: 1200px;
   }
 
   .save_empty {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 50px;
     gap: 25px;
     margin-top: 50px;

@@ -8,7 +8,8 @@ import { PipesModule } from './safe.module';
 import { ItemInfoPageRoutingModule } from './item-info-routing.module';
 
 import { ItemInfoPage } from './item-info.page';
-import {NavbarPageModule} from '../../../components/navbar/navbar.module';
+import { NavbarPageModule } from '../../../components/navbar/navbar.module';
+import { Select2Module } from 'ng-select2-component';
 
 @NgModule({
   imports: [
@@ -17,8 +18,9 @@ import {NavbarPageModule} from '../../../components/navbar/navbar.module';
     IonicModule,
     PipesModule,
     ItemInfoPageRoutingModule,
-    NavbarPageModule
+    NavbarPageModule,
+    Select2Module,
   ],
-  declarations: [ItemInfoPage]
+  declarations: [ItemInfoPage],
 })
 export class ItemInfoPageModule {}

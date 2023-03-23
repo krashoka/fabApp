@@ -97,6 +97,7 @@ $extra-large-screen: 1200px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 75px;
   }
 
   .signinBtn {
@@ -222,6 +223,7 @@ $extra-large-screen: 1200px;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 85px;
   }
 
   .passwordField {
@@ -242,7 +244,6 @@ $extra-large-screen: 1200px;
   .passwordField ion-icon {
     font-size: 20px;
   }
-
 
   .signinBtn {
     margin: 50px 0 0px;

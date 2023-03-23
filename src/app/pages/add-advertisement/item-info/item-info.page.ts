@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
 import { Storage } from '@ionic/storage-angular';
-// import 'select2';
-// import '../../../assets/select2.css';
+import { Select2Option } from 'ng-select2-component';
 
 @Component({
   selector: 'app-item-info',
@@ -16,6 +15,7 @@ export class ItemInfoPage implements OnInit {
   items: any = [];
   catTitle: any;
   showNextBtn = true;
+  overlay = false;
 
   constructor(
     private router: Router,
@@ -48,20 +48,28 @@ export class ItemInfoPage implements OnInit {
             for (let i = 0; i < res.length; i++) {
               if (res[i].type == 'select') {
                 for (let m = 0; m < indices.length; m++) {
-                  let options: any = [];
+                  let optionsData: any = [];
 
                   if (
                     res[i].form_field_id == res[indices[m]][0].form_fields_id
                   ) {
                     for (let j = 0; j < res[indices[m]].length; j++) {
-                      options.push(res[indices[m]][j].value);
+                      let data = {
+                        options: [
+                          {
+                            value: res[indices[m]][j].value,
+                            label: res[indices[m]][j].value,
+                          },
+                        ],
+                      };
+                      optionsData.push(data);
                     }
 
                     this.items.push({
                       selectType: res[i].type,
                       value: res[i].label,
                       label: res[i].label,
-                      optionElement: options,
+                      optionElement: optionsData,
                     });
                   }
                 }
@@ -97,6 +105,19 @@ export class ItemInfoPage implements OnInit {
           }
         );
     });
+  }
+
+  search(text: string) {
+    this.items.optionElement = text
+      ? (
+          JSON.parse(
+            JSON.stringify(this.items.optionElement)
+          ) as Select2Option[]
+        ).filter(
+          (option) =>
+            option.label.toLowerCase().indexOf(text.toLowerCase()) > -1
+        )
+      : JSON.parse(JSON.stringify(this.items.optionElement));
   }
 
   goToCommercialAds() {

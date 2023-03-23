@@ -12,8 +12,6 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
-// import { SQLite } from '@ionic-native/sqlite/ngx';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [

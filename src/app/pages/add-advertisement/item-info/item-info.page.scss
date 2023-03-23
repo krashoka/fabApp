@@ -101,13 +101,15 @@ $extra-large-screen: 1200px;
     color: #484848;
   }
 
-  .selectStyle select {
+  .selectStyle .selecStyle {
     height: 40px;
     border: 1px solid #dedede;
     border-radius: 5px;
     margin-bottom: 20px;
-    padding-left: 10px;
+    // padding-left: 10px;
     padding-right: 10px;
+    display: flex;
+    align-items: center;
   }
 
   .selectStyle select:focus {
@@ -423,13 +425,15 @@ $extra-large-screen: 1200px;
     color: #484848;
   }
 
-  .selectStyle select {
+  .selectStyle .selecStyle {
     height: 40px;
     border: 1px solid #dedede;
     border-radius: 5px;
     margin-bottom: 20px;
-    padding-left: 10px;
+    // padding-left: 10px;
     padding-right: 10px;
+    display: flex;
+    align-items: center;
   }
 
   .selectStyle select:focus {

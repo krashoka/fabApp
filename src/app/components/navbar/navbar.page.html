@@ -5,7 +5,6 @@
       src="../../../assets/images/arabicLang.png"
     ></ion-img>
     <div class="topMenu">
-      <ion-button (click)="logout()">Logout</ion-button>
       <div *ngIf="showLogin" (click)="goToLogin()">
         <div>
           <ion-icon name="person-circle"></ion-icon>
@@ -13,7 +12,7 @@
         <p class="topMenu_icon_title">Login</p>
       </div>
 
-      <div *ngIf="showAccount">
+      <div *ngIf="showAccount" (click)="openMyAccountTab()">
         <div class="myAccount">
           <div>
             <ion-icon name="person-circle"></ion-icon>
@@ -52,7 +51,7 @@
       <div
         class="menuInnerText"
         [ngClass]="{'active': isElementActive('/products')}"
-        (click)="goToStickyAds()"
+        (click)="goToStickyAds(0, 'All/Newest')"
       >
         Sticky Ads
       </div>
@@ -73,12 +72,33 @@
       </div>
     </div>
   </ion-card>
-  <div class="accountDropdown">
-    <ion-list>
-      <ion-item>My Ads</ion-item>
-      <ion-item>My Comments</ion-item>
-      <ion-item>My Favorites</ion-item>
-      <ion-item>Block List</ion-item>
-    </ion-list>
-  </div>
 </ion-card>
+
+<div class="accountDropdown" *ngIf="onDropdownSelect">
+  <div (click)="dismissSideMenu()"></div>
+  <div>
+    <div class="accountMenu">
+      <h2 class="welcome">Welcome {{username}}</h2>
+      <div>
+        <div><ion-icon name="duplicate"></ion-icon> My Ads</div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+      <div>
+        <div><ion-icon name="chatbox"></ion-icon> My Comments</div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+      <div>
+        <div><ion-icon name="heart"></ion-icon> My Favorites</div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+      <div>
+        <div><ion-icon name="people"></ion-icon> My Referrals</div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+      <p (click)="logout()" class="logOut">
+        <ion-icon name="exit"></ion-icon>
+        <ion-text>Log out</ion-text>
+      </p>
+    </div>
+  </div>
+</div>

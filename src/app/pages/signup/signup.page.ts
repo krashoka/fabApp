@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ApiService } from 'src/app/api.service';
+import { Select2Option } from 'ng-select2-component';
 
 @Component({
   selector: 'app-signup',
@@ -11,8 +12,9 @@ import { ApiService } from 'src/app/api.service';
 })
 export class SignupPage implements OnInit {
   user_mob: any;
-  phonecode = '973';
   countries: any = [];
+  selectedCountry: any;
+  overlay = false;
 
   vcode: any;
   referalCode: any;
@@ -31,14 +33,32 @@ export class SignupPage implements OnInit {
       .get('https://specbits.com/class2/fab/country')
       .subscribe((res: any) => {
         console.log(res);
-        this.countries = res;
+        for (let i = 0; i < res.length; i++) {
+          let data = {
+            options: [{ value: res[i], label: '+' + res[i] }],
+          };
+          this.countries.push(data);
+
+          if (res[i] == 973) {
+            this.selectedCountry = this.countries[i].options[0].value;
+          }
+        }
       });
+  }
+
+  search(text: string) {
+    this.countries = text
+      ? (JSON.parse(JSON.stringify(this.countries)) as Select2Option[]).filter(
+          (option) =>
+            option.label.toLowerCase().indexOf(text.toLowerCase()) > -1
+        )
+      : JSON.parse(JSON.stringify(this.countries));
   }
 
   sendVerify() {
     let data = {
       user_mob: this.user_mob,
-      phonecode: this.phonecode,
+      phonecode: this.selectedCountry,
       referral: this.referalCode,
     };
 
@@ -52,7 +72,7 @@ export class SignupPage implements OnInit {
         } else if (res != 'wrongref') {
           this.user_mob = res[1];
           this.isInputDisabled = true;
-          this.successToast("Referral Code verified successfully.");
+          this.successToast('Referral Code verified successfully.');
           this.showSendVerify = false;
           this.isVerify = true;
         } else {
@@ -74,7 +94,7 @@ export class SignupPage implements OnInit {
   verifyCode() {
     let data = {
       user_mob: this.user_mob,
-      phonecode: this.phonecode,
+      phonecode: this.selectedCountry,
       vcode: this.vcode,
     };
 
@@ -86,7 +106,7 @@ export class SignupPage implements OnInit {
         if (res == 'success') {
           this.successToast('Account Verified.');
           this.user_mob = '';
-          this.phonecode = '973';
+          this.selectedCountry = '+973';
           this.vcode = '';
           this.showSendVerify = true;
           this.isVerify = false;
