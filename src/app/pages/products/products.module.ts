@@ -10,6 +10,7 @@ import { ProductsPage } from './products.page';
 
 import { NavbarPageModule } from '../../components/navbar/navbar.module';
 import { FooterTabsPageModule } from '../../components/footer-tabs/footer-tabs.module';
+import { FloatingChatPageModule } from '../../components/floating-chat/floating-chat.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { FooterTabsPageModule } from '../../components/footer-tabs/footer-tabs.m
     ProductsPageRoutingModule,
     NavbarPageModule,
     FooterTabsPageModule,
+    FloatingChatPageModule,
   ],
   declarations: [ProductsPage],
 })

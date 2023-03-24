@@ -32,7 +32,9 @@ export class LoginPage implements OnInit {
     private http: HttpClient
   ) {
     this.storage.create();
+  }
 
+  ngOnInit() {
     this.http
       .get('https://specbits.com/class2/fab/country')
       .subscribe((res: any) => {
@@ -49,8 +51,6 @@ export class LoginPage implements OnInit {
         }
       });
   }
-
-  ngOnInit() {}
 
   // change(key: string, event: Event) {
   //   console.log(key, event);

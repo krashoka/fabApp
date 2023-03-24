@@ -13,8 +13,9 @@ import { FloatingChatPage } from './floating-chat.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    FloatingChatPageRoutingModule
+    FloatingChatPageRoutingModule,
   ],
-  declarations: [FloatingChatPage]
+  declarations: [FloatingChatPage],
+  exports: [FloatingChatPage],
 })
 export class FloatingChatPageModule {}

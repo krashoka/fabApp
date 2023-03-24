@@ -24,6 +24,77 @@ export class ItemInfoPage implements OnInit {
     private storage: Storage
   ) {
     this.storage.create();
+  }
+
+  search(text: string) {
+    this.items.optionElement = text
+      ? (
+          JSON.parse(
+            JSON.stringify(this.items.optionElement)
+          ) as Select2Option[]
+        ).filter(
+          (option) =>
+            option.label.toLowerCase().indexOf(text.toLowerCase()) > -1
+        )
+      : JSON.parse(JSON.stringify(this.items.optionElement));
+  }
+
+  goToCommercialAds() {
+    this.router.navigate(['commercialads']);
+  }
+
+  goToStickyAds() {
+    this.router.navigate(['products']);
+  }
+
+  goToHome() {
+    this.router.navigate(['home']);
+  }
+
+  goBack() {
+    this.navCtrl.back();
+  }
+
+  goToUploadImage() {
+    this.router.navigate(['uploadimage-page']);
+  }
+
+  goToAddNewAd() {
+    this.router.navigate(['add-new-advertisement']);
+  }
+
+  goToNextStep() {
+    let itemVal: any = [];
+    for (let i = 0; i < this.items.length; i++) {
+      itemVal.push(this.items[i].value);
+    }
+
+    this.storage.get('catDetails').then((val) => {
+      let adData = {
+        cid: val.cid,
+        uid: val.userid,
+        formData: itemVal,
+      };
+
+      this.http
+        .post('https://specbits.com/class2/fab/partialSave', adData)
+        .subscribe((res: any) => {
+          console.log('response Data:', res);
+          let data = {
+            aid: res[0].add_id,
+            uid: res[1].user_id,
+          };
+          this.storage.set('adDetails', data);
+          this.router.navigate(['uploadimage-page']);
+        });
+      console.log(adData);
+    });
+  }
+
+  ngOnInit() {
+    this.storage.get('catTitle').then((val) => {
+      this.catTitle = val;
+    });
 
     this.storage.get('catDetails').then((val) => {
       let newValue = {
@@ -104,77 +175,6 @@ export class ItemInfoPage implements OnInit {
             console.log('ErrorMessage: ', error);
           }
         );
-    });
-  }
-
-  search(text: string) {
-    this.items.optionElement = text
-      ? (
-          JSON.parse(
-            JSON.stringify(this.items.optionElement)
-          ) as Select2Option[]
-        ).filter(
-          (option) =>
-            option.label.toLowerCase().indexOf(text.toLowerCase()) > -1
-        )
-      : JSON.parse(JSON.stringify(this.items.optionElement));
-  }
-
-  goToCommercialAds() {
-    this.router.navigate(['commercialads']);
-  }
-
-  goToStickyAds() {
-    this.router.navigate(['products']);
-  }
-
-  goToHome() {
-    this.router.navigate(['home']);
-  }
-
-  goBack() {
-    this.navCtrl.back();
-  }
-
-  goToUploadImage() {
-    this.router.navigate(['uploadimage-page']);
-  }
-
-  goToAddNewAd() {
-    this.router.navigate(['add-new-advertisement']);
-  }
-
-  goToNextStep() {
-    let itemVal: any = [];
-    for (let i = 0; i < this.items.length; i++) {
-      itemVal.push(this.items[i].value);
-    }
-
-    this.storage.get('catDetails').then((val) => {
-      let adData = {
-        cid: val.cid,
-        uid: val.userid,
-        formData: itemVal,
-      };
-
-      this.http
-        .post('https://specbits.com/class2/fab/partialSave', adData)
-        .subscribe((res: any) => {
-          console.log('response Data:', res);
-          let data = {
-            aid: res[0].add_id,
-            uid: res[1].user_id,
-          };
-          this.storage.set('adDetails', data);
-          this.router.navigate(['uploadimage-page']);
-        });
-      console.log(adData);
-    });
-  }
-
-  ngOnInit() {
-    this.storage.get('catTitle').then((val) => {
-      this.catTitle = val;
     });
   }
 }

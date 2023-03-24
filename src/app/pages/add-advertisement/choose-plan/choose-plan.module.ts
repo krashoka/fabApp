@@ -4,21 +4,21 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UploadimagePagePageRoutingModule } from './uploadimage-page-routing.module';
+import { ChoosePlanPageRoutingModule } from './choose-plan-routing.module';
 
-import { UploadimagePagePage } from './uploadimage-page.page';
-import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
+import { ChoosePlanPage } from './choose-plan.page';
 import { NavbarPageModule } from '../../../components/navbar/navbar.module';
+import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UploadimagePagePageRoutingModule,
+    ChoosePlanPageRoutingModule,
     NavbarPageModule,
     FloatingChatPageModule,
   ],
-  declarations: [UploadimagePagePage],
+  declarations: [ChoosePlanPage],
 })
-export class UploadimagePagePageModule {}
+export class ChoosePlanPageModule {}

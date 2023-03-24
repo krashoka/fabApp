@@ -1,0 +1,99 @@
+$small-screen: 576px;
+$medium-screen: 768px;
+$large-screen: 992px;
+$extra-large-screen: 1200px;
+
+@media (max-width: $small-screen) {
+}
+
+/******************* Styling for large screens ***************/
+
+@media (min-width: $large-screen) {
+  .planHeader {
+    margin: 160px 6% 20px;
+    text-align: center;
+    color: #484848;
+  }
+
+  .planHeader h1 {
+    font-weight: 700;
+  }
+
+  .choosePlan {
+    width: 55%;
+    margin: 30px auto;
+    display: flex;
+    justify-content: space-between;
+    // grid-template-columns: repeat(2, 1fr);
+    // justify-content: center;
+  }
+
+  .card {
+    width: 40%;
+    // border: 1px solid #b8b5b5;
+    height: 300px;
+    padding: 0 !important;
+  }
+
+  .card p {
+    color: #383838;
+    text-align: center;
+    margin: 8px 0;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .cardTitle {
+    color: #fff;
+    background-color: #fc4040;
+    padding: 8px 0;
+    text-align: center;
+    position: relative;
+    margin-bottom: 15px;
+  }
+
+  .freeCard {
+    color: #fff;
+    background-color: #a7a7a7;
+    padding: 8px 0;
+    text-align: center;
+    position: relative;
+    margin-bottom: 15px;
+  }
+
+  .freeCard h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .cardTitle h2 {
+    margin: 0;
+    font-size: 20px;
+  }
+
+  .choose {
+    width: 94%;
+    padding: 8px 0;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    background-color: #fc4040;
+    position: absolute;
+    left: 3%;
+    bottom: 8px;
+    border-radius: 5px;
+  }
+
+  .chooseFree {
+    width: 94%;
+    padding: 8px 0;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    background-color: #a7a7a7;
+    position: absolute;
+    left: 3%;
+    bottom: 8px;
+    border-radius: 5px;
+  }
+}

@@ -9,6 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { NavbarPageModule } from '../../components/navbar/navbar.module';
 import { FooterTabsPageModule } from '../../components/footer-tabs/footer-tabs.module';
+import { FloatingChatPageModule } from '../../components/floating-chat/floating-chat.module';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { FooterTabsPageModule } from '../../components/footer-tabs/footer-tabs.m
     HomePageRoutingModule,
     NavbarPageModule,
     FooterTabsPageModule,
+    FloatingChatPageModule,
   ],
   declarations: [HomePage],
 })

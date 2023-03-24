@@ -10,6 +10,7 @@ import { ItemInfoPageRoutingModule } from './item-info-routing.module';
 import { ItemInfoPage } from './item-info.page';
 import { NavbarPageModule } from '../../../components/navbar/navbar.module';
 import { Select2Module } from 'ng-select2-component';
+import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { Select2Module } from 'ng-select2-component';
     ItemInfoPageRoutingModule,
     NavbarPageModule,
     Select2Module,
+    FloatingChatPageModule,
   ],
   declarations: [ItemInfoPage],
 })

@@ -9,9 +9,9 @@ import { AddNewAdvertisementPageRoutingModule } from './add-new-advertisement-ro
 import { AddNewAdvertisementPage } from './add-new-advertisement.page';
 
 import { PipesModule } from './safe.module';
-import {NavbarPageModule} from '../../../components/navbar/navbar.module';
+import { NavbarPageModule } from '../../../components/navbar/navbar.module';
 import { DataService } from 'src/app/data.service';
-
+import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
 
 @NgModule({
   imports: [
@@ -20,9 +20,10 @@ import { DataService } from 'src/app/data.service';
     IonicModule,
     PipesModule,
     AddNewAdvertisementPageRoutingModule,
-    NavbarPageModule
+    NavbarPageModule,
+    FloatingChatPageModule,
   ],
   declarations: [AddNewAdvertisementPage],
-  providers: [DataService]
+  providers: [DataService],
 })
 export class AddNewAdvertisementPageModule {}

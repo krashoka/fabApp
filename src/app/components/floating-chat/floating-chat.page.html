@@ -1,3 +1,65 @@
-<ion-fab slot="fixed" vertical="bottom" horizontal="end" id="floatingChatIcon">
+<ion-fab
+  slot="fixed"
+  vertical="bottom"
+  horizontal="end"
+  id="floatingChatIcon"
+  (click)="openFloatingChat()"
+>
   <ion-icon name="chatbubble"></ion-icon>
 </ion-fab>
+
+<div class="accountDropdown" *ngIf="onDropdownSelect">
+  <div>
+    <div class="chatAdmin">
+      <h1>Chat With Admin</h1>
+      <ion-icon
+        name="close-circle-outline"
+        class="close"
+        (click)="dismissSideMenu()"
+      ></ion-icon>
+    </div>
+
+    <div class="chatMessages">
+      <div class="commentFlow">
+        <div>
+          <!-- <div *ngFor="let comment of comments"> -->
+          <div class="adminComment">
+            <!-- <div class="userComment" *ngIf="comment.commenter=='user'"> -->
+            <div>
+              <div>
+                <ion-icon class="avatar" name="person-circle"></ion-icon>
+              </div>
+
+              <div>
+                <ion-text>Admin</ion-text>
+                <p>comment</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="userComment">
+            <!-- <div class="adminComment" *ngIf="comment.commenter=='owner'"> -->
+            <div>
+              <div>
+                <ion-icon class="avatar" name="person-circle"></ion-icon>
+              </div>
+              <div>
+                <ion-text>User</ion-text>
+                <p>comment.comment_msg</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sendMessage">
+      <!-- <div> -->
+      <ion-input type="text" placeholder="Type a message..." />
+      <!-- </div> -->
+      <div>
+        <ion-text>Send</ion-text>
+      </div>
+    </div>
+  </div>
+</div>

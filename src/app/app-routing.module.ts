@@ -152,6 +152,10 @@ const routes: Routes = [
     path: 'floating-chat',
     loadChildren: () => import('./components/floating-chat/floating-chat.module').then( m => m.FloatingChatPageModule)
   },
+  {
+    path: 'choose-plan',
+    loadChildren: () => import('./pages/add-advertisement/choose-plan/choose-plan.module').then( m => m.ChoosePlanPageModule)
+  },
 ];
 
 @NgModule({

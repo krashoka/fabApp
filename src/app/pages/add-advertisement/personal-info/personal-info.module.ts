@@ -9,6 +9,7 @@ import { PersonalInfoPageRoutingModule } from './personal-info-routing.module';
 import { PersonalInfoPage } from './personal-info.page';
 import { NavbarPageModule } from '../../../components/navbar/navbar.module';
 import { Select2Module } from 'ng-select2-component';
+import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { Select2Module } from 'ng-select2-component';
     PersonalInfoPageRoutingModule,
     NavbarPageModule,
     Select2Module,
+    FloatingChatPageModule,
   ],
   declarations: [PersonalInfoPage],
 })

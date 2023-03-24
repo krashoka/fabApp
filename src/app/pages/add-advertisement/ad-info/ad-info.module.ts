@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { AdInfoPageRoutingModule } from './ad-info-routing.module';
 
 import { AdInfoPage } from './ad-info.page';
-import {NavbarPageModule} from '../../../components/navbar/navbar.module';
-
+import { NavbarPageModule } from '../../../components/navbar/navbar.module';
+import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
 
 @NgModule({
   imports: [
@@ -16,8 +16,9 @@ import {NavbarPageModule} from '../../../components/navbar/navbar.module';
     FormsModule,
     IonicModule,
     AdInfoPageRoutingModule,
-    NavbarPageModule
+    NavbarPageModule,
+    FloatingChatPageModule,
   ],
-  declarations: [AdInfoPage]
+  declarations: [AdInfoPage],
 })
 export class AdInfoPageModule {}

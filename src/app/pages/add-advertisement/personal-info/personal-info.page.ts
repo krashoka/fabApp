@@ -25,21 +25,6 @@ export class PersonalInfoPage implements OnInit {
     private toastCtrl: ToastController
   ) {
     this.storage.create();
-
-    this.http
-      .get('https://specbits.com/class2/fab/country')
-      .subscribe((res: any) => {
-        for (let i = 0; i < res.length; i++) {
-          let data = {
-            options: [{ value: res[i], label: '+' + res[i] }],
-          };
-          this.countries.push(data);
-
-          if (res[i] == this.countryCode) {
-            this.selectedCountry = this.countries[i].options[0].value;
-          }
-        }
-      });
   }
 
   search(text: string) {
@@ -75,6 +60,21 @@ export class PersonalInfoPage implements OnInit {
   // countryCode: ElementRef | any;
 
   ngOnInit() {
+    this.http
+      .get('https://specbits.com/class2/fab/country')
+      .subscribe((res: any) => {
+        for (let i = 0; i < res.length; i++) {
+          let data = {
+            options: [{ value: res[i], label: '+' + res[i] }],
+          };
+          this.countries.push(data);
+
+          if (res[i] == this.countryCode) {
+            this.selectedCountry = this.countries[i].options[0].value;
+          }
+        }
+      });
+      
     this.storage.get('admin').then((value) => {
       // this.phonecode.nativeElement.textContent = '+' + value.phonecode;
       this.countryCode = value.phonecode;

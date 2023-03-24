@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { ProductDetailsPageRoutingModule } from './product-details-routing.module';
 
 import { ProductDetailsPage } from './product-details.page';
-import {NavbarPageModule} from '../../components/navbar/navbar.module';
-
+import { NavbarPageModule } from '../../components/navbar/navbar.module';
+import { FloatingChatPageModule } from '../../components/floating-chat/floating-chat.module';
 
 @NgModule({
   imports: [
@@ -16,8 +16,9 @@ import {NavbarPageModule} from '../../components/navbar/navbar.module';
     FormsModule,
     IonicModule,
     ProductDetailsPageRoutingModule,
-    NavbarPageModule
+    NavbarPageModule,
+    FloatingChatPageModule,
   ],
-  declarations: [ProductDetailsPage]
+  declarations: [ProductDetailsPage],
 })
 export class ProductDetailsPageModule {}

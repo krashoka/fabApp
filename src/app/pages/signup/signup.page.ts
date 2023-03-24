@@ -28,23 +28,7 @@ export class SignupPage implements OnInit {
     public _apiService: ApiService,
     private toastCtrl: ToastController,
     private http: HttpClient
-  ) {
-    this.http
-      .get('https://specbits.com/class2/fab/country')
-      .subscribe((res: any) => {
-        console.log(res);
-        for (let i = 0; i < res.length; i++) {
-          let data = {
-            options: [{ value: res[i], label: '+' + res[i] }],
-          };
-          this.countries.push(data);
-
-          if (res[i] == 973) {
-            this.selectedCountry = this.countries[i].options[0].value;
-          }
-        }
-      });
-  }
+  ) {}
 
   search(text: string) {
     this.countries = text
@@ -169,6 +153,20 @@ export class SignupPage implements OnInit {
   }
 
   ngOnInit() {
-    // this.phonecode = "+973"
+    this.http
+      .get('https://specbits.com/class2/fab/country')
+      .subscribe((res: any) => {
+        console.log(res);
+        for (let i = 0; i < res.length; i++) {
+          let data = {
+            options: [{ value: res[i], label: '+' + res[i] }],
+          };
+          this.countries.push(data);
+
+          if (res[i] == 973) {
+            this.selectedCountry = this.countries[i].options[0].value;
+          }
+        }
+      });
   }
 }
