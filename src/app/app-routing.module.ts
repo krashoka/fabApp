@@ -148,6 +148,10 @@ const routes: Routes = [
     path: 'complete-profile',
     loadChildren: () => import('./pages/complete-profile/complete-profile.module').then( m => m.CompleteProfilePageModule)
   },
+  {
+    path: 'floating-chat',
+    loadChildren: () => import('./components/floating-chat/floating-chat.module').then( m => m.FloatingChatPageModule)
+  },
 ];
 
 @NgModule({

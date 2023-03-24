@@ -26,7 +26,7 @@ export class HomePage {
     private router: Router,
     public http: HttpClient,
     private storage: Storage,
-    public _apiService: ApiService
+    private _apiService: ApiService
   ) {
     this.storage.create();
 

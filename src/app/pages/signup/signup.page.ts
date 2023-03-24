@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ApiService } from 'src/app/api.service';
 import { Select2Option } from 'ng-select2-component';
@@ -67,8 +67,17 @@ export class SignupPage implements OnInit {
     this._apiService.sendVerify(data).subscribe(
       (res: any) => {
         console.log('SuccessMessage: ', res);
-        if (res == 'exists') {
-          this.errorToast('Number already registered!');
+        if (res.exists) {
+          this.inCompleteToast('Already registered! Complete your Profile');
+          let navigationExtras: NavigationExtras = {
+            queryParams: {
+              uid: res.exists,
+            },
+          };
+          this.router.navigate(['/complete-profile'], navigationExtras);
+        } else if (res.registered) {
+          this.inCompleteToast('Already registered! Please Login');
+          this.router.navigate(['/login']);
         } else if (res != 'wrongref') {
           this.user_mob = res[1];
           this.isInputDisabled = true;
@@ -111,7 +120,7 @@ export class SignupPage implements OnInit {
           this.showSendVerify = true;
           this.isVerify = false;
           this.isInputDisabled = false;
-          this.router.navigate(['login']);
+          this.router.navigate(['complete-profile']);
         } else this.errorToast(res);
       },
       (er: any) => {
@@ -141,6 +150,16 @@ export class SignupPage implements OnInit {
       duration: 1500,
       position: 'top',
       cssClass: 'successToast',
+    });
+    toast.present();
+  }
+
+  async inCompleteToast(a) {
+    const toast = await this.toastCtrl.create({
+      message: a,
+      duration: 1500,
+      position: 'top',
+      cssClass: 'inCompleteToast',
     });
     toast.present();
   }

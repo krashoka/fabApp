@@ -44,4 +44,11 @@ export class ApiService {
   fetchAds(data) {
     return this.http.post('https://specbits.com/class2/fab/fetch-ads', data);
   }
+
+  completeProfile(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/complete-profile',
+      data
+    );
+  }
 }

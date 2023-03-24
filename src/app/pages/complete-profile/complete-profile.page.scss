@@ -7,16 +7,15 @@ $extra-large-screen: 1200px;
   /************** Hiding elements in Mobile View **************/
   .profile {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 40px;
     font-weight: 700;
     color: #484848;
   }
   .profileDetails {
-    margin: 30px 0;
+    margin: 0;
     border-radius: 5px;
     width: 100%;
     padding: 25px 20px 100px;
-    position: relative;
   }
 
   .name {
@@ -52,10 +51,10 @@ $extra-large-screen: 1200px;
     align-items: center;
     height: 50px;
     gap: 25px;
-    margin-top: 50px;
-    position: absolute;
+    margin-top: 80px;
     bottom: 20px;
     width: 100%;
+    text-align: center;
   }
 
   .save {
