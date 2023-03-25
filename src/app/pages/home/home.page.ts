@@ -110,10 +110,7 @@ export class HomePage {
   }
 
   goToAddNewAd() {
-    this.storage.get('admin').then((value) => {
-      if (value.userid != null) this.router.navigate(['add-new-advertisement']);
-      else this.router.navigate(['login']);
-    });
+    this.router.navigate(['add-new-advertisement']);
   }
 
   goToCommercialAds() {

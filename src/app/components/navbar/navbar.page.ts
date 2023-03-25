@@ -22,10 +22,11 @@ export class NavbarPage implements OnInit {
     private toastCtrl: ToastController,
     private storage: Storage
   ) {
+    this.storage.create();
+
     this.storage.get('admin').then((val) => {
       console.log('SessionVal:', val);
       if (val != null) {
-        this.storage.create();
         this.username = val.username;
       }
     });
@@ -42,11 +43,16 @@ export class NavbarPage implements OnInit {
 
   logout() {
     this.storage.remove('admin');
+
     this.storage.get('admin').then((value) => {
       if (value == null) {
         this.router.navigate(['login']);
+        this.showAccount = false;
+        this.showLogin = true;
       }
     });
+
+    this.onDropdownSelect = !this.onDropdownSelect;
   }
 
   async errorToast(a) {
@@ -69,14 +75,15 @@ export class NavbarPage implements OnInit {
     toast.present();
   }
 
-  ngOnInit() {
-    this.storage.get('admin').then((value) => {
-      if (value != null) {
-        console.log('Session value is', value.userid);
+  async ngOnInit() {
+    const value = await this.storage.get('admin');
+    if (value != null) {
+      console.log('Session value is', value.userid);
+      setTimeout(() => {
         this.showAccount = true;
         this.showLogin = false;
-      }
-    });
+      }, 100);
+    }
   }
 
   isElementActive(routePath: string): boolean {
@@ -101,9 +108,6 @@ export class NavbarPage implements OnInit {
   }
 
   goToAddNewAd() {
-    this.storage.get('admin').then((value) => {
-      if (value != null) this.router.navigate(['add-new-advertisement']);
-      else this.router.navigate(['login']);
-    });
+    this.router.navigate(['add-new-advertisement']);
   }
 }

@@ -51,4 +51,25 @@ export class ApiService {
       data
     );
   }
+
+  getChats(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/admin/load-message',
+      data
+    );
+  }
+
+  openChat(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/admin/change-seen-flag',
+      data
+    );
+  }
+
+  sendChat(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/admin/send-message',
+      data
+    );
+  }
 }

@@ -6,6 +6,7 @@
   (click)="openFloatingChat()"
 >
   <ion-icon name="chatbubble"></ion-icon>
+  <ion-text class="chatCount">{{chatCount}}</ion-text>
 </ion-fab>
 
 <div class="accountDropdown" *ngIf="onDropdownSelect">
@@ -20,10 +21,10 @@
     </div>
 
     <div class="chatMessages">
-      <div class="commentFlow">
-        <div>
+      <div class="commentFlow" #content>
+        <div *ngFor="let chat of chats">
           <!-- <div *ngFor="let comment of comments"> -->
-          <div class="adminComment">
+          <div class="adminComment" *ngIf="chat.sender == 'admin'">
             <!-- <div class="userComment" *ngIf="comment.commenter=='user'"> -->
             <div>
               <div>
@@ -32,21 +33,22 @@
 
               <div>
                 <ion-text>Admin</ion-text>
-                <p>comment</p>
+                <p>{{chat.message}}</p>
               </div>
             </div>
           </div>
 
-          <div class="userComment">
-            <!-- <div class="adminComment" *ngIf="comment.commenter=='owner'"> -->
+          <div class="userComment" *ngIf="chat.sender == 'user'">
             <div>
               <div>
                 <ion-icon class="avatar" name="person-circle"></ion-icon>
               </div>
               <div>
-                <ion-text>User</ion-text>
-                <p>comment.comment_msg</p>
+                <ion-text>You</ion-text>
+                <p>{{chat.message}}</p>
               </div>
+
+              <span class="uChatStatus">{{chat.status}}</span>
             </div>
           </div>
         </div>
@@ -55,9 +57,13 @@
 
     <div class="sendMessage">
       <!-- <div> -->
-      <ion-input type="text" placeholder="Type a message..." />
+      <ion-input
+        type="text"
+        [(ngModel)]="chatMsg"
+        placeholder="Type a message..."
+      />
       <!-- </div> -->
-      <div>
+      <div (click)="sendChat()">
         <ion-text>Send</ion-text>
       </div>
     </div>

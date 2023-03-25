@@ -13,10 +13,7 @@ export class FooterTabsPage implements OnInit {
   ngOnInit() {}
 
   goToAddNewAd() {
-    this.storage.get('admin').then((value) => {
-      if (value != null) this.router.navigate(['add-new-advertisement']);
-      else this.router.navigate(['login']);
-    });
+    this.router.navigate(['add-new-advertisement']);
   }
 
   goToHome() {

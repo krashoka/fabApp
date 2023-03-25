@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthImplementsGuard } from './guards/auth---implements.guard';
+import { HomeGuard } from './guards/home.guard';
 
 const routes: Routes = [
   {
     path: 'home',
     loadChildren: () =>
       import('./pages/home/home.module').then((m) => m.HomePageModule),
-    // canLoad: [AuthImplementsGuard]
   },
   {
     path: '',
@@ -49,6 +49,7 @@ const routes: Routes = [
       import('./pages/add-advertisement/categories/categories.module').then(
         (m) => m.CategoriesPageModule
       ),
+    canLoad: [AuthImplementsGuard],
   },
   {
     path: 'categories/:slug',
@@ -56,6 +57,7 @@ const routes: Routes = [
       import('./pages/add-advertisement/categories/categories.module').then(
         (m) => m.CategoriesPageModule
       ),
+    canLoad: [AuthImplementsGuard],
   },
   {
     path: 'item-info',
@@ -63,16 +65,19 @@ const routes: Routes = [
       import('./pages/add-advertisement/item-info/item-info.module').then(
         (m) => m.ItemInfoPageModule
       ),
+    canLoad: [AuthImplementsGuard],
   },
   {
     path: 'signup',
     loadChildren: () =>
       import('./pages/signup/signup.module').then((m) => m.SignupPageModule),
+    canLoad: [HomeGuard],
   },
   {
     path: 'login',
     loadChildren: () =>
       import('./pages/login/login.module').then((m) => m.LoginPageModule),
+    canLoad: [HomeGuard],
   },
   {
     path: 'uploadimage-page',
@@ -80,6 +85,7 @@ const routes: Routes = [
       import(
         './pages/add-advertisement/uploadimage-page/uploadimage-page.module'
       ).then((m) => m.UploadimagePagePageModule),
+    canLoad: [AuthImplementsGuard],
   },
   {
     path: 'ad-info',
@@ -87,6 +93,7 @@ const routes: Routes = [
       import('./pages/add-advertisement/ad-info/ad-info.module').then(
         (m) => m.AdInfoPageModule
       ),
+    canLoad: [AuthImplementsGuard],
   },
   {
     path: 'personal-info',
@@ -94,6 +101,7 @@ const routes: Routes = [
       import(
         './pages/add-advertisement/personal-info/personal-info.module'
       ).then((m) => m.PersonalInfoPageModule),
+    canLoad: [AuthImplementsGuard],
   },
   {
     path: 'commercialads',
@@ -115,6 +123,7 @@ const routes: Routes = [
       import('./pages/forgot-password/forgot-password.module').then(
         (m) => m.ForgotPasswordPageModule
       ),
+    canLoad: [HomeGuard],
   },
   {
     path: 'auth-system-navbar',
@@ -129,6 +138,7 @@ const routes: Routes = [
       import('./pages/myaccount/myaccount/myaccount.module').then(
         (m) => m.MyaccountPageModule
       ),
+    canLoad: [AuthImplementsGuard],
   },
   {
     path: 'profile',
@@ -136,6 +146,7 @@ const routes: Routes = [
       import('./pages/myaccount/profile/profile.module').then(
         (m) => m.ProfilePageModule
       ),
+    canLoad: [AuthImplementsGuard],
   },
   {
     path: 'footer-tabs',
@@ -146,15 +157,26 @@ const routes: Routes = [
   },
   {
     path: 'complete-profile',
-    loadChildren: () => import('./pages/complete-profile/complete-profile.module').then( m => m.CompleteProfilePageModule)
+    loadChildren: () =>
+      import('./pages/complete-profile/complete-profile.module').then(
+        (m) => m.CompleteProfilePageModule
+      ),
+    canLoad: [HomeGuard],
   },
   {
     path: 'floating-chat',
-    loadChildren: () => import('./components/floating-chat/floating-chat.module').then( m => m.FloatingChatPageModule)
+    loadChildren: () =>
+      import('./components/floating-chat/floating-chat.module').then(
+        (m) => m.FloatingChatPageModule
+      ),
   },
   {
     path: 'choose-plan',
-    loadChildren: () => import('./pages/add-advertisement/choose-plan/choose-plan.module').then( m => m.ChoosePlanPageModule)
+    loadChildren: () =>
+      import('./pages/add-advertisement/choose-plan/choose-plan.module').then(
+        (m) => m.ChoosePlanPageModule
+      ),
+    canLoad: [AuthImplementsGuard],
   },
 ];
 

@@ -13,10 +13,176 @@ $extra-large-screen: 1200px;
     border-radius: 100%;
     width: 50px;
     height: 50px;
-    font-size: 26px;
+    font-size: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+
+  .chatCount {
+    position: absolute;
+    color: #d90036;
+    font-size: 12px;
+    top: 36%;
+    // left: 36%;
+    font-weight: 700;
+  }
+
+  .accountDropdown {
+    // display: none;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    // top: 60px;
+    // bottom: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 1000;
+    box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2);
+    // border: 1px solid #dedede;
+  }
+
+  .accountDropdown > div {
+    width: 100%;
+    background-color: #fff;
+    height: 100vh;
+    // border-radius: 10px;
+    position: relative;
+  }
+
+  .chatAdmin {
+    background-color: #d90036;
+    text-align: center;
+    // border-radius: 10px 10px 0 0;
+    padding: 15px 0 16px;
+    position: relative;
+  }
+
+  .chatAdmin h1 {
+    color: #fff;
+    font-weight: 700;
+    margin: 0;
+    font-size: 22px;
+  }
+
+  .close {
+    color: #fff;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+  }
+
+  .chatMessages {
+    // border: 1px solid green;
+    width: 90%;
+    margin: auto;
+    height: 66vh;
+  }
+
+  .commentFlow {
+    height: 83vh;
+    overflow: scroll;
+    border: 1px solid #fff;
+  }
+
+  .commentFlow p {
+    font-size: 16px;
+    margin-bottom: 0;
+    margin-top: 5px;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+
+  .commentFlow ion-text {
+    font-weight: 700;
+  }
+
+  .adminComment {
+    margin: 15px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .adminComment > div {
+    width: max-content;
+    max-width: 70%;
+    border-radius: 0 25px 25px;
+    border: 1px solid #dedede;
+    padding: 15px;
+    display: flex;
+    gap: 15px;
+    background-color: #e6e9eb;
+    position: relative;
+  }
+
+  .userComment {
+    margin: 15px 0;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+  }
+
+  .userComment > div {
+    width: max-content;
+    max-width: 70%;
+    border-radius: 25px 0 25px 25px;
+    border: 1px solid #dedede;
+    padding: 15px;
+    display: flex;
+    float: right;
+    justify-content: right;
+    gap: 15px;
+    background-color: #f8bdcc;
+    position: relative;
+  }
+
+  .uChatStatus {
+    position: absolute;
+    left: -30px;
+    bottom: 0;
+    color: #b1acac;
+    font-weight: 100;
+    font-size: 12px;
+  }
+
+  .avatar {
+    font-size: 36px;
+  }
+
+  .sendMessage {
+    padding: 15px 5%;
+    display: flex;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    gap: 10px;
+    border-radius: 0 0 5px 5px;
+    background-color: #e2e2e2;
+  }
+
+  .sendMessage ion-input {
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    width: 75%;
+    background-color: #fff;
+  }
+
+  .sendMessage > div {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #d90036;
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
   }
 }
 
@@ -31,13 +197,22 @@ $extra-large-screen: 1200px;
     background-color: #d90036;
     color: #fff;
     border-radius: 100%;
-    width: 80px;
-    height: 80px;
-    font-size: 36px;
+    width: 70px;
+    height: 70px;
+    font-size: 42px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+  }
+
+  .chatCount {
+    position: absolute;
+    color: #d90036;
+    font-size: 18px;
+    top: 36%;
+    // left: 34%;
+    font-weight: 700;
   }
 
   .accountDropdown {
@@ -101,6 +276,8 @@ $extra-large-screen: 1200px;
     font-size: 16px;
     margin-bottom: 0;
     margin-top: 5px;
+    word-wrap: break-word;
+    word-break: break-all;
   }
 
   .commentFlow ion-text {
@@ -124,6 +301,7 @@ $extra-large-screen: 1200px;
     display: flex;
     gap: 15px;
     background-color: #e6e9eb;
+    position: relative;
   }
 
   .userComment {
@@ -145,6 +323,16 @@ $extra-large-screen: 1200px;
     justify-content: right;
     gap: 15px;
     background-color: #f8bdcc;
+    position: relative;
+  }
+
+  .uChatStatus {
+    position: absolute;
+    left: -30px;
+    bottom: 0;
+    color: #b1acac;
+    font-weight: 100;
+    font-size: 12px;
   }
 
   .avatar {
@@ -180,5 +368,6 @@ $extra-large-screen: 1200px;
     justify-content: center;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
   }
 }

@@ -25,6 +25,8 @@ export class ProductsPage implements OnInit {
 
   totalAds: any;
 
+  breadcrums: any = [];
+
   // isArrow = true;
 
   // imageUrl: any;
@@ -60,6 +62,7 @@ export class ProductsPage implements OnInit {
   goToSticky(datas: any, titles: any, parent: any) {
     let data = { cid: datas };
 
+    console.log('newTitttltltlt:', titles);
     if (parent == '0') {
       this.storage.set('catTitle', titles);
       this.router.navigateByUrl(`products/${datas}`);
@@ -69,6 +72,7 @@ export class ProductsPage implements OnInit {
         if (res == 'empty') {
           console.log('give res', res);
         } else {
+          this.breadcrums.push(titles);
           this.router.navigateByUrl(`products/${datas}`);
         }
       });
@@ -165,6 +169,7 @@ export class ProductsPage implements OnInit {
 
       this.storage.get('catTitle').then((val) => {
         this.categoryTitle = val;
+        this.breadcrums.push(val);
       });
     } else {
       this._apiService.sendCategory(cidData).subscribe((res: any) => {
@@ -174,6 +179,7 @@ export class ProductsPage implements OnInit {
 
       this.storage.get('catTitle').then((val) => {
         this.categoryTitle = val;
+        this.breadcrums.push(val);
       });
     }
   }

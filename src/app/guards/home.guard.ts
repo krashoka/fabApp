@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage-angular';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthImplementsGuard implements CanLoad {
+export class HomeGuard implements CanLoad {
   constructor(private router: Router, private storage: Storage) {
     this.storage.create();
   }
@@ -15,10 +15,10 @@ export class AuthImplementsGuard implements CanLoad {
       let isAuthenticated = await this.storage.get('admin');
       console.log('Authenticate:', isAuthenticated);
 
-      if (isAuthenticated) {
+      if (isAuthenticated == null) {
         resolve(true);
       } else {
-        this.router.navigate(['login']);
+        this.router.navigate(['home']);
         resolve(false);
       }
     });
