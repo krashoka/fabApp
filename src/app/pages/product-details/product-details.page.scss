@@ -234,9 +234,23 @@ $extra-large-screen: 1200px;
     cursor: pointer;
   }
 
+  .commentWidth {
+    width: 94%;
+    margin: 0 3%;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #faf5f5;
+  }
+
   .commentFlow {
     height: 250px;
-    overflow: scroll;
+    overflow: auto;
+  }
+
+  .commentFlowChat {
+    height: 180px;
+    overflow: auto;
   }
 
   .userComment {
@@ -281,10 +295,23 @@ $extra-large-screen: 1200px;
     font-size: 36px;
   }
 
+  .commentCard {
+    position: relative;
+    height: 350px;
+  }
+
   .replySection {
-    margin: 20px 6%;
-    width: 88%;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+  }
+
+  .replySection > div {
+    padding: 10px 0 5px;
+    width: 96%;
     display: flex;
+    margin: auto;
     gap: 10px;
   }
 
@@ -301,6 +328,38 @@ $extra-large-screen: 1200px;
     padding: 18px 10px;
     border-radius: 5px;
     font-weight: 700;
+  }
+
+  // *************** Chat Cards Section **************
+
+  .chatCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #484848;
+    cursor: pointer;
+  }
+
+  .chatCard > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 10px;
+    gap: 10px;
+  }
+
+  .chatCard > ion-icon {
+    font-size: 18px;
+    padding-right: 20px;
+  }
+
+  .users {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .time {
+    color: #6c757d;
   }
 
   .relatedPost {
@@ -844,15 +903,24 @@ $extra-large-screen: 1200px;
   .commentWidth {
     width: 50%;
     margin-left: 6%;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #faf5f5;
   }
 
   .commentFlow {
-    height: 300px;
-    overflow: scroll;
+    height: 350px;
+    overflow: auto;
+  }
+
+  .commentFlowChat {
+    height: 280px;
+    overflow: auto;
   }
 
   .userComment {
-    margin: 20px 0;
+    margin: 10px 0;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -864,14 +932,14 @@ $extra-large-screen: 1200px;
     max-width: 70%;
     border-radius: 0 25px 25px;
     border: 1px solid #dedede;
-    padding: 15px;
+    padding: 0 15px;
     display: flex;
     gap: 15px;
     background-color: #e6e9eb;
   }
 
   .adminComment {
-    margin: 20px 0;
+    margin: 10px 0;
     width: 100%;
     display: flex;
     justify-content: right;
@@ -883,7 +951,7 @@ $extra-large-screen: 1200px;
     max-width: 70%;
     border-radius: 25px 0 25px 25px;
     border: 1px solid #dedede;
-    padding: 15px;
+    padding: 10px 15px 0;
     display: flex;
     float: right;
     justify-content: right;
@@ -895,10 +963,23 @@ $extra-large-screen: 1200px;
     font-size: 36px;
   }
 
+  .commentCard {
+    position: relative;
+    height: 350px;
+  }
+
   .replySection {
-    margin: 20px 0;
+    position: absolute;
+    bottom: 0;
     width: 100%;
+    background-color: #fff;
+  }
+
+  .replySection > div {
+    padding: 10px 0 5px;
+    width: 96%;
     display: flex;
+    margin: auto;
     gap: 10px;
   }
 
@@ -915,6 +996,38 @@ $extra-large-screen: 1200px;
     padding: 18px 10px;
     border-radius: 5px;
     font-weight: 700;
+  }
+
+  // *************** Chat Cards Section **************
+
+  .chatCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #484848;
+    cursor: pointer;
+  }
+
+  .chatCard > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 20px;
+    gap: 20px;
+  }
+
+  .chatCard > ion-icon {
+    font-size: 22px;
+    padding-right: 20px;
+  }
+
+  .users {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .time {
+    color: #6c757d;
   }
 
   //************* Related Posts **********

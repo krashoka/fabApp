@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { HttpClient } from '@angular/common/http';
+import { ApiService } from 'src/app/api.service';
 
 @Component({
   selector: 'app-product-details',
@@ -12,6 +13,7 @@ import { HttpClient } from '@angular/common/http';
 export class ProductDetailsPage implements OnInit {
   adTitle: any;
   adDetail: any;
+  adAdmin: any;
   adId: any;
   price: any;
   prodDetails: any;
@@ -22,6 +24,12 @@ export class ProductDetailsPage implements OnInit {
   userid: any;
   comments: any = [];
   adMobile: any;
+  adminSessionId: any;
+
+  chatUserList: any = {};
+
+  chatCardDisplay: any;
+  commentCardDisplay: any;
 
   waLink = 'https://wa.me/';
 
@@ -32,7 +40,8 @@ export class ProductDetailsPage implements OnInit {
     private router: Router,
     private navCtrl: NavController,
     private storage: Storage,
-    private http: HttpClient
+    private http: HttpClient,
+    private _apiService: ApiService
   ) {
     this.storage.create();
   }
@@ -75,6 +84,7 @@ export class ProductDetailsPage implements OnInit {
   ngOnInit() {
     this.storage.get('adId').then((val) => {
       console.log('aDiD:', val);
+      this.adAdmin = val.adINFO.adAdmin;
       this.adId = val.adINFO.ad_id;
       this.adTitle = val.adINFO.adTitle;
       this.price = val.adINFO.itemObj.Price;
@@ -87,10 +97,31 @@ export class ProductDetailsPage implements OnInit {
         console.log('admin session:', session);
         if (session != null) {
           console.log('User is in session');
+          this.adminSessionId = session.userid;
           if (val.comment != 'blank') {
             this.canComment = false;
             this.allComments = true;
-            this.comments = val.comment;
+
+            if (session.userid == val.adINFO.adAdmin) {
+              this.chatCardDisplay = true;
+              this.commentCardDisplay = false;
+
+              // Filtering number of users commented on a particular ad.
+              for (let i = 0; i < val.comment.length; i++) {
+                let sameUser = val.comment[i].user_id;
+                // let chats = {};
+                // chats[sameUser]
+                // chats['time'] = val.comment[i].created_at;
+                this.chatUserList[sameUser] = val.comment[i].username;
+              }
+
+              console.log('chatUserList:', this.chatUserList);
+            } else {
+              this.chatCardDisplay = false;
+              this.commentCardDisplay = true;
+              this.comments = val.comment;
+              console.log('All comments:', this.comments);
+            }
           } else {
             this.commentDisabled = false;
             this.canComment = true;
@@ -108,9 +139,23 @@ export class ProductDetailsPage implements OnInit {
     });
   }
 
+  // Function to show chat on click of particular user
+  showUserChat(key) {
+    let data = {
+      aid: this.adId,
+      uid: key,
+      oid: this.adminSessionId,
+    };
+
+    this._apiService.showUserChat(data).subscribe((res: any) => {
+      console.log('Fetched chats:', res);
+    });
+  }
+
   addComment() {
     if (this.sessionVal) {
       let commentData = {
+        oid: this.adAdmin,
         aid: this.adId,
         uid: this.userid,
         comment: this.commentValue,

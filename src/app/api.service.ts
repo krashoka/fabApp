@@ -72,4 +72,11 @@ export class ApiService {
       data
     );
   }
+
+  showUserChat(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/fetch-comment',
+      data
+    );
+  }
 }

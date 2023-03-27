@@ -158,47 +158,75 @@
 
   <div *ngIf="allComments">
     <div class="seeComments" *ngIf="show" (click)="showComment()">
-      <p>See Comments</p>
+      <p>See Chats</p>
       <ion-icon name="caret-down"></ion-icon>
     </div>
     <div class="seeComments" *ngIf="hide" (click)="showComment()">
-      <p>Hide Comments</p>
+      <p>Hide Chats</p>
       <ion-icon name="caret-up"></ion-icon>
     </div>
 
     <div *ngIf="commentDisplay" class="commentWidth">
-      <div class="commentFlow">
-        <div *ngFor="let comment of comments">
-          <div class="userComment" *ngIf="comment.commenter=='user'">
+      <!-- Below div for Number of users commented on that ad -->
+      <div class="commentFlow" *ngIf="chatCardDisplay">
+        <ion-card
+          class="chatCard"
+          *ngFor="let chatUsers of chatUserList | keyvalue"
+          (click)="showUserChat(chatUsers.key)"
+        >
+          <div>
+            <ion-icon class="avatar" name="person-circle"></ion-icon>
             <div>
-              <div>
-                <ion-icon class="avatar" name="person-circle"></ion-icon>
-              </div>
-
-              <div>
-                <ion-text>User</ion-text>
-                <p>{{comment.comment_msg}}</p>
-              </div>
+              <p class="users">{{chatUsers.value}}</p>
+              <!-- <p class="time">{{chatUsers.time}}</p> -->
             </div>
           </div>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </ion-card>
+      </div>
 
-          <div class="adminComment" *ngIf="comment.commenter=='owner'">
-            <div>
+      <div class="commentCard" *ngIf="commentCardDisplay">
+        <!-- Comment display of certain user for certain ad -->
+        <div class="commentFlowChat chatCardDisplay">
+          <div *ngFor="let comment of comments">
+            <div class="userComment" *ngIf="comment.commenter=='owner'">
               <div>
-                <ion-icon class="avatar" name="person-circle"></ion-icon>
+                <div>
+                  <ion-icon class="avatar" name="person-circle"></ion-icon>
+                </div>
+
+                <div>
+                  <ion-text>owner</ion-text>
+                  <p>{{comment.comment_msg}}</p>
+                </div>
               </div>
+            </div>
+
+            <div class="adminComment" *ngIf="comment.commenter=='user'">
               <div>
-                <ion-text>Owner</ion-text>
-                <p>{{comment.comment_msg}}</p>
+                <div>
+                  <ion-icon class="avatar" name="person-circle"></ion-icon>
+                </div>
+                <div>
+                  <ion-text>You</ion-text>
+                  <p>{{comment.comment_msg}}</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="replySection">
-        <ion-input type="text" class="reply" placeholder="Type a message" />
-        <button class="replyBtn">Reply</button>
+        <div class="replySection">
+          <div>
+            <ion-input
+              type="text"
+              [(ngModel)]="commentValue"
+              class="reply"
+              placeholder="Type a message"
+            />
+            <button class="replyBtn" (click)="addComment()">Reply</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

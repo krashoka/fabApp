@@ -14,6 +14,7 @@ export class HomePage {
   // showHomeContent = true;
 
   imageUrl: any;
+  sessionUser: any;
   commercialImageUrl: string[] = [];
 
   categories: any = [];
@@ -118,10 +119,11 @@ export class HomePage {
   }
 
   goToProductDetails(ad) {
-    let value = { aid: ad.ad_id };
+    let value = { aid: ad.ad_id, uid: this.sessionUser };
     this.http
       .post('https://specbits.com/class2/fab/display-comment', value)
       .subscribe((res: any) => {
+        console.log('chaaaaat:', res);
         let data = {
           adINFO: ad,
           comment: res,
@@ -133,6 +135,10 @@ export class HomePage {
 
   ngOnInit() {
     window.addEventListener('resize', this.onResize.bind(this));
+
+    this.storage.get('admin').then((val) => {
+      this.sessionUser = val.userid;
+    });
 
     this.http
       .get('https://specbits.com/class2/fab/adds')

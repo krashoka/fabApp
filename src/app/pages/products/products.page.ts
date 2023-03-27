@@ -25,7 +25,7 @@ export class ProductsPage implements OnInit {
 
   totalAds: any;
 
-  breadcrums: any = [];
+  breadcrumbs: any = [];
 
   // isArrow = true;
 
@@ -72,7 +72,7 @@ export class ProductsPage implements OnInit {
         if (res == 'empty') {
           console.log('give res', res);
         } else {
-          this.breadcrums.push(titles);
+          this.breadcrumbs.push(titles);
           this.router.navigateByUrl(`products/${datas}`);
         }
       });
@@ -169,7 +169,7 @@ export class ProductsPage implements OnInit {
 
       this.storage.get('catTitle').then((val) => {
         this.categoryTitle = val;
-        this.breadcrums.push(val);
+        this.breadcrumbs.push(val);
       });
     } else {
       this._apiService.sendCategory(cidData).subscribe((res: any) => {
@@ -179,7 +179,7 @@ export class ProductsPage implements OnInit {
 
       this.storage.get('catTitle').then((val) => {
         this.categoryTitle = val;
-        this.breadcrums.push(val);
+        this.breadcrumbs.push(val);
       });
     }
   }
