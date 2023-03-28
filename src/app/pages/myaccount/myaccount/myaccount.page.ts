@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-myaccount',
@@ -17,7 +18,11 @@ export class MyaccountPage implements OnInit {
     this.selectedSegment = event.detail.value;
   }
 
-  constructor(private router: Router, private storage: Storage) {
+  constructor(
+    private router: Router,
+    private navCtrl: NavController,
+    private storage: Storage
+  ) {
     this.storage.create();
 
     this.storage.get('admin').then((val) => {
@@ -31,6 +36,10 @@ export class MyaccountPage implements OnInit {
 
   goToProfile() {
     this.router.navigate(['profile']);
+  }
+
+  goBack() {
+    this.navCtrl.back();
   }
 
   ngOnInit() {}

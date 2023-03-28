@@ -7,7 +7,7 @@
       <p class="icon_title">Home</p>
     </div>
 
-    <div>
+    <div (click)="goToMyAccount()">
       <div>
         <ion-icon name="person-circle"></ion-icon>
       </div>
@@ -21,14 +21,14 @@
       <p class="icon_title" style="padding-top: 20px">Add your ad</p>
     </div>
 
-    <div>
+    <div (click)="goToChats()">
       <div>
         <ion-icon name="chatbubbles"></ion-icon>
       </div>
       <p class="icon_title">Chats</p>
     </div>
 
-    <div>
+    <div (click)="showMore()">
       <div>
         <ion-icon name="menu"></ion-icon>
       </div>
@@ -37,4 +37,14 @@
   </div>
 </ion-footer>
 
-<div class="myAccount"></div>
+<div class="moreSection" *ngIf="more">
+  <ion-card class="welcome">
+    <ion-text>Welcome {{username}}</ion-text>
+    <ion-icon name="close-circle-outline" (click)="closeMore()"></ion-icon>
+  </ion-card>
+
+  <ion-card class="logout" (click)="logout()">
+    <ion-text>Logout</ion-text>
+    <ion-icon name="exit-outline"></ion-icon>
+  </ion-card>
+</div>

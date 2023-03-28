@@ -35,7 +35,7 @@
       />
 
       <div class="save_empty">
-        <div class="save">save</div>
+        <div class="save" (click)="changeName()">save</div>
         <div class="empty" (click)="emptyName()">Empty fields</div>
       </div>
     </div>
@@ -51,33 +51,79 @@
       </p>
 
       <p class="name">Current Password</p>
-      <ion-input
-        type="password"
-        class="inputField"
-        placeholder="Enter the password"
-        [(ngModel)]="currentPassword"
-      />
+      <div class="passwordField">
+        <ion-input
+          [type]="typePassword"
+          placeholder="Enter the password"
+          [(ngModel)]="currentPassword"
+        ></ion-input>
+        <ion-icon
+          slot="end"
+          name="eye"
+          *ngIf="showPassword"
+          (click)="togglePasswordVisibility()"
+        ></ion-icon>
+        <ion-icon
+          slot="end"
+          name="eye-off"
+          *ngIf="!showPassword"
+          (click)="togglePasswordVisibility()"
+        ></ion-icon>
+      </div>
 
       <p class="name">New Password</p>
-      <ion-input
-        type="password"
-        class="inputField"
-        placeholder="Enter the password"
-        [(ngModel)]="newPassword"
-      />
+      <div class="passwordField">
+        <ion-input
+          [type]="typeNewPassword"
+          placeholder="Enter the password"
+          [(ngModel)]="newPassword"
+        ></ion-input>
+        <ion-icon
+          slot="end"
+          name="eye"
+          *ngIf="showNewPassword"
+          (click)="toggleNewPasswordVisibility()"
+        ></ion-icon>
+        <ion-icon
+          slot="end"
+          name="eye-off"
+          *ngIf="!showNewPassword"
+          (click)="toggleNewPasswordVisibility()"
+        ></ion-icon>
+      </div>
 
       <p class="name">Confirm the new password</p>
-      <ion-input
-        type="password"
-        class="inputField"
-        placeholder="Confirm the new password"
-        [(ngModel)]="confirmPassword"
-      />
+      <div class="passwordField">
+        <ion-input
+          [type]="typeConfirmPassword"
+          placeholder="Confirm the new password"
+          [(ngModel)]="confirmPassword"
+        ></ion-input>
+        <ion-icon
+          slot="end"
+          name="eye"
+          *ngIf="showConfirmPassword"
+          (click)="toggleConfirmPasswordVisibility()"
+        ></ion-icon>
+        <ion-icon
+          slot="end"
+          name="eye-off"
+          *ngIf="!showConfirmPassword"
+          (click)="toggleConfirmPasswordVisibility()"
+        ></ion-icon>
+      </div>
 
       <div class="save_empty">
-        <div class="save">save</div>
+        <div class="save" (click)="changePassword()">save</div>
         <div class="empty" (click)="emptyPassword()">Empty fields</div>
       </div>
     </div>
   </ion-card>
+
+  <!-- Footer Section -->
+  <ion-footer id="footerMob">
+    <app-footer-tabs></app-footer-tabs>
+  </ion-footer>
+
+  <app-floating-chat></app-floating-chat>
 </ion-content>

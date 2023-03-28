@@ -55,4 +55,60 @@ $small-screen: 576px;
     color: #343a40 !important;
     text-align: center;
   }
+
+  .moreSection {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    z-index: 1000;
+    background-color: #fff;
+    padding: 30px 4%;
+    color: #1c1d1f;
+  }
+
+  .welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: none !important;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #d6d3d3;
+    padding-bottom: 15px;
+  }
+
+  .welcome > ion-text {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .welcome > ion-icon {
+    font-size: 28px;
+  }
+
+  .logout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: none !important;
+  }
+
+  .logout > ion-text {
+    font-size: 18px;
+    font-weight: normal;
+  }
+
+  .logout > ion-icon {
+    font-size: 32px;
+    color: #e30b1c;
+  }
+
+  .select {
+    color: #e30b1c;
+  }
+
+  // .homeNotSelect.clicked {
+  //   color: #cecece;
+  //   border-bottom: 3px solid #fff;
+  // }
 }

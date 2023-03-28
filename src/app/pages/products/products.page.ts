@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { ApiService } from 'src/app/api.service';
 import { ActivatedRoute } from '@angular/router';
-// import { LocationStrategy } from '@angular/common';
+import { BreadcrumbService } from 'src/app/breadcrumb.service';
 
 @Component({
   selector: 'app-products',
@@ -25,11 +25,15 @@ export class ProductsPage implements OnInit {
 
   totalAds: any;
 
-  breadcrumbs: any = [];
+  // breadcrumbs: any = [];
 
   // isArrow = true;
 
   // imageUrl: any;
+
+  breadcrumbs: { title: string; link: string }[];
+
+  currentUrl: string = 'http://localhost:8100/fabApp/';
 
   constructor(
     private navCtrl: NavController,
@@ -37,12 +41,34 @@ export class ProductsPage implements OnInit {
     public http: HttpClient,
     private storage: Storage,
     public _apiService: ApiService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public breadcrumbService: BreadcrumbService
   ) {
     this.storage.create();
+
+    // this.currentUrl = this.router.url;
+
+    this.breadcrumbs = this.breadcrumbService.getBreadcrumbs();
   }
 
+  // breadcrumbsFun(titles) {
+  //   const slug = this.route.snapshot.paramMap.get('slug');
+  //   let breadcrumbs: Breadcrumb[] = [];
+  //   if (slug == '0') {
+  //     breadcrumbs.push({ title: 'Home', link: `${this.currentUrl}` });
+  //   } else {
+  //     breadcrumbs.push({ title: 'Home', link: `${this.currentUrl}` });
+  //     breadcrumbs.push({
+  //       title: `${titles}`,
+  //       link: `${this.currentUrl}/products/${slug}`,
+  //     });
+  //   }
+
+  //   this.breadcrumbService.setBreadcrumbs(breadcrumbs);
+  // }
+
   goBack() {
+    this.breadcrumbService.clearBreadcrumbs();
     this.navCtrl.back();
   }
 
@@ -60,6 +86,14 @@ export class ProductsPage implements OnInit {
   }
 
   goToSticky(datas: any, titles: any, parent: any) {
+    // this.breadcrumbsFun(titles);
+
+    // const title = this.route.snapshot.data['titles'];
+    const link = `${this.currentUrl}/products/${datas}-${titles}`;
+
+    // Add the breadcrumb to the breadcrumb trail
+    this.breadcrumbService.addBreadcrumb(titles, link);
+
     let data = { cid: datas };
 
     console.log('newTitttltltlt:', titles);
@@ -72,8 +106,8 @@ export class ProductsPage implements OnInit {
         if (res == 'empty') {
           console.log('give res', res);
         } else {
-          this.breadcrumbs.push(titles);
-          this.router.navigateByUrl(`products/${datas}`);
+          // this.breadcrumbs.push(titles);
+          this.router.navigateByUrl(`products/${datas}-${titles}`);
         }
       });
     }
@@ -82,11 +116,21 @@ export class ProductsPage implements OnInit {
   ngOnInit() {
     // window.addEventListener('resize', this.onResize.bind(this));
 
+    // this.breadcrumbService;
+
     const slug = this.route.snapshot.paramMap.get('slug');
+
     console.log('SlugValue:', slug);
+    let titles;
+    let id;
+
+    if (slug) {
+      titles = slug.replace(/[^a-zA-Z]/g, '');
+      id = slug.replace(/\D/g, '');
+    }
 
     let cidData = {
-      cid: slug,
+      cid: id,
     };
 
     this._apiService.fetchAds(cidData).subscribe((res: any) => {
@@ -155,7 +199,7 @@ export class ProductsPage implements OnInit {
       }
     });
 
-    if (slug == '0') {
+    if (id == '0') {
       this.http.get('https://specbits.com/class2/fab/index').subscribe(
         (res: any) => {
           this.categories = res;
@@ -167,9 +211,11 @@ export class ProductsPage implements OnInit {
         }
       );
 
+      // const link = `${this.currentUrl}/products/${slug}`;
+      // this.breadcrumbService.addBreadcrumb(titles, link);
+
       this.storage.get('catTitle').then((val) => {
         this.categoryTitle = val;
-        this.breadcrumbs.push(val);
       });
     } else {
       this._apiService.sendCategory(cidData).subscribe((res: any) => {
@@ -177,9 +223,11 @@ export class ProductsPage implements OnInit {
         console.log("What's response:", res);
       });
 
+      // const link = `${this.currentUrl}/products/${slug}`;
+      // this.breadcrumbService.addBreadcrumb(titles, link);
+
       this.storage.get('catTitle').then((val) => {
         this.categoryTitle = val;
-        this.breadcrumbs.push(val);
       });
     }
   }

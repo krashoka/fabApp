@@ -9,6 +9,8 @@ import { ProfilePageRoutingModule } from './profile-routing.module';
 import { ProfilePage } from './profile.page';
 
 import {NavbarPageModule} from '../../../components/navbar/navbar.module';
+import { FooterTabsPageModule } from '../../../components/footer-tabs/footer-tabs.module';
+import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import {NavbarPageModule} from '../../../components/navbar/navbar.module';
     FormsModule,
     IonicModule,
     ProfilePageRoutingModule,
-    NavbarPageModule
+    NavbarPageModule,
+    FooterTabsPageModule,
+    FloatingChatPageModule
   ],
   declarations: [ProfilePage]
 })

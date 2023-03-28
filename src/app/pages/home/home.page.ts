@@ -98,7 +98,7 @@ export class HomePage {
       if (res == 'empty') {
         this.router.navigate(['home']);
       } else {
-        this.router.navigateByUrl(`products/${datas}`);
+        this.router.navigateByUrl(`products/${datas}-${titles}`);
       }
     });
 
@@ -107,7 +107,7 @@ export class HomePage {
 
   goToStickyAds(datas: any, title: any) {
     this.storage.set('catTitle', title);
-    this.router.navigateByUrl(`products/${datas}`);
+    this.router.navigateByUrl(`products/${datas}-${title}`);
   }
 
   goToAddNewAd() {

@@ -3,6 +3,14 @@
   <app-navbar class="topNav"></app-navbar>
   <!-- ------------------------------------------------ -->
 
+  <ion-card class="stickyAds">
+    <ion-icon name="arrow-back" (click)="goBack()"></ion-icon>
+    <div>
+      <ion-icon class="header_icon" name="search"></ion-icon>
+      <ion-icon class="header_icon" name="notifications"></ion-icon>
+    </div>
+  </ion-card>
+
   <ion-card class="account">
     <ion-card-header>
       <ion-card-title class="userName">
@@ -35,16 +43,33 @@
       <ion-segment-button value="favorites">
         <ion-label>My Favorites(0)</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="blockList">
+      <ion-segment-button value="referrals">
         <ion-label>My Referrals (0)</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="purchases">
+        <ion-label>My Purchases (0)</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="sellings">
+        <ion-label>My Sellings (0)</ion-label>
       </ion-segment-button>
     </div>
   </ion-segment>
 
   <div class="myData">
     <div *ngIf="selectedSegment === 'ads'"><h1>No Ads Posted Yet.</h1></div>
-    <div *ngIf="selectedSegment === 'comments'"><h1>meena</h1></div>
-    <div *ngIf="selectedSegment === 'favorites'"><h1>deena</h1></div>
-    <div *ngIf="selectedSegment === 'blockList'"><h1>teena</h1></div>
+    <div *ngIf="selectedSegment === 'comments'"><h1>No comments added</h1></div>
+    <div *ngIf="selectedSegment === 'favorites'"><h1>Empty List</h1></div>
+    <div *ngIf="selectedSegment === 'referrals'"><h1>0 referrals</h1></div>
+    <div *ngIf="selectedSegment === 'purchases'">
+      <h1>No purchase made yet.</h1>
+    </div>
+    <div *ngIf="selectedSegment === 'sellings'"><h1>No sellings</h1></div>
   </div>
+
+  <!-- Footer Section -->
+  <ion-footer id="footerMob">
+    <app-footer-tabs></app-footer-tabs>
+  </ion-footer>
+
+  <app-floating-chat></app-floating-chat>
 </ion-content>

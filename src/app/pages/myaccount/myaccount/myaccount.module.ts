@@ -8,7 +8,8 @@ import { MyaccountPageRoutingModule } from './myaccount-routing.module';
 
 import { MyaccountPage } from './myaccount.page';
 import {NavbarPageModule} from '../../../components/navbar/navbar.module';
-
+import { FooterTabsPageModule } from '../../../components/footer-tabs/footer-tabs.module';
+import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,9 @@ import {NavbarPageModule} from '../../../components/navbar/navbar.module';
     FormsModule,
     IonicModule,
     MyaccountPageRoutingModule,
-    NavbarPageModule
+    NavbarPageModule,
+    FooterTabsPageModule,
+    FloatingChatPageModule
   ],
   declarations: [MyaccountPage]
 })

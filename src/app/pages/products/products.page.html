@@ -6,9 +6,12 @@
   <ion-card class="navigationAndSearch">
     <div>
       <ion-breadcrumbs>
-        <ion-breadcrumb href="#home" *ngFor="let bread of breadcrumbs"
-          >{{bread}}</ion-breadcrumb
+        <ion-breadcrumb
+          *ngFor="let breadcrumb of breadcrumbs"
+          [href]="breadcrumb.link"
         >
+          {{ breadcrumb.title }}
+        </ion-breadcrumb>
       </ion-breadcrumbs>
       <div class="searchFor">
         <ion-input placeholder="Search Keyword" />
@@ -31,11 +34,11 @@
     </div>
   </ion-card>
 
-  <ion-breadcrumbs class="navigation">
+  <!-- <ion-breadcrumbs class="navigation">
     <ion-breadcrumb href="" *ngFor="let bread of breadcrumbs"
       >{{bread}}</ion-breadcrumb
     >
-  </ion-breadcrumbs>
+  </ion-breadcrumbs> -->
 
   <div class="searchForMob">
     <ion-input placeholder="Search Keyword" />

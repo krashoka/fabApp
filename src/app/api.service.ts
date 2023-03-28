@@ -79,4 +79,12 @@ export class ApiService {
       data
     );
   }
+
+  changeName(data) {
+    return this.http.post('https://specbits.com/class2/fab/update-name', data);
+  }
+
+  changePassword(data) {
+    return this.http.post('https://specbits.com/class2/fab/update-password', data);
+  }
 }
