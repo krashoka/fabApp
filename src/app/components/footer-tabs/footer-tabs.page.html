@@ -1,13 +1,16 @@
 <ion-footer>
   <div class="footerIcons">
-    <div (click)="goToHome()">
+    <div (click)="goToHome()" [ngClass]="{'active': isElementActive('/home')}">
       <div>
         <ion-icon name="home"></ion-icon>
       </div>
       <p class="icon_title">Home</p>
     </div>
 
-    <div (click)="goToMyAccount()">
+    <div
+      (click)="goToMyAccount()"
+      [ngClass]="{'active': isElementActive('/myaccount')}"
+    >
       <div>
         <ion-icon name="person-circle"></ion-icon>
       </div>

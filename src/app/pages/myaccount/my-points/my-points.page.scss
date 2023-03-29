@@ -40,7 +40,7 @@ $extra-large-screen: 1200px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 800;
     color: #484848;
     margin-bottom: 30px;
@@ -48,7 +48,7 @@ $extra-large-screen: 1200px;
 
   .userName > div {
     display: flex;
-    gap: 10px;
+    gap: 20px;
   }
 
   .points {
@@ -58,6 +58,7 @@ $extra-large-screen: 1200px;
     font-weight: 700px;
     border-radius: 5px;
     height: 40px;
+    cursor: pointer;
   }
 
   .points > p:nth-child(1) {
@@ -83,100 +84,85 @@ $extra-large-screen: 1200px;
     border-radius: 0 5px 5px 0;
   }
 
-  .editIcon {
+  .redeem {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    font-size: 18px;
-    padding: 12px 12px 10px;
+    border: 1px solid #484848;
+    padding: 0 10px;
     border-radius: 5px;
-    background-color: #f5f5f5;
+    font-size: 11px;
+    font-weight: 700px;
+    height: 40px;
+    margin: 0;
     cursor: pointer;
   }
 
-  .contactNum {
-    color: #959595;
-    font-size: 16px;
-    font-weight: 700;
-    letter-spacing: 1px;
+  .pointSection {
+    box-shadow: none !important;
+    // margin: 30px 5% 30px;
   }
 
-  .contactNum div {
-    display: flex;
-    align-items: center;
-  }
-
-  .referralCode {
-    letter-spacing: 0;
-    color: #484848;
-    display: flex;
-    align-items: center;
-  }
-
-  .referralCode span {
-    margin-left: 10px;
-    font-weight: normal;
-  }
-
-  .referralCode ion-icon {
-    margin-left: 5px;
-    padding: 5px;
-    cursor: pointer;
-  }
-
-  .call {
-    font-size: 24px;
-    margin-right: 15px;
-    font-weight: lighter;
-  }
-
-  // ************ Segment Section *************
-
-  // .segment {
-  //   padding: 0 4%;
-  // }
-
-  .segment ion-label {
-    text-transform: none !important;
+  ion-row {
     font-size: 14px;
+    border: 1px solid #484848;
+    margin-bottom: 10px;
     color: #484848;
   }
 
-  .segmentBorder {
-    margin: 0 4%;
-    border-bottom: 1px solid #959595;
-    width: 100%;
+  .slNumber {
+    padding: 10px;
+    background-color: #484848;
+    color: #fff;
+  }
+
+  .pointsTitle {
+    padding: 10px 0 10px 10px;
+    font-weight: 700;
+  }
+
+  .pointsDisplay {
+    padding: 10px 5px;
+    font-weight: 700;
+    color: #0ea74e;
+  }
+
+  .availPoints {
+    text-align: center;
+    color: #484848;
+    margin-bottom: 30px;
+    font-size: 20px;
+  }
+
+  .enterPoints {
+    border: 1px solid #484848;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    height: 50px;
     display: flex;
-    gap: 20px;
-    overflow: scroll;
-  }
-
-  .segmentBorder::-webkit-scrollbar {
-    display: none;
-  }
-
-  ion-segment {
-    ion-segment-button {
-      --color-checked: #e30b1c;
-      --background-checked: #faeaea;
-    }
-  }
-
-  .myData {
-    margin: 20px 4%;
-  }
-
-  .myData div {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100px;
+    color: #484848;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  .submit {
+    width: fit-content;
+    padding: 0 10%;
+    margin: auto;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #007a3d;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
 @media (min-width: $large-screen) {
   #footerMob,
+  ion-footer,
   .stickyAds {
     display: none;
   }
@@ -199,6 +185,7 @@ $extra-large-screen: 1200px;
   .userName > div {
     display: flex;
     gap: 20px;
+    align-items: center;
   }
 
   .points {
@@ -208,6 +195,7 @@ $extra-large-screen: 1200px;
     font-weight: 700px;
     border-radius: 5px;
     height: 45px;
+    cursor: pointer;
   }
 
   .points > p:nth-child(1) {
@@ -233,101 +221,80 @@ $extra-large-screen: 1200px;
     border-radius: 0 5px 5px 0;
   }
 
-  .editIcon {
+  .redeem {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-    font-size: 23px;
-    padding: 12px 12px 10px;
+    border: 1px solid #484848;
+    padding: 0 10px;
     border-radius: 5px;
-    background-color: #f5f5f5;
-    cursor: pointer;
-  }
-
-  .edit {
-    display: none;
     font-size: 13px;
     font-weight: 700px;
-  }
-
-  .editIcon:hover .edit {
-    display: block;
-  }
-
-  .contactNum {
-    display: flex;
-    align-items: center;
-    gap: 100px;
-    color: #959595;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
-
-  .contactNum div {
-    display: flex;
-    align-items: center;
-  }
-
-  .referralCode {
-    letter-spacing: 0;
-    color: #484848;
-    display: flex;
-    align-items: center;
-  }
-
-  .referralCode span {
-    margin-left: 10px;
-    font-weight: normal;
-  }
-
-  .referralCode ion-icon {
-    margin-left: 5px;
-    padding: 5px;
+    height: 45px;
+    margin: 0;
     cursor: pointer;
   }
 
-  .call {
-    font-size: 24px;
-    margin-right: 15px;
-    font-weight: lighter;
+  .pointSection {
+    box-shadow: none !important;
+    margin: 30px 5% 30px;
   }
 
-  // ************ Segment Section *************
-
-  // .segment {
-  //   padding: 0 4%;
-  // }
-
-  .segment ion-label {
-    text-transform: none !important;
-    font-size: 18px;
+  ion-row {
+    font-size: 20px;
+    border: 1px solid #959595;
+    margin-bottom: 10px;
     color: #484848;
   }
 
-  .segmentBorder {
-    margin: 0 4%;
-    border-bottom: 1px solid #959595;
-    width: 100%;
+  .slNumber {
+    padding: 20px;
+    background-color: #484848;
+    color: #fff;
+  }
+
+  .pointsTitle {
+    padding: 20px 0 20px 10px;
+    font-weight: 700;
+  }
+
+  .pointsDisplay {
+    padding: 20px;
+    font-weight: 700;
+    color: #0ea74e;
+  }
+
+  .availPoints {
+    text-align: center;
+    color: #484848;
+    margin-bottom: 30px;
+    font-size: 30px;
+  }
+
+  .enterPoints {
+    border: 1px solid #484848;
+    border-radius: 5px;
+    width: 40%;
+    margin: auto;
+    margin-bottom: 20px;
+    height: 50px;
     display: flex;
-  }
-
-  ion-segment {
-    ion-segment-button {
-      --color-checked: #e30b1c;
-      --background-checked: #faeaea;
-    }
-  }
-
-  .myData {
-    margin: 20px 4%;
-  }
-
-  .myData div {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100px;
+    color: #484848;
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .submit {
+    width: fit-content;
+    padding: 0 5%;
+    margin: auto;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: #007a3d;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

@@ -322,7 +322,10 @@ export class UploadimagePagePage implements OnInit {
         },
       });
       console.log('Upload response:', uploadResponse);
-      this.successToast('Images UP');
+      if(uploadResponse.data == 'success'){
+        this.successToast('Images Uploaded successfully');
+        this.router.navigate(['ad-info']);
+      }
     } catch (error) {
       console.error('Upload error:', error);
     }

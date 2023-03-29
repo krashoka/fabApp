@@ -18,10 +18,6 @@ export class FooterTabsPage implements OnInit {
     });
   }
 
-  // onHome = false;
-  // onAccountSelect = false;
-  // onChatSelect = false;
-
   ngOnInit() {}
 
   more = false;
@@ -50,16 +46,10 @@ export class FooterTabsPage implements OnInit {
   }
 
   goToHome() {
-    // this.onHome = true;
-    // this.onAccountSelect = false;
-    // this.onChatSelect = false;
     this.router.navigate(['/']);
   }
 
   goToMyAccount() {
-    // this.onHome = false;
-    // this.onAccountSelect = true;
-    // this.onChatSelect = false;
     this.router.navigate(['myaccount']);
   }
 
@@ -67,5 +57,9 @@ export class FooterTabsPage implements OnInit {
     // this.onHome = false;
     // this.onAccountSelect = false;
     // this.onChatSelect = true;
+  }
+
+  isElementActive(routePath: string): boolean {
+    return this.router.url.includes(routePath);
   }
 }

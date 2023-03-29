@@ -1,0 +1,64 @@
+<ion-content>
+  <!-- Header for Large screen -->
+  <app-navbar class="topNav"></app-navbar>
+  <!-- ------------------------------------------------ -->
+
+  <ion-card class="stickyAds">
+    <ion-icon name="arrow-back" (click)="goBack()"></ion-icon>
+    <div>
+      <ion-icon class="header_icon" name="search"></ion-icon>
+      <ion-icon class="header_icon" name="notifications"></ion-icon>
+    </div>
+  </ion-card>
+
+  <ion-card class="account">
+    <ion-card-header>
+      <ion-card-title class="userName">
+        <ion-text>{{username}}</ion-text>
+        <div>
+          <div class="points" (click)="onClickPoints()" *ngIf="showPoints">
+            <p>1600</p>
+            <p>My Points</p>
+          </div>
+          <p class="redeem" (click)="onClickRedeem()" *ngIf="showRedeem">
+            Redeem Points
+          </p>
+        </div>
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card *ngIf="showRedeem" class="pointSection"
+    ><ion-grid>
+      <ion-row>
+        <ion-col size="auto" class="slNumber">1.</ion-col>
+        <ion-col class="pointsTitle">Welcome Bonus</ion-col>
+        <ion-col size="auto" class="pointsDisplay">+ 50 pts.</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="auto" class="slNumber">2.</ion-col>
+        <ion-col class="pointsTitle">Ads Bonus</ion-col>
+        <ion-col size="auto" class="pointsDisplay">+ 1050 pts.</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="auto" class="slNumber">3.</ion-col>
+        <ion-col class="pointsTitle">Monthly Bonus</ion-col>
+        <ion-col size="auto" class="pointsDisplay">+ 500 pts.</ion-col>
+      </ion-row>
+    </ion-grid></ion-card
+  >
+  <ion-card *ngIf="showPoints" class="pointSection"
+    ><h1 class="availPoints">Available Points to Redeem - 1600</h1>
+    <div class="enterPoints">
+      <ion-input type="number" placeholder="Enter points to redeem" />
+    </div>
+    <div class="submit">Submit</div>
+  </ion-card>
+
+  <!-- Footer Section -->
+  <ion-footer id="footerMob">
+    <app-footer-tabs></app-footer-tabs>
+  </ion-footer>
+
+  <app-floating-chat></app-floating-chat>
+</ion-content>

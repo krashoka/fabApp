@@ -52,7 +52,6 @@ $small-screen: 576px;
 
   .icon_title {
     font-size: 10px;
-    color: #343a40 !important;
     text-align: center;
   }
 
@@ -103,12 +102,8 @@ $small-screen: 576px;
     color: #e30b1c;
   }
 
-  .select {
-    color: #e30b1c;
+  .active ion-icon,
+  .active p {
+    color: #e30b1c !important;
   }
-
-  // .homeNotSelect.clicked {
-  //   color: #cecece;
-  //   border-bottom: 3px solid #fff;
-  // }
 }

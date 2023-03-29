@@ -141,6 +141,14 @@ const routes: Routes = [
     canLoad: [AuthImplementsGuard],
   },
   {
+    path: 'myaccount/:slug',
+    loadChildren: () =>
+      import('./pages/myaccount/myaccount/myaccount.module').then(
+        (m) => m.MyaccountPageModule
+      ),
+    canLoad: [AuthImplementsGuard],
+  },
+  {
     path: 'profile',
     loadChildren: () =>
       import('./pages/myaccount/profile/profile.module').then(
@@ -175,6 +183,14 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/add-advertisement/choose-plan/choose-plan.module').then(
         (m) => m.ChoosePlanPageModule
+      ),
+    canLoad: [AuthImplementsGuard],
+  },
+  {
+    path: 'my-points',
+    loadChildren: () =>
+      import('./pages/myaccount/my-points/my-points.module').then(
+        (m) => m.MyPointsPageModule
       ),
     canLoad: [AuthImplementsGuard],
   },

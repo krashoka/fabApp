@@ -79,20 +79,32 @@
   <div>
     <div class="accountMenu">
       <h2 class="welcome">Welcome {{username}}</h2>
-      <div>
+      <div (click)="goToAccount()">
+        <div><ion-icon name="person"></ion-icon> My Profile</div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+      <div (click)="goToMyAccount('ads')">
         <div><ion-icon name="duplicate"></ion-icon> My Ads</div>
         <ion-icon name="chevron-forward"></ion-icon>
       </div>
-      <div>
-        <div><ion-icon name="chatbox"></ion-icon> My Comments</div>
+      <div (click)="goToMyAccount('chats')">
+        <div><ion-icon name="chatbox"></ion-icon> My Chats</div>
         <ion-icon name="chevron-forward"></ion-icon>
       </div>
-      <div>
+      <div (click)="goToMyAccount('favorites')">
         <div><ion-icon name="heart"></ion-icon> My Favorites</div>
         <ion-icon name="chevron-forward"></ion-icon>
       </div>
-      <div>
+      <div (click)="goToMyAccount('referrals')">
         <div><ion-icon name="people"></ion-icon> My Referrals</div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+      <div (click)="goToMyAccount('purchases')">
+        <div><ion-icon name="bag-handle"></ion-icon> My Purchases</div>
+        <ion-icon name="chevron-forward"></ion-icon>
+      </div>
+      <div (click)="goToMyAccount('sellings')">
+        <div><ion-icon name="bag-check"></ion-icon> My Sellings</div>
         <ion-icon name="chevron-forward"></ion-icon>
       </div>
       <p (click)="logout()" class="logOut">

@@ -15,14 +15,26 @@
     <ion-card-header>
       <ion-card-title class="userName">
         <ion-text>{{username}}</ion-text>
-        <div class="editIcon" (click)="goToProfile()">
-          <ion-icon name="pencil-sharp" />
-          <ion-text class="edit">Edit my account</ion-text>
+        <div>
+          <div class="points" (click)="goToMyPoints()">
+            <p>1600</p>
+            <p>My Points</p>
+          </div>
+          <div class="editIcon" (click)="goToProfile()">
+            <ion-icon name="pencil-sharp" />
+            <ion-text class="edit">Edit my account</ion-text>
+          </div>
         </div>
       </ion-card-title>
       <ion-card-subtitle class="contactNum">
-        <ion-icon name="call" class="call"></ion-icon>
-        <ion-text>{{mobNumber}}</ion-text>
+        <div>
+          <ion-icon name="call" class="call"></ion-icon>
+          <ion-text>{{mobNumber}}</ion-text>
+        </div>
+        <p class="referralCode">
+          My Referral Code - <span> ABcDe</span>
+          <ion-icon name="share-social"></ion-icon>
+        </p>
       </ion-card-subtitle>
     </ion-card-header>
   </ion-card>
@@ -37,7 +49,7 @@
       <ion-segment-button value="ads" default>
         <ion-label>My Ads(0)</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="comments">
+      <ion-segment-button value="chats">
         <ion-label>My Chats(0)</ion-label>
       </ion-segment-button>
       <ion-segment-button value="favorites">
@@ -57,7 +69,7 @@
 
   <div class="myData">
     <div *ngIf="selectedSegment === 'ads'"><h1>No Ads Posted Yet.</h1></div>
-    <div *ngIf="selectedSegment === 'comments'"><h1>No comments added</h1></div>
+    <div *ngIf="selectedSegment === 'chats'"><h1>No chats added</h1></div>
     <div *ngIf="selectedSegment === 'favorites'"><h1>Empty List</h1></div>
     <div *ngIf="selectedSegment === 'referrals'"><h1>0 referrals</h1></div>
     <div *ngIf="selectedSegment === 'purchases'">

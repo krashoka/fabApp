@@ -110,4 +110,12 @@ export class NavbarPage implements OnInit {
   goToAddNewAd() {
     this.router.navigate(['add-new-advertisement']);
   }
+
+  goToAccount() {
+    this.router.navigateByUrl(`/myaccount`);
+  }
+
+  goToMyAccount(segment) {
+    this.router.navigateByUrl(`/myaccount/${segment}`);
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { NavController } from '@ionic/angular';
 
@@ -12,16 +12,19 @@ export class MyaccountPage implements OnInit {
   mobNumber: any;
   username: any;
 
-  selectedSegment: any = 'ads';
+  selectedSegment: any;
 
   segmentChanged(event) {
     this.selectedSegment = event.detail.value;
+    console.log('SelectedSegment:', this.selectedSegment);
+    // this.router.navigateByUrl(`/myaccount/${this.selectedSegment}`);
   }
 
   constructor(
     private router: Router,
     private navCtrl: NavController,
-    private storage: Storage
+    private storage: Storage,
+    private route: ActivatedRoute
   ) {
     this.storage.create();
 
@@ -42,5 +45,13 @@ export class MyaccountPage implements OnInit {
     this.navCtrl.back();
   }
 
-  ngOnInit() {}
+  goToMyPoints(){
+    this.router.navigate(['my-points']);
+  }
+
+  ngOnInit() {
+    this.selectedSegment = this.route.snapshot.paramMap.get('slug');
+    console.log('Segment VAl:', this.selectedSegment);
+    if (this.selectedSegment == null) this.selectedSegment = 'ads';
+  }
 }
