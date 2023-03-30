@@ -85,6 +85,34 @@ export class ApiService {
   }
 
   changePassword(data) {
-    return this.http.post('https://specbits.com/class2/fab/update-password', data);
+    return this.http.post(
+      'https://specbits.com/class2/fab/update-password',
+      data
+    );
+  }
+
+  addToFavorites(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/add-to-favorites',
+      data
+    );
+  }
+
+  removeFromFavorites(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/remove-from-favorites',
+      data
+    );
+  }
+
+  fetchFavorites(favData) {
+    return this.http.post('https://specbits.com/class2/fab/favorites', favData);
+  }
+
+  fetchLoggedAds(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/fetch-logged-ads',
+      data
+    );
   }
 }

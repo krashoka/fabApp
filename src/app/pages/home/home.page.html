@@ -63,7 +63,7 @@
           <ion-icon class="searchIcon" name="search"></ion-icon>
         </div>
 
-        <ion-select
+        <!-- <ion-select
           interface="popover"
           class="selectCategory"
           placeholder="Category"
@@ -71,7 +71,16 @@
           <ion-select-option>fasdf</ion-select-option>
           <ion-select-option>fasdf</ion-select-option>
           <ion-select-option>fasdf</ion-select-option>
-        </ion-select>
+        </ion-select> -->
+        <div class="selectCategory">
+          <select2
+            [overlay]="overlay"
+            [data]="searchCategories"
+            (search)="search('search1')"
+            placeholder="Category For"
+          >
+          </select2>
+        </div>
 
         <ion-select
           interface="popover"
@@ -82,6 +91,7 @@
           <ion-select-option>fasdf</ion-select-option>
           <ion-select-option>fasdf</ion-select-option>
         </ion-select>
+
         <div class="searchBtn">Search</div>
       </ion-card>
     </div>
@@ -194,11 +204,22 @@
           <div class="stickyContentHeight">
             <div class="dayAndHeart">
               <div>
-                <ion-label>2 days ago</ion-label>
+                <ion-label>{{ad.timestamp}}</ion-label>
                 <ion-label class="locationSticky">Abu Dhabi</ion-label>
               </div>
 
-              <ion-icon class="heart" name="heart-outline"></ion-icon>
+              <ion-icon
+                class="heart"
+                name="heart-outline"
+                (click)="addToFavorites(ad.ad_id)"
+                *ngIf="!isFavorite(ad.ad_id)"
+              ></ion-icon>
+              <ion-icon
+                class="heartRed"
+                name="heart"
+                (click)="removeFromFavorites(ad.ad_id)"
+                *ngIf="isFavorite(ad.ad_id)"
+              ></ion-icon>
             </div>
             <p class="adsTitle">{{ad.adTitle}}</p>
             <div class="adsPrice">
@@ -369,5 +390,4 @@
   </ion-footer>
 
   <app-floating-chat></app-floating-chat>
-  
 </ion-content>

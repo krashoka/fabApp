@@ -464,6 +464,9 @@ $extra-large-screen: 1200px;
   }
 
   .selectCategory {
+    display: flex;
+    align-items: center;
+    width: 100%;
     border: 1px solid #eee;
     border-radius: 10px;
     padding-right: 5px;
@@ -472,6 +475,10 @@ $extra-large-screen: 1200px;
     margin-bottom: 30px;
     color: #484848;
     height: 40px;
+  }
+
+  .selectCategory > select2 {
+    width: 100%;
   }
 
   .searchBtn {
@@ -646,6 +653,13 @@ $extra-large-screen: 1200px;
   .heart {
     font-size: 24px;
     font-weight: bolder;
+    cursor: pointer;
+  }
+
+  .heartRed {
+    color: #e30b1c;
+    font-size: 24px;
+    cursor: pointer;
   }
 
   .adsTitle {

@@ -167,12 +167,12 @@ $extra-large-screen: 1200px;
     margin: 20px 4%;
   }
 
-  .myData div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-  }
+  // .myData div {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   height: 100px;
+  // }
 }
 
 @media (min-width: $large-screen) {
@@ -324,10 +324,94 @@ $extra-large-screen: 1200px;
     margin: 20px 4%;
   }
 
-  .myData div {
+  // .myData div {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   height: 100px;
+  // }
+
+  //********** My Ads Section Styling **************
+  .myAds {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100px;
+    margin-bottom: 50px;
+  }
+
+  .myAds > img {
+    width: 45%;
+  }
+
+  .myAds > div {
+    width: 55%;
+    padding: 25px;
+    margin-right: 15px;
+    // border: 1px solid green;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fcf0f0;
+  }
+
+  .uploadTime {
+    margin-top: 0;
+  }
+
+  .adTitle {
+    font-size: 32px;
+    color: #212529;
+  }
+
+  .adPrice {
+    font-size: 28px;
+    letter-spacing: 1px;
+    color: #212529;
+  }
+
+  .currency {
+    font-size: 16px;
+    color: #959595;
+    letter-spacing: 0;
+  }
+
+  .adBtns {
+    display: flex;
+    gap: 20px;
+  }
+
+  .viewBtn {
+    display: flex;
+    gap: 10px;
+    padding: 0 25px;
+    height: 50px;
+    align-items: center;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .editBtn {
+    display: flex;
+    gap: 10px;
+    font-size: 18px;
+    padding: 0 25px;
+    height: 50px;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #ff5100;
+    color: #fff;
+  }
+
+  .deleteBtn {
+    display: flex;
+    gap: 10px;
+    padding: 0 25px;
+    font-size: 18px;
+    height: 50px;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #e30b1c;
+    color: #fff;
   }
 }

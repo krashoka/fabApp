@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { ApiService } from 'src/app/api.service';
+import { Select2Option } from 'ng-select2-component';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +21,11 @@ export class HomePage {
 
   categories: any = [];
 
+  searchCategories: any = [];
+  overlay = false;
+
+  favData: any = [];
+
   adDetails: any = [];
 
   waLink = 'https://wa.me/';
@@ -26,6 +33,7 @@ export class HomePage {
   constructor(
     private router: Router,
     public http: HttpClient,
+    private toastCtrl: ToastController,
     private storage: Storage,
     private _apiService: ApiService
   ) {
@@ -37,11 +45,33 @@ export class HomePage {
         this.categories = res;
 
         console.log('IconCat:', res);
+
+        for (let i = 0; i < res.length; i++) {
+          let data = {
+            options: [{ value: res[i].title, label: res[i].title }],
+          };
+          this.searchCategories.push(data);
+
+          // if (res[i] == 973) {
+          //   this.selectedCountry = this.countries[i].options[0].value;
+          // }
+        }
       },
       (error: any) => {
         console.log('ErrorMessage: ', error);
       }
     );
+  }
+
+  search(text: string) {
+    this.searchCategories = text
+      ? (
+          JSON.parse(JSON.stringify(this.searchCategories)) as Select2Option[]
+        ).filter(
+          (option) =>
+            option.label.toLowerCase().indexOf(text.toLowerCase()) > -1
+        )
+      : JSON.parse(JSON.stringify(this.searchCategories));
   }
 
   onHomeSelect = true;
@@ -133,11 +163,95 @@ export class HomePage {
       });
   }
 
+  isFavorite(ad_id: number): boolean {
+    // console.log('this.favData:', this.favData);
+    return false;
+  }
+
+  addToFavorites(adid) {
+    let data = {
+      uid: this.sessionUser,
+      aid: adid,
+    };
+
+    this._apiService.addToFavorites(data).subscribe(
+      (res: any) => {
+        if (res == 'success') {
+          this.successToast('Added to your Favorites.');
+        } else if (res == 'fail') {
+          this.errorToast('Failed adding to your Favorites!');
+        } else if (res == 'noadd') {
+          this.errorToast('Error finding ad!');
+        } else {
+          this.errorToast('Please login first!');
+          this.router.navigate(['login']);
+        }
+      },
+      (err) => {
+        console.log('Error response:', err);
+      }
+    );
+  }
+
+  removeFromFavorites(adid) {
+    let data = {
+      uid: this.sessionUser,
+      aid: adid,
+    };
+
+    this._apiService.removeFromFavorites(data).subscribe(
+      (res: any) => {
+        if (res == 'success') {
+          this.successToast('Removed from your Favorites.');
+        } else {
+          this.errorToast('Error removing from Favorites!');
+        }
+      },
+      (err) => {
+        console.log('Error response:', err);
+      }
+    );
+  }
+
+  async errorToast(a) {
+    const toast = await this.toastCtrl.create({
+      message: a,
+      duration: 1500,
+      position: 'top',
+      cssClass: 'errorToast',
+    });
+    toast.present();
+  }
+
+  async successToast(a) {
+    const toast = await this.toastCtrl.create({
+      message: a,
+      duration: 1500,
+      position: 'top',
+      cssClass: 'successToast',
+    });
+    toast.present();
+  }
+
   ngOnInit() {
     window.addEventListener('resize', this.onResize.bind(this));
 
     this.storage.get('admin').then((val) => {
       this.sessionUser = val.userid;
+
+      let favData = {
+        uid: val.userid,
+      };
+
+      this._apiService.fetchLoggedAds(favData).subscribe((res: any) => {
+        console.log('Logged Ads response:', res);
+      });
+
+      this._apiService.fetchFavorites(favData).subscribe((res: any) => {
+        console.log('favorites response:', res);
+
+        this.favData = res;
+      });
     });
 
     this.http
@@ -156,6 +270,7 @@ export class HomePage {
           let ad_id;
           let adAdmin;
           let adMobile;
+          let timestamp;
           for (let key in res[i]) {
             if (key === 'addHeadings') {
               adTitle = res[i][key].add_title;
@@ -165,6 +280,7 @@ export class HomePage {
 
             if (key === 'addPersonalInfo') {
               adMobile = res[i][key].phonecode + res[i][key].mobile;
+              timestamp = res[i][key].created_at;
             }
 
             if (key === 'addData') {
@@ -203,13 +319,49 @@ export class HomePage {
             imagesArray: imagesArray,
             ad_id: ad_id,
             adMobile: adMobile,
+            timestamp: this.timestamp(timestamp),
           };
 
-          this.adDetails.push(data);
+          if (this.sessionUser != data.adAdmin) {
+            this.adDetails.push(data);
+          }
         }
 
         console.log('Total ad Data:', this.adDetails);
       });
+  }
+
+  timestamp(time) {
+    const timestamp = new Date(time).getTime();
+    const now = Date.now();
+    const diff = now - timestamp;
+
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    let result;
+
+    if (days > 1) {
+      result = `${days} days ago`;
+    } else if (days === 1) {
+      result = `1 day ago`;
+    } else if (hours > 1) {
+      result = `${hours} hours ago`;
+    } else if (hours === 1) {
+      result = `1 hour ago`;
+    } else if (minutes > 1) {
+      result = `${minutes} minutes ago`;
+    } else if (minutes === 1) {
+      result = `1 minute ago`;
+    } else if (seconds > 5) {
+      result = `${seconds} seconds ago`;
+    } else {
+      result = `just now`;
+    }
+
+    return result;
   }
 
   onResize() {

@@ -13,7 +13,7 @@ export class AuthImplementsGuard implements CanLoad {
   canLoad() {
     return new Promise<boolean>(async (resolve, reject) => {
       let isAuthenticated = await this.storage.get('admin');
-      console.log('Authenticate:', isAuthenticated);
+      // console.log('Authenticate:', isAuthenticated);
 
       if (isAuthenticated) {
         resolve(true);

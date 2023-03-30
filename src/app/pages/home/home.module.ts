@@ -10,6 +10,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { NavbarPageModule } from '../../components/navbar/navbar.module';
 import { FooterTabsPageModule } from '../../components/footer-tabs/footer-tabs.module';
 import { FloatingChatPageModule } from '../../components/floating-chat/floating-chat.module';
+import { Select2Module } from 'ng-select2-component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { FloatingChatPageModule } from '../../components/floating-chat/floating-
     NavbarPageModule,
     FooterTabsPageModule,
     FloatingChatPageModule,
+    Select2Module,
   ],
   declarations: [HomePage],
 })
