@@ -151,7 +151,7 @@ export class HomePage {
   goToProductDetails(ad) {
     let value = { aid: ad.ad_id, uid: this.sessionUser };
     this.http
-      .post('https://specbits.com/class2/fab/display-comment', value)
+      .post('https://specbits.com/class2/fab/fetch-comment', value)
       .subscribe((res: any) => {
         console.log('chaaaaat:', res);
         let data = {
