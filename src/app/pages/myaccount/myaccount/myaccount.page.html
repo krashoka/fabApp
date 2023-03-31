@@ -70,18 +70,18 @@
   <div class="myData">
     <div *ngIf="selectedSegment === 'ads'">
       <h1 *ngIf="emptyMyAds">No Ads Posted Yet.</h1>
-      <div *ngIf="myAds">
+      <div *ngIf="myAds" class="cardDisplayMargin">
         <ion-card class="myAds" *ngFor="let ad of adDetails">
           <img [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]" />
 
           <div>
-            <p class="uploadTime">20 minutes ago</p>
+            <p class="uploadTime">{{ad.timestamp}}</p>
             <h1 class="adTitle">{{ad.adTitle}}</h1>
             <p class="adPrice">
               {{ad.itemObj.Price}} <ion-text class="currency">AED</ion-text>
             </p>
             <div class="adBtns">
-              <div class="viewBtn">
+              <div class="viewBtn" (click)="goToProductDetails(ad)">
                 <ion-icon name="eye-sharp"></ion-icon> View
               </div>
               <div class="editBtn">
@@ -98,7 +98,7 @@
     <div *ngIf="selectedSegment === 'chats'"><h1>No chats added</h1></div>
     <div *ngIf="selectedSegment === 'favorites'">
       <h1 *ngIf="emptyFavAds">Empty List</h1>
-      <div *ngIf="favAds">
+      <div *ngIf="favAds" class="cardDisplayMargin">
         <ion-card class="myAds" *ngFor="let fav of favorites">
           <img
             [src]="'https://specbits.com/class2/fab/'+ fav.images[0].image_name"

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
@@ -98,7 +98,7 @@ export class ProductDetailsPage implements OnInit {
         if (session != null) {
           console.log('User is in session');
           this.adminSessionId = session.userid;
-          if (val.comment != 'blank') {
+          if (val.comment.length != 0) {
             this.canComment = false;
             this.allComments = true;
 
@@ -109,6 +109,7 @@ export class ProductDetailsPage implements OnInit {
               // Filtering number of users commented on a particular ad.
               for (let i = 0; i < val.comment.length; i++) {
                 let sameUser = val.comment[i].user_id;
+                console.log('sameUser:', sameUser);
                 // let chats = {};
                 // chats[sameUser]
                 // chats['time'] = val.comment[i].created_at;
@@ -123,9 +124,14 @@ export class ProductDetailsPage implements OnInit {
               console.log('All comments:', this.comments);
             }
           } else {
-            this.commentDisabled = false;
-            this.canComment = true;
-            this.allComments = false;
+            if (session.userid == val.adINFO.adAdmin) {
+              this.canComment = false;
+              this.allComments = false;
+            }else{
+              this.commentDisabled = false;
+              this.canComment = true;
+              this.allComments = false;
+            }
           }
 
           this.sessionVal = true;
@@ -152,6 +158,8 @@ export class ProductDetailsPage implements OnInit {
     });
   }
 
+  @ViewChild('content', { static: false }) content: any = ElementRef;
+
   addComment() {
     if (this.sessionVal) {
       let commentData = {
@@ -164,6 +172,20 @@ export class ProductDetailsPage implements OnInit {
         .subscribe((res: any) => {
           console.log('comment response:', res);
           this.commentValue = '';
+
+          let value = { aid: this.adId, uid: this.userid };
+          this.http
+            .post('https://specbits.com/class2/fab/fetch-comment', value)
+            .subscribe((res: any) => {
+              this.comments = res;
+
+              setTimeout(() => {
+                this.content.nativeElement.scrollTo({
+                  top: this.content.nativeElement.scrollHeight,
+                  behavior: 'smooth',
+                });
+              }, 100);
+            });
         });
     } else {
       this.router.navigate(['login']);
@@ -178,5 +200,18 @@ export class ProductDetailsPage implements OnInit {
     this.show = !this.show;
     this.hide = !this.hide;
     this.commentDisplay = !this.commentDisplay;
+
+    let value = { aid: this.adId, uid: this.userid };
+    this.http
+      .post('https://specbits.com/class2/fab/fetch-comment', value)
+      .subscribe((res: any) => {
+        this.comments = res;
+        setTimeout(() => {
+          this.content.nativeElement.scrollTo({
+            top: this.content.nativeElement.scrollHeight,
+            behavior: 'smooth',
+          });
+        }, 100);
+      });
   }
 }

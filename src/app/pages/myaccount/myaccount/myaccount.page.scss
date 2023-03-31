@@ -173,6 +173,102 @@ $extra-large-screen: 1200px;
   //   align-items: center;
   //   height: 100px;
   // }
+
+  //********** My Ads Section Styling **************
+  .cardDisplayMargin {
+    margin-bottom: 80px;
+  }
+
+  .myAds {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .myAds > img {
+    width: 100%;
+  }
+
+  .myAds > div {
+    width: 100%;
+    padding: 20px;
+    // margin-right: 15px;
+    // border: 1px solid green;
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    // gap: 10px;
+    background-color: #fcf0f0;
+  }
+
+  .uploadTime {
+    margin-top: 0;
+  }
+
+  .adTitle {
+    font-size: 24px;
+    color: #212529;
+    font-weight: 700;
+  }
+
+  .adPrice {
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: #212529;
+    font-weight: 700;
+  }
+
+  .currency {
+    font-size: 12px;
+    color: #959595;
+    letter-spacing: 0;
+  }
+
+  .adBtns {
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+  }
+
+  .viewBtn {
+    display: flex;
+    gap: 5px;
+    padding: 0 20px 0 10px;
+    height: 40px;
+    align-items: center;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .editBtn {
+    display: flex;
+    gap: 5px;
+    font-size: 14px;
+    padding: 0 20px 0 10px;
+    height: 40px;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #ff5100;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .deleteBtn {
+    display: flex;
+    gap: 5px;
+    padding: 0 20px 0 10px;
+    font-size: 14px;
+    height: 40px;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #e30b1c;
+    color: #fff;
+    cursor: pointer;
+  }
 }
 
 @media (min-width: $large-screen) {
@@ -336,20 +432,23 @@ $extra-large-screen: 1200px;
     display: flex;
     align-items: center;
     margin-bottom: 50px;
+    height: 315px;
   }
 
   .myAds > img {
     width: 45%;
+    object-fit: contain;
   }
 
   .myAds > div {
     width: 55%;
     padding: 25px;
+    margin-left: 15px;
     margin-right: 15px;
     // border: 1px solid green;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    // gap: 10px;
     background-color: #fcf0f0;
   }
 
@@ -383,12 +482,13 @@ $extra-large-screen: 1200px;
     display: flex;
     gap: 10px;
     padding: 0 25px;
-    height: 50px;
+    height: 45px;
     align-items: center;
     font-size: 18px;
     border-radius: 5px;
     background-color: #007bff;
     color: #fff;
+    cursor: pointer;
   }
 
   .editBtn {
@@ -396,11 +496,12 @@ $extra-large-screen: 1200px;
     gap: 10px;
     font-size: 18px;
     padding: 0 25px;
-    height: 50px;
+    height: 45px;
     align-items: center;
     border-radius: 5px;
     background-color: #ff5100;
     color: #fff;
+    cursor: pointer;
   }
 
   .deleteBtn {
@@ -408,10 +509,11 @@ $extra-large-screen: 1200px;
     gap: 10px;
     padding: 0 25px;
     font-size: 18px;
-    height: 50px;
+    height: 45px;
     align-items: center;
     border-radius: 5px;
     background-color: #e30b1c;
     color: #fff;
+    cursor: pointer;
   }
 }

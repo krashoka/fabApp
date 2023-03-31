@@ -66,6 +66,21 @@ export class MyaccountPage implements OnInit {
     this.router.navigate(['my-points']);
   }
 
+  goToProductDetails(ad) {
+    let value = { aid: ad.ad_id, uid: this.sessionUser };
+    this.http
+      .post('https://specbits.com/class2/fab/fetch-comment', value)
+      .subscribe((res: any) => {
+        console.log('chaaaaat:', res);
+        let data = {
+          adINFO: ad,
+          comment: res,
+        };
+        this.storage.set('adId', data);
+        this.router.navigate(['product-details']);
+      });
+  }
+
   ngOnInit() {
     this.selectedSegment = this.route.snapshot.paramMap.get('slug');
     // console.log('Segment VAl:', this.selectedSegment);
@@ -98,6 +113,7 @@ export class MyaccountPage implements OnInit {
             let ad_id;
             let adAdmin;
             let adMobile;
+            let timestamp;
             for (let key in res[i]) {
               if (key === 'addHeadings') {
                 adTitle = res[i][key].add_title;
@@ -107,6 +123,7 @@ export class MyaccountPage implements OnInit {
 
               if (key === 'addPersonalInfo') {
                 adMobile = res[i][key].phonecode + res[i][key].mobile;
+                timestamp = res[i][key].created_at;
               }
 
               if (key === 'addData') {
@@ -145,6 +162,7 @@ export class MyaccountPage implements OnInit {
               imagesArray: imagesArray,
               ad_id: ad_id,
               adMobile: adMobile,
+              timestamp: this.timestamp(timestamp),
             };
 
             if (this.sessionUser == data.adAdmin) {

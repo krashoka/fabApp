@@ -208,7 +208,7 @@
 
       <div class="commentCard" *ngIf="commentCardDisplay">
         <!-- Comment display of certain user for certain ad -->
-        <div class="commentFlowChat chatCardDisplay">
+        <div class="commentFlowChat chatCardDisplay" #content>
           <div *ngFor="let comment of comments">
             <div class="userComment" *ngIf="comment.commenter=='owner'">
               <div>
@@ -218,7 +218,7 @@
 
                 <div>
                   <ion-text>owner</ion-text>
-                  <p>{{comment.comment_msg}}</p>
+                  <p>{{comment.comment}}</p>
                 </div>
               </div>
             </div>
@@ -230,7 +230,7 @@
                 </div>
                 <div>
                   <ion-text>You</ion-text>
-                  <p>{{comment.comment_msg}}</p>
+                  <p>{{comment.comment}}</p>
                 </div>
               </div>
             </div>
