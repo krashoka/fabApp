@@ -56,7 +56,7 @@ $extra-large-screen: 1200px;
     // border-radius: 10px 10px 0 0;
     padding: 15px 0 16px;
     position: relative;
-    height: 8vh;
+    height: 10vh;
   }
 
   .chatAdmin h1 {
@@ -82,9 +82,14 @@ $extra-large-screen: 1200px;
   }
 
   .commentFlow {
-    height: 82vh;
+    height: 80vh;
     overflow: scroll;
     border: 1px solid #fff;
+    margin-bottom: 70px;
+  }
+
+  .commentFlow::-webkit-scrollbar {
+    display: none;
   }
 
   .commentFlow p {
@@ -157,11 +162,12 @@ $extra-large-screen: 1200px;
   .sendMessage {
     padding: 15px 5%;
     display: flex;
-    position: absolute;
+    position: fixed;
     width: 100%;
     bottom: 0;
+    margin-top: -30px;
     gap: 10px;
-    height: 10vh;
+    // height: 60px;
     border-radius: 0 0 5px 5px;
     background-color: #e2e2e2;
   }

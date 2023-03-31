@@ -155,7 +155,6 @@ export class ProductDetailsPage implements OnInit {
   addComment() {
     if (this.sessionVal) {
       let commentData = {
-        oid: this.adAdmin,
         aid: this.adId,
         uid: this.userid,
         comment: this.commentValue,

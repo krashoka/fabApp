@@ -40,6 +40,24 @@ export class FloatingChatPage implements OnInit {
         }
       });
     });
+
+    // ********** Chat Messages ***************
+    //   const windowHeight = window.innerHeight;
+    // const chatAdmin = document.querySelector('.chatAdmin');
+    // const chatMessages = document.querySelector('.chatMessages');
+    // const sendMessage = document.querySelector('.sendMessage');
+
+    // chatAdmin.style.height = `${windowHeight * 0.1}px`;
+    // chatMessages.style.height = `${windowHeight * 0.8}px`;
+    // sendMessage.style.height = `${windowHeight * 0.1}px`;
+
+    // window.addEventListener('resize', () => {
+    //   const windowHeight = window.innerHeight;
+
+    //   chatAdmin.style.height = `${windowHeight * 0.1}px`;
+    //   chatMessages.style.height = `${windowHeight * 0.8}px`;
+    //   sendMessage.style.height = `${windowHeight * 0.1}px`;
+    // });
   }
 
   @ViewChild('content', { static: false }) content: any = ElementRef;
