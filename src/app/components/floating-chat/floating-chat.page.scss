@@ -56,6 +56,7 @@ $extra-large-screen: 1200px;
     // border-radius: 10px 10px 0 0;
     padding: 15px 0 16px;
     position: relative;
+    height: 8vh;
   }
 
   .chatAdmin h1 {
@@ -81,7 +82,7 @@ $extra-large-screen: 1200px;
   }
 
   .commentFlow {
-    height: 83vh;
+    height: 82vh;
     overflow: scroll;
     border: 1px solid #fff;
   }
@@ -160,6 +161,7 @@ $extra-large-screen: 1200px;
     width: 100%;
     bottom: 0;
     gap: 10px;
+    height: 10vh;
     border-radius: 0 0 5px 5px;
     background-color: #e2e2e2;
   }
@@ -243,6 +245,7 @@ $extra-large-screen: 1200px;
     // border-radius: 10px 10px 0 0;
     padding: 15px 0 16px;
     position: relative;
+    height: 8vh;
   }
 
   .chatAdmin h1 {
@@ -261,15 +264,17 @@ $extra-large-screen: 1200px;
   }
 
   .chatMessages {
-    // border: 1px solid green;
     width: 90%;
     margin: auto;
-    height: 66vh;
   }
 
   .commentFlow {
-    height: 80vh;
+    height: 82vh;
     overflow: scroll;
+  }
+
+  .commentFlow::-webkit-scrollbar {
+    display: none;
   }
 
   .commentFlow p {
@@ -342,6 +347,7 @@ $extra-large-screen: 1200px;
   .sendMessage {
     padding: 15px 5%;
     display: flex;
+    height: 10vh;
     position: absolute;
     width: 100%;
     bottom: 0;
