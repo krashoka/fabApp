@@ -29,7 +29,8 @@ export class LoginPage implements OnInit {
     public _apiService: ApiService,
     private toastCtrl: ToastController,
     private storage: Storage,
-    private http: HttpClient
+    private http: HttpClient,
+    private navController: NavController
   ) {
     this.storage.create();
   }
@@ -99,11 +100,6 @@ export class LoginPage implements OnInit {
           this.selectedCountry = '+973';
           this.user_mob = '';
           this.user_pwd = '';
-          // this.successToast("Logged in Successfully.");
-
-          // this.storage.get('admin').then((value) => {
-          //   console.log('Session value is', value);
-          // });
           this.router.navigateByUrl('home');
         } else if (res == 'wrongpwd') {
           this.errorToast('Wrong Password !');

@@ -20,7 +20,7 @@
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
     "@awesome-cordova-plugins/ionic-webview": "^6.3.0",
-    "@capacitor/android": "^4.7.0",
+    "@capacitor/android": "^4.7.3",
     "@capacitor/app": "4.1.1",
     "@capacitor/camera": "^4.1.4",
     "@capacitor/core": "4.6.3",

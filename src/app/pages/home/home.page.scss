@@ -662,6 +662,14 @@ $extra-large-screen: 1200px;
     cursor: pointer;
   }
 
+  .heartNone {
+    display: none;
+  }
+
+  .heartRedNone {
+    display: none;
+  }
+
   .adsTitle {
     text-align: left;
     font-size: 18px;

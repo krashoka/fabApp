@@ -1,20 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { ApiService } from 'src/app/api.service';
 import { Select2Option } from 'ng-select2-component';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   // showCommercial= false;
   // showHomeContent = true;
-
+  pageLoaded = false;
   imageUrl: any;
   sessionUser: any;
   commercialImageUrl: string[] = [];
@@ -23,6 +24,9 @@ export class HomePage {
 
   searchCategories: any = [];
   overlay = false;
+
+  heart = true;
+  heartRed = false;
 
   favData: any = [];
 
@@ -35,7 +39,8 @@ export class HomePage {
     public http: HttpClient,
     private toastCtrl: ToastController,
     private storage: Storage,
-    private _apiService: ApiService
+    private _apiService: ApiService,
+    private navController: NavController
   ) {
     this.storage.create();
 
@@ -163,11 +168,6 @@ export class HomePage {
       });
   }
 
-  isFavorite(ad_id: number): boolean {
-    // console.log('this.favData:', this.favData);
-    return false;
-  }
-
   addToFavorites(adid) {
     let data = {
       uid: this.sessionUser,
@@ -178,6 +178,8 @@ export class HomePage {
       (res: any) => {
         if (res == 'success') {
           this.successToast('Added to your Favorites.');
+          this.heart = false;
+          this.heartRed = true;
         } else if (res == 'fail') {
           this.errorToast('Failed adding to your Favorites!');
         } else if (res == 'noadd') {
@@ -203,6 +205,8 @@ export class HomePage {
       (res: any) => {
         if (res == 'success') {
           this.successToast('Removed from your Favorites.');
+          this.heart = true;
+          this.heartRed = false;
         } else {
           this.errorToast('Error removing from Favorites!');
         }

@@ -127,7 +127,7 @@ export class ProductDetailsPage implements OnInit {
             if (session.userid == val.adINFO.adAdmin) {
               this.canComment = false;
               this.allComments = false;
-            }else{
+            } else {
               this.commentDisabled = false;
               this.canComment = true;
               this.allComments = false;
@@ -150,11 +150,30 @@ export class ProductDetailsPage implements OnInit {
     let data = {
       aid: this.adId,
       uid: key,
-      oid: this.adminSessionId,
     };
 
     this._apiService.showUserChat(data).subscribe((res: any) => {
       console.log('Fetched chats:', res);
+      this.comments = [];
+      for (let i = 0; i < res.length; i++) {
+        let obj = {};
+        if (res[i].commenter == 'user') {
+          obj['commenter'] = 'owner';
+          obj['username'] = res[i].username;
+          obj['comment'] = res[i].comment;
+          this.comments.push(obj);
+        } else {
+          {
+            obj['commenter'] = 'user';
+            obj['username'] = res[i].username;
+            obj['comment'] = res[i].comment;
+            this.comments.push(obj);
+          }
+        }
+      }
+      console.log('New Comments:', this.comments);
+      this.chatCardDisplay = false;
+      this.commentCardDisplay = true;
     });
   }
 

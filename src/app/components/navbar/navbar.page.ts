@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './navbar.page.html',
   styleUrls: ['./navbar.page.scss'],
 })
-export class NavbarPage implements OnInit {
+export class NavbarPage implements OnInit, OnChanges {
   showAccount = false;
   showLogin = true;
   username: any;
@@ -20,16 +20,10 @@ export class NavbarPage implements OnInit {
     private router: Router,
     public _apiService: ApiService,
     private toastCtrl: ToastController,
-    private storage: Storage
+    private storage: Storage,
+    private navController: NavController
   ) {
     this.storage.create();
-
-    this.storage.get('admin').then((val) => {
-      console.log('SessionVal:', val);
-      if (val != null) {
-        this.username = val.username;
-      }
-    });
   }
 
   onDropdownSelect = false;
@@ -76,14 +70,25 @@ export class NavbarPage implements OnInit {
   }
 
   async ngOnInit() {
+    this.storage.get('admin').then((val) => {
+      console.log('SessionVal:', val);
+      if (val != null) {
+        this.username = val.username;
+      }
+    });
+
     const value = await this.storage.get('admin');
     if (value != null) {
       console.log('Session value is', value.userid);
-      setTimeout(() => {
-        this.showAccount = true;
-        this.showLogin = false;
-      }, 100);
+      // setTimeout(() => {
+      this.showAccount = true;
+      this.showLogin = false;
+      // }, 100);
     }
+  }
+
+  ngOnChanges() {
+    console.log('adlsldk');
   }
 
   isElementActive(routePath: string): boolean {

@@ -212,19 +212,19 @@
                 class="heart"
                 name="heart-outline"
                 (click)="addToFavorites(ad.ad_id)"
-                *ngIf="!isFavorite(ad.ad_id)"
               ></ion-icon>
               <ion-icon
                 class="heartRed"
                 name="heart"
                 (click)="removeFromFavorites(ad.ad_id)"
-                *ngIf="isFavorite(ad.ad_id)"
               ></ion-icon>
             </div>
-            <p class="adsTitle">{{ad.adTitle}}</p>
-            <div class="adsPrice">
-              <ion-label>{{ad.itemObj.Price}}</ion-label>
-              <ion-label class="currency">AED</ion-label>
+            <div (click)="goToProductDetails(ad)" style="cursor: pointer">
+              <p class="adsTitle">{{ad.adTitle}}</p>
+              <div class="adsPrice">
+                <ion-label>{{ad.itemObj.Price}}</ion-label>
+                <ion-label class="currency">AED</ion-label>
+              </div>
             </div>
           </div>
           <div class="contactSticky">

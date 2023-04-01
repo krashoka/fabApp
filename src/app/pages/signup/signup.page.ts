@@ -62,15 +62,21 @@ export class SignupPage implements OnInit {
         } else if (res.registered) {
           this.inCompleteToast('Already registered! Please Login');
           this.router.navigate(['/login']);
-        } else if (res != 'wrongref') {
+        } else if (res == 'wrongref') {
+          this.errorToast('Enter valid Referral code!');
+          this.referalCode = '';
+        } else if (res[4] == 1) {
           this.user_mob = res[1];
           this.isInputDisabled = true;
           this.successToast('Referral Code verified successfully.');
           this.showSendVerify = false;
           this.isVerify = true;
-        } else {
-          this.errorToast('Enter valid Referral code!');
-          this.referalCode = '';
+        } else if (res[4] == 2) {
+          this.user_mob = res[1];
+          this.isInputDisabled = true;
+          this.successToast('Referral Code blank.');
+          this.showSendVerify = false;
+          this.isVerify = true;
         }
       },
       (er: any) => {
