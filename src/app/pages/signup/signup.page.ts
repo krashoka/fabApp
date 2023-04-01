@@ -74,7 +74,6 @@ export class SignupPage implements OnInit {
         } else if (res[4] == 2) {
           this.user_mob = res[1];
           this.isInputDisabled = true;
-          this.successToast('Referral Code blank.');
           this.showSendVerify = false;
           this.isVerify = true;
         }
