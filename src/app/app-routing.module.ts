@@ -172,6 +172,14 @@ const routes: Routes = [
     canLoad: [HomeGuard],
   },
   {
+    path: 'complete-profile/:slug',
+    loadChildren: () =>
+      import('./pages/complete-profile/complete-profile.module').then(
+        (m) => m.CompleteProfilePageModule
+      ),
+    canLoad: [HomeGuard],
+  },
+  {
     path: 'floating-chat',
     loadChildren: () =>
       import('./components/floating-chat/floating-chat.module').then(

@@ -16,6 +16,7 @@ export class SignupPage implements OnInit {
   selectedCountry: any;
   overlay = false;
 
+  userId: any;
   vcode: any;
   referalCode: any;
 
@@ -50,6 +51,7 @@ export class SignupPage implements OnInit {
 
     this._apiService.sendVerify(data).subscribe(
       (res: any) => {
+        this.userId = res[3].user_id;
         console.log('SuccessMessage: ', res);
         if (res.exists) {
           this.inCompleteToast('Already registered! Complete your Profile');
@@ -98,7 +100,7 @@ export class SignupPage implements OnInit {
 
     this._apiService.verifyCode(data).subscribe(
       (res: any) => {
-        console.log(res);
+        console.log('UserIddd:', res);
         // this.user_mob= res;
         // this.isInputDisabled = true;
         if (res == 'success') {
@@ -109,7 +111,7 @@ export class SignupPage implements OnInit {
           this.showSendVerify = true;
           this.isVerify = false;
           this.isInputDisabled = false;
-          this.router.navigate(['complete-profile']);
+          this.router.navigateByUrl(`complete-profile/${this.userId}`);
         } else this.errorToast(res);
       },
       (er: any) => {

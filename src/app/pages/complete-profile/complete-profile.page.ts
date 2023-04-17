@@ -52,10 +52,8 @@ export class CompleteProfilePage implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
-      console.log('queryParam:', params);
-      this.userId = params['uid'];
-    });
+    const slug = this.route.snapshot.paramMap.get('slug');
+    this.userId = slug;
   }
 
   saveProfile() {
@@ -65,6 +63,7 @@ export class CompleteProfilePage implements OnInit {
       confirmpwd: this.confirmPassword,
       uid: this.userId,
     };
+    console.log('fsdfsf:', data);
     this._apiService.completeProfile(data).subscribe(
       (res: any) => {
         console.log('complete Profile response:', res);
