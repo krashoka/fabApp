@@ -100,7 +100,7 @@ export class LoginPage implements OnInit {
           this.selectedCountry = '+973';
           this.user_mob = '';
           this.user_pwd = '';
-          this.router.navigateByUrl('home');
+          this.router.navigateByUrl(`home/${res[3].userid}`);
         } else if (res == 'wrongpwd') {
           this.errorToast('Wrong Password !');
         } else {

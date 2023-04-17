@@ -124,8 +124,8 @@
       </div>
     </ion-card>
 
-    <ion-slides [options]="option2" class="commercialSlide">
-      <ion-slide *ngFor="let ad of adDetails">
+    <div class="commercialSlide">
+      <div *ngFor="let ad of adDetails">
         <ion-card>
           <img
             style="cursor: pointer"
@@ -173,8 +173,8 @@
             </div>
           </div>
         </ion-card>
-      </ion-slide>
-    </ion-slides>
+      </div>
+    </div>
   </div>
 
   <!-- ---------- STICKY ADS for Desktop -------------- -->
@@ -193,8 +193,8 @@
       </div>
     </ion-card>
 
-    <ion-slides [options]="option2" class="stickySlide">
-      <ion-slide *ngFor="let ad of adDetails">
+    <div class="stickySlide">
+      <div *ngFor="let ad of adDetails; let i = index">
         <ion-card>
           <img
             (click)="goToProductDetails(ad)"
@@ -209,14 +209,18 @@
               </div>
 
               <ion-icon
-                class="heart"
+                class="heartSize"
+                [ngClass]="{'heartStyle': !ad.heartRedVisible}"
                 name="heart-outline"
-                (click)="addToFavorites(ad.ad_id)"
+                *ngIf="!ad.heartRedVisible"
+                (click)="addToFavorites(ad.ad_id, i)"
               ></ion-icon>
               <ion-icon
-                class="heartRed"
+                class="heartSize"
+                [ngClass]="{'heartRedStyle': !ad.heartVisible}"
                 name="heart"
-                (click)="removeFromFavorites(ad.ad_id)"
+                *ngIf="!ad.heartVisible"
+                (click)="removeFromFavorites(ad.ad_id, i)"
               ></ion-icon>
             </div>
             <div (click)="goToProductDetails(ad)" style="cursor: pointer">
@@ -250,8 +254,8 @@
             </div>
           </div>
         </ion-card>
-      </ion-slide>
-    </ion-slides>
+      </div>
+    </div>
   </div>
 
   <!-- --------- Sticky Ads for Mobile --------- -->
@@ -272,7 +276,7 @@
       style="margin-bottom: 60px"
       id="stickySlider"
     >
-      <ion-slide *ngFor="let ad of adDetails">
+      <ion-slide *ngFor="let ad of adDetails; let i = index">
         <div class="adsCrousel">
           <div class="adsBorder">
             <img
@@ -281,8 +285,21 @@
               [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
             />
             <div class="dayAndHeart">
-              <ion-label>2 days ago</ion-label>
-              <ion-icon name="heart-outline"></ion-icon>
+              <ion-label>{{ad.timestamp}}</ion-label>
+              <ion-icon
+                class="heartSize"
+                [ngClass]="{'heartStyle': !ad.heartRedVisible}"
+                name="heart-outline"
+                *ngIf="!ad.heartRedVisible"
+                (click)="addToFavorites(ad.ad_id, i)"
+              ></ion-icon>
+              <ion-icon
+                class="heartSize"
+                [ngClass]="{'heartRedStyle': !ad.heartVisible}"
+                name="heart"
+                *ngIf="!ad.heartVisible"
+                (click)="removeFromFavorites(ad.ad_id, i)"
+              ></ion-icon>
             </div>
             <p class="adsTitle">{{ad.adTitle}}</p>
             <div class="adsPrice">

@@ -10,6 +10,11 @@ const routes: Routes = [
       import('./pages/home/home.module').then((m) => m.HomePageModule),
   },
   {
+    path: 'home/:id',
+    loadChildren: () =>
+      import('./pages/home/home.module').then((m) => m.HomePageModule),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',

@@ -18,7 +18,7 @@ export class HomeGuard implements CanLoad {
       if (isAuthenticated == null) {
         resolve(true);
       } else {
-        this.router.navigate(['home']);
+        this.router.navigate(['/']);
         resolve(false);
       }
     });

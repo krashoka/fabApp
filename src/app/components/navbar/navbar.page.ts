@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './navbar.page.html',
   styleUrls: ['./navbar.page.scss'],
 })
-export class NavbarPage implements OnInit, OnChanges {
+export class NavbarPage implements OnInit {
   showAccount = false;
   showLogin = true;
   username: any;
@@ -85,10 +85,6 @@ export class NavbarPage implements OnInit, OnChanges {
       this.showLogin = false;
       // }, 100);
     }
-  }
-
-  ngOnChanges() {
-    console.log('adlsldk');
   }
 
   isElementActive(routePath: string): boolean {

@@ -25,9 +25,6 @@ export class HomePage implements OnInit {
   searchCategories: any = [];
   overlay = false;
 
-  heart = true;
-  heartRed = false;
-
   favData: any = [];
 
   adDetails: any = [];
@@ -110,7 +107,7 @@ export class HomePage implements OnInit {
   option2 = {
     slidesPerView: 4,
     // centeredSlides: true,
-    loop: true,
+    // loop: true,
     spaceBetween: 40,
     autoplay: true,
   };
@@ -118,7 +115,7 @@ export class HomePage implements OnInit {
   option3 = {
     slidesPerView: 2,
     // centeredSlides: true,
-    loop: true,
+    // loop: true,
     spaceBetween: 2,
     autoplay: true,
   };
@@ -168,7 +165,7 @@ export class HomePage implements OnInit {
       });
   }
 
-  addToFavorites(adid) {
+  addToFavorites(adid, i) {
     let data = {
       uid: this.sessionUser,
       aid: adid,
@@ -178,8 +175,8 @@ export class HomePage implements OnInit {
       (res: any) => {
         if (res == 'success') {
           this.successToast('Added to your Favorites.');
-          this.heart = false;
-          this.heartRed = true;
+          this.adDetails[i].heartVisible = false;
+          this.adDetails[i].heartRedVisible = true;
         } else if (res == 'fail') {
           this.errorToast('Failed adding to your Favorites!');
         } else if (res == 'noadd') {
@@ -195,7 +192,7 @@ export class HomePage implements OnInit {
     );
   }
 
-  removeFromFavorites(adid) {
+  removeFromFavorites(adid, i) {
     let data = {
       uid: this.sessionUser,
       aid: adid,
@@ -205,8 +202,8 @@ export class HomePage implements OnInit {
       (res: any) => {
         if (res == 'success') {
           this.successToast('Removed from your Favorites.');
-          this.heart = true;
-          this.heartRed = false;
+          this.adDetails[i].heartVisible = true;
+          this.adDetails[i].heartRedVisible = false;
         } else {
           this.errorToast('Error removing from Favorites!');
         }
@@ -324,6 +321,8 @@ export class HomePage implements OnInit {
             ad_id: ad_id,
             adMobile: adMobile,
             timestamp: this.timestamp(timestamp),
+            heartVisible: true,
+            heartRedVisible: false,
           };
 
           if (this.sessionUser != data.adAdmin) {
