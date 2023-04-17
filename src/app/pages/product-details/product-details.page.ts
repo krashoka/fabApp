@@ -36,6 +36,10 @@ export class ProductDetailsPage implements OnInit {
   canComment = true;
   allComments = false;
 
+  counter = 0;
+  timeOnPage = 0;
+  progressBarWidth = '0%';
+
   constructor(
     private router: Router,
     private navCtrl: NavController,
@@ -81,7 +85,25 @@ export class ProductDetailsPage implements OnInit {
     // autoplay:true,
   };
 
+  increaseCounter() {
+    this.counter++;
+    this.progressBarWidth = this.counter + '%'; // increase the width of the progress bar by 10% with each iteration
+    if (this.counter < 100) {
+      setTimeout(() => {
+        this.timeOnPage += 600;
+        this.increaseCounter();
+      }, 600);
+    }
+  }
+
   ngOnInit() {
+    // TESTING CODE FOR PROGRESS BAR
+    // setTimeout(() => {
+    // this.timeOnPage += 5000;
+    this.increaseCounter();
+    // }, 5000);
+    // ///////////////////////////
+
     this.storage.get('adId').then((val) => {
       console.log('aDiD:', val);
       this.adAdmin = val.adINFO.adAdmin;
