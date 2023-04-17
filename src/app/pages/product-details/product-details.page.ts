@@ -90,9 +90,9 @@ export class ProductDetailsPage implements OnInit {
     this.progressBarWidth = this.counter + '%'; // increase the width of the progress bar by 10% with each iteration
     if (this.counter < 100) {
       setTimeout(() => {
-        this.timeOnPage += 600;
+        this.timeOnPage += 620;
         this.increaseCounter();
-      }, 600);
+      }, 620);
     }
   }
 
