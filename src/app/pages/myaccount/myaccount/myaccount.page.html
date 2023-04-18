@@ -33,7 +33,11 @@
         </div>
         <p class="referralCode">
           My Referral Code - <span> ABcDe</span>
-          <ion-icon name="share-social"></ion-icon>
+          <ion-icon
+            name="share-social"
+            (click)="share()"
+            style="cursor: pointer"
+          ></ion-icon>
         </p>
       </ion-card-subtitle>
     </ion-card-header>

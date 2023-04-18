@@ -1,16 +1,17 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/app/api.service';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.page.html',
   styleUrls: ['./product-details.page.scss'],
 })
-export class ProductDetailsPage implements OnInit {
+export class ProductDetailsPage {
   adTitle: any;
   adDetail: any;
   adAdmin: any;
@@ -28,22 +29,36 @@ export class ProductDetailsPage implements OnInit {
 
   chatUserList: any = {};
 
+  sessionUser: any;
+
   chatCardDisplay: any;
   commentCardDisplay: any;
+
+  heart = true;
+  heartRed = false;
+  checkFav = 'Add to ';
+  flag = false;
 
   waLink = 'https://wa.me/';
 
   canComment = true;
   allComments = false;
 
+  // Progress bar variables
   counter = 0;
   timeOnPage = 0;
   progressBarWidth = '0%';
+  // ///////////////////
+
+  // Offer making variables
+  makeOffer: any;
+  // ///////////////////////
 
   constructor(
     private router: Router,
     private navCtrl: NavController,
     private storage: Storage,
+    private toastCtrl: ToastController,
     private http: HttpClient,
     private _apiService: ApiService
   ) {
@@ -68,6 +83,97 @@ export class ProductDetailsPage implements OnInit {
 
   goToAddNewAd() {
     this.router.navigate(['add-new-advertisement']);
+  }
+
+  async share() {
+    const shareRet = await Share.share({
+      title: 'Check out this cool app!',
+      text: 'If you like this post please share.',
+      url: `https://fabapp-47874.web.app/fabApp/product-details/${this.adId}`,
+      dialogTitle: 'Share with friends', // optional
+    });
+    console.log('Share result:', shareRet);
+  }
+
+  favoritesToggle() {
+    if (this.flag) {
+      this.removeFromFavorites();
+      this.flag = false;
+    } else {
+      this.addToFavorites();
+      this.flag = true;
+    }
+  }
+
+  addToFavorites() {
+    let data = {
+      uid: this.sessionUser,
+      aid: this.adId,
+    };
+
+    this._apiService.addToFavorites(data).subscribe(
+      (res: any) => {
+        if (res == 'success') {
+          this.successToast('Added to your Favorites.');
+          this.heart = false;
+          this.heartRed = true;
+          this.checkFav = 'Remove from ';
+        } else if (res == 'fail') {
+          this.errorToast('Failed adding to your Favorites!');
+        } else if (res == 'noadd') {
+          this.errorToast('Error finding ad!');
+        } else {
+          this.errorToast('Please login first!');
+          this.router.navigate(['login']);
+        }
+      },
+      (err) => {
+        console.log('Error response:', err);
+      }
+    );
+  }
+
+  removeFromFavorites() {
+    let data = {
+      uid: this.sessionUser,
+      aid: this.adId,
+    };
+
+    this._apiService.removeFromFavorites(data).subscribe(
+      (res: any) => {
+        if (res == 'success') {
+          this.successToast('Removed from your Favorites.');
+          this.heart = true;
+          this.heartRed = false;
+          this.checkFav = 'Add to ';
+        } else {
+          this.errorToast('Error removing from Favorites!');
+        }
+      },
+      (err) => {
+        console.log('Error response:', err);
+      }
+    );
+  }
+
+  async errorToast(a) {
+    const toast = await this.toastCtrl.create({
+      message: a,
+      duration: 1500,
+      position: 'top',
+      cssClass: 'errorToast',
+    });
+    toast.present();
+  }
+
+  async successToast(a) {
+    const toast = await this.toastCtrl.create({
+      message: a,
+      duration: 1500,
+      position: 'top',
+      cssClass: 'successToast',
+    });
+    toast.present();
   }
 
   option = {
@@ -96,7 +202,7 @@ export class ProductDetailsPage implements OnInit {
     }
   }
 
-  ngOnInit() {
+  async ionViewWillEnter() {
     // TESTING CODE FOR PROGRESS BAR
     // setTimeout(() => {
     // this.timeOnPage += 5000;
@@ -104,7 +210,11 @@ export class ProductDetailsPage implements OnInit {
     // }, 5000);
     // ///////////////////////////
 
-    this.storage.get('adId').then((val) => {
+    await this.storage.get('admin').then((val) => {
+      this.sessionUser = val.userid;
+    });
+
+    await this.storage.get('adId').then((val) => {
       console.log('aDiD:', val);
       this.adAdmin = val.adINFO.adAdmin;
       this.adId = val.adINFO.ad_id;
@@ -127,6 +237,7 @@ export class ProductDetailsPage implements OnInit {
             if (session.userid == val.adINFO.adAdmin) {
               this.chatCardDisplay = true;
               this.commentCardDisplay = false;
+              this.makeOffer = false;
 
               // Filtering number of users commented on a particular ad.
               for (let i = 0; i < val.comment.length; i++) {
@@ -143,6 +254,7 @@ export class ProductDetailsPage implements OnInit {
               this.chatCardDisplay = false;
               this.commentCardDisplay = true;
               this.comments = val.comment;
+              this.makeOffer = true;
               console.log('All comments:', this.comments);
             }
           } else {

@@ -77,9 +77,9 @@
             <ion-label class="price">{{price}}</ion-label>
             <ion-label class="currency">AED</ion-label>
           </div>
-          <div class="makeOffer">
+          <ion-card class="makeOffer" *ngIf="makeOffer">
             <ion-text>Make an Offer</ion-text>
-          </div>
+          </ion-card>
         </div>
 
         <div class="displayContact">
@@ -125,11 +125,23 @@
     </div>
 
     <div class="shareFav">
-      <div>
-        <ion-icon class="header_icon" name="heart-outline"></ion-icon>
-        <ion-text>Add to Favorites</ion-text>
+      <div (click)="favoritesToggle()">
+        <!-- <ion-icon class="header_icon" name="heart-outline"></ion-icon> -->
+        <ion-icon
+          class="header_icon"
+          [ngClass]="{'heartStyle': heart}"
+          name="heart-outline"
+          *ngIf="heart"
+        ></ion-icon>
+        <ion-icon
+          class="header_icon"
+          [ngClass]="{'heartRedStyle': heartRed}"
+          name="heart"
+          *ngIf="heartRed"
+        ></ion-icon>
+        <ion-text>{{checkFav}}Favorites</ion-text>
       </div>
-      <div>
+      <div (click)="share()">
         <ion-icon class="share" name="share-social"></ion-icon>
         <ion-text>Share this Post</ion-text>
       </div>

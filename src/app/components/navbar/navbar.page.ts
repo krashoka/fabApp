@@ -114,9 +114,11 @@ export class NavbarPage implements OnInit {
 
   goToAccount() {
     this.router.navigateByUrl(`/myaccount`);
+    this.onDropdownSelect = !this.onDropdownSelect;
   }
 
   goToMyAccount(segment) {
     this.router.navigateByUrl(`/myaccount/${segment}`);
+    this.onDropdownSelect = !this.onDropdownSelect;
   }
 }

@@ -65,13 +65,13 @@
   </div>
 
   <div class="productDisplay">
-    <div
-      class="adsBorder"
-      (click)="goToProductDetails(ad)"
-      *ngFor="let ad of adDetails"
-    >
+    <div class="adsBorder" *ngFor="let ad of adDetails; let i=index">
       <div class="prodImgAndDetails">
-        <div class="prodImage">
+        <div
+          class="prodImage"
+          (click)="goToProductDetails(ad)"
+          style="cursor: pointer"
+        >
           <img
             class="imgHeight"
             [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
@@ -80,13 +80,28 @@
 
         <div class="productDetails">
           <div class="dayAndHeart">
-            <ion-label>2 days ago</ion-label>
-            <ion-icon name="heart-outline"></ion-icon>
+            <ion-label>{{ad.timestamp}}</ion-label>
+            <ion-icon
+              class="heartSize"
+              [ngClass]="{'heartStyle': !ad.heartRedVisible}"
+              name="heart-outline"
+              *ngIf="!ad.heartRedVisible"
+              (click)="addToFavorites(ad.ad_id, i)"
+            ></ion-icon>
+            <ion-icon
+              class="heartSize"
+              [ngClass]="{'heartRedStyle': !ad.heartVisible}"
+              name="heart"
+              *ngIf="!ad.heartVisible"
+              (click)="removeFromFavorites(ad.ad_id, i)"
+            ></ion-icon>
           </div>
-          <p class="adsTitle">{{ad.adTitle}}</p>
-          <div class="adsPrice">
-            <ion-label>{{ad.itemObj.Price}}</ion-label>
-            <ion-label class="currency">AED</ion-label>
+          <div (click)="goToProductDetails(ad)" style="cursor: pointer">
+            <p class="adsTitle">{{ad.adTitle}}</p>
+            <div class="adsPrice">
+              <ion-label>{{ad.itemObj.Price}}</ion-label>
+              <ion-label class="currency">AED</ion-label>
+            </div>
           </div>
         </div>
       </div>

@@ -161,7 +161,7 @@ export class HomePage implements OnInit {
           comment: res,
         };
         this.storage.set('adId', data);
-        this.router.navigate(['product-details']);
+        this.router.navigateByUrl(`product-details/${ad.ad_id}`);
       });
   }
 
@@ -234,16 +234,17 @@ export class HomePage implements OnInit {
     toast.present();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     window.addEventListener('resize', this.onResize.bind(this));
 
-    this.storage.get('admin').then((val) => {
+    await this.storage.get('admin').then((val) => {
       this.sessionUser = val.userid;
 
       let favData = {
         uid: val.userid,
       };
 
+      console.log('favDataassss:', favData);
       this._apiService.fetchLoggedAds(favData).subscribe((res: any) => {
         console.log('Logged Ads response:', res);
       });

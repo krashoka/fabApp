@@ -38,6 +38,16 @@ $extra-large-screen: 1200px;
     color: #212529;
   }
 
+  .heartStyle {
+    font-weight: bolder;
+    cursor: pointer;
+  }
+
+  .heartRedStyle {
+    color: #e30b1c;
+    cursor: pointer;
+  }
+
   .navigationProd {
     font-size: 11px;
     padding: 0px 10px;
@@ -880,11 +890,22 @@ $extra-large-screen: 1200px;
     width: 50%;
     gap: 5px;
     color: #212529;
+    cursor: pointer;
   }
 
   .header_icon {
     font-size: 24px !important;
     color: #212529;
+  }
+
+  .heartStyle {
+    font-weight: bolder;
+    cursor: pointer;
+  }
+
+  .heartRedStyle {
+    color: #e30b1c;
+    cursor: pointer;
   }
 
   .share {

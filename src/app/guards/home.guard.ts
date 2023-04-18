@@ -10,17 +10,29 @@ export class HomeGuard implements CanLoad {
     this.storage.create();
   }
 
-  canLoad() {
-    return new Promise<boolean>(async (resolve, reject) => {
-      let isAuthenticated = await this.storage.get('admin');
-      console.log('Authenticate:', isAuthenticated);
+  // canLoad() {
+  //   return new Promise<boolean>(async (resolve, reject) => {
+  //     let isAuthenticated = await this.storage.get('admin');
+  //     console.log('Authenticate:', isAuthenticated);
 
-      if (isAuthenticated == null) {
-        resolve(true);
-      } else {
-        this.router.navigate(['/']);
-        resolve(false);
-      }
-    });
+  //     if (isAuthenticated == null) {
+  //       resolve(true);
+  //     } else {
+  //       this.router.navigate(['/']);
+  //       resolve(false);
+  //     }
+  //   });
+  // }
+
+  async canLoad() {
+    const isAuthenticated = await this.storage.get('admin');
+    console.log('Authenticate:', isAuthenticated);
+
+    if (isAuthenticated) {
+      this.router.navigateByUrl('/home');
+      return false;
+    } else {
+      return true;
+    }
   }
 }

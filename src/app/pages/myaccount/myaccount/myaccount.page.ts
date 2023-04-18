@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage-angular';
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { ApiService } from 'src/app/api.service';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-myaccount',
@@ -67,6 +68,8 @@ export class MyaccountPage implements OnInit {
   }
 
   goToProductDetails(ad) {
+    console.log('sdhdo:');
+    console.log('show dksl:', ad);
     let value = { aid: ad.ad_id, uid: this.sessionUser };
     this.http
       .post('https://specbits.com/class2/fab/fetch-comment', value)
@@ -77,8 +80,18 @@ export class MyaccountPage implements OnInit {
           comment: res,
         };
         this.storage.set('adId', data);
-        this.router.navigate(['product-details']);
+        this.router.navigateByUrl(`product-details/${ad.ad_id}`);
       });
+  }
+
+  async share() {
+    const shareRet = await Share.share({
+      title: 'Check out this cool app!',
+      text: 'Join with my Referral Code "ABcDe" to get exciting offer.',
+      url: 'https://fabapp-47874.web.app/fabApp/signup',
+      dialogTitle: 'Share with friends', // optional
+    });
+    console.log('Share result:', shareRet);
   }
 
   ngOnInit() {
