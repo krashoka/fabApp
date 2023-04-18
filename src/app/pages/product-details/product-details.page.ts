@@ -210,7 +210,7 @@ export class ProductDetailsPage {
     // }, 5000);
     // ///////////////////////////
 
-    await this.storage.get('admin').then((val) => {
+    this.storage.get('admin').then((val) => {
       this.sessionUser = val.userid;
     });
 

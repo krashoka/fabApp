@@ -234,10 +234,10 @@ export class HomePage implements OnInit {
     toast.present();
   }
 
-  async ngOnInit() {
+  ngOnInit() {
     window.addEventListener('resize', this.onResize.bind(this));
 
-    await this.storage.get('admin').then((val) => {
+    this.storage.get('admin').then((val) => {
       this.sessionUser = val.userid;
 
       let favData = {
