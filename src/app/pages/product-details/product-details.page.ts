@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/app/api.service';
+import { ActivatedRoute } from '@angular/router';
 import { Share } from '@capacitor/share';
 
 @Component({
@@ -60,6 +61,7 @@ export class ProductDetailsPage {
     private storage: Storage,
     private toastCtrl: ToastController,
     private http: HttpClient,
+    private route: ActivatedRoute,
     private _apiService: ApiService
   ) {
     this.storage.create();
@@ -210,72 +212,151 @@ export class ProductDetailsPage {
     // }, 5000);
     // ///////////////////////////
 
+    const slug = this.route.snapshot.paramMap.get('id');
+
     this.storage.get('admin').then((val) => {
       this.sessionUser = val.userid;
+    }, err => {
+      console.log(err);
     });
 
-    await this.storage.get('adId').then((val) => {
-      console.log('aDiD:', val);
-      this.adAdmin = val.adINFO.adAdmin;
-      this.adId = val.adINFO.ad_id;
-      this.adTitle = val.adINFO.adTitle;
-      this.price = val.adINFO.itemObj.Price;
-      this.prodDetails = val.adINFO.itemObj;
-      this.adDetail = val.adINFO.adDetail;
-      this.adImage = val.adINFO.imagesArray[0];
-      this.adMobile = val.adINFO.adMobile;
+    // await this.storage.get('adId').then((val) => {
+    //   console.log('aDiD:', val);
+    //   this.adAdmin = val.adINFO.adAdmin;
+    //   this.adId = val.adINFO.ad_id;
+    //   this.adTitle = val.adINFO.adTitle;
+    //   this.price = val.adINFO.itemObj.Price;
+    //   this.prodDetails = val.adINFO.itemObj;
+    //   this.adDetail = val.adINFO.adDetail;
+    //   this.adImage = val.adINFO.imagesArray[0];
+    //   this.adMobile = val.adINFO.adMobile;
+    // });
+    // ***********************************************************
 
-      this.storage.get('admin').then((session) => {
-        console.log('admin session:', session);
-        if (session != null) {
-          console.log('User is in session');
-          this.adminSessionId = session.userid;
-          if (val.comment.length != 0) {
-            this.canComment = false;
-            this.allComments = true;
+    let itemInfo: any = [];
+    let itemLabel: any = [];
+    // let ad_id;
+    let itemObj = {};
 
-            if (session.userid == val.adINFO.adAdmin) {
-              this.chatCardDisplay = true;
-              this.commentCardDisplay = false;
-              this.makeOffer = false;
+    this.http
+      .get('https://specbits.com/class2/fab/adds')
+      .subscribe((res: any) => {
+        console.log('Show Ad details:', res);
 
-              // Filtering number of users commented on a particular ad.
-              for (let i = 0; i < val.comment.length; i++) {
-                let sameUser = val.comment[i].user_id;
-                console.log('sameUser:', sameUser);
-                // let chats = {};
-                // chats[sameUser]
-                // chats['time'] = val.comment[i].created_at;
-                this.chatUserList[sameUser] = val.comment[i].username;
+        // Displaying ads from database
+        let dataLength = res.length;
+        for (let i = 0; i < dataLength; i++) {
+          for (let key in res[i]) {
+            if (key === 'addHeadings') {
+              if (res[i][key].add_id == slug) {
+                this.adTitle = res[i][key].add_title;
+                this.adDetail = res[i][key].add_detail;
+                this.adAdmin = res[i][key].user_id;
               }
-
-              console.log('chatUserList:', this.chatUserList);
-            } else {
-              this.chatCardDisplay = false;
-              this.commentCardDisplay = true;
-              this.comments = val.comment;
-              this.makeOffer = true;
-              console.log('All comments:', this.comments);
             }
-          } else {
-            if (session.userid == val.adINFO.adAdmin) {
-              this.canComment = false;
-              this.allComments = false;
-            } else {
-              this.commentDisabled = false;
-              this.canComment = true;
-              this.allComments = false;
+
+            if (key === 'addPersonalInfo') {
+              if (res[i][key].add_id == slug) {
+                this.adMobile = res[i][key].phonecode + res[i][key].mobile;
+                // timestamp = res[i][key].created_at;
+              }
+            }
+
+            if (key === 'addData') {
+              for (let j = 0; j < res[i][key].length; j++) {
+                for (let val in res[i][key][j]) {
+                  if (res[i][key][j].add_id == slug) {
+                    if (val == 'main_data') itemInfo.push(res[i][key][j][val]);
+                    if (val == 'label') itemLabel.push(res[i][key][j][val]);
+                    // if (val == 'add_id') ad_id = res[i][key][j][val];
+                  }
+                }
+                // }
+              }
+            }
+
+            if (key === 'addImage') {
+                  if (res[i][key][0].add_id == slug) {
+                      this.adImage = res[i][key][0].image_name;
+                  }
             }
           }
 
-          this.sessionVal = true;
-          this.userid = session.userid;
-        } else {
-          this.commentDisabled = true;
-          this.canComment = true;
-          this.allComments = false;
+          for (let k = 0; k < itemInfo.length; k++) {
+            if (itemLabel[k] == 'Price') this.price = itemInfo[k];
+            itemObj[itemLabel[k]] = itemInfo[k];
+          }
         }
+      }, err => {
+        console.log(err);
       });
+
+    this.prodDetails = itemObj;
+    // ///////////////////////////////////////////////////////////////////////
+
+    this.storage.get('admin').then((session) => {
+      // ////////////////////
+      let value = { aid: slug, uid: session.userid };
+      this.http
+        .post('https://specbits.com/class2/fab/fetch-comment', value)
+        .subscribe((com: any) => {
+          console.log('chaaaaat:', com);
+
+          // ///////////////////////////
+          console.log('admin session:', session);
+          if (session != null) {
+            console.log('User is in session');
+            this.adminSessionId = session.userid;
+            if (com.length != 0) {
+              this.canComment = false;
+              this.allComments = true;
+
+              if (session.userid == this.adAdmin) {
+                this.chatCardDisplay = true;
+                this.commentCardDisplay = false;
+                this.makeOffer = false;
+
+                // Filtering number of users commented on a particular ad.
+                for (let i = 0; i < com.length; i++) {
+                  let sameUser = com[i].user_id;
+                  console.log('sameUser:', sameUser);
+                  // let chats = {};
+                  // chats[sameUser]
+                  // chats['time'] = com[i].created_at;
+                  this.chatUserList[sameUser] = com[i].username;
+                }
+
+                console.log('chatUserList:', this.chatUserList);
+              } else {
+                this.chatCardDisplay = false;
+                this.commentCardDisplay = true;
+                this.comments = com;
+                this.makeOffer = true;
+                console.log('All comments:', this.comments);
+              }
+            } else {
+              if (session.userid == this.adAdmin) {
+                this.canComment = false;
+                this.allComments = false;
+              } else {
+                this.commentDisabled = false;
+                this.canComment = true;
+                this.allComments = false;
+              }
+            }
+
+            this.sessionVal = true;
+            this.userid = session.userid;
+          } else {
+            this.commentDisabled = true;
+            this.canComment = true;
+            this.allComments = false;
+          }
+        }, err => {
+          console.log(err);
+        });
+    }, err => {
+      console.log(err);
     });
   }
 
@@ -308,6 +389,8 @@ export class ProductDetailsPage {
       console.log('New Comments:', this.comments);
       this.chatCardDisplay = false;
       this.commentCardDisplay = true;
+    }, err => {
+      console.log(err);
     });
   }
 
@@ -338,7 +421,11 @@ export class ProductDetailsPage {
                   behavior: 'smooth',
                 });
               }, 100);
+            }, err => {
+              console.log(err);
             });
+        }, err => {
+          console.log(err);
         });
     } else {
       this.router.navigate(['login']);
@@ -365,6 +452,8 @@ export class ProductDetailsPage {
             behavior: 'smooth',
           });
         }, 100);
+      }, err => {
+        console.log(err);
       });
   }
 }

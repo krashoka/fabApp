@@ -38,7 +38,11 @@ export class FloatingChatPage implements OnInit {
             this.chatCount++;
           }
         }
+      }, err => {
+        console.log(err);
       });
+    }, err => {
+      console.log(err);
     });
 
     // ********** Chat Messages ***************
@@ -96,7 +100,11 @@ export class FloatingChatPage implements OnInit {
           });
         }
         this.chatMsg = '';
+      }, err => {
+        console.log(err);
       });
+    }, err => {
+      console.log(err);
     });
   }
 
@@ -111,6 +119,8 @@ export class FloatingChatPage implements OnInit {
       };
       this._apiService.openChat(data).subscribe((res: any) => {
         this.chatCount = 0;
+      }, err => {
+        console.log(err);
       });
 
       setTimeout(() => {
@@ -119,6 +129,8 @@ export class FloatingChatPage implements OnInit {
           behavior: 'smooth',
         });
       }, 100);
+    }, err => {
+      console.log(err);
     });
   }
 

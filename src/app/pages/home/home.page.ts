@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage-angular';
 import { ApiService } from 'src/app/api.service';
 import { Select2Option } from 'ng-select2-component';
 import { NavController } from '@ionic/angular';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-home',
@@ -151,18 +152,20 @@ export class HomePage implements OnInit {
   }
 
   goToProductDetails(ad) {
-    let value = { aid: ad.ad_id, uid: this.sessionUser };
-    this.http
-      .post('https://specbits.com/class2/fab/fetch-comment', value)
-      .subscribe((res: any) => {
-        console.log('chaaaaat:', res);
-        let data = {
-          adINFO: ad,
-          comment: res,
-        };
-        this.storage.set('adId', data);
-        this.router.navigateByUrl(`product-details/${ad.ad_id}`);
-      });
+    this.router.navigateByUrl(`product-details/${ad.ad_id}`);
+
+    // let value = { aid: ad.ad_id, uid: this.sessionUser };
+    // this.http
+    //   .post('https://specbits.com/class2/fab/fetch-comment', value)
+    //   .subscribe((res: any) => {
+    //     console.log('chaaaaat:', res);
+    //     let data = {
+    //       adINFO: ad,
+    //       comment: res,
+    //     };
+    //     this.storage.set('adId', data);
+    //     this.router.navigateByUrl(`product-details/${ad.ad_id}`);
+    //   });
   }
 
   addToFavorites(adid, i) {
@@ -232,6 +235,16 @@ export class HomePage implements OnInit {
       cssClass: 'successToast',
     });
     toast.present();
+  }
+
+  async share(adId) {
+    const shareRet = await Share.share({
+      title: 'Check out this cool app!',
+      text: 'If you like this post please share.',
+      url: `http://localhost:8100/fabApp/product-details/${adId}`,
+      dialogTitle: 'Share with friends', // optional
+    });
+    console.log('Share result:', shareRet);
   }
 
   ngOnInit() {

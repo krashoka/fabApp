@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage-angular';
 import { ApiService } from 'src/app/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-products',
@@ -184,6 +185,16 @@ export class ProductsPage implements OnInit {
       cssClass: 'successToast',
     });
     toast.present();
+  }
+
+  async share(adId) {
+    const shareRet = await Share.share({
+      title: 'Check out this cool app!',
+      text: 'If you like this post please share.',
+      url: `https://fabapp-47874.web.app/fabApp/product-details/${adId}`,
+      dialogTitle: 'Share with friends', // optional
+    });
+    console.log('Share result:', shareRet);
   }
 
   ngOnInit() {
