@@ -213,6 +213,7 @@ export class ProductDetailsPage {
     // ///////////////////////////
 
     const slug = this.route.snapshot.paramMap.get('id');
+    this.adId = slug;
 
     this.storage.get('admin').then((val) => {
       this.sessionUser = val.userid;
