@@ -241,7 +241,7 @@ export class HomePage implements OnInit {
     const shareRet = await Share.share({
       title: 'Check out this cool app!',
       text: 'If you like this post please share.',
-      url: `http://localhost:8100/fabApp/product-details/${adId}`,
+      url: `https://fabapp-47874.web.app/fabApp/product-details/${adId}`,
       dialogTitle: 'Share with friends', // optional
     });
     console.log('Share result:', shareRet);
