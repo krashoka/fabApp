@@ -62,17 +62,7 @@
           <ion-input placeholder="Search For..." />
           <ion-icon class="searchIcon" name="search"></ion-icon>
         </div>
-
-        <!-- <ion-select
-          interface="popover"
-          class="selectCategory"
-          placeholder="Category"
-        >
-          <ion-select-option>fasdf</ion-select-option>
-          <ion-select-option>fasdf</ion-select-option>
-          <ion-select-option>fasdf</ion-select-option>
-        </ion-select> -->
-        <div class="selectCategory">
+        <!-- <div class="selectCategory">
           <select2
             [overlay]="overlay"
             [data]="searchCategories"
@@ -80,16 +70,32 @@
             placeholder="Category For"
           >
           </select2>
-        </div>
+        </div> -->
+
+        <ion-select
+          interface="popover"
+          class="selectCategory"
+          placeholder="Category For"
+        >
+          <ion-select-option *ngFor="let category of categories" class="sel"
+            >{{ category.title }}</ion-select-option
+          >
+        </ion-select>
 
         <ion-select
           interface="popover"
           class="selectCategory"
           placeholder="City"
         >
-          <ion-select-option>fasdf</ion-select-option>
-          <ion-select-option>fasdf</ion-select-option>
-          <ion-select-option>fasdf</ion-select-option>
+          <ion-select-option>Delhi</ion-select-option>
+          <ion-select-option>Mumbai</ion-select-option>
+          <ion-select-option>Kolkata</ion-select-option>
+          <ion-select-option>Chennai</ion-select-option>
+          <ion-select-option>Hyderabad</ion-select-option>
+          <ion-select-option>Ahmedabad</ion-select-option>
+          <ion-select-option>Lucknow</ion-select-option>
+          <ion-select-option>Rachi</ion-select-option>
+          <ion-select-option>Patna</ion-select-option>
         </ion-select>
 
         <div class="searchBtn">Search</div>

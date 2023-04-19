@@ -41,6 +41,7 @@
           [type]="typePassword"
           [(ngModel)]="user_pwd"
           placeholder="Enter the password"
+          (keyup.enter)="loginUser()"
         ></ion-input>
         <ion-icon
           slot="end"

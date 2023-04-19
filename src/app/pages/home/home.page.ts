@@ -13,7 +13,7 @@ import { Share } from '@capacitor/share';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
   // showCommercial= false;
   // showHomeContent = true;
   pageLoaded = false;
@@ -247,7 +247,7 @@ export class HomePage implements OnInit {
     console.log('Share result:', shareRet);
   }
 
-  ngOnInit() {
+  dataOnPageLoad() {
     window.addEventListener('resize', this.onResize.bind(this));
 
     this.storage.get('admin').then((val) => {
@@ -347,6 +347,15 @@ export class HomePage implements OnInit {
         console.log('Total ad Data:', this.adDetails);
       });
   }
+
+  ngOnInit() {
+    this.dataOnPageLoad();
+    console.log('session User:', this.sessionUser);
+  }
+
+  // async ionViewWillEnter() {
+  //   await this.dataOnPageLoad();
+  // }
 
   timestamp(time) {
     const timestamp = new Date(time).getTime();

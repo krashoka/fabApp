@@ -30,7 +30,7 @@
       </div>
     </div>
 
-    <p class="days">4 days ago</p>
+    <p class="days">{{timestamp}}</p>
 
     <!-- ------ Location ------------- -->
     <div class="location">
@@ -60,7 +60,7 @@
     </div>
     <!-- ----------------------------- -->
 
-    <p class="days">4 days ago</p>
+    <p class="days">{{timestamp}}</p>
 
     <p class="productLabel">{{adTitle}}</p>
     <div class="imgAndPriceDiv">
@@ -120,7 +120,7 @@
           </div>
         </div>
 
-        <div class="buyNow">Buy Now</div>
+        <ion-card class="buyNow">Buy Now</ion-card>
       </div>
     </div>
 
@@ -277,12 +277,8 @@
 
   <!------------------------ SLIDER  ------------------>
 
-  <ion-slides
-    [options]="option"
-    style="margin-bottom: 60px"
-    id="stickySliderMob"
-  >
-    <ion-slide>
+  <div style="margin-bottom: 60px" id="stickySliderMob">
+    <div>
       <div class="adsCrousel">
         <div class="adsBorder">
           <img class="imgHeight" src="assets/images/crousel_img1.jpeg" />
@@ -305,162 +301,77 @@
           </div>
         </div>
       </div>
-
-      <div class="adsCrousel">
-        <div class="adsBorder">
-          <img class="imgHeight" src="assets/images/crousel_img1.jpeg" />
-          <div class="dayAndHeart">
-            <ion-label>2 days ago</ion-label>
-            <ion-icon name="heart-outline"></ion-icon>
-          </div>
-          <p class="adsTitle">Easy to disassemble and install</p>
-          <div class="adsPrice">
-            <ion-label>2500</ion-label>
-            <ion-label class="currency">AED</ion-label>
-          </div>
-          <div class="adsButton">
-            <div class="callBtn">
-              <ion-icon name="call"></ion-icon>
-            </div>
-            <div class="whatsappBtn">
-              <ion-icon name="logo-whatsapp"></ion-icon>
-            </div>
-          </div>
-        </div>
-      </div>
-    </ion-slide>
-  </ion-slides>
+    </div>
+  </div>
 
   <!-- ----------------- Slider for Desktop --------------- -->
-  <ion-slides [options]="option2" id="stickySliderDesktop">
-    <ion-slide>
+  <div id="stickySliderDesktop">
+    <div *ngFor="let ad of adData; let i = index">
       <ion-card>
-        <img src="assets/images/crousel_img1.jpeg" />
+        <img
+          (click)="goToProductDetails(ad)"
+          style="cursor: pointer"
+          [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
+        />
         <div class="stickyContentHeight">
           <div class="dayAndHeart">
             <div>
-              <ion-label>2 days ago</ion-label>
+              <ion-label>{{ad.timestamp}}</ion-label>
               <ion-label class="locationSticky">Abu Dhabi</ion-label>
             </div>
 
-            <ion-icon class="heart" name="heart-outline"></ion-icon>
+            <ion-icon
+              class="heartSize"
+              [ngClass]="{'heartStyle': !ad.heartRedVisible}"
+              name="heart-outline"
+              *ngIf="!ad.heartRedVisible"
+              (click)="addToFav(ad.ad_id, i)"
+            ></ion-icon>
+            <ion-icon
+              class="heartSize"
+              [ngClass]="{'heartRedStyle': !ad.heartVisible}"
+              name="heart"
+              *ngIf="!ad.heartVisible"
+              (click)="removeFromFav(ad.ad_id, i)"
+            ></ion-icon>
           </div>
-          <p class="adsTitle">Easy to disassemble and install</p>
-          <div class="adsPrice">
-            <ion-label>25000</ion-label>
-            <ion-label class="currency">AED</ion-label>
-          </div>
-        </div>
-        <div class="contactSticky">
-          <div style="border-right: 1px solid #dcdcdc">
-            <ion-icon name="call" class="call"></ion-icon>
-          </div>
-          <div>
-            <ion-img
-              class="whatsapp"
-              src="../../../assets/images/whatsapp.png"
-            />
-          </div>
-        </div>
-      </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-      <ion-card>
-        <img src="assets/images/crousel_img1.jpeg" />
-        <div class="stickyContentHeight">
-          <div class="dayAndHeart">
-            <div>
-              <ion-label>2 days ago</ion-label>
-              <ion-label class="locationSticky">Abu Dhabi</ion-label>
+          <div (click)="goToProductDetails(ad)" style="cursor: pointer">
+            <p class="adsTitle">{{ad.adTitle}}</p>
+            <div class="adsPrice">
+              <ion-label>{{ad.itemObj.Price}}</ion-label>
+              <ion-label class="currency">AED</ion-label>
             </div>
-
-            <ion-icon class="heart" name="heart-outline"></ion-icon>
-          </div>
-          <p class="adsTitle">Easy to disassemble and install</p>
-          <div class="adsPrice">
-            <ion-label>25000</ion-label>
-            <ion-label class="currency">AED</ion-label>
           </div>
         </div>
         <div class="contactSticky">
-          <div style="border-right: 1px solid #dcdcdc">
-            <ion-icon name="call" class="call"></ion-icon>
+          <div>
+            <ion-button class="call" [href]="'tel:+' + ad.adMobile">
+              <ion-icon name="call"></ion-icon>
+            </ion-button>
           </div>
           <div>
-            <ion-img
+            <ion-button
               class="whatsapp"
-              src="../../../assets/images/whatsapp.png"
-            />
+              target="_blank"
+              [href]="waLink + ad.adMobile"
+            >
+              <ion-icon name="logo-whatsapp"></ion-icon>
+            </ion-button>
+          </div>
+
+          <div>
+            <ion-button
+              class="sharePost"
+              target="_blank"
+              (click)="shareRelatedPost(ad.ad_id)"
+            >
+              <ion-icon name="share-social"></ion-icon>
+            </ion-button>
           </div>
         </div>
       </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-      <ion-card>
-        <img src="assets/images/crousel_img1.jpeg" />
-        <div class="stickyContentHeight">
-          <div class="dayAndHeart">
-            <div>
-              <ion-label>2 days ago</ion-label>
-              <ion-label class="locationSticky">Abu Dhabi</ion-label>
-            </div>
-
-            <ion-icon class="heart" name="heart-outline"></ion-icon>
-          </div>
-          <p class="adsTitle">Easy to disassemble and install</p>
-          <div class="adsPrice">
-            <ion-label>25000</ion-label>
-            <ion-label class="currency">AED</ion-label>
-          </div>
-        </div>
-        <div class="contactSticky">
-          <div style="border-right: 1px solid #dcdcdc">
-            <ion-icon name="call" class="call"></ion-icon>
-          </div>
-          <div>
-            <ion-img
-              class="whatsapp"
-              src="../../../assets/images/whatsapp.png"
-            />
-          </div>
-        </div>
-      </ion-card>
-    </ion-slide>
-
-    <ion-slide>
-      <ion-card>
-        <img src="assets/images/crousel_img1.jpeg" />
-        <div class="stickyContentHeight">
-          <div class="dayAndHeart">
-            <div>
-              <ion-label>2 days ago</ion-label>
-              <ion-label class="locationSticky">Abu Dhabi</ion-label>
-            </div>
-
-            <ion-icon class="heart" name="heart-outline"></ion-icon>
-          </div>
-          <p class="adsTitle">Easy to disassemble and install</p>
-          <div class="adsPrice">
-            <ion-label>25000</ion-label>
-            <ion-label class="currency">AED</ion-label>
-          </div>
-        </div>
-        <div class="contactSticky">
-          <div style="border-right: 1px solid #dcdcdc">
-            <ion-icon name="call" class="call"></ion-icon>
-          </div>
-          <div>
-            <ion-img
-              class="whatsapp"
-              src="../../../assets/images/whatsapp.png"
-            />
-          </div>
-        </div>
-      </ion-card>
-    </ion-slide>
-  </ion-slides>
+    </div>
+  </div>
 
   <!-- --------- Footer Section -------- -->
 

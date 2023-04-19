@@ -60,6 +60,7 @@
         type="text"
         [(ngModel)]="chatMsg"
         placeholder="Type a message..."
+        (keyup.enter)="sendChat()"
       />
       <div (click)="sendChat()">
         <ion-text>Send</ion-text>
