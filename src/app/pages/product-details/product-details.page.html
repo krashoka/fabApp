@@ -166,11 +166,21 @@
   <!-- Produce Description -->
   <div class="description">
     <p class="descLang">Description</p>
-    <p class="details">{{adDetail}}</p>
+    <p
+      class="details"
+      [ngStyle]="{ 'height': adDetailsHeight, 'box-shadow': bShadow, 'overflow': oFlow }"
+    >
+      {{adDetail}}
+    </p>
   </div>
-  <div class="read">
-    <button class="readBtn">Read more</button>
+  <div class="read" *ngIf="readMore" (click)="readDetailsMore()">
+    <button class="readBtn">Read More</button>
     <ion-icon class="caret" name="caret-down"></ion-icon>
+  </div>
+
+  <div class="read" *ngIf="readLess" (click)="readDetailsLess()">
+    <button class="readBtn">Read Less</button>
+    <ion-icon class="caret" name="caret-up"></ion-icon>
   </div>
 
   <!-- ---------- Report Abuse ---------- -->
@@ -277,7 +287,7 @@
 
   <!------------------------ SLIDER  ------------------>
 
-  <div style="margin-bottom: 60px" id="stickySliderMob">
+  <!-- <div style="margin-bottom: 60px" id="stickySliderMob">
     <div>
       <div class="adsCrousel">
         <div class="adsBorder">
@@ -302,7 +312,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- ----------------- Slider for Desktop --------------- -->
   <div id="stickySliderDesktop">

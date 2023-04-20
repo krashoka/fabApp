@@ -68,20 +68,7 @@ export class MyaccountPage implements OnInit {
   }
 
   goToProductDetails(ad) {
-    console.log('sdhdo:');
-    console.log('show dksl:', ad);
-    let value = { aid: ad.ad_id, uid: this.sessionUser };
-    this.http
-      .post('https://specbits.com/class2/fab/fetch-comment', value)
-      .subscribe((res: any) => {
-        console.log('chaaaaat:', res);
-        let data = {
-          adINFO: ad,
-          comment: res,
-        };
-        this.storage.set('adId', data);
-        this.router.navigateByUrl(`product-details/${ad.ad_id}`);
-      });
+    this.router.navigateByUrl(`product-details/${ad.ad_id}`);
   }
 
   async share() {
@@ -212,6 +199,7 @@ export class MyaccountPage implements OnInit {
                 price: res[i].price,
                 timestamp: result,
                 images: res[i].images,
+                ad_id: res[i].id,
               };
 
               this.favorites.push(favData);

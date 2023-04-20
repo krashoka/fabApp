@@ -47,6 +47,12 @@ export class ProductDetailsPage {
   canComment = true;
   allComments = false;
 
+  readMore = true;
+  readLess = false;
+  adDetailsHeight = '40px';
+  bShadow = 'inset 0 -10px 10px -10px rgba(0, 0, 0, 0.4)';
+  oFlow = 'hidden';
+
   // Progress bar variables
   counter = 0;
   timeOnPage = 0;
@@ -97,6 +103,22 @@ export class ProductDetailsPage {
       dialogTitle: 'Share with friends', // optional
     });
     console.log('Share result:', shareRet);
+  }
+
+  readDetailsMore() {
+    this.readMore = !this.readMore;
+    this.readLess = !this.readLess;
+    this.adDetailsHeight = 'auto';
+    this.bShadow = 'none';
+    this.oFlow = 'none';
+  }
+
+  readDetailsLess() {
+    this.readMore = !this.readMore;
+    this.readLess = !this.readLess;
+    this.adDetailsHeight = '40px';
+    this.bShadow = 'inset 0 -10px 10px -10px rgba(0, 0, 0, 0.5)';
+    this.oFlow = 'hidden';
   }
 
   favoritesToggle() {
@@ -233,20 +255,20 @@ export class ProductDetailsPage {
     toast.present();
   }
 
-  option = {
-    slidesPerView: 1,
-    centeredSlides: true,
-    loop: true,
-    spaceBetween: 2,
-  };
+  // option = {
+  //   slidesPerView: 1,
+  //   centeredSlides: true,
+  //   loop: true,
+  //   spaceBetween: 2,
+  // };
 
-  option2 = {
-    slidesPerView: 4,
-    // centeredSlides: true,
-    loop: true,
-    spaceBetween: 40,
-    // autoplay:true,
-  };
+  // option2 = {
+  //   slidesPerView: 4,
+  //   // centeredSlides: true,
+  //   loop: true,
+  //   spaceBetween: 40,
+  //   // autoplay:true,
+  // };
 
   increaseCounter() {
     this.counter++;
