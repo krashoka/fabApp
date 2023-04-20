@@ -11,7 +11,7 @@ import { Share } from '@capacitor/share';
   templateUrl: './myaccount.page.html',
   styleUrls: ['./myaccount.page.scss'],
 })
-export class MyaccountPage implements OnInit {
+export class MyaccountPage {
   mobNumber: any;
   username: any;
 
@@ -33,7 +33,7 @@ export class MyaccountPage implements OnInit {
   segmentChanged(event) {
     this.selectedSegment = event.detail.value;
     // console.log('SelectedSegment:', this.selectedSegment);
-    // this.router.navigateByUrl(`/myaccount/${this.selectedSegment}`);
+    this.router.navigateByUrl(`/myaccount/${this.selectedSegment}`);
   }
 
   constructor(
@@ -85,7 +85,7 @@ export class MyaccountPage implements OnInit {
   myAccountDataOnPageLoad(){
     this.selectedSegment = this.route.snapshot.paramMap.get('slug');
     // console.log('Segment VAl:', this.selectedSegment);
-    if (this.selectedSegment == null) this.selectedSegment = 'ads';
+    // if (this.selectedSegment == null) this.selectedSegment = 'ads';
 
     // *********** Showing Only user ads *************
     this.storage.get('admin').then((val) => {
@@ -214,7 +214,7 @@ export class MyaccountPage implements OnInit {
     });
   }
 
-  async ngOnInit() {
+  async ionViewWillEnter() {
     await this.myAccountDataOnPageLoad();
   }
 
