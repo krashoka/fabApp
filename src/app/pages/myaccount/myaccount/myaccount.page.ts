@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { ApiService } from 'src/app/api.service';
 import { Share } from '@capacitor/share';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-myaccount',
@@ -19,6 +20,7 @@ export class MyaccountPage {
 
   sessionUser: any;
   adDetails: any = [];
+  chatsOnAd: any = [];
 
   favorites: any = [];
 
@@ -26,9 +28,13 @@ export class MyaccountPage {
   favAds = false;
   favAdsCount = 0;
 
+  emptyChats = true;
+  chats = false;
+
   emptyMyAds = true;
   myAds = false;
   myAdsCount = 0;
+  myChatsCount = 0;
 
   segmentChanged(event) {
     this.selectedSegment = event.detail.value;
@@ -41,6 +47,7 @@ export class MyaccountPage {
     private navCtrl: NavController,
     public http: HttpClient,
     private storage: Storage,
+    private toastCtrl: ToastController,
     private route: ActivatedRoute,
     private _apiService: ApiService
   ) {
@@ -81,6 +88,47 @@ export class MyaccountPage {
     console.log('Share result:', shareRet);
   }
 
+  removeFromFavorites(adid) {
+    let data = {
+      uid: this.sessionUser,
+      aid: adid,
+    };
+
+    this._apiService.removeFromFavorites(data).subscribe(
+      (res: any) => {
+        if (res == 'success') {
+          this.successToast('Removed from your Favorites.');
+          this.myAccountDataOnPageLoad();
+        } else {
+          this.errorToast('Error removing from Favorites!');
+        }
+      },
+      (err) => {
+        console.log('Error response:', err);
+      }
+    );
+  }
+
+  async errorToast(a) {
+    const toast = await this.toastCtrl.create({
+      message: a,
+      duration: 1500,
+      position: 'top',
+      cssClass: 'errorToast',
+    });
+    toast.present();
+  }
+
+  async successToast(a) {
+    const toast = await this.toastCtrl.create({
+      message: a,
+      duration: 1500,
+      position: 'top',
+      cssClass: 'successToast',
+    });
+    toast.present();
+  }
+
   myAccountDataOnPageLoad() {
     this.selectedSegment = this.route.snapshot.paramMap.get('slug');
     // console.log('Segment VAl:', this.selectedSegment);
@@ -97,6 +145,7 @@ export class MyaccountPage {
           console.log('Show Ad details:', res);
 
           this.adDetails = [];
+          this.chatsOnAd = [];
 
           if (res) {
             this.myAds = true;
@@ -104,6 +153,7 @@ export class MyaccountPage {
           }
 
           let count = 0;
+          // let chatCount = 0;
           // Displaying ads from database
           let dataLength = res.length;
           for (let i = 0; i < dataLength; i++) {
@@ -170,6 +220,20 @@ export class MyaccountPage {
             if (this.sessionUser == data.adAdmin) {
               this.adDetails.push(data);
               count++;
+
+              let value = { aid: data.ad_id, uid: this.sessionUser };
+              this.http
+                .post('https://specbits.com/class2/fab/fetch-comment', value)
+                .subscribe((com: any) => {
+                  console.log('comment data for chat:', com);
+
+                  if (com != null) {
+                    this.myChatsCount++;
+                    this.emptyChats = false;
+                    this.chats = true;
+                    this.chatsOnAd.push(data);
+                  }
+                });
             }
           }
 

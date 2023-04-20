@@ -54,7 +54,7 @@
         <ion-label>My Ads({{myAdsCount}})</ion-label>
       </ion-segment-button>
       <ion-segment-button value="chats">
-        <ion-label>My Chats(0)</ion-label>
+        <ion-label>My Chats({{myChatsCount}})</ion-label>
       </ion-segment-button>
       <ion-segment-button value="favorites">
         <ion-label>My Favorites({{favAdsCount}})</ion-label>
@@ -99,7 +99,30 @@
         </ion-card>
       </div>
     </div>
-    <div *ngIf="selectedSegment === 'chats'"><h1>No chats added</h1></div>
+    <div *ngIf="selectedSegment === 'chats'">
+      <h1 *ngIf="emptyChats">No chats added</h1>
+      <div *ngIf="chats" class="cardDisplayMargin">
+        <ion-card class="myAds" *ngFor="let chat of chatsOnAd">
+          <img
+            [src]="'https://specbits.com/class2/fab/'+ chat.imagesArray[0]"
+          />
+
+          <div>
+            <p class="uploadTime">{{chat.timestamp}}</p>
+            <h1 class="adTitle">{{chat.adTitle}}</h1>
+            <p class="adPrice">
+              {{chat.itemObj.Price}} <ion-text class="currency">AED</ion-text>
+            </p>
+            <div class="adBtns">
+              <div class="viewBtn" (click)="goToProductDetails(chat)">
+                <ion-icon name="eye-sharp"></ion-icon> View
+              </div>
+            </div>
+          </div>
+        </ion-card>
+      </div>
+    </div>
+
     <div *ngIf="selectedSegment === 'favorites'">
       <h1 *ngIf="emptyFavAds">Empty List</h1>
       <div *ngIf="favAds" class="cardDisplayMargin">
@@ -118,7 +141,7 @@
               <div class="viewBtn" (click)="goToProductDetails(fav)">
                 <ion-icon name="eye-sharp"></ion-icon> View
               </div>
-              <div class="deleteBtn">
+              <div class="deleteBtn" (click)="removeFromFavorites(fav.ad_id)">
                 <ion-icon name="trash-outline"></ion-icon> Remove
               </div>
             </div>
@@ -128,9 +151,51 @@
     </div>
     <div *ngIf="selectedSegment === 'referrals'"><h1>0 referrals</h1></div>
     <div *ngIf="selectedSegment === 'purchases'">
-      <h1>No purchase made yet.</h1>
+      <h1 *ngIf="emptyFavAds">No purchase made yet.</h1>
+      <div *ngIf="favAds" class="cardDisplayMargin">
+        <ion-card class="myAds" *ngFor="let fav of favorites">
+          <img
+            [src]="'https://specbits.com/class2/fab/'+ fav.images[0].image_name"
+          />
+
+          <div>
+            <p class="uploadTime">{{fav.timestamp}}</p>
+            <h1 class="adTitle">{{fav.title}}</h1>
+            <p class="adPrice">
+              {{fav.price}} <ion-text class="currency">AED</ion-text>
+            </p>
+            <div class="adBtns">
+              <div class="viewBtn" (click)="goToProductDetails(fav)">
+                <ion-icon name="eye-sharp"></ion-icon> View
+              </div>
+            </div>
+          </div>
+        </ion-card>
+      </div>
     </div>
-    <div *ngIf="selectedSegment === 'sellings'"><h1>No sellings</h1></div>
+    <div *ngIf="selectedSegment === 'sellings'">
+      <h1 *ngIf="emptyFavAds">No sellings made yet.</h1>
+      <div *ngIf="favAds" class="cardDisplayMargin">
+        <ion-card class="myAds" *ngFor="let fav of favorites">
+          <img
+            [src]="'https://specbits.com/class2/fab/'+ fav.images[0].image_name"
+          />
+
+          <div>
+            <p class="uploadTime">{{fav.timestamp}}</p>
+            <h1 class="adTitle">{{fav.title}}</h1>
+            <p class="adPrice">
+              {{fav.price}} <ion-text class="currency">AED</ion-text>
+            </p>
+            <div class="adBtns">
+              <div class="viewBtn" (click)="goToProductDetails(fav)">
+                <ion-icon name="eye-sharp"></ion-icon> View
+              </div>
+            </div>
+          </div>
+        </ion-card>
+      </div>
+    </div>
   </div>
 
   <!-- Footer Section -->
