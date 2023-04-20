@@ -81,7 +81,8 @@ export class MyaccountPage implements OnInit {
     console.log('Share result:', shareRet);
   }
 
-  ngOnInit() {
+
+  myAccountDataOnPageLoad(){
     this.selectedSegment = this.route.snapshot.paramMap.get('slug');
     // console.log('Segment VAl:', this.selectedSegment);
     if (this.selectedSegment == null) this.selectedSegment = 'ads';
@@ -211,6 +212,10 @@ export class MyaccountPage implements OnInit {
         }
       );
     });
+  }
+
+  async ngOnInit() {
+    await this.myAccountDataOnPageLoad();
   }
 
   timestamp(time) {
