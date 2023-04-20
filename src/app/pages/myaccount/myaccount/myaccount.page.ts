@@ -228,7 +228,7 @@ export class MyaccountPage {
                   console.log('comment data for chat:', com);
 
                   if (com != null) {
-                    this.myChatsCount++;
+                    // this.myChatsCount++;
                     this.emptyChats = false;
                     this.chats = true;
                     this.chatsOnAd.push(data);
