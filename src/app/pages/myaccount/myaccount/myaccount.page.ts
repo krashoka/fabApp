@@ -81,8 +81,7 @@ export class MyaccountPage {
     console.log('Share result:', shareRet);
   }
 
-
-  myAccountDataOnPageLoad(){
+  myAccountDataOnPageLoad() {
     this.selectedSegment = this.route.snapshot.paramMap.get('slug');
     // console.log('Segment VAl:', this.selectedSegment);
     // if (this.selectedSegment == null) this.selectedSegment = 'ads';
@@ -96,6 +95,8 @@ export class MyaccountPage {
         .get('https://specbits.com/class2/fab/adds')
         .subscribe((res: any) => {
           console.log('Show Ad details:', res);
+
+          this.adDetails = [];
 
           if (res) {
             this.myAds = true;
@@ -186,6 +187,8 @@ export class MyaccountPage {
       this._apiService.fetchFavorites(favData).subscribe(
         (res: any) => {
           console.log('Show fav:', res);
+
+          this.favorites = [];
 
           if (res) {
             this.emptyFavAds = false;
