@@ -348,9 +348,8 @@ export class HomePage {
       });
   }
 
-  ngOnInit() {
-    this.dataOnPageLoad();
-    console.log('session User:', this.sessionUser);
+  async ngOnInit() {
+    await this.dataOnPageLoad();
   }
 
   // async ionViewWillEnter() {
