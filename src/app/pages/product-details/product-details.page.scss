@@ -1312,6 +1312,9 @@ $extra-large-screen: 1200px;
     align-items: center;
     font-size: 14px;
     padding: 10px;
+    ion-icon {
+      font-size: 24px;
+    }
   }
 
   .heartStyle {
