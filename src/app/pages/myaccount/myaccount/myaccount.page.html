@@ -72,6 +72,7 @@
   </ion-segment>
 
   <div class="myData">
+    <!-- MY ADS -->
     <div *ngIf="selectedSegment === 'ads'">
       <h1 *ngIf="emptyMyAds">No Ads Posted Yet.</h1>
       <div *ngIf="myAds" class="cardDisplayMargin">
@@ -99,6 +100,8 @@
         </ion-card>
       </div>
     </div>
+
+    <!-- MY CHATS -->
     <div *ngIf="selectedSegment === 'chats'">
       <h1 *ngIf="emptyChats">No chats added</h1>
       <div *ngIf="chats" class="cardDisplayMargin">
@@ -123,6 +126,7 @@
       </div>
     </div>
 
+    <!-- MY FAVORITES -->
     <div *ngIf="selectedSegment === 'favorites'">
       <h1 *ngIf="emptyFavAds">Empty List</h1>
       <div *ngIf="favAds" class="cardDisplayMargin">
@@ -149,7 +153,59 @@
         </ion-card>
       </div>
     </div>
-    <div *ngIf="selectedSegment === 'referrals'"><h1>0 referrals</h1></div>
+
+    <!-- MY REFERRALS -->
+    <div *ngIf="selectedSegment === 'referrals'">
+      <h1 *ngIf="emptyReferrals">0 referrals</h1>
+      <div class="referralsCard" *ngIf="referrals">
+        <ion-card>
+          <div class="userTitle">
+            <ion-icon name="person-circle-sharp"></ion-icon>
+            <h1>Chandan</h1>
+          </div>
+          <p>joined 10 days ago</p>
+          <div class="contactBtns">
+            <div class="viewBtn"><ion-icon name="call"></ion-icon> Call</div>
+
+            <div class="waBtn">
+              <ion-icon name="logo-whatsapp"></ion-icon> WhatsApp
+            </div>
+          </div>
+        </ion-card>
+
+        <ion-card>
+          <div class="userTitle">
+            <ion-icon name="person-circle-sharp"></ion-icon>
+            <h1>Kishore</h1>
+          </div>
+          <p>joined 5 days ago</p>
+          <div class="contactBtns">
+            <div class="viewBtn"><ion-icon name="call"></ion-icon> Call</div>
+
+            <div class="waBtn">
+              <ion-icon name="logo-whatsapp"></ion-icon> WhatsApp
+            </div>
+          </div>
+        </ion-card>
+
+        <ion-card>
+          <div class="userTitle">
+            <ion-icon name="person-circle-sharp"></ion-icon>
+            <h1>Ashok</h1>
+          </div>
+          <p>joined 4 days ago</p>
+          <div class="contactBtns">
+            <div class="viewBtn"><ion-icon name="call"></ion-icon> Call</div>
+
+            <div class="waBtn">
+              <ion-icon name="logo-whatsapp"></ion-icon> WhatsApp
+            </div>
+          </div>
+        </ion-card>
+      </div>
+    </div>
+
+    <!-- MY PURCHASES -->
     <div *ngIf="selectedSegment === 'purchases'">
       <h1 *ngIf="emptyFavAds">No purchase made yet.</h1>
       <div *ngIf="favAds" class="cardDisplayMargin">
@@ -173,6 +229,8 @@
         </ion-card>
       </div>
     </div>
+
+    <!-- MY SELLINGS -->
     <div *ngIf="selectedSegment === 'sellings'">
       <h1 *ngIf="emptyFavAds">No sellings made yet.</h1>
       <div *ngIf="favAds" class="cardDisplayMargin">

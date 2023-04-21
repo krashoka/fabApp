@@ -36,6 +36,9 @@ export class MyaccountPage {
   myAdsCount = 0;
   myChatsCount = 0;
 
+  emptyReferrals = false;
+  referrals = true;
+
   segmentChanged(event) {
     this.selectedSegment = event.detail.value;
     // console.log('SelectedSegment:', this.selectedSegment);

@@ -146,10 +146,11 @@ $extra-large-screen: 1200px;
   .segmentBorder {
     margin: 0 4%;
     border-bottom: 1px solid #959595;
-    width: 100%;
     display: flex;
-    gap: 20px;
     overflow: scroll;
+    ion-segment-button {
+      min-width: auto !important;
+    }
   }
 
   .segmentBorder::-webkit-scrollbar {
@@ -268,6 +269,59 @@ $extra-large-screen: 1200px;
     background-color: #e30b1c;
     color: #fff;
     cursor: pointer;
+  }
+
+  //////////// Referrals Section //////////
+  .referralsCard {
+    width: 100%;
+    margin-bottom: 80px;
+  }
+
+  .referralsCard ion-card {
+    padding: 20px;
+    background-color: #fcf0f0;
+    margin-bottom: 30px;
+  }
+
+  .referralsCard p {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
+  .userTitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #484848;
+  }
+
+  .userTitle ion-icon {
+    font-size: 30px;
+  }
+
+  .userTitle h1 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .waBtn {
+    display: flex;
+    gap: 5px;
+    padding: 0 20px 0 10px;
+    height: 40px;
+    align-items: center;
+    font-size: 14px;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .contactBtns {
+    display: flex;
+    gap: 20px;
   }
 }
 
@@ -520,5 +574,59 @@ $extra-large-screen: 1200px;
     background-color: #e30b1c;
     color: #fff;
     cursor: pointer;
+  }
+
+  //////////// Referrals Section //////////
+  .referralsCard {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-top: 40px;
+  }
+
+  .referralsCard ion-card {
+    padding: 20px;
+    background-color: #fcf0f0;
+  }
+
+  .referralsCard p {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 16px;
+  }
+
+  .userTitle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #484848;
+  }
+
+  .userTitle ion-icon {
+    font-size: 35px;
+  }
+
+  .userTitle h1 {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .waBtn {
+    display: flex;
+    gap: 10px;
+    padding: 0 25px;
+    height: 45px;
+    align-items: center;
+    font-size: 18px;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .contactBtns {
+    display: flex;
+    gap: 20px;
   }
 }
