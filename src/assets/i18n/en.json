@@ -1,0 +1,35 @@
+{
+    "dir": "ltr",
+    "navData":
+    {
+        "login": "Login",
+        "home": "Home Page",
+        "sticky": "Sticky Ads",
+        "commercial": "Commercial Ads",
+        "account": "My account",
+        "notification": "Notification",
+        "addAd": "Add Your Ad Now",
+        "welcome": "Welcome",
+        "profile": "My Profile",
+        "ads": "My Ads",
+        "chats": "My Chats",
+        "favorites": "My Favorites",
+        "referrals": "My Referrals",
+        "purchases": "My Purchases",
+        "sellings": "My Sellings",
+        "logout": "Logout"
+    },
+
+    "homeData":
+    {
+        "searchHere": "Search in here",
+        "searchFor": "Search For...",
+        "categoryFor": "Category For",
+        "city": "City",
+        "search": "Search",
+        "commercialAds": "Commercial Ads",
+        "stickyAds": "Sticky Ads",
+        "readMore": "Read More",
+        "cars": "Cars"
+    }
+}

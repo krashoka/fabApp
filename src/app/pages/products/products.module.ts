@@ -11,12 +11,14 @@ import { ProductsPage } from './products.page';
 import { NavbarPageModule } from '../../components/navbar/navbar.module';
 import { FooterTabsPageModule } from '../../components/footer-tabs/footer-tabs.module';
 import { FloatingChatPageModule } from '../../components/floating-chat/floating-chat.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     ProductsPageRoutingModule,
     NavbarPageModule,
     FooterTabsPageModule,

@@ -1,15 +1,23 @@
-<ion-card class="topNav">
+<ion-card class="topNav" [dir]="'dir' | translate">
   <ion-card class="innerTopNav">
     <ion-img
+      *ngIf="arabicFlag"
       class="langImg"
+      (click)="translate('ar')"
       src="../../../assets/images/arabicLang.png"
+    ></ion-img>
+    <ion-img
+      *ngIf="engFlag"
+      class="langImg"
+      (click)="translate('en')"
+      src="../../../assets/images/eng.png"
     ></ion-img>
     <div class="topMenu">
       <div *ngIf="showLogin" (click)="goToLogin()">
         <div>
           <ion-icon name="person-circle"></ion-icon>
         </div>
-        <p class="topMenu_icon_title">Login</p>
+        <p class="topMenu_icon_title">{{'navData.login' | translate}}</p>
       </div>
 
       <div *ngIf="showAccount" (click)="openMyAccountTab()">
@@ -17,15 +25,15 @@
           <div>
             <ion-icon name="person-circle"></ion-icon>
           </div>
-          <p class="topMenu_icon_title">My account</p>
+          <p class="topMenu_icon_title">{{'navData.account' | translate}}</p>
         </div>
       </div>
 
-      <div class="notification">
+      <div class="notification" (click)="openNotificationTab()">
         <div>
           <ion-icon name="notifications"></ion-icon>
         </div>
-        <p class="topMenu_icon_title">Notification</p>
+        <p class="topMenu_icon_title">{{'navData.notification' | translate}}</p>
 
         <div class="notificationCount">
           <span>0</span>
@@ -48,7 +56,7 @@
         [ngClass]="{'active': isElementActive('/home')}"
         (click)="goToHome()"
       >
-        Home Page
+        <label>{{'navData.home' | translate}}</label>
       </div>
     </div>
     <div>
@@ -57,7 +65,7 @@
         [ngClass]="{'active': isElementActive('/products')}"
         (click)="goToStickyAds(0, 'All/Newest')"
       >
-        Sticky Ads
+        {{'navData.sticky' | translate}}
       </div>
     </div>
     <div>
@@ -66,55 +74,186 @@
         [ngClass]="{'active': isElementActive('/commercialads')}"
         (click)="goToCommercialAds()"
       >
-        Commercials Ads
+        {{'navData.commercial' | translate}}
       </div>
     </div>
     <div>
       <div class="addNewAds" (click)="goToAddNewAd()">
         <ion-icon class="adIcon" name="duplicate-outline"></ion-icon>
-        <ion-text>Add Your Ad Now</ion-text>
+        <ion-text>{{'navData.addAd' | translate}}</ion-text>
       </div>
     </div>
   </ion-card>
 </ion-card>
 
-<div class="accountDropdown" *ngIf="onDropdownSelect">
+<div class="accountDropdown" *ngIf="onDropdownSelect" [dir]="'dir' | translate">
   <div (click)="dismissSideMenu()"></div>
   <div>
     <div class="accountMenu">
-      <h2 class="welcome">Welcome {{username}}</h2>
+      <h2 class="welcome">{{'navData.welcome' | translate}} {{username}}</h2>
       <div (click)="goToMyAccount('ads')">
-        <div><ion-icon name="person"></ion-icon> My Profile</div>
+        <div>
+          <ion-icon name="person"></ion-icon>&nbsp; {{'navData.profile' |
+          translate}}
+        </div>
         <ion-icon name="chevron-forward"></ion-icon>
       </div>
       <div (click)="goToMyAccount('ads')">
-        <div><ion-icon name="duplicate"></ion-icon> My Ads</div>
+        <div>
+          <ion-icon name="duplicate"></ion-icon>&nbsp; {{'navData.ads' |
+          translate}}
+        </div>
         <ion-icon name="chevron-forward"></ion-icon>
       </div>
       <div (click)="goToMyAccount('chats')">
-        <div><ion-icon name="chatbox"></ion-icon> My Chats</div>
+        <div>
+          <ion-icon name="chatbox"></ion-icon>&nbsp; {{'navData.chats' |
+          translate}}
+        </div>
         <ion-icon name="chevron-forward"></ion-icon>
       </div>
       <div (click)="goToMyAccount('favorites')">
-        <div><ion-icon name="heart"></ion-icon> My Favorites</div>
+        <div>
+          <ion-icon name="heart"></ion-icon>&nbsp; {{'navData.favorites' |
+          translate}}
+        </div>
         <ion-icon name="chevron-forward"></ion-icon>
       </div>
       <div (click)="goToMyAccount('referrals')">
-        <div><ion-icon name="people"></ion-icon> My Referrals</div>
+        <div>
+          <ion-icon name="people"></ion-icon>&nbsp; {{'navData.referrals' |
+          translate}}
+        </div>
         <ion-icon name="chevron-forward"></ion-icon>
       </div>
       <div (click)="goToMyAccount('purchases')">
-        <div><ion-icon name="bag-handle"></ion-icon> My Purchases</div>
+        <div>
+          <ion-icon name="bag-handle"></ion-icon>&nbsp; {{'navData.purchases' |
+          translate}}
+        </div>
         <ion-icon name="chevron-forward"></ion-icon>
       </div>
       <div (click)="goToMyAccount('sellings')">
-        <div><ion-icon name="bag-check"></ion-icon> My Sellings</div>
+        <div>
+          <ion-icon name="bag-check"></ion-icon>&nbsp; {{'navData.sellings' |
+          translate}}
+        </div>
         <ion-icon name="chevron-forward"></ion-icon>
       </div>
       <p (click)="logout()" class="logOut">
         <ion-icon name="exit"></ion-icon>
-        <ion-text>Logout</ion-text>
+        <ion-text>&nbsp; {{'navData.logout' | translate}}</ion-text>
       </p>
     </div>
+  </div>
+</div>
+
+<div
+  class="notificationDropdown"
+  *ngIf="onNotificationSelect"
+  [dir]="'dir' | translate"
+>
+  <div>
+    <div class="myNotification">
+      <h1>My Notifications</h1>
+      <ion-icon
+        name="close-circle-outline"
+        class="close"
+        (click)="dismissNotification()"
+      ></ion-icon>
+    </div>
+
+    <ion-card>
+      <h5>Kishore commented on your ad</h5>
+      <div class="notifDetails">
+        <p>10 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card>
+      <h5>You received point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
   </div>
 </div>

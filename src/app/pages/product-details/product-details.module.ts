@@ -9,12 +9,14 @@ import { ProductDetailsPageRoutingModule } from './product-details-routing.modul
 import { ProductDetailsPage } from './product-details.page';
 import { NavbarPageModule } from '../../components/navbar/navbar.module';
 import { FloatingChatPageModule } from '../../components/floating-chat/floating-chat.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     ProductDetailsPageRoutingModule,
     NavbarPageModule,
     FloatingChatPageModule,

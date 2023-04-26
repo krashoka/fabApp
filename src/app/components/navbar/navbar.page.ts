@@ -5,6 +5,8 @@ import { Storage } from '@ionic/storage-angular';
 import { ToastController } from '@ionic/angular';
 import { ApiService } from 'src/app/api.service';
 import { CookieService } from 'ngx-cookie-service';
+import { TranslateService } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar',
@@ -15,17 +17,38 @@ export class NavbarPage implements OnInit {
   showAccount = false;
   showLogin = true;
   username: any;
+  engFlag = false;
+  arabicFlag = true;
+  // langData: any;
 
   constructor(
     private router: Router,
     public _apiService: ApiService,
     private toastCtrl: ToastController,
     private storage: Storage,
-    private navController: NavController
+    private navController: NavController,
+    private translateService: TranslateService,
+    private http: HttpClient
   ) {
     this.storage.create();
+    this.translateService.use('en');
   }
 
+  translate(event) {
+    this.translateService.use(event);
+    this.engFlag = !this.engFlag;
+    this.arabicFlag = !this.arabicFlag;
+  }
+
+  // Change direction from ltr to rtl in arabic language
+  // changeDirection() {
+  //   this._apiService.direction$.subscribe((value) => {
+  //     const direction = value === 'ltr' ? 'rtl' : 'ltr';
+  //     this._apiService.setDirection(direction);
+  //   });
+  // }
+
+  // My Account SideMenu
   onDropdownSelect = false;
   openMyAccountTab() {
     this.onDropdownSelect = !this.onDropdownSelect;
@@ -33,6 +56,16 @@ export class NavbarPage implements OnInit {
 
   dismissSideMenu() {
     this.onDropdownSelect = !this.onDropdownSelect;
+  }
+
+  // My Notification SideMenu
+  onNotificationSelect = false;
+  openNotificationTab() {
+    this.onNotificationSelect = !this.onNotificationSelect;
+  }
+
+  dismissNotification() {
+    this.onNotificationSelect = !this.onNotificationSelect;
   }
 
   logout() {

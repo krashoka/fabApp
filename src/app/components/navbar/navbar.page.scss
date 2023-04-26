@@ -1,5 +1,88 @@
-/******************* Navbar for large screens ***************/
+$small-screen: 576px;
+$medium-screen: 768px;
 $large-screen: 992px;
+$extra-large-screen: 1200px;
+
+@media (max-width: $small-screen) {
+  // Notification Dropdown
+
+  .notificationDropdown {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .notificationDropdown > div {
+    width: 100%;
+    background-color: #fff;
+    height: 100vh;
+    // border-radius: 10px;
+    position: relative;
+    overflow: auto;
+
+    ion-card {
+      padding: 0 20px 5px;
+      margin-top: 15px;
+
+      h5 {
+        font-size: 16px;
+        color: #212529;
+      }
+    }
+
+    ion-card:hover {
+      background-color: #fcf0f0;
+    }
+  }
+
+  .myNotification {
+    background-color: #d90036;
+    text-align: center;
+    // border-radius: 10px 10px 0 0;
+    padding: 15px 0 16px;
+    position: relative;
+    height: 8vh;
+  }
+
+  .myNotification h1 {
+    color: #fff;
+    font-weight: 700;
+    margin: 0;
+    font-size: 22px;
+  }
+
+  .close {
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+  }
+
+  .notifDetails {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .notifDetails > div {
+    display: flex;
+    align-items: center;
+    color: #007bff;
+    cursor: pointer;
+  }
+
+  .notifDetails > p {
+    color: #b1b0b0;
+  }
+}
+
+/******************* Navbar for large screens ***************/
 
 @media (min-width: $large-screen) {
   /********* Top Nav **************/
@@ -253,8 +336,85 @@ $large-screen: 992px;
   .websiteTitle {
     width: 130px;
     height: 60px;
-    margin-right: 80px;
+    // margin-right: 80px;
     padding: 0;
     cursor: pointer;
+  }
+
+  // Notification Dropdown
+
+  .notificationDropdown {
+    width: 25%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 1000;
+    background-color: #fff;
+    box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .notificationDropdown > div {
+    width: 100%;
+    background-color: #fff;
+    height: 100vh;
+    // border-radius: 10px;
+    position: relative;
+    overflow: auto;
+
+    ion-card {
+      padding: 0 20px 5px;
+      margin-top: 15px;
+
+      h5 {
+        font-size: 16px;
+        color: #212529;
+      }
+    }
+
+    ion-card:hover {
+      background-color: #fcf0f0;
+    }
+  }
+
+  .myNotification {
+    background-color: #d90036;
+    text-align: center;
+    // border-radius: 10px 10px 0 0;
+    padding: 15px 0 16px;
+    position: relative;
+    height: 8vh;
+  }
+
+  .myNotification h1 {
+    color: #fff;
+    font-weight: 700;
+    margin: 0;
+    font-size: 22px;
+  }
+
+  .close {
+    color: #fff;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+  }
+
+  .notifDetails {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .notifDetails > div {
+    display: flex;
+    align-items: center;
+    color: #007bff;
+    cursor: pointer;
+  }
+
+  .notifDetails > p {
+    color: #b1b0b0;
   }
 }

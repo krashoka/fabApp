@@ -11,6 +11,7 @@ import { NavbarPageModule } from '../../components/navbar/navbar.module';
 import { FooterTabsPageModule } from '../../components/footer-tabs/footer-tabs.module';
 import { FloatingChatPageModule } from '../../components/floating-chat/floating-chat.module';
 import { Select2Module } from 'ng-select2-component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { Select2Module } from 'ng-select2-component';
     FormsModule,
     IonicModule,
     PipesModule,
+    TranslateModule,
     HomePageRoutingModule,
     NavbarPageModule,
     FooterTabsPageModule,

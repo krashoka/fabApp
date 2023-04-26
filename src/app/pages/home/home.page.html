@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [dir]="'dir' | translate">
   <!-- Header for Large screen -->
 
   <app-navbar class="topNav"></app-navbar>
@@ -14,7 +14,7 @@
         <ion-icon
           class="header_icon"
           name="search"
-          (click)="goToStickyAds(0, 'All/Newest')"
+          (click)="goToStickyAds(0, 'all-newest')"
         ></ion-icon>
         <ion-icon class="header_icon" name="notifications"></ion-icon>
       </div>
@@ -56,10 +56,10 @@
       <ion-card class="search">
         <div class="searchTitle">
           <ion-icon class="searchIcon" name="search"></ion-icon>
-          <ion-text>Search in FaB</ion-text>
+          <ion-text>{{'homeData.searchHere' | translate}}</ion-text>
         </div>
         <div class="searchFor">
-          <ion-input placeholder="Search For..." />
+          <ion-input [placeholder]="'homeData.searchFor' | translate" />
           <ion-icon class="searchIcon" name="search"></ion-icon>
         </div>
         <!-- <div class="selectCategory">
@@ -75,7 +75,7 @@
         <ion-select
           interface="popover"
           class="selectCategory"
-          placeholder="Category For"
+          [placeholder]="'homeData.categoryFor' | translate"
         >
           <ion-select-option *ngFor="let category of categories" class="sel"
             >{{ category.title }}</ion-select-option
@@ -85,7 +85,7 @@
         <ion-select
           interface="popover"
           class="selectCategory"
-          placeholder="City"
+          [placeholder]="'homeData.city' | translate"
         >
           <ion-select-option>Delhi</ion-select-option>
           <ion-select-option>Mumbai</ion-select-option>
@@ -98,7 +98,7 @@
           <ion-select-option>Patna</ion-select-option>
         </ion-select>
 
-        <div class="searchBtn">Search</div>
+        <div class="searchBtn">{{'homeData.search' | translate}}</div>
       </ion-card>
     </div>
 
@@ -110,7 +110,7 @@
       >
         <ion-card class="icons" [innerHTML]="category.icon | safeHtml">
         </ion-card>
-        <p class="icon_title">{{ category.title }}</p>
+        <p class="icon_title">{{category.title}}</p>
       </div>
     </div>
   </div>
@@ -119,13 +119,13 @@
     <ion-card class="commercialAdsTitle">
       <div>
         <ion-icon style="font-size: 28px" name="megaphone"></ion-icon>
-        <ion-text>Commercials Ads</ion-text>
+        <ion-text>{{'homeData.commercialAds' | translate}}</ion-text>
       </div>
       <div
         style="color: #007bff; cursor: pointer"
         (click)="goToCommercialAds()"
       >
-        <ion-text>Read More</ion-text>
+        <ion-text>{{'homeData.readMore' | translate}}</ion-text>
         <ion-icon style="font-size: 24px" name="chevron-forward"></ion-icon>
       </div>
     </ion-card>
@@ -188,13 +188,13 @@
     <ion-card class="commercialAdsTitle">
       <div>
         <ion-icon style="font-size: 28px" name="flash"></ion-icon>
-        <ion-text>Sticky Ads</ion-text>
+        <ion-text>{{'homeData.stickyAds' | translate}}</ion-text>
       </div>
       <div
         style="color: #007bff; cursor: pointer"
         (click)="goToStickyAds(0, 'all-newest')"
       >
-        <ion-text>Read More</ion-text>
+        <ion-text>{{'homeData.readMore' | translate}}</ion-text>
         <ion-icon style="font-size: 28px" name="chevron-forward"></ion-icon>
       </div>
     </ion-card>
@@ -275,7 +275,7 @@
       <ion-label>Sticky Ads</ion-label>
       <ion-icon
         name="arrow-forward-outline"
-        (click)="goToStickyAds(0, 'All/Newest')"
+        (click)="goToStickyAds(0, 'all-newest')"
       ></ion-icon>
     </ion-card>
 

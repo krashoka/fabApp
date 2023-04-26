@@ -1,0 +1,34 @@
+{
+    "dir": "rtl",
+    "navData":
+    {
+        "login": "تسجيل الدخول",
+        "home": "الصفحة الرئيسية",
+        "sticky": "إعلانات مثبتة",
+        "commercial": "الإعلانات التجارية",
+        "account": "حسابي",
+        "notification": "إشعار",
+        "addAd": "أضف إعلانك الآن",
+        "welcome": "مرحباً",
+        "profile": "ملفي",
+        "ads": "إعلاناتي",
+        "chats": "دردشاتي",
+        "favorites": "مفضلتي",
+        "referrals": "إحالاتي",
+        "purchases": "مشترياتي",
+        "sellings": "عمليات البيع الخاصة بي",
+        "logout": "تسجيل خروج"
+    },
+
+    "homeData":
+    {
+        "searchHere": "ابحث هنا",
+        "searchFor": "بحث عن...",
+        "categoryFor": "فئة لـ",
+        "city": "مدينة",
+        "search": "يبحث",
+        "commercialAds": "الإعلانات التجارية",
+        "stickyAds": "إعلانات مثبتة",
+        "readMore": "اقرأ أكثر"
+    }
+}

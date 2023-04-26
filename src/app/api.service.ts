@@ -1,11 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+  private directionSubject = new BehaviorSubject<string>('ltr');
+  public direction$ = this.directionSubject.asObservable();
+
   constructor(public http: HttpClient) {}
+
+  setDirection(direction: string) {
+    this.directionSubject.next(direction);
+  }
 
   sendVerify(data) {
     console.log('Verification code received :)');

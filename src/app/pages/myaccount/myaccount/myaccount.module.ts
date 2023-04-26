@@ -7,20 +7,22 @@ import { IonicModule } from '@ionic/angular';
 import { MyaccountPageRoutingModule } from './myaccount-routing.module';
 
 import { MyaccountPage } from './myaccount.page';
-import {NavbarPageModule} from '../../../components/navbar/navbar.module';
+import { NavbarPageModule } from '../../../components/navbar/navbar.module';
 import { FooterTabsPageModule } from '../../../components/footer-tabs/footer-tabs.module';
 import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     MyaccountPageRoutingModule,
     NavbarPageModule,
     FooterTabsPageModule,
-    FloatingChatPageModule
+    FloatingChatPageModule,
   ],
-  declarations: [MyaccountPage]
+  declarations: [MyaccountPage],
 })
 export class MyaccountPageModule {}

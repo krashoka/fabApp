@@ -89,13 +89,34 @@
               <div class="viewBtn" (click)="goToProductDetails(ad)">
                 <ion-icon name="eye-sharp"></ion-icon> View
               </div>
-              <div class="editBtn">
-                <ion-icon name="pencil-sharp"></ion-icon>Edit
+              <div>
+                <ion-button class="editBtn" [id]="ad.ad_id">
+                  <ion-icon name="pencil-sharp"></ion-icon>Edit
+                </ion-button>
               </div>
               <div class="deleteBtn">
                 <ion-icon name="trash-outline"></ion-icon> Delete
               </div>
             </div>
+
+            <!-- Modal to Edit -->
+            <ion-modal id="example-modal" #modal [trigger]="ad.ad_id">
+              <ng-template>
+                <ion-content>
+                  <div>
+                    <ion-text>Ad Title</ion-text>
+                    <ion-input type="text" placeholder="Enter New Ad Title" />
+                  </div>
+                  <div>
+                    <ion-text>Ad Description</ion-text>
+                    <ion-input
+                      type="text"
+                      placeholder="Enter New Ad Description"
+                    />
+                  </div>
+                </ion-content>
+              </ng-template>
+            </ion-modal>
           </div>
         </ion-card>
       </div>

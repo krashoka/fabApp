@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { ApiService } from 'src/app/api.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +17,18 @@ export class AppComponent {
   //     this.router.navigateByUrl('/login');
   //   }
   // }
+  direction: any;
 
-  constructor(){}
+  constructor(
+    private _apiService: ApiService,
+    public translateService: TranslateService
+  ) {
+    // this._apiService.direction$.subscribe((value) => {
+    //   this.direction = value;
+    // });
+  }
+
+  translate(event: any) {
+    this.translateService.use(event.target.value);
+  }
 }

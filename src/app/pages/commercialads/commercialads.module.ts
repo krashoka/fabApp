@@ -10,12 +10,14 @@ import { CommercialadsPage } from './commercialads.page';
 import { FooterTabsPageModule } from '../../components/footer-tabs/footer-tabs.module';
 import { NavbarPageModule } from '../../components/navbar/navbar.module';
 import { FloatingChatPageModule } from '../../components/floating-chat/floating-chat.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     CommercialadsPageRoutingModule,
     NavbarPageModule,
     FooterTabsPageModule,
