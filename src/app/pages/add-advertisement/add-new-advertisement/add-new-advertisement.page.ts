@@ -51,7 +51,7 @@ export class AddNewAdvertisementPage implements OnInit {
   goToCategories(datas: any, titles: any, slug: any) {
     let data = { cid: datas };
 
-    this.storage.set('catTitle', titles);
+    this.storage.set('catTitle', slug);
 
     this._apiService.sendCategory(data).subscribe((res: any) => {
       console.log('check empty: ', res);
@@ -60,7 +60,7 @@ export class AddNewAdvertisementPage implements OnInit {
       } else {
         let value = {
           newData: datas,
-          title: titles,
+          slug: slug,
         };
         this.storage.set('category', value);
         this.router.navigateByUrl(`categories/${datas}`);

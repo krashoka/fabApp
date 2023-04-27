@@ -94,10 +94,9 @@ export class CategoriesPage implements OnInit {
 
     let data = { cid: slug };
 
-    this.storage.get('category').then((value)=>{
-      this.categoryTitle = value.title;
-    })
-    
+    this.storage.get('category').then((value) => {
+      this.categoryTitle = value.slug;
+    });
 
     this._apiService.sendCategory(data).subscribe((res: any) => {
       this.categories = res;

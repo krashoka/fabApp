@@ -10,12 +10,14 @@ import { CategoriesPage } from './categories.page';
 import { NavbarPageModule } from '../../../components/navbar/navbar.module';
 import { DataService } from 'src/app/data.service';
 import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     CategoriesPageRoutingModule,
     NavbarPageModule,
     FloatingChatPageModule,

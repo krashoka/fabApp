@@ -1,13 +1,13 @@
-<ion-content>
+<ion-content [dir]="'dir' | translate">
   <!-- Header for Large screen -->
 
   <app-navbar class="topNav"></app-navbar>
   <!-- ---------------------------------- -->
 
   <ion-card class="advertisement">
-    <ion-label class="adTitle">Add new advertisement</ion-label>
+    <ion-label class="adTitle">{{'addNewAd' | translate}}</ion-label>
     <ion-card-content class="cancelAd" (click)="goBack()">
-      <ion-label>Back</ion-label>
+      <ion-label>{{'back' | translate}}</ion-label>
       <ion-icon class="cancelIcon" name="chevron-forward"></ion-icon>
     </ion-card-content>
   </ion-card>
@@ -24,7 +24,7 @@
   <div class="adContent">
     <ion-card class="categories">
       <div class="categoriesHeader">
-        <ion-label>{{categoryTitle}}</ion-label>
+        <ion-label>{{ 'homeData.' + categoryTitle | translate }}</ion-label>
         <ion-icon name="search"></ion-icon>
       </div>
 
@@ -32,7 +32,7 @@
         <div
           (click)="goToCategories(category.cid, category.title, category.slug)"
         >
-          <ion-text>{{category.title}}</ion-text>
+          <ion-text>{{ 'homeData.' + category.slug | translate }}</ion-text>
           <ion-icon name="chevron-forward"></ion-icon>
         </div>
       </div>

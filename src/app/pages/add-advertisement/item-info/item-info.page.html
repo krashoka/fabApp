@@ -1,13 +1,13 @@
-<ion-content>
+<ion-content [dir]="'dir' | translate">
   <!-- Header for Large screen -->
 
   <app-navbar class="topNav"></app-navbar>
   <!-- ---------------------------------- -->
 
   <ion-card class="advertisement">
-    <ion-label class="adTitle">Add new advertisement</ion-label>
+    <ion-label class="adTitle">{{'addNewAd' | translate}}</ion-label>
     <ion-card-content class="cancelAd" (click)="goBack()">
-      <ion-label>Back</ion-label>
+      <ion-label>{{'back' | translate}}</ion-label>
       <ion-icon class="cancelIcon" name="chevron-forward"></ion-icon>
     </ion-card-content>
   </ion-card>
@@ -24,14 +24,16 @@
   <div class="adContent">
     <ion-card class="categories">
       <ion-card-header>
-        <ion-card-title class="catTitle">{{catTitle}}</ion-card-title>
+        <ion-card-title class="catTitle"
+          >{{'homeData.'+ catTitle | translate}}</ion-card-title
+        >
       </ion-card-header>
 
       <ion-card-content class="selectOption">
         <div *ngFor="let item of items">
           <!-- <div [innerHTML]="item | safeHtml"></div> -->
           <div *ngIf="item.selectType" class="selectStyle">
-            <ion-text>{{item.label}}</ion-text>
+            <ion-text>{{'itemInfo.'+item.label | translate}}</ion-text>
             <!-- <select [(ngModel)]="item.value">
               <option
                 *ngFor="let option of item.optionElement"
@@ -46,28 +48,31 @@
               [data]="item.optionElement"
               (search)="search('search1')"
               [(ngModel)]="item.value"
-              placeholder="Select"
+              [placeholder]="'itemInfo.select' | translate"
               class="selecStyle"
             >
             </select2>
           </div>
           <div *ngIf="item.inputType" class="inputStyle">
-            <ion-text>{{item.label}}</ion-text>
-            <input [placeholder]="item.label" [(ngModel)]="item.value" />
+            <ion-text>{{'itemInfo.'+item.label | translate}}</ion-text>
+            <input
+              [placeholder]="'itemInfo.'+item.label | translate"
+              [(ngModel)]="item.value"
+            />
           </div>
 
           <div *ngIf="item.checkType" class="checkStyle">
             <ion-checkbox slot="start" [(ngModel)]="item.value"></ion-checkbox>
-            <ion-text>{{item.label}}</ion-text>
+            <ion-text>{{'itemInfo.'+item.label | translate}}</ion-text>
           </div>
 
           <div *ngIf="item.radioType" class="checkStyle">
             <ion-radio slot="start" [(ngModel)]="item.value"></ion-radio>
-            <ion-text>{{item.label}}</ion-text>
+            <ion-text>{{'itemInfo.'+item.label | translate}}</ion-text>
           </div>
 
           <div *ngIf="item.textArea" class="inputStyle">
-            <ion-text>{{item.label}}</ion-text>
+            <ion-text>{{'itemInfo.'+item.label | translate}}</ion-text>
             <ion-textarea
               type="text"
               autoGrow="true"
@@ -85,7 +90,7 @@
           expand="block"
           *ngIf="showNextBtn"
           (click)="goToNextStep()"
-          >Next Step</ion-button
+          >{{'itemInfo.nextStep' | translate}}</ion-button
         >
       </ion-card-content>
     </ion-card>

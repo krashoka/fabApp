@@ -105,7 +105,7 @@ export class ItemInfoPage implements OnInit {
         .post('https://specbits.com/class2/fab/newform', newValue)
         .subscribe(
           (res: any) => {
-            console.log(res.length);
+            console.log('Form dataaaaas', res);
 
             if (res.length < 1) this.showNextBtn = false;
 

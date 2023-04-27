@@ -10,12 +10,14 @@ import { PersonalInfoPage } from './personal-info.page';
 import { NavbarPageModule } from '../../../components/navbar/navbar.module';
 import { Select2Module } from 'ng-select2-component';
 import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     PersonalInfoPageRoutingModule,
     NavbarPageModule,
     Select2Module,

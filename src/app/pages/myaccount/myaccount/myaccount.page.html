@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [dir]="'dir' | translate">
   <!-- Header for Large screen -->
   <app-navbar class="topNav"></app-navbar>
   <!-- ------------------------------------------------ -->
@@ -18,11 +18,13 @@
         <div>
           <div class="points" (click)="goToMyPoints()">
             <p>1600</p>
-            <p>My Points</p>
+            <p>{{'myProfile.myPoints' | translate}}</p>
           </div>
           <div class="editIcon" (click)="goToProfile()">
             <ion-icon name="pencil-sharp" />
-            <ion-text class="edit">Edit my account</ion-text>
+            <ion-text class="edit"
+              >{{'myProfile.editAccount' | translate}}</ion-text
+            >
           </div>
         </div>
       </ion-card-title>
@@ -32,7 +34,7 @@
           <ion-text>{{mobNumber}}</ion-text>
         </div>
         <p class="referralCode">
-          My Referral Code - <span> ABcDe</span>
+          {{'myProfile.refCode' | translate}} - <span> ABcDe</span>
           <ion-icon
             name="share-social"
             (click)="share()"
@@ -51,22 +53,24 @@
   >
     <div class="segmentBorder">
       <ion-segment-button value="ads" default>
-        <ion-label>My Ads({{myAdsCount}})</ion-label>
+        <ion-label>{{'navData.ads' | translate}}({{myAdsCount}})</ion-label>
       </ion-segment-button>
       <ion-segment-button value="chats">
-        <ion-label>My Chats({{myChatsCount}})</ion-label>
+        <ion-label>{{'navData.chats' | translate}}({{myChatsCount}})</ion-label>
       </ion-segment-button>
       <ion-segment-button value="favorites">
-        <ion-label>My Favorites({{favAdsCount}})</ion-label>
+        <ion-label
+          >{{'navData.favorites' | translate}}({{favAdsCount}})</ion-label
+        >
       </ion-segment-button>
       <ion-segment-button value="referrals">
-        <ion-label>My Referrals (0)</ion-label>
+        <ion-label>{{'navData.referrals' | translate}} (0)</ion-label>
       </ion-segment-button>
       <ion-segment-button value="purchases">
-        <ion-label>My Purchases (0)</ion-label>
+        <ion-label>{{'navData.purchases' | translate}} (0)</ion-label>
       </ion-segment-button>
       <ion-segment-button value="sellings">
-        <ion-label>My Sellings (0)</ion-label>
+        <ion-label>{{'navData.sellings' | translate}} (0)</ion-label>
       </ion-segment-button>
     </div>
   </ion-segment>

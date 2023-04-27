@@ -90,7 +90,7 @@ export class ProductsPage implements OnInit {
       });
   }
 
-  goToSticky(datas: any, titles: any, parent: any) {
+  goToSticky(datas: any, titles: any, parent: any, slug: any) {
     // this.breadcrumbsFun(titles);
 
     // const title = this.route.snapshot.data['titles'];
@@ -103,7 +103,7 @@ export class ProductsPage implements OnInit {
 
     console.log('newTitttltltlt:', titles);
     if (parent == '0') {
-      this.storage.set('catTitle', titles);
+      this.storage.set('catTitle', slug);
       this.router.navigateByUrl(`products/${datas}`);
     } else {
       this._apiService.sendCategory(data).subscribe((res: any) => {
@@ -311,6 +311,7 @@ export class ProductsPage implements OnInit {
       // this.breadcrumbService.addBreadcrumb(titles, link);
 
       this.storage.get('catTitle').then((val) => {
+        console.log("data in Cat Title:", val);
         this.categoryTitle = val;
       });
     } else {

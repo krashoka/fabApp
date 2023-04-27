@@ -12,6 +12,7 @@ import { PipesModule } from './safe.module';
 import { NavbarPageModule } from '../../../components/navbar/navbar.module';
 import { DataService } from 'src/app/data.service';
 import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { FloatingChatPageModule } from '../../../components/floating-chat/floati
     FormsModule,
     IonicModule,
     PipesModule,
+    TranslateModule,
     AddNewAdvertisementPageRoutingModule,
     NavbarPageModule,
     FloatingChatPageModule,

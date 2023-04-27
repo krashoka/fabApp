@@ -31,7 +31,8 @@ export class NavbarPage implements OnInit {
     private http: HttpClient
   ) {
     this.storage.create();
-    this.translateService.use('en');
+    // this.translateService.use('en');
+    this.translateService.setDefaultLang('en');
   }
 
   translate(event) {

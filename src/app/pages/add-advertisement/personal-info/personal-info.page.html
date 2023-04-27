@@ -1,13 +1,13 @@
-<ion-content>
+<ion-content [dir]="'dir' | translate">
   <!-- Header for Large screen -->
 
   <app-navbar class="topNav"></app-navbar>
   <!-- ---------------------------------- -->
 
   <ion-card class="advertisement">
-    <ion-label class="adTitle">Add new advertisement</ion-label>
+    <ion-label class="adTitle">{{'addNewAd' | translate}}</ion-label>
     <ion-card-content class="cancelAd" (click)="goBack()">
-      <ion-label>Back</ion-label>
+      <ion-label>{{'back' | translate}}</ion-label>
       <ion-icon class="cancelIcon" name="chevron-forward"></ion-icon>
     </ion-card-content>
   </ion-card>
@@ -24,13 +24,15 @@
   <div class="adContent">
     <ion-card class="categories">
       <ion-card-header>
-        <ion-card-title class="catTitle">Personal Information</ion-card-title>
+        <ion-card-title class="catTitle"
+          >{{'personalInfo' | translate}}</ion-card-title
+        >
       </ion-card-header>
 
       <ion-card-content class="selectOption">
-        <ion-text>Phone Number</ion-text>
+        <ion-text>{{'phoneNumber' | translate}}</ion-text>
 
-        <div class="mobNumber">
+        <div class="mobNumber" dir="ltr">
           <div class="countryCode">
             <select2
               [overlay]="overlay"
@@ -42,7 +44,7 @@
           </div>
           <ion-input
             type="text"
-            placeholder="Enter a mobile number"
+            [placeholder]="'enterMobNumber' | translate"
             [(ngModel)]="user_mob"
           ></ion-input>
         </div>
@@ -52,7 +54,7 @@
           color="danger"
           expand="block"
           (click)="postMyAd()"
-          >Post my Ad</ion-button
+          >{{'postMyAd' | translate}}</ion-button
         >
       </ion-card-content>
     </ion-card>

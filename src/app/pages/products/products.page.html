@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [dir]="'dir' | translate">
   <!-- Header for Large screen -->
   <app-navbar class="topNav"></app-navbar>
   <!-- ------------------------------------------------ -->
@@ -14,7 +14,7 @@
         </ion-breadcrumb>
       </ion-breadcrumbs>
       <div class="searchFor">
-        <ion-input placeholder="Search Keyword" />
+        <ion-input [placeholder]="'searchKeyword' | translate" />
         <ion-icon class="searchIcon" name="search"></ion-icon>
       </div>
     </div>
@@ -22,7 +22,8 @@
 
   <ion-card class="stickyCat">
     <div class="stickyCatTitle">
-      You have {{totalAds}} {{categoryTitle}} in All Cities
+      {{'youHave' | translate}} {{totalAds}} {{'homeData.'+categoryTitle |
+      translate}} {{'inCities' | translate}}
     </div>
   </ion-card>
 
@@ -56,8 +57,8 @@
       <ion-label
         class="tabsSlide"
         *ngFor="let category of categories"
-        (click)="goToSticky(category.cid, category.title, category.parent)"
-        >{{category.title}}</ion-label
+        (click)="goToSticky(category.cid, category.title, category.parent, category.slug)"
+        >{{ 'homeData.' + category.slug | translate }}</ion-label
       >
       <ion-icon name="chevron-back" class="arrowBack"></ion-icon>
       <ion-icon name="chevron-forward" class="arrowForward"></ion-icon>

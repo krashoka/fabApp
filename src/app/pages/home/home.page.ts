@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/api.service';
 import { Select2Option } from 'ng-select2-component';
 import { NavController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -38,7 +39,8 @@ export class HomePage {
     private toastCtrl: ToastController,
     private storage: Storage,
     private _apiService: ApiService,
-    private navController: NavController
+    private navController: NavController,
+    private translate: TranslateService
   ) {
     this.storage.create();
 
@@ -121,10 +123,10 @@ export class HomePage {
     autoplay: true,
   };
 
-  goToSticky(datas: any, titles: any) {
+  goToSticky(datas: any, titles: any, slug:any) {
     let data = { cid: datas };
 
-    this.storage.set('catTitle', titles);
+    this.storage.set('catTitle', slug);
 
     this._apiService.sendCategory(data).subscribe((res: any) => {
       // console.log('check empty: ', res);

@@ -1,13 +1,13 @@
-<ion-content>
+<ion-content [dir]="'dir' | translate">
   <!-- Header for Large screen -->
 
   <app-navbar class="topNav"></app-navbar>
   <!-- ---------------------------------- -->
 
   <ion-card class="advertisement">
-    <ion-label class="adTitle">Add new advertisement</ion-label>
+    <ion-label class="adTitle">{{'addNewAd' | translate}}</ion-label>
     <ion-card-content class="cancelAd" (click)="goBack()">
-      <ion-label>Back</ion-label>
+      <ion-label>{{'back' | translate}}</ion-label>
       <ion-icon class="cancelIcon" name="chevron-forward"></ion-icon>
     </ion-card-content>
   </ion-card>
@@ -24,24 +24,26 @@
   <div class="adContent">
     <ion-card class="categories">
       <ion-card-header>
-        <ion-card-title class="catTitle">Ad Information</ion-card-title>
+        <ion-card-title class="catTitle"
+          >{{'adInfo' | translate}}</ion-card-title
+        >
       </ion-card-header>
 
       <ion-card-content class="selectOption">
-        <ion-text>Ad title</ion-text>
+        <ion-text>{{'adTitle' | translate}}</ion-text>
         <ion-input
           type="text"
-          placeholder="Enter ad title"
+          [placeholder]="'enterAdTitle' | translate"
           class="inputAdTitle"
           [(ngModel)]="adTitle"
         />
-        <ion-text>Ad Details</ion-text>
+        <ion-text>{{'adDetails' | translate}}</ion-text>
         <ion-textarea
           type="text"
           autoGrow="true"
           class="adDetails"
           [(ngModel)]="adDescription"
-          placeholder="Write here..."
+          [placeholder]="'writeHere' | translate"
         />
 
         <ion-button
@@ -49,7 +51,7 @@
           color="danger"
           expand="block"
           (click)="goToPersonalInfo()"
-          >Next Step</ion-button
+          >{{'itemInfo.nextStep' | translate}}</ion-button
         >
       </ion-card-content>
     </ion-card>

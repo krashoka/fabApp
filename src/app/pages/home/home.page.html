@@ -78,7 +78,7 @@
           [placeholder]="'homeData.categoryFor' | translate"
         >
           <ion-select-option *ngFor="let category of categories" class="sel"
-            >{{ category.title }}</ion-select-option
+            >{{ 'homeData.' + category.slug | translate }}</ion-select-option
           >
         </ion-select>
 
@@ -105,12 +105,12 @@
     <div class="grid homeTabComponent" *ngIf="homeTabComponent">
       <!-- <div class="grid" *ngIf="showHomeContent"> -->
       <div
-        (click)="goToSticky(category.cid, category.title)"
+        (click)="goToSticky(category.cid, category.title, category.slug)"
         *ngFor="let category of categories"
       >
         <ion-card class="icons" [innerHTML]="category.icon | safeHtml">
         </ion-card>
-        <p class="icon_title">{{category.title}}</p>
+        <p class="icon_title">{{ 'homeData.' + category.slug | translate }}</p>
       </div>
     </div>
   </div>
@@ -201,7 +201,7 @@
 
     <div class="stickySlide">
       <div *ngFor="let ad of adDetails; let i = index">
-        <ion-card>
+        <ion-card dir="ltr">
           <img
             (click)="goToProductDetails(ad)"
             style="cursor: pointer"
@@ -211,7 +211,7 @@
             <div class="dayAndHeart">
               <div>
                 <ion-label>{{ad.timestamp}}</ion-label>
-                <ion-label class="locationSticky">Abu Dhabi</ion-label>
+                <!-- <ion-label class="locationSticky">Abu Dhabi</ion-label> -->
               </div>
 
               <ion-icon

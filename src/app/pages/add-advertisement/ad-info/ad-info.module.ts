@@ -9,12 +9,14 @@ import { AdInfoPageRoutingModule } from './ad-info-routing.module';
 import { AdInfoPage } from './ad-info.page';
 import { NavbarPageModule } from '../../../components/navbar/navbar.module';
 import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     AdInfoPageRoutingModule,
     NavbarPageModule,
     FloatingChatPageModule,

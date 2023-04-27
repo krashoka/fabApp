@@ -1,13 +1,13 @@
-<ion-content>
+<ion-content [dir]="'dir' | translate">
   <!-- Header for Large screen -->
 
   <app-navbar class="topNav"></app-navbar>
   <!-- ---------------------------------- -->
 
   <ion-card class="advertisement">
-    <ion-label class="adTitle">Add new advertisement</ion-label>
+    <ion-label class="adTitle">{{'addNewAd' | translate}}</ion-label>
     <ion-card-content class="cancelAd" (click)="goBack()">
-      <ion-label>Back</ion-label>
+      <ion-label>{{'back' | translate}}</ion-label>
       <ion-icon class="cancelIcon" name="chevron-forward"></ion-icon>
     </ion-card-content>
   </ion-card>
@@ -25,15 +25,12 @@
     <ion-card class="categories">
       <ion-card-header>
         <ion-card-title class="catTitle"
-          >Upload images for the Ad</ion-card-title
+          >{{'uploadImageForAd' | translate}}</ion-card-title
         >
       </ion-card-header>
 
       <ion-card-content class="selectOption">
-        <p>
-          Advertising with pictures becomes more attractive, which means more
-          contacts and views
-        </p>
+        <p>{{'uploadAdSubHeading' | translate}}</p>
 
         <div class="showUpload">
           <div *ngFor="let file of images; let i = index">
@@ -54,18 +51,18 @@
         <ion-card class="upload">
           <ion-card-content class="uploadImg" (click)="selectImage()">
             <ion-icon name="images" class="uploadIcon"></ion-icon>
-            <p class="uploadText">Upload Images</p>
+            <p class="uploadText">{{'uploadImage' | translate}}</p>
           </ion-card-content>
         </ion-card>
 
-        <p style="color: #e30b1c">* You can add 12 photos</p>
+        <p style="color: #e30b1c">{{'addUpto' | translate}}</p>
 
         <div style="display: flex; justify-content: center">
           <ion-button
             color="danger"
-            style="margin: 60px auto"
+            style="margin: 60px auto; text-transform: none"
             (click)="startUpload()"
-            >Send Photos</ion-button
+            >{{'sendPhotos' | translate}}</ion-button
           >
         </div>
 

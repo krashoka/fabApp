@@ -9,12 +9,14 @@ import { UploadimagePagePageRoutingModule } from './uploadimage-page-routing.mod
 import { UploadimagePagePage } from './uploadimage-page.page';
 import { FloatingChatPageModule } from '../../../components/floating-chat/floating-chat.module';
 import { NavbarPageModule } from '../../../components/navbar/navbar.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     UploadimagePagePageRoutingModule,
     NavbarPageModule,
     FloatingChatPageModule,
