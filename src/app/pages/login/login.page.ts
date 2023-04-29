@@ -84,7 +84,8 @@ export class LoginPage {
             userid: res.userid,
             phonecode: res.phonecode,
             usermob: res.mobile,
-            referral: res.myref
+            referral: res.myref,
+            myPoints: res.mypoints,
           };
           this.storage.set('admin', data);
           this.selectedCountry = '+973';

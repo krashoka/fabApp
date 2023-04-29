@@ -40,6 +40,8 @@ export class MyaccountPage {
   emptyReferrals = false;
   referrals = true;
 
+  myPoints = 0;
+
   segmentChanged(event) {
     this.selectedSegment = event.detail.value;
     // console.log('SelectedSegment:', this.selectedSegment);
@@ -140,6 +142,7 @@ export class MyaccountPage {
 
       this.username = val.username;
       this.referralCode = val.referral;
+      this.myPoints = val.myPoints;
 
       this.http
         .get('https://specbits.com/class2/fab/adds')

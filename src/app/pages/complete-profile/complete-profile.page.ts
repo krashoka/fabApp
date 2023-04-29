@@ -78,6 +78,8 @@ export class CompleteProfilePage implements OnInit {
             userid: res.userid,
             phonecode: res.phonecode,
             usermob: res.usermob,
+            referral: res.myref,
+            myPoints: res.mypoints,
           };
 
           this.storage.set('admin', data);
