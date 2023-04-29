@@ -63,10 +63,9 @@ export class CompleteProfilePage implements OnInit {
       confirmpwd: this.confirmPassword,
       uid: this.userId,
     };
-    console.log('fsdfsf:', data);
+
     this._apiService.completeProfile(data).subscribe(
       (res: any) => {
-        console.log('complete Profile response:', res);
         if (res.complete) {
           this.errorToast(res.complete);
         } else if (res.sorry) {
@@ -87,7 +86,6 @@ export class CompleteProfilePage implements OnInit {
         }
       },
       (err) => {
-        console.log('profile error:', err);
         if (err.error.errors.name) this.errorToast(err.error.errors.name[0]);
         else if (err.error.errors.pwd) this.errorToast(err.error.errors.pwd[0]);
         else if (err.error.errors.confirmpwd)

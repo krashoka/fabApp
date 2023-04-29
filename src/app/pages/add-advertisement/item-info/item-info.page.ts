@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
 import { Storage } from '@ionic/storage-angular';
 import { Select2Option } from 'ng-select2-component';
+import { ApiService } from 'src/app/api.service';
 
 @Component({
   selector: 'app-item-info',
@@ -21,7 +22,8 @@ export class ItemInfoPage implements OnInit {
     private router: Router,
     private navCtrl: NavController,
     public http: HttpClient,
-    private storage: Storage
+    private storage: Storage,
+    private _apiService: ApiService
   ) {
     this.storage.create();
   }
@@ -101,80 +103,78 @@ export class ItemInfoPage implements OnInit {
         cid: val.cid,
       };
 
-      this.http
-        .post('https://specbits.com/class2/fab/newform', newValue)
-        .subscribe(
-          (res: any) => {
-            console.log('Form dataaaaas', res);
+      this._apiService.newForm(newValue).subscribe(
+        (res: any) => {
+          console.log('Form dataaaaas', res);
 
-            if (res.length < 1) this.showNextBtn = false;
+          if (res.length < 1) this.showNextBtn = false;
 
-            const indices = res.reduce((acc, cur, index) => {
-              if (Array.isArray(cur)) {
-                acc.push(index);
-              }
-              return acc;
-            }, []);
-
-            for (let i = 0; i < res.length; i++) {
-              if (res[i].type == 'select') {
-                for (let m = 0; m < indices.length; m++) {
-                  let optionsData: any = [];
-
-                  if (
-                    res[i].form_field_id == res[indices[m]][0].form_fields_id
-                  ) {
-                    for (let j = 0; j < res[indices[m]].length; j++) {
-                      let data = {
-                        options: [
-                          {
-                            value: res[indices[m]][j].value,
-                            label: res[indices[m]][j].value,
-                          },
-                        ],
-                      };
-                      optionsData.push(data);
-                    }
-
-                    this.items.push({
-                      selectType: res[i].type,
-                      value: res[i].label,
-                      label: res[i].label,
-                      optionElement: optionsData,
-                    });
-                  }
-                }
-              } else if (res[i].type == 'input') {
-                this.items.push({
-                  inputType: res[i].type,
-                  label: res[i].label,
-                  value: '',
-                });
-              } else if (res[i].type == 'checkbox') {
-                this.items.push({
-                  checkType: res[i].type,
-                  label: res[i].label,
-                  value: false,
-                });
-              } else if (res[i].type == 'radio') {
-                this.items.push({
-                  radioType: res[i].type,
-                  label: res[i].label,
-                  value: false,
-                });
-              } else if (res[i].type == 'textarea') {
-                this.items.push({
-                  textArea: res[i].type,
-                  label: res[i].label,
-                  value: '',
-                });
-              }
+          const indices = res.reduce((acc, cur, index) => {
+            if (Array.isArray(cur)) {
+              acc.push(index);
             }
-          },
-          (error: any) => {
-            console.log('ErrorMessage: ', error);
+            return acc;
+          }, []);
+
+          for (let i = 0; i < res.length; i++) {
+            if (res[i].type == 'select') {
+              for (let m = 0; m < indices.length; m++) {
+                let optionsData: any = [];
+
+                if (res[i].form_field_id == res[indices[m]][0].form_fields_id) {
+                  for (let j = 0; j < res[indices[m]].length; j++) {
+                    let data = {
+                      options: [
+                        {
+                          value: res[indices[m]][j].value,
+                          label: res[indices[m]][j].value,
+                        },
+                      ],
+                    };
+                    optionsData.push(data);
+                  }
+
+                  this.items.push({
+                    selectType: res[i].type,
+                    value: res[i].label,
+                    label: res[i].label,
+                    optionElement: optionsData,
+                  });
+                }
+              }
+            } else if (res[i].type == 'input') {
+              this.items.push({
+                inputType: res[i].type,
+                label: res[i].label,
+                value: '',
+              });
+            } else if (res[i].type == 'checkbox') {
+              this.items.push({
+                checkType: res[i].type,
+                label: res[i].label,
+                value: false,
+              });
+            } else if (res[i].type == 'radio') {
+              this.items.push({
+                radioType: res[i].type,
+                label: res[i].label,
+                value: false,
+              });
+            } else if (res[i].type == 'textarea') {
+              this.items.push({
+                textArea: res[i].type,
+                label: res[i].label,
+                value: '',
+              });
+            }
           }
-        );
+
+          console.log('item pushed data:', this.items);
+        },
+        (error: any) => {
+          console.log('ErrorMessage: ', error);
+        }
+      );
     });
   }
 }

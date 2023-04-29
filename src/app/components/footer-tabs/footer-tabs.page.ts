@@ -13,9 +13,14 @@ export class FooterTabsPage implements OnInit {
   constructor(private router: Router, private storage: Storage) {
     this.storage.create();
 
-    this.storage.get('admin').then((val) => {
-      this.username = val.username;
-    });
+    this.storage.get('admin').then(
+      (val) => {
+        if (val != null) this.username = val.username;
+      },
+      (er) => {
+        console.log(er);
+      }
+    );
   }
 
   ngOnInit() {}

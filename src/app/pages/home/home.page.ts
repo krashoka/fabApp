@@ -52,8 +52,6 @@ export class HomePage {
       (res: any) => {
         this.categories = res;
 
-        console.log('IconCat:', res);
-
         for (let i = 0; i < res.length; i++) {
           let data = {
             options: [{ value: res[i].title, label: res[i].title }],
@@ -255,24 +253,30 @@ export class HomePage {
   dataOnPageLoad() {
     window.addEventListener('resize', this.onResize.bind(this));
 
-    this.storage.get('admin').then((val) => {
-      this.sessionUser = val.userid;
+    this.storage.get('admin').then(
+      (val) => {
+        if (val != null) {
+          this.sessionUser = val.userid;
 
-      let favData = {
-        uid: val.userid,
-      };
+          let favData = {
+            uid: val.userid,
+          };
 
-      console.log('favDataassss:', favData);
-      this._apiService.fetchLoggedAds(favData).subscribe((res: any) => {
-        console.log('Logged Ads response:', res);
-      });
+          this._apiService.fetchLoggedAds(favData).subscribe((res: any) => {
+            // console.log('Logged Ads response:', res);
+          });
 
-      this._apiService.fetchFavorites(favData).subscribe((res: any) => {
-        console.log('favorites response:', res);
+          this._apiService.fetchFavorites(favData).subscribe((res: any) => {
+            // console.log('favorites response:', res);
 
-        this.favData = res;
-      });
-    });
+            this.favData = res;
+          });
+        }
+      },
+      (er) => {
+        console.log(er);
+      }
+    );
 
     this.http
       .get('https://specbits.com/class2/fab/adds')

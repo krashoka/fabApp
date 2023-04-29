@@ -105,7 +105,6 @@ export class NavbarPage implements OnInit {
 
   async ngOnInit() {
     this.storage.get('admin').then((val) => {
-      console.log('SessionVal:', val);
       if (val != null) {
         this.username = val.username;
       }
@@ -113,11 +112,8 @@ export class NavbarPage implements OnInit {
 
     const value = await this.storage.get('admin');
     if (value != null) {
-      console.log('Session value is', value.userid);
-      // setTimeout(() => {
       this.showAccount = true;
       this.showLogin = false;
-      // }, 100);
     }
   }
 

@@ -57,6 +57,10 @@ export class ApiService {
     return this.http.post('https://specbits.com/class2/fab/subcategory', data);
   }
 
+  newForm(data) {
+    return this.http.post('https://specbits.com/class2/fab/newform', data);
+  }
+
   fetchAds(data) {
     return this.http.post('https://specbits.com/class2/fab/fetch-ads', data);
   }

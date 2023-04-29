@@ -48,8 +48,6 @@ export class SignupPage {
       referral: this.referalCode,
     };
 
-    // console.log(data);
-
     this._apiService.sendVerify(data).subscribe(
       (res: any) => {
         this.userId = res.userid;
@@ -85,7 +83,6 @@ export class SignupPage {
         }
       },
       (er: any) => {
-        console.log('ErrorMessage: ', er);
         if (er.error.message == 'The user mob field is required.') {
           this.errorToast('Mobile number is required!');
         } else {
@@ -104,7 +101,6 @@ export class SignupPage {
 
     this._apiService.verifyCode(data).subscribe(
       (res: any) => {
-        console.log('UserIddd:', res);
         if (res == 'success') {
           this.successToast('Account Verified.');
           this.user_mob = '';
@@ -120,7 +116,6 @@ export class SignupPage {
         else if (res == 'mnf') this.errorToast('Invalid Mobile Number!');
       },
       (er: any) => {
-        console.log(er.error.message);
         this.errorToast(er.error.message);
       }
     );
@@ -164,7 +159,6 @@ export class SignupPage {
     this.http
       .get('https://specbits.com/class2/fab/country')
       .subscribe((res: any) => {
-        console.log(res);
         for (let i = 0; i < res.length; i++) {
           let data = {
             options: [{ value: res[i], label: '+' + res[i] }],

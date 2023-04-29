@@ -13,7 +13,7 @@ import { Select2Option } from 'ng-select2-component';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   countries: any = [];
   user_mob: any;
   user_pwd: any;
@@ -35,11 +35,10 @@ export class LoginPage implements OnInit {
     this.storage.create();
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.http
       .get('https://specbits.com/class2/fab/country')
       .subscribe((res: any) => {
-        console.log('Countries:', res);
         for (let i = 0; i < res.length; i++) {
           let data = {
             options: [{ value: res[i], label: '+' + res[i] }],

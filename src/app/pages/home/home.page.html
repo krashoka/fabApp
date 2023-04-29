@@ -269,78 +269,80 @@
   </div>
 
   <!-- --------- Sticky Ads for Mobile --------- -->
-  <div id="stickyTab" *ngIf="homeTabComponent">
-    <!-- <div id="stickyTab" *ngIf="showHomeContent"> -->
-    <ion-card id="stickyAds">
-      <ion-label>Sticky Ads</ion-label>
-      <ion-icon
-        name="arrow-forward-outline"
-        (click)="goToStickyAds(0, 'all-newest')"
-      ></ion-icon>
-    </ion-card>
+  <div id="stickyTab" *ngIf="showStickyTitle">
+    <div *ngIf="homeTabComponent">
+      <!-- <div id="stickyTab" *ngIf="showHomeContent"> -->
+      <ion-card id="stickyAds">
+        <ion-label>Sticky Ads</ion-label>
+        <ion-icon
+          name="arrow-forward-outline"
+          (click)="goToStickyAds(0, 'all-newest')"
+        ></ion-icon>
+      </ion-card>
 
-    <!------------------------ SLIDER  ------------------>
+      <!------------------------ SLIDER  ------------------>
 
-    <ion-slides
-      [options]="option3"
-      style="margin-bottom: 60px"
-      id="stickySlider"
-    >
-      <ion-slide *ngFor="let ad of adDetails; let i = index">
-        <div class="adsCrousel">
-          <div class="adsBorder">
-            <img
-              class="imgHeight"
-              (click)="goToProductDetails(ad)"
-              [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
-            />
-            <div class="dayAndHeart">
-              <ion-label>{{ad.timestamp}}</ion-label>
-              <ion-icon
-                class="heartSize"
-                [ngClass]="{'heartStyle': !ad.heartRedVisible}"
-                name="heart-outline"
-                *ngIf="!ad.heartRedVisible"
-                (click)="addToFavorites(ad.ad_id, i)"
-              ></ion-icon>
-              <ion-icon
-                class="heartSize"
-                [ngClass]="{'heartRedStyle': !ad.heartVisible}"
-                name="heart"
-                *ngIf="!ad.heartVisible"
-                (click)="removeFromFavorites(ad.ad_id, i)"
-              ></ion-icon>
-            </div>
-            <p class="adsTitle">{{ad.adTitle}}</p>
-            <div class="adsPrice">
-              <ion-label>{{ad.itemObj.Price}}</ion-label>
-              <ion-label class="currency">AED</ion-label>
-            </div>
-            <div class="adsButton">
-              <div>
-                <ion-button class="callBtn" [href]="'tel:+' + ad.adMobile">
-                  <ion-icon name="call"></ion-icon>
-                </ion-button>
+      <ion-slides
+        [options]="option3"
+        style="margin-bottom: 60px"
+        id="stickySlider"
+      >
+        <ion-slide *ngFor="let ad of adDetails; let i = index">
+          <div class="adsCrousel">
+            <div class="adsBorder">
+              <img
+                class="imgHeight"
+                (click)="goToProductDetails(ad)"
+                [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
+              />
+              <div class="dayAndHeart">
+                <ion-label>{{ad.timestamp}}</ion-label>
+                <ion-icon
+                  class="heartSize"
+                  [ngClass]="{'heartStyle': !ad.heartRedVisible}"
+                  name="heart-outline"
+                  *ngIf="!ad.heartRedVisible"
+                  (click)="addToFavorites(ad.ad_id, i)"
+                ></ion-icon>
+                <ion-icon
+                  class="heartSize"
+                  [ngClass]="{'heartRedStyle': !ad.heartVisible}"
+                  name="heart"
+                  *ngIf="!ad.heartVisible"
+                  (click)="removeFromFavorites(ad.ad_id, i)"
+                ></ion-icon>
               </div>
-              <div>
-                <ion-button
-                  class="whatsappBtn"
-                  target="_blank"
-                  [href]="waLink + ad.adMobile"
-                >
-                  <ion-icon name="logo-whatsapp"></ion-icon>
-                </ion-button>
+              <p class="adsTitle">{{ad.adTitle}}</p>
+              <div class="adsPrice">
+                <ion-label>{{ad.itemObj.Price}}</ion-label>
+                <ion-label class="currency">AED</ion-label>
               </div>
-              <div>
-                <ion-button class="shareBtn" target="_blank">
-                  <ion-icon name="share-social"></ion-icon>
-                </ion-button>
+              <div class="adsButton">
+                <div>
+                  <ion-button class="callBtn" [href]="'tel:+' + ad.adMobile">
+                    <ion-icon name="call"></ion-icon>
+                  </ion-button>
+                </div>
+                <div>
+                  <ion-button
+                    class="whatsappBtn"
+                    target="_blank"
+                    [href]="waLink + ad.adMobile"
+                  >
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                  </ion-button>
+                </div>
+                <div>
+                  <ion-button class="shareBtn" target="_blank">
+                    <ion-icon name="share-social"></ion-icon>
+                  </ion-button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </ion-slide>
-    </ion-slides>
+        </ion-slide>
+      </ion-slides>
+    </div>
   </div>
 
   <!-- --------- Commercial Ads for Mobile ---------- -->

@@ -28,7 +28,6 @@ export class AddNewAdvertisementPage implements OnInit {
     this.http.get('https://specbits.com/class2/fab/index').subscribe(
       (res: any) => {
         this.categories = res;
-        console.log(res);
       },
       (error: any) => {
         console.log('ErrorMessage: ', error);
@@ -54,7 +53,6 @@ export class AddNewAdvertisementPage implements OnInit {
     this.storage.set('catTitle', slug);
 
     this._apiService.sendCategory(data).subscribe((res: any) => {
-      console.log('check empty: ', res);
       if (res == 'empty') {
         this.router.navigate(['item-info']);
       } else {
