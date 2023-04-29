@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
@@ -23,7 +23,8 @@ export class ItemInfoPage implements OnInit {
     private navCtrl: NavController,
     public http: HttpClient,
     private storage: Storage,
-    private _apiService: ApiService
+    private _apiService: ApiService,
+    private toastCtrl: ToastController
   ) {
     this.storage.create();
   }
@@ -67,30 +68,53 @@ export class ItemInfoPage implements OnInit {
 
   goToNextStep() {
     let itemVal: any = [];
+
     for (let i = 0; i < this.items.length; i++) {
+      if (!this.items[i].checkType) {
+        if (
+          this.items[i].value == null ||
+          this.items[i].value == undefined ||
+          this.items[i].value == ''
+        ) {
+          this.errorToast(this.items[i].label + ' is required');
+          itemVal = [];
+          break;
+        }
+      }
+
       itemVal.push(this.items[i].value);
     }
 
-    this.storage.get('catDetails').then((val) => {
-      let adData = {
-        cid: val.cid,
-        uid: val.userid,
-        formData: itemVal,
-      };
-
-      this.http
-        .post('https://specbits.com/class2/fab/partialSave', adData)
-        .subscribe((res: any) => {
-          console.log('response Data:', res);
-          let data = {
-            aid: res[0].add_id,
-            uid: res[1].user_id,
+    if (itemVal.length != 0) {
+      this.storage.get('catDetails').then(
+        (val) => {
+          let adData = {
+            cid: val.cid,
+            uid: val.userid,
+            formData: itemVal,
           };
-          this.storage.set('adDetails', data);
-          this.router.navigate(['uploadimage-page']);
-        });
-      console.log(adData);
-    });
+
+          this._apiService.saveItemData(adData).subscribe(
+            (res: any) => {
+              console.log('response Data:', res);
+              let data = {
+                aid: res[0].add_id,
+                uid: res[1].user_id,
+              };
+              this.storage.set('adDetails', data);
+              this.router.navigate(['uploadimage-page']);
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+          console.log(adData);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
 
   ngOnInit() {
@@ -176,5 +200,25 @@ export class ItemInfoPage implements OnInit {
         }
       );
     });
+  }
+
+  async errorToast(a) {
+    const toast = await this.toastCtrl.create({
+      message: a,
+      duration: 1500,
+      position: 'top',
+      cssClass: 'errorToast',
+    });
+    toast.present();
+  }
+
+  async successToast(a) {
+    const toast = await this.toastCtrl.create({
+      message: a,
+      duration: 1500,
+      position: 'top',
+      cssClass: 'successToast',
+    });
+    toast.present();
   }
 }

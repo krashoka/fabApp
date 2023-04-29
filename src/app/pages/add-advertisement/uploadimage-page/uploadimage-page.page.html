@@ -34,7 +34,6 @@
 
         <div class="showUpload">
           <div *ngFor="let file of images; let i = index">
-            <!-- <ion-thumbnail slot="start"> -->
             <ion-img [src]="file.data"></ion-img>
 
             <ion-icon
@@ -42,29 +41,29 @@
               class="deletePic"
               (click)="deleteImage(file)"
             ></ion-icon>
-            <!-- </ion-thumbnail> -->
-
-            <!-- <ion-button (click)="startUpload(file)">upload</ion-button> -->
           </div>
         </div>
 
-        <ion-card class="upload">
+        <ion-card class="upload" *ngIf="showUploadBtn">
           <ion-card-content class="uploadImg" (click)="selectImage()">
             <ion-icon name="images" class="uploadIcon"></ion-icon>
             <p class="uploadText">{{'uploadImage' | translate}}</p>
           </ion-card-content>
         </ion-card>
 
-        <p style="color: #e30b1c">{{'addUpto' | translate}}</p>
+        <p style="color: #e30b1c" *ngIf="showUploadBtn">
+          {{'addUpto' | translate}}
+        </p>
 
-        <div style="display: flex; justify-content: center">
-          <ion-button
-            color="danger"
-            style="margin: 60px auto; text-transform: none"
-            (click)="startUpload()"
-            >{{'sendPhotos' | translate}}</ion-button
-          >
-        </div>
+        <!-- <div style="display: flex; justify-content: center"> -->
+        <ion-button
+          color="danger"
+          expand="block"
+          style="margin: 60px 0; text-transform: none"
+          (click)="startUpload()"
+          >{{'savePhotos' | translate}}</ion-button
+        >
+        <!-- </div> -->
 
         <!-- Video Section -->
 

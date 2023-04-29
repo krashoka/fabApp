@@ -41,6 +41,7 @@ export class UploadimagePagePage implements OnInit {
 
   videoUrl: any;
   video: any;
+  showUploadBtn = true;
 
   constructor(
     private router: Router,
@@ -116,7 +117,7 @@ export class UploadimagePagePage implements OnInit {
 
   async saveImage(photo: Photo) {
     const base64 = await this.readAsBase64(photo);
-    console.log(base64);
+
     if (base64 !== undefined) {
       const fileName = new Date().getTime() + '.jpeg';
       const savedFile = await Filesystem.writeFile({
@@ -219,7 +220,15 @@ export class UploadimagePagePage implements OnInit {
     }).then(
       (result) => {
         console.log('result:', result);
-        this.loadFileData(result.files);
+        if (result.files.length <= 12) {
+          this.loadFileData(result.files);
+        } 
+        
+        if (result.files.length >= 12) { 
+          this.showUploadBtn = false;
+        }else{
+          this.showUploadBtn = true;
+        }
       },
       async (err) => {
         await Filesystem.mkdir({
@@ -269,39 +278,28 @@ export class UploadimagePagePage implements OnInit {
 
   async startUpload() {
     let files: any = this.images;
-    // let blobs: Blob[] = [];
-    console.log('FilesName:', this.images);
-    for (let i = 0; i < files.length; i++) {
-      const response = await fetch(files[i].data);
-      const blob = await response.blob();
-      const formData = new FormData();
-      formData.append('file', blob, files[i].name.name);
-
-      this.uploadData(formData);
-      // console.log('Uolols:', upData.__zone_symbol__state);
-      // // blobs.push(blob);
-      // upData.then((state) => {
-      //   console.log('Uolols:', state);
-      // });
+    // console.log('FilesName:', files);
+    if(files.length == 0){
+      this.errorToast("Please add minimum 1 image!")
+    }else{
+      for (let i = 0; i < files.length; i++) {
+        const response = await fetch(files[i].data);
+        const blob = await response.blob();
+        const formData = new FormData();
+        formData.append('file', blob, files[i].name.name);
+  
+        this.uploadData(formData);
+      }
+  
+  
+      for (let i = 0; i < this.images.length; i++) {
+        await Filesystem.deleteFile({
+          directory: Directory.Data,
+          path: this.images[i].path,
+        });
+      }
     }
-
-    // let delFile = this.images;
-
-    for (let i = 0; i < this.images.length; i++) {
-      await Filesystem.deleteFile({
-        directory: Directory.Data,
-        path: this.images[i].path,
-      });
-    }
-
-    // const mergedBlob = new Blob(blobs, { type: blobs[0].type });
-
-    // console.log('mergedBlobs:', mergedBlob);
-
-    // const formData = new FormData();
-    // formData.append('file', mergedBlob);
-
-    // this.uploadData(formData);
+    
   }
 
   async uploadData(formData: FormData) {
@@ -322,7 +320,7 @@ export class UploadimagePagePage implements OnInit {
         },
       });
       console.log('Upload response:', uploadResponse);
-      if(uploadResponse.data == 'success'){
+      if (uploadResponse.data == 'success') {
         this.successToast('Images Uploaded successfully');
         this.router.navigate(['ad-info']);
       }

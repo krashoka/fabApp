@@ -348,18 +348,21 @@ export class HomePage {
             heartRedVisible: false,
           };
 
+          console.log('adDetails data:', data);
+
           if (this.sessionUser != data.adAdmin) {
             this.adDetails.push(data);
+            if (this.adDetails.length != 0) {
+              this.showCommercialTitle = true;
+              this.showStickyTitle = true;
+            }
           }
         }
 
         console.log('Total ad Data:', this.adDetails);
       });
 
-    if (this.adDetails.length != 0) {
-      this.showCommercialTitle = true;
-      this.showStickyTitle = true;
-    }
+    
   }
 
   async ngOnInit() {

@@ -53,12 +53,19 @@ export class ApiService {
     return this.http.post('https://specbits.com/class2/fab/logout', data);
   }
 
+  // Getting sub-category from Below Api
   sendCategory(data) {
     return this.http.post('https://specbits.com/class2/fab/subcategory', data);
   }
 
+  // Getting form fields from Below API
   newForm(data) {
     return this.http.post('https://specbits.com/class2/fab/newform', data);
+  }
+
+  // Saving attributes of the Ad
+  saveItemData(data) {
+    return this.http.post('https://specbits.com/class2/fab/partialSave', data);
   }
 
   fetchAds(data) {

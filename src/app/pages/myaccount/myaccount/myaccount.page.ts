@@ -15,6 +15,7 @@ import { ToastController } from '@ionic/angular';
 export class MyaccountPage {
   mobNumber: any;
   username: any;
+  referralCode: any;
 
   selectedSegment: any;
 
@@ -56,13 +57,19 @@ export class MyaccountPage {
   ) {
     this.storage.create();
 
-    this.storage.get('admin').then((val) => {
-      // console.log(val);
-      let mobile = '+' + val.phonecode + ' ' + val.usermob;
-      this.mobNumber = mobile;
+    this.storage.get('admin').then(
+      (val) => {
+        // console.log(val);
+        let mobile = '+' + val.phonecode + ' ' + val.usermob;
+        this.mobNumber = mobile;
 
-      this.username = val.username;
-    });
+        this.username = val.username;
+        this.referralCode = val.referral;
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   goToProfile() {

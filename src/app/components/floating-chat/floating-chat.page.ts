@@ -25,15 +25,11 @@ export class FloatingChatPage implements OnInit {
     this.storage.get('admin').then(
       (value) => {
         if (value != null) {
-          let userid = value.userid;
-
           let data = {
             uid: value.userid,
           };
           this._apiService.getChats(data).subscribe(
             (res: any) => {
-              console.log('Chat Data:', res);
-
               this.chats = res;
 
               for (let i = 0; i < res.length; i++) {
@@ -52,24 +48,6 @@ export class FloatingChatPage implements OnInit {
         console.log(err);
       }
     );
-
-    // ********** Chat Messages ***************
-    //   const windowHeight = window.innerHeight;
-    // const chatAdmin = document.querySelector('.chatAdmin');
-    // const chatMessages = document.querySelector('.chatMessages');
-    // const sendMessage = document.querySelector('.sendMessage');
-
-    // chatAdmin.style.height = `${windowHeight * 0.1}px`;
-    // chatMessages.style.height = `${windowHeight * 0.8}px`;
-    // sendMessage.style.height = `${windowHeight * 0.1}px`;
-
-    // window.addEventListener('resize', () => {
-    //   const windowHeight = window.innerHeight;
-
-    //   chatAdmin.style.height = `${windowHeight * 0.1}px`;
-    //   chatMessages.style.height = `${windowHeight * 0.8}px`;
-    //   sendMessage.style.height = `${windowHeight * 0.1}px`;
-    // });
   }
 
   @ViewChild('content', { static: false }) content: any = ElementRef;
