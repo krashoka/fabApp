@@ -15,32 +15,41 @@ export class ApiService {
     this.directionSubject.next(direction);
   }
 
+  // Sending verification code to user
   sendVerify(data) {
     return this.http.post('https://specbits.com/class2/fab/register', data);
   }
 
+  // Verifying code entered by user
   verifyCode(data) {
-    console.log('data added :)');
     return this.http.post('https://specbits.com/class2/fab/verify', data);
   }
 
+  // Sending user data to complete user profile, like Name and Password
+  completeProfile(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/complete-profile',
+      data
+    );
+  }
+
+  // Logging in user with the provided credentials
   loginUser(data) {
-    console.log('login data send :)');
     return this.http.post('https://specbits.com/class2/fab/login', data);
   }
 
+  // Sending verification code to reset password after authentication user
   resetPasswordValidation(data) {
-    console.log('Verification code received :)');
     return this.http.post('https://specbits.com/class2/fab/reset', data);
   }
 
+  // Reseting password with the new password provided by user.
   resetPassword(data) {
-    console.log('reseting successful :)');
     return this.http.post('https://specbits.com/class2/fab/setpassword', data);
   }
 
+  // Signing Out User
   logout(data) {
-    console.log('reseting successful :)');
     return this.http.post('https://specbits.com/class2/fab/logout', data);
   }
 
@@ -50,13 +59,6 @@ export class ApiService {
 
   fetchAds(data) {
     return this.http.post('https://specbits.com/class2/fab/fetch-ads', data);
-  }
-
-  completeProfile(data) {
-    return this.http.post(
-      'https://specbits.com/class2/fab/complete-profile',
-      data
-    );
   }
 
   getChats(data) {

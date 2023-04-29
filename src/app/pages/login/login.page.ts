@@ -53,9 +53,7 @@ export class LoginPage implements OnInit {
       });
   }
 
-  // change(key: string, event: Event) {
-  //   console.log(key, event);
-  // }
+  // Searching functionality in Select2
   search(text: string) {
     this.countries = text
       ? (JSON.parse(JSON.stringify(this.countries)) as Select2Option[]).filter(
@@ -64,9 +62,6 @@ export class LoginPage implements OnInit {
         )
       : JSON.parse(JSON.stringify(this.countries));
   }
-  // update(key: string, event: Select2UpdateEvent<any>) {
-  //   console.log(event.value);
-  // }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -82,25 +77,20 @@ export class LoginPage implements OnInit {
       user_pwd: this.user_pwd,
     };
 
-    console.log('login Data:', data);
-
     this._apiService.loginUser(data).subscribe(
       (res: any) => {
-        console.log('Message From database: ', res);
-
-        if (res[1].msg == 'success') {
-          // this.storage.remove("admin");
+        if (res.loggedin) {
           let data = {
-            username: res[2].username,
-            userid: res[3].userid,
-            phonecode: res[4].phonecode,
-            usermob: res[5].mobile,
+            username: res.username,
+            userid: res.userid,
+            phonecode: res.phonecode,
+            usermob: res.mobile,
           };
           this.storage.set('admin', data);
           this.selectedCountry = '+973';
           this.user_mob = '';
           this.user_pwd = '';
-          this.router.navigateByUrl(`home/${res[3].userid}`);
+          this.router.navigateByUrl(`home/${res.userid}`);
         } else if (res == 'wrongpwd') {
           this.errorToast('Wrong Password !');
         } else {
@@ -109,27 +99,10 @@ export class LoginPage implements OnInit {
       },
       (er: any) => {
         console.log('ErrorMessage: ', er);
-        if (er.error.errors.user_mob) {
-          if (er.error.errors.user_mob == 'The user mob field is required.') {
-            this.errorToast('Mobile number is required!');
-          } else if (
-            er.error.errors.user_mob == 'The user mob field must be a number.'
-          ) {
-            this.errorToast('Invalid Number!');
-          }
-        } else if (er.error.errors.user_pwd) {
-          this.errorToast('Password is required!');
-        }
+        this.errorToast(er.error.message);
       }
     );
   }
-
-  // isAuthenticated(): Promise<boolean> {
-  //   return this.storage.get('loggedin')
-  //     .then(token => {
-  //       return token ? true : false;
-  //     });
-  // }
 
   async errorToast(a) {
     const toast = await this.toastCtrl.create({

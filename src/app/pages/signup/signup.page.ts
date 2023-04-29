@@ -61,7 +61,7 @@ export class SignupPage {
               uid: res.exists,
             },
           };
-          this.router.navigate(['/complete-profile'], navigationExtras);
+          this.router.navigateByUrl(`/complete-profile/${res.exists}`);
         } else if (res.registered) {
           this.inCompleteToast('Already registered! Please Login');
           this.router.navigate(['/login']);
@@ -114,12 +114,7 @@ export class SignupPage {
           this.isVerify = false;
           this.isInputDisabled = false;
           this.isSelectDisabled = false;
-          let navigationExtras: NavigationExtras = {
-            queryParams: {
-              uid: this.userId,
-            },
-          };
-          this.router.navigate(['/complete-profile'], navigationExtras);
+          this.router.navigateByUrl(`/complete-profile/${this.userId}`);
         } else if (res == 'wvc') this.errorToast('Wrong Verification Code!');
         else if (res == 'wpc') this.errorToast('Phone Code Error!');
         else if (res == 'mnf') this.errorToast('Invalid Mobile Number!');

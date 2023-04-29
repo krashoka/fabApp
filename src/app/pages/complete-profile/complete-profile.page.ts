@@ -71,6 +71,8 @@ export class CompleteProfilePage implements OnInit {
           this.errorToast(res.complete);
         } else if (res.sorry) {
           this.errorToast(res.sorry);
+        } else if (res.dberror) {
+          this.errorToast(res.sorry);
         } else {
           let data = {
             username: res.username,
