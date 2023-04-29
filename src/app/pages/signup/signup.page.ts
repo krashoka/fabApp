@@ -16,9 +16,14 @@ export class SignupPage {
   selectedCountry: any;
   overlay = false;
 
+  showCode = false;
+  verificationCode: any;
+
   userId: any;
   vcode: any;
   referalCode: any;
+
+  refCode = null;
 
   isVerify = false;
   showSendVerify = true;
@@ -51,14 +56,14 @@ export class SignupPage {
     this._apiService.sendVerify(data).subscribe(
       (res: any) => {
         this.userId = res.userid;
-        console.log('ResponseChandan: ', res);
+        console.log('Verification response: ', res);
         if (res.exists) {
           this.inCompleteToast('Already registered! Complete your Profile');
-          let navigationExtras: NavigationExtras = {
-            queryParams: {
-              uid: res.exists,
-            },
-          };
+          // let navigationExtras: NavigationExtras = {
+          //   queryParams: {
+          //     uid: res.exists,
+          //   },
+          // };
           this.router.navigateByUrl(`/complete-profile/${res.exists}`);
         } else if (res.registered) {
           this.inCompleteToast('Already registered! Please Login');
@@ -71,8 +76,12 @@ export class SignupPage {
           this.isInputDisabled = true;
           this.isSelectDisabled = true;
           this.successToast('Verification Code sent successfully.');
+          this.referalCode = '';
           this.showSendVerify = false;
           this.isVerify = true;
+          this.refCode = res.refcode;
+          this.showCode = true;
+          this.verificationCode = res.otp;
         } else if (res.otp) {
           this.user_mob = res.mobile;
           this.successToast('Verification Code sent successfully.');
@@ -80,6 +89,9 @@ export class SignupPage {
           this.isSelectDisabled = true;
           this.showSendVerify = false;
           this.isVerify = true;
+
+          this.showCode = true;
+          this.verificationCode = res.otp;
         }
       },
       (er: any) => {
@@ -97,6 +109,7 @@ export class SignupPage {
       user_mob: this.user_mob,
       phonecode: this.selectedCountry,
       vcode: this.vcode,
+      refcode: this.refCode,
     };
 
     this._apiService.verifyCode(data).subscribe(
@@ -106,6 +119,8 @@ export class SignupPage {
           this.user_mob = '';
           this.selectedCountry = '+973';
           this.vcode = '';
+          this.showCode = false;
+          this.verificationCode = "";
           this.showSendVerify = true;
           this.isVerify = false;
           this.isInputDisabled = false;

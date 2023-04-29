@@ -56,20 +56,6 @@ export class MyaccountPage {
     private _apiService: ApiService
   ) {
     this.storage.create();
-
-    this.storage.get('admin').then(
-      (val) => {
-        // console.log(val);
-        let mobile = '+' + val.phonecode + ' ' + val.usermob;
-        this.mobNumber = mobile;
-
-        this.username = val.username;
-        this.referralCode = val.referral;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
   }
 
   goToProfile() {
@@ -148,6 +134,12 @@ export class MyaccountPage {
     this.storage.get('admin').then((val) => {
       this.sessionUser = val.userid;
       // });
+
+      let mobile = '+' + val.phonecode + ' ' + val.usermob;
+      this.mobNumber = mobile;
+
+      this.username = val.username;
+      this.referralCode = val.referral;
 
       this.http
         .get('https://specbits.com/class2/fab/adds')

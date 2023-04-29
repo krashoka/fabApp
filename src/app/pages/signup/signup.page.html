@@ -13,6 +13,8 @@
         <p>So you can receive the activation code through it</p>
       </ion-text>
 
+      <h3 *ngIf="showCode" style="text-align: center">Verification Code: {{verificationCode}}</h3>
+
       <div class="phoneNumberLabel">
         <ion-icon name="call"></ion-icon>
         <ion-text>Phone Number</ion-text>
