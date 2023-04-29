@@ -147,7 +147,7 @@ export class ProductDetailsPage {
           this.successToast('Added to your Favorites.');
           this.heart = false;
           this.heartRed = true;
-          this.checkFav = 'Remove from ';
+          this.checkFav = 'rmFav ';
         } else if (res == 'fail') {
           this.errorToast('Failed adding to your Favorites!');
         } else if (res == 'noadd') {
@@ -175,7 +175,7 @@ export class ProductDetailsPage {
           this.successToast('Removed from your Favorites.');
           this.heart = true;
           this.heartRed = false;
-          this.checkFav = 'Add to ';
+          this.checkFav = 'addFav ';
         } else {
           this.errorToast('Error removing from Favorites!');
         }

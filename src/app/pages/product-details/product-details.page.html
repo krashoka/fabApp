@@ -78,7 +78,7 @@
             <ion-label class="currency">AED</ion-label>
           </div>
           <ion-card class="makeOffer" *ngIf="makeOffer">
-            <ion-text>Make an Offer</ion-text>
+            <ion-text>{{'makeOffer' | translate}}</ion-text>
           </ion-card>
         </div>
 
@@ -103,24 +103,24 @@
 
         <div>
           <div class="makeYourOffer">
-            <ion-input type="number" placeholder="Make your offer" />
-            <div class="sendOffer">SEND</div>
+            <ion-input type="number" [placeholder]="'makeOffer' | translate" />
+            <div class="sendOffer">{{'send' | translate}}</div>
           </div>
 
           <div class="offeredPrice">
-            <p>OFFERED PRICE</p>
+            <p>{{'offeredPrice' | translate}}</p>
             <p>
               <ion-text class="pmo">5980000</ion-text>
               <ion-text class="cmo">AED</ion-text>
             </p>
           </div>
           <div class="offerBtn">
-            <div>Accept Offer</div>
-            <div>Reject Offer</div>
+            <div>{{'acceptOffer' | translate}}</div>
+            <div>{{'rejectOffer' | translate}}</div>
           </div>
         </div>
 
-        <ion-card class="buyNow">Buy Now</ion-card>
+        <ion-card class="buyNow">{{'buyNow' | translate}}</ion-card>
       </div>
     </div>
 
@@ -139,15 +139,15 @@
           name="heart"
           *ngIf="heartRed"
         ></ion-icon>
-        <ion-text>{{checkFav}}Favorites</ion-text>
+        <ion-text>{{checkFav | translate}}{{'fav' | translate}}</ion-text>
       </div>
       <div (click)="share()">
         <ion-icon class="share" name="share-social"></ion-icon>
-        <ion-text>Share this Post</ion-text>
+        <ion-text>{{'sharePost' | translate}}</ion-text>
       </div>
     </div>
 
-    <p class="productLabel">The Details</p>
+    <p class="productLabel">{{'details' | translate}}</p>
 
     <!-- ------ Location ------------- -->
     <div class="location">
@@ -165,7 +165,7 @@
 
   <!-- Produce Description -->
   <div class="description">
-    <p class="descLang">Description</p>
+    <p class="descLang">{{'description' | translate}}</p>
     <p
       class="details"
       [ngStyle]="{ 'height': adDetailsHeight, 'box-shadow': bShadow, 'overflow': oFlow }"
@@ -174,12 +174,12 @@
     </p>
   </div>
   <div class="read" *ngIf="readMore" (click)="readDetailsMore()">
-    <button class="readBtn">Read More</button>
+    <button class="readBtn">{{'readMore' | translate}}</button>
     <ion-icon class="caret" name="caret-down"></ion-icon>
   </div>
 
   <div class="read" *ngIf="readLess" (click)="readDetailsLess()">
-    <button class="readBtn">Read Less</button>
+    <button class="readBtn">{{'readLess' | translate}}</button>
     <ion-icon class="caret" name="caret-up"></ion-icon>
   </div>
 
@@ -191,17 +191,17 @@
 
   <!-- ----------- Comment -------------- -->
   <div class="commentSection" *ngIf="canComment">
-    <p class="comment">Chat</p>
+    <p class="comment">{{'chat' | translate}}</p>
     <ion-textarea
       class="addComment"
-      placeholder="Type to chat..."
+      [placeholder]="'typeChat' | translate"
       type="text"
       [disabled]="commentDisabled"
       autoGrow="true"
       [(ngModel)]="commentValue"
     ></ion-textarea>
     <div class="addCommentBtn">
-      <button (click)="addComment()">Start Chat</button>
+      <button (click)="addComment()">{{'startChat' | translate}}</button>
     </div>
   </div>
 
@@ -282,7 +282,7 @@
 
   <!-- ---------- Related Posts ------------- -->
   <div class="relatedPost">
-    <p class="comment">Related Posts</p>
+    <p class="comment">{{'relatedPosts' | translate}}</p>
   </div>
 
   <!------------------------ SLIDER  ------------------>

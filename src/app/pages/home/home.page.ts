@@ -31,6 +31,9 @@ export class HomePage {
 
   adDetails: any = [];
 
+  showCommercialTitle = false;
+  showStickyTitle = false;
+
   waLink = 'https://wa.me/';
 
   constructor(
@@ -123,7 +126,7 @@ export class HomePage {
     autoplay: true,
   };
 
-  goToSticky(datas: any, titles: any, slug:any) {
+  goToSticky(datas: any, titles: any, slug: any) {
     let data = { cid: datas };
 
     this.storage.set('catTitle', slug);
@@ -348,6 +351,11 @@ export class HomePage {
 
         console.log('Total ad Data:', this.adDetails);
       });
+
+    if (this.adDetails.length != 0) {
+      this.showCommercialTitle = true;
+      this.showStickyTitle = true;
+    }
   }
 
   async ngOnInit() {

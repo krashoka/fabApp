@@ -16,7 +16,6 @@ export class ApiService {
   }
 
   sendVerify(data) {
-    console.log('Verification code received :)');
     return this.http.post('https://specbits.com/class2/fab/register', data);
   }
 

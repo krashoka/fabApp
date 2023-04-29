@@ -10,7 +10,7 @@ import { Select2Option } from 'ng-select2-component';
   templateUrl: './signup.page.html',
   styleUrls: ['./signup.page.scss'],
 })
-export class SignupPage implements OnInit {
+export class SignupPage {
   user_mob: any;
   countries: any = [];
   selectedCountry: any;
@@ -23,6 +23,7 @@ export class SignupPage implements OnInit {
   isVerify = false;
   showSendVerify = true;
   isInputDisabled = false;
+  isSelectDisabled = false;
 
   constructor(
     private router: Router,
@@ -47,12 +48,12 @@ export class SignupPage implements OnInit {
       referral: this.referalCode,
     };
 
-    console.log(data);
+    // console.log(data);
 
     this._apiService.sendVerify(data).subscribe(
       (res: any) => {
-        this.userId = res[3].user_id;
-        console.log('SuccessMessage: ', res);
+        this.userId = res.userid;
+        console.log('ResponseChandan: ', res);
         if (res.exists) {
           this.inCompleteToast('Already registered! Complete your Profile');
           let navigationExtras: NavigationExtras = {
@@ -64,18 +65,21 @@ export class SignupPage implements OnInit {
         } else if (res.registered) {
           this.inCompleteToast('Already registered! Please Login');
           this.router.navigate(['/login']);
-        } else if (res == 'wrongref') {
+        } else if (res.refferedBy == 0) {
           this.errorToast('Enter valid Referral code!');
           this.referalCode = '';
-        } else if (res[4] == 1) {
-          this.user_mob = res[1];
+        } else if (res.refferedBy == 1) {
+          this.user_mob = res.mobile;
           this.isInputDisabled = true;
-          this.successToast('Referral Code verified successfully.');
+          this.isSelectDisabled = true;
+          this.successToast('Verification Code sent successfully.');
           this.showSendVerify = false;
           this.isVerify = true;
-        } else if (res[4] == 2) {
-          this.user_mob = res[1];
+        } else if (res.otp) {
+          this.user_mob = res.mobile;
+          this.successToast('Verification Code sent successfully.');
           this.isInputDisabled = true;
+          this.isSelectDisabled = true;
           this.showSendVerify = false;
           this.isVerify = true;
         }
@@ -101,8 +105,6 @@ export class SignupPage implements OnInit {
     this._apiService.verifyCode(data).subscribe(
       (res: any) => {
         console.log('UserIddd:', res);
-        // this.user_mob= res;
-        // this.isInputDisabled = true;
         if (res == 'success') {
           this.successToast('Account Verified.');
           this.user_mob = '';
@@ -111,16 +113,20 @@ export class SignupPage implements OnInit {
           this.showSendVerify = true;
           this.isVerify = false;
           this.isInputDisabled = false;
-          this.router.navigateByUrl(`complete-profile/${this.userId}`);
-        } else this.errorToast(res);
+          this.isSelectDisabled = false;
+          let navigationExtras: NavigationExtras = {
+            queryParams: {
+              uid: this.userId,
+            },
+          };
+          this.router.navigate(['/complete-profile'], navigationExtras);
+        } else if (res == 'wvc') this.errorToast('Wrong Verification Code!');
+        else if (res == 'wpc') this.errorToast('Phone Code Error!');
+        else if (res == 'mnf') this.errorToast('Invalid Mobile Number!');
       },
       (er: any) => {
         console.log(er.error.message);
-        if (er.error.message == 'The vcode field is required.') {
-          this.errorToast((er.error.message = 'Please enter OTP'));
-        } else {
-          this.errorToast((er.error.message = 'OTP must be a number'));
-        }
+        this.errorToast(er.error.message);
       }
     );
   }
@@ -159,7 +165,7 @@ export class SignupPage implements OnInit {
     this.router.navigate(['home']);
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.http
       .get('https://specbits.com/class2/fab/country')
       .subscribe((res: any) => {

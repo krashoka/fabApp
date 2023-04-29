@@ -115,7 +115,7 @@
     </div>
   </div>
   <!-- ------- COMMERCIAL ADS SECTION for Desktop --------- -->
-  <div class="commercial">
+  <div class="commercial" *ngIf="showCommercialTitle">
     <ion-card class="commercialAdsTitle">
       <div>
         <ion-icon style="font-size: 28px" name="megaphone"></ion-icon>
@@ -184,7 +184,7 @@
   </div>
 
   <!-- ---------- STICKY ADS for Desktop -------------- -->
-  <div class="commercial">
+  <div class="commercial" *ngIf="showStickyTitle">
     <ion-card class="commercialAdsTitle">
       <div>
         <ion-icon style="font-size: 28px" name="flash"></ion-icon>

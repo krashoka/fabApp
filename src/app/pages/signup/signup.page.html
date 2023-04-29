@@ -25,12 +25,13 @@
             [data]="countries"
             (search)="search('search1')"
             [(ngModel)]="selectedCountry"
+            [disabled]="isSelectDisabled"
           >
           </select2>
         </div>
 
         <ion-input
-          type="text"
+          type="number"
           placeholder="Enter a phone number"
           [(ngModel)]="user_mob"
           [disabled]="isInputDisabled"
