@@ -3,7 +3,7 @@
   <app-navbar class="topNav"></app-navbar>
   <!-- ------------------------------------------------ -->
 
-  <ion-card class="navigationAndSearch">
+  <ion-card class="navigationAndSearch" style="display: none">
     <div>
       <ion-breadcrumbs>
         <ion-breadcrumb
@@ -58,8 +58,10 @@
         class="tabsSlide"
         *ngFor="let category of categories"
         (click)="goToSticky(category.cid, category.title, category.parent, category.slug)"
-        >{{ 'homeData.' + category.slug | translate }}</ion-label
       >
+        <ion-label *ngIf="english">{{category.title}}</ion-label>
+        <ion-label *ngIf="arabic">{{category.arabic}}</ion-label>
+      </ion-label>
       <ion-icon name="chevron-back" class="arrowBack"></ion-icon>
       <ion-icon name="chevron-forward" class="arrowForward"></ion-icon>
     </div>

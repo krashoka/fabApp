@@ -39,6 +39,8 @@ export class NavbarPage implements OnInit {
     this.translateService.use(event);
     this.engFlag = !this.engFlag;
     this.arabicFlag = !this.arabicFlag;
+    let lang = { lang: event };
+    this.storage.set('changeLang', lang);
   }
 
   // Change direction from ltr to rtl in arabic language

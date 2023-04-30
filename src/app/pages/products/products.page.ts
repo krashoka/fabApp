@@ -28,6 +28,9 @@ export class ProductsPage implements OnInit {
 
   sessionUser: any;
 
+  english = true;
+  arabic = false;
+
   // breadcrumbs: any = [];
 
   // isArrow = true;
@@ -202,6 +205,16 @@ export class ProductsPage implements OnInit {
 
     // this.breadcrumbService;
 
+    this.storage.get('changeLang').then((val) => {
+      if (val.lang == 'en') {
+        this.english = true;
+        this.arabic = false;
+      } else if (val.lang == 'ar') {
+        this.arabic = true;
+        this.english = false;
+      }
+    });
+
     this.storage.get('admin').then((val) => {
       this.sessionUser = val.userid;
     });
@@ -311,7 +324,7 @@ export class ProductsPage implements OnInit {
       // this.breadcrumbService.addBreadcrumb(titles, link);
 
       this.storage.get('catTitle').then((val) => {
-        console.log("data in Cat Title:", val);
+        console.log('data in Cat Title:', val);
         this.categoryTitle = val;
       });
     } else {
