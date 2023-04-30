@@ -88,13 +88,13 @@ $extra-large-screen: 1200px;
     display: flex !important;
     justify-content: space-between !important;
     align-items: center;
+    background-color: #fff !important;
   }
 
   .select2-results__options {
     padding: 0px !important;
   }
 
-  
   .select2-results__group {
     padding: 0px !important;
   }
@@ -136,6 +136,7 @@ $extra-large-screen: 1200px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #fff !important;
   }
 
   .select2-container .select2-selection__rendered {

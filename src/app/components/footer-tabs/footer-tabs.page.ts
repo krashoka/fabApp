@@ -9,13 +9,19 @@ import { Storage } from '@ionic/storage-angular';
 })
 export class FooterTabsPage implements OnInit {
   username: any;
+  isLoggedIn = false;
 
   constructor(private router: Router, private storage: Storage) {
     this.storage.create();
+  }
 
+  ngOnInit() {
     this.storage.get('admin').then(
       (val) => {
-        if (val != null) this.username = val.username;
+        if (val.loggedin) {
+          this.username = val.username;
+          this.isLoggedIn = val.loggedin;
+        }
       },
       (er) => {
         console.log(er);
@@ -23,12 +29,11 @@ export class FooterTabsPage implements OnInit {
     );
   }
 
-  ngOnInit() {}
-
   more = false;
 
   showMore() {
-    this.more = true;
+    if (this.isLoggedIn) this.more = true;
+    else this.router.navigate(['login']);
   }
 
   closeMore() {

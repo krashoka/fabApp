@@ -69,6 +69,10 @@ $extra-large-screen: 1200px;
     margin: 30px 20px;
   }
 
+  .mobNumber > ion-input {
+    margin-left: 10px;
+  }
+
   .flags {
     width: 15px;
     height: 15px;
@@ -91,6 +95,7 @@ $extra-large-screen: 1200px;
     margin: 20px;
     display: flex;
     align-items: center;
+    padding-left: 10px;
   }
 
   .verifyBtn {
@@ -206,6 +211,10 @@ $extra-large-screen: 1200px;
     color: #484848;
     font-size: 18px;
     text-align: left;
+  }
+
+  .mobNumber > ion-input {
+    margin-left: 10px;
   }
 
   .flags {
