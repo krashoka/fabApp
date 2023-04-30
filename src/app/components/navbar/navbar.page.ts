@@ -53,6 +53,7 @@ export class NavbarPage implements OnInit {
   onDropdownSelect = false;
   openMyAccountTab() {
     this.onDropdownSelect = !this.onDropdownSelect;
+    this.ngOnInit();
   }
 
   dismissSideMenu() {
@@ -103,18 +104,48 @@ export class NavbarPage implements OnInit {
     toast.present();
   }
 
-  async ngOnInit() {
+  fetchAdminData() {
+    this.storage.get('admin').then((val) => {
+      let data = {
+        uid: val.userid,
+      };
+
+      this._apiService.fetchAdminData(data).subscribe((res: any) => {
+        if (res == 'code-1') {
+          this.errorToast('User not found');
+        } else if (res == 'code-0') {
+          this.errorToast('Session Error');
+        } else {
+          let newData = {
+            username: res.username,
+            userid: res.userid,
+            phonecode: res.phonecode,
+            usermob: res.mobile,
+            referral: res.myref,
+            myPoints: res.mypoints,
+          };
+          this.storage.set('admin', newData);
+        }
+      });
+    });
+  }
+
+  ngOnInit() {
+    this.fetchAdminData();
+
     this.storage.get('admin').then((val) => {
       if (val != null) {
         this.username = val.username;
+        this.showAccount = true;
+        this.showLogin = false;
       }
     });
 
-    const value = await this.storage.get('admin');
-    if (value != null) {
-      this.showAccount = true;
-      this.showLogin = false;
-    }
+    // const value = await this.storage.get('admin');
+    // if (value != null) {
+    //   this.showAccount = true;
+    //   this.showLogin = false;
+    // }
   }
 
   isElementActive(routePath: string): boolean {

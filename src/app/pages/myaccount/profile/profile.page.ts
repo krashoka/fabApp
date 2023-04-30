@@ -9,7 +9,7 @@ import { ToastController } from '@ionic/angular';
   templateUrl: './profile.page.html',
   styleUrls: ['./profile.page.scss'],
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage {
   username: any;
   userid: any;
 
@@ -34,11 +34,11 @@ export class ProfilePage implements OnInit {
   ) {
     this.storage.create();
 
-    this.storage.get('admin').then((val) => {
-      console.log(val);
-      this.username = val.username;
-      this.userid = val.userid;
-    });
+    // this.storage.get('admin').then((val) => {
+    //   console.log(val);
+    //   this.username = val.username;
+    //   this.userid = val.userid;
+    // });
   }
 
   togglePasswordVisibility() {
@@ -85,10 +85,12 @@ export class ProfilePage implements OnInit {
     this._apiService.changeName(data).subscribe(
       (res: any) => {
         console.log('new Name:', res);
+
         if (res == 'fail') this.errorToast('Sorry, Name not updated!');
         else {
           this.successToast('Name updated successfully.');
           this.newName = '';
+          this.ionViewWillEnter();
         }
       },
       (error) => {
@@ -96,6 +98,36 @@ export class ProfilePage implements OnInit {
         this.errorToast(error.error.message);
       }
     );
+  }
+
+  fetchAdminData() {
+    this.storage.get('admin').then((val) => {
+      let data = {
+        uid: val.userid,
+      };
+
+      console.log('fetsldf:', data);
+
+      this._apiService.fetchAdminData(data).subscribe((res: any) => {
+        console.log('my response:', res);
+        if (res == 'code-1') {
+          this.errorToast('User not found');
+        } else {
+          let newData = {
+            username: res.username,
+            userid: res.userid,
+            phonecode: res.phonecode,
+            usermob: res.mobile,
+            referral: res.myref,
+            myPoints: res.mypoints,
+          };
+          this.storage.set('admin', newData);
+
+          this.username = res.username;
+          this.userid = res.userid;
+        }
+      });
+    });
   }
 
   changePassword() {
@@ -154,5 +186,7 @@ export class ProfilePage implements OnInit {
     toast.present();
   }
 
-  ngOnInit() {}
+  ionViewWillEnter() {
+    this.fetchAdminData();
+  }
 }

@@ -15,7 +15,7 @@ import { Share } from '@capacitor/share';
 export class ProductDetailsPage {
   adTitle: any;
   adDetail: any;
-  adAdmin: any;
+  adKaAdmin: any;
   adId: any;
   price: any;
   prodDetails: any;
@@ -30,9 +30,13 @@ export class ProductDetailsPage {
   adminSessionId: any;
   adData: any = [];
 
+  commentedUserId: any;
+
   chatUserList: any = {};
 
   sessionUser: any;
+
+  showBack = false;
 
   chatCardDisplay: any;
   commentCardDisplay: any;
@@ -292,7 +296,7 @@ export class ProductDetailsPage {
     console.log('Share result:', shareRet);
   }
 
-  async ionViewWillEnter() {
+  ionViewWillEnter() {
     // TESTING CODE FOR PROGRESS BAR
     // setTimeout(() => {
     // this.timeOnPage += 5000;
@@ -304,8 +308,8 @@ export class ProductDetailsPage {
     this.adId = slug;
 
     this.storage.get('admin').then(
-      (val) => {
-        this.sessionUser = val.userid;
+      (session) => {
+        this.sessionUser = session.userid;
       },
       (err) => {
         console.log(err);
@@ -353,7 +357,7 @@ export class ProductDetailsPage {
               if (res[i][key].add_id == slug) {
                 this.adTitle = res[i][key].add_title;
                 this.adDetail = res[i][key].add_detail;
-                this.adAdmin = res[i][key].user_id;
+                this.adKaAdmin = res[i][key].user_id;
               } else {
                 adTitle = res[i][key].add_title;
                 adDetail = res[i][key].add_detail;
@@ -447,8 +451,16 @@ export class ProductDetailsPage {
 
     this.storage.get('admin').then(
       (session) => {
+        this.sessionUser = session.userid;
+
+        if (session.userid == this.adKaAdmin) {
+          this.chatCardDisplay = true;
+          this.commentCardDisplay = false;
+          this.showBack = false;
+        }
         // ////////////////////
         let value = { aid: slug, uid: session.userid };
+        console.log('loading data:', value);
         this.http
           .post('https://specbits.com/class2/fab/fetch-comment', value)
           .subscribe(
@@ -464,19 +476,23 @@ export class ProductDetailsPage {
                   this.canComment = false;
                   this.allComments = true;
 
-                  if (session.userid == this.adAdmin) {
+                  if (session.userid == this.adKaAdmin) {
                     this.chatCardDisplay = true;
                     this.commentCardDisplay = false;
                     this.makeOffer = false;
 
                     // Filtering number of users commented on a particular ad.
                     for (let i = 0; i < com.length; i++) {
+                      
                       let sameUser = com[i].user_id;
                       console.log('sameUser:', sameUser);
                       // let chats = {};
                       // chats[sameUser]
                       // chats['time'] = com[i].created_at;
-                      this.chatUserList[sameUser] = com[i].username;
+                      if(sameUser != this.adKaAdmin){
+                        this.chatUserList[sameUser] = com[i].username;
+                      }
+                      
                     }
 
                     console.log('chatUserList:', this.chatUserList);
@@ -488,7 +504,7 @@ export class ProductDetailsPage {
                     console.log('All comments:', this.comments);
                   }
                 } else {
-                  if (session.userid == this.adAdmin) {
+                  if (session.userid == this.adKaAdmin) {
                     this.canComment = false;
                     this.allComments = false;
                   } else {
@@ -515,10 +531,13 @@ export class ProductDetailsPage {
         console.log(err);
       }
     );
+
+    // *************************************
   }
 
   // Function to show chat on click of particular user
   showUserChat(key) {
+    this.commentedUserId = key;
     let data = {
       aid: this.adId,
       uid: key,
@@ -544,14 +563,29 @@ export class ProductDetailsPage {
             }
           }
         }
+        // this.comments = res;
+
+        setTimeout(() => {
+          this.content.nativeElement.scrollTo({
+            top: this.content.nativeElement.scrollHeight,
+            behavior: 'smooth',
+          });
+        }, 100);
         console.log('New Comments:', this.comments);
         this.chatCardDisplay = false;
         this.commentCardDisplay = true;
+        this.showBack = true;
       },
       (err) => {
         console.log(err);
       }
     );
+  }
+
+  goToChatCard() {
+    this.showBack = false;
+    this.chatCardDisplay = true;
+    this.commentCardDisplay = false;
   }
 
   @ViewChild('content', { static: false }) content: any = ElementRef;
@@ -560,34 +594,44 @@ export class ProductDetailsPage {
     if (this.sessionVal) {
       let commentData = {
         aid: this.adId,
-        uid: this.userid,
+        oid: this.userid,
+        cuid: this.commentedUserId,
         comment: this.commentValue,
       };
       this.http
         .post('https://specbits.com/class2/fab/make-comment', commentData)
         .subscribe(
-          (res: any) => {
-            console.log('comment response:', res);
+          (resCom: any) => {
+            console.log('comment response:', resCom);
             this.commentValue = '';
 
-            let value = { aid: this.adId, uid: this.userid };
-            this.http
-              .post('https://specbits.com/class2/fab/fetch-comment', value)
-              .subscribe(
-                (res: any) => {
-                  this.comments = res;
+            if (resCom == 'success') {
+              if (this.userid == this.adKaAdmin) {
+                this.showUserChat(this.commentedUserId);
+              } else {
+                let value = { aid: this.adId, uid: this.userid };
+                this.http
+                  .post('https://specbits.com/class2/fab/fetch-comment', value)
+                  .subscribe(
+                    (res: any) => {
+                      console.log('fetch comment: ', res);
+                      this.comments = res;
 
-                  setTimeout(() => {
-                    this.content.nativeElement.scrollTo({
-                      top: this.content.nativeElement.scrollHeight,
-                      behavior: 'smooth',
-                    });
-                  }, 100);
-                },
-                (err) => {
-                  console.log(err);
-                }
-              );
+                      setTimeout(() => {
+                        this.content.nativeElement.scrollTo({
+                          top: this.content.nativeElement.scrollHeight,
+                          behavior: 'smooth',
+                        });
+                      }, 100);
+                    },
+                    (err) => {
+                      console.log(err);
+                    }
+                  );
+              }
+            } else {
+              this.errorToast('Message sending failed.');
+            }
           },
           (err) => {
             console.log(err);

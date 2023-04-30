@@ -250,7 +250,34 @@ export class HomePage {
     console.log('Share result:', shareRet);
   }
 
+  fetchAdminData() {
+    this.storage.get('admin').then((val) => {
+      let data = {
+        uid: val.userid,
+      };
+
+      this._apiService.fetchAdminData(data).subscribe((res: any) => {
+        if(res == 'code-1'){
+          this.errorToast("User not found");
+        }else if(res == 'code-0'){
+          this.errorToast("Session Error");
+        }else {
+          let newData = {
+            username: res.username,
+            userid: res.userid,
+            phonecode: res.phonecode,
+            usermob: res.mobile,
+            referral: res.myref,
+            myPoints: res.mypoints,
+          };
+          this.storage.set('admin', newData);
+        }
+      });
+    });
+  }
+
   dataOnPageLoad() {
+    this.fetchAdminData();
     window.addEventListener('resize', this.onResize.bind(this));
 
     this.storage.get('admin').then(
@@ -365,8 +392,8 @@ export class HomePage {
     
   }
 
-  async ngOnInit() {
-    await this.dataOnPageLoad();
+  ngOnInit() {
+    this.dataOnPageLoad();
   }
 
   // async ionViewWillEnter() {

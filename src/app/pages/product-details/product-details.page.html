@@ -206,13 +206,18 @@
   </div>
 
   <div *ngIf="allComments">
-    <div class="seeComments" *ngIf="show" (click)="showComment()">
-      <p>See Chats</p>
-      <ion-icon name="caret-down"></ion-icon>
+    <div style="display: flex; justify-content: space-between;">
+    <div>
+      <div class="seeComments" *ngIf="show" (click)="showComment()">
+        <p>See Chats</p>
+        <ion-icon name="caret-down"></ion-icon>
+      </div>
+      <div class="seeComments" *ngIf="hide" (click)="showComment()">
+        <p>Hide Chats</p>
+        <ion-icon name="caret-up"></ion-icon>
+      </div>
     </div>
-    <div class="seeComments" *ngIf="hide" (click)="showComment()">
-      <p>Hide Chats</p>
-      <ion-icon name="caret-up"></ion-icon>
+    <ion-button *ngIf="showBack" (click)="goToChatCard()">Back</ion-button>
     </div>
 
     <div *ngIf="commentDisplay" class="commentWidth">

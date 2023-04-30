@@ -61,6 +61,7 @@ export class MyaccountPage {
   }
 
   goToProfile() {
+    this.fetchAdminData();
     this.router.navigate(['profile']);
   }
 
@@ -69,6 +70,7 @@ export class MyaccountPage {
   }
 
   goToMyPoints() {
+    this.fetchAdminData();
     this.router.navigate(['my-points']);
   }
 
@@ -127,7 +129,35 @@ export class MyaccountPage {
     toast.present();
   }
 
+  fetchAdminData() {
+    this.storage.get('admin').then((val) => {
+      let data = {
+        uid: val.userid,
+      };
+
+      this._apiService.fetchAdminData(data).subscribe((res: any) => {
+        if (res == 'code-1') {
+          this.errorToast('User not found');
+        } else if (res == 'code-0') {
+          this.errorToast('Session Error');
+        } else {
+          let newData = {
+            username: res.username,
+            userid: res.userid,
+            phonecode: res.phonecode,
+            usermob: res.mobile,
+            referral: res.myref,
+            myPoints: res.mypoints,
+          };
+          this.storage.set('admin', newData);
+        }
+      });
+    });
+  }
+
   myAccountDataOnPageLoad() {
+    this.fetchAdminData();
+
     this.selectedSegment = this.route.snapshot.paramMap.get('slug');
     // console.log('Segment VAl:', this.selectedSegment);
     // if (this.selectedSegment == null) this.selectedSegment = 'ads';

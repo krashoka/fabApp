@@ -135,4 +135,11 @@ export class ApiService {
       data
     );
   }
+
+  fetchAdminData(data){
+    return this.http.post(
+      'https://specbits.com/class2/fab/active-user-info',
+      data
+    );
+  }
 }
