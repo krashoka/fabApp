@@ -84,7 +84,10 @@
           <img [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]" />
 
           <div>
-            <p class="uploadTime">{{ad.timestamp}}</p>
+            <p class="uploadTime">
+              <ion-text>{{ad.timestamp}}</ion-text>
+              <ion-text class="adStatus">{{ad.adStatus}}</ion-text>
+            </p>
             <h1 class="adTitle">{{ad.adTitle}}</h1>
             <p class="adPrice">
               {{ad.itemObj.Price}} <ion-text class="currency">AED</ion-text>

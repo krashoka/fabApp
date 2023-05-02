@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { ApiService } from 'src/app/api.service';
 import { Select2Option } from 'ng-select2-component';
+import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import { TranslateService } from '@ngx-translate/core';
@@ -42,6 +43,7 @@ export class HomePage {
     private toastCtrl: ToastController,
     private storage: Storage,
     private _apiService: ApiService,
+    private route: ActivatedRoute,
     private navController: NavController,
     private translate: TranslateService
   ) {
@@ -134,7 +136,7 @@ export class HomePage {
       if (res == 'empty') {
         this.router.navigate(['home']);
       } else {
-        this.router.navigateByUrl(`products/${datas}-${titles}`);
+        this.router.navigateByUrl(`products/${datas}-${slug}`);
       }
     });
 
@@ -179,6 +181,7 @@ export class HomePage {
 
     this._apiService.addToFavorites(data).subscribe(
       (res: any) => {
+        console.log('favRreed:', res);
         if (res == 'success') {
           this.successToast('Added to your Favorites.');
           this.adDetails[i].heartVisible = false;
@@ -257,12 +260,13 @@ export class HomePage {
       };
 
       this._apiService.fetchAdminData(data).subscribe((res: any) => {
-        if(res == 'code-1'){
-          this.errorToast("User not found");
-        }else if(res == 'code-0'){
-          this.errorToast("Session Error");
-        }else {
+        if (res == 'code-1') {
+          this.errorToast('User not found');
+        } else if (res == 'code-0') {
+          this.errorToast('Session Error');
+        } else {
           let newData = {
+            loggedIn: true,
             username: res.username,
             userid: res.userid,
             phonecode: res.phonecode,
@@ -282,8 +286,12 @@ export class HomePage {
 
     this.storage.get('admin').then(
       (val) => {
+
         if (val != null) {
+          console.log('data fetched');
           this.sessionUser = val.userid;
+
+          this.newData(val.userid);
 
           let favData = {
             uid: val.userid,
@@ -298,6 +306,9 @@ export class HomePage {
 
             this.favData = res;
           });
+        } else {
+          console.log('not fetched');
+          this.newData(null);
         }
       },
       (er) => {
@@ -305,10 +316,24 @@ export class HomePage {
       }
     );
 
+    // let slug = this.route.snapshot.paramMap.get('id');
+    // console.log("Get Slug:", slug);
+
+    // let slugData = {
+    //   uid: slug
+    // }
+  }
+
+  newData(userId) {
+    console.log('');
+
+    let data = {
+      uid: userId,
+    };
     this.http
-      .get('https://specbits.com/class2/fab/adds')
+      .post('https://specbits.com/class2/fab/adds', data)
       .subscribe((res: any) => {
-        console.log('Show Ad details:', res);
+        console.log('new user details:', res);
 
         // Displaying ads from database
         let dataLength = res.length;
@@ -322,11 +347,15 @@ export class HomePage {
           let adAdmin;
           let adMobile;
           let timestamp;
+          let adStatus;
+          let heartVisible;
+          let heartRedVisible;
           for (let key in res[i]) {
             if (key === 'addHeadings') {
               adTitle = res[i][key].add_title;
               adDetail = res[i][key].add_detail;
               adAdmin = res[i][key].user_id;
+              adStatus = res[i][key].add_status;
             }
 
             if (key === 'addPersonalInfo') {
@@ -354,6 +383,9 @@ export class HomePage {
                 // }
               }
             }
+
+            if (key === 'heartVisible') heartVisible = res[i][key];
+            if (key === 'heartRedVisible') heartRedVisible = res[i][key];
           }
 
           let itemObj = {};
@@ -364,6 +396,7 @@ export class HomePage {
 
           let data = {
             adAdmin: adAdmin,
+            adStatus: adStatus,
             adTitle: adTitle,
             itemObj: itemObj,
             adDetail: adDetail,
@@ -371,25 +404,25 @@ export class HomePage {
             ad_id: ad_id,
             adMobile: adMobile,
             timestamp: this.timestamp(timestamp),
-            heartVisible: true,
-            heartRedVisible: false,
+            heartVisible: heartVisible,
+            heartRedVisible: heartRedVisible,
           };
 
           console.log('adDetails data:', data);
-
-          if (this.sessionUser != data.adAdmin) {
+          console.log('checkuse:');
+          if (userId != data.adAdmin && data.adStatus == 'approved') {
             this.adDetails.push(data);
             if (this.adDetails.length != 0) {
               this.showCommercialTitle = true;
               this.showStickyTitle = true;
             }
+          } else {
+            this.adDetails.push(data);
           }
         }
 
         console.log('Total ad Data:', this.adDetails);
       });
-
-    
   }
 
   ngOnInit() {

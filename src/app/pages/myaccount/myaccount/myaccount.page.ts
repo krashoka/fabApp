@@ -177,7 +177,7 @@ export class MyaccountPage {
       this.http
         .get('https://specbits.com/class2/fab/adds')
         .subscribe((res: any) => {
-          console.log('Show Ad details:', res);
+          console.log('Show ads data:', res);
 
           this.adDetails = [];
           this.chatsOnAd = [];
@@ -201,11 +201,13 @@ export class MyaccountPage {
             let adAdmin;
             let adMobile;
             let timestamp;
+            let adStatus;
             for (let key in res[i]) {
               if (key === 'addHeadings') {
                 adTitle = res[i][key].add_title;
                 adDetail = res[i][key].add_detail;
                 adAdmin = res[i][key].user_id;
+                adStatus = res[i][key].add_status;
               }
 
               if (key === 'addPersonalInfo') {
@@ -243,6 +245,7 @@ export class MyaccountPage {
 
             let data = {
               adAdmin: adAdmin,
+              adStatus: adStatus,
               adTitle: adTitle,
               itemObj: itemObj,
               adDetail: adDetail,
@@ -255,6 +258,22 @@ export class MyaccountPage {
             if (this.sessionUser == data.adAdmin) {
               this.adDetails.push(data);
               count++;
+
+              if(data.adStatus == "approved"){
+
+              }
+
+              if(data.adStatus == "pending"){
+
+              }
+
+              if(data.adStatus == "rejected"){
+
+              }
+
+              if(data.adStatus == "expired"){
+
+              }
 
               let value = { aid: data.ad_id, uid: this.sessionUser };
               this.http

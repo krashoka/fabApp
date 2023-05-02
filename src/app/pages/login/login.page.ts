@@ -80,6 +80,7 @@ export class LoginPage {
       (res: any) => {
         if (res.loggedin) {
           let data = {
+            loggedIn: true,
             username: res.username,
             userid: res.userid,
             phonecode: res.phonecode,
@@ -91,7 +92,7 @@ export class LoginPage {
           this.selectedCountry = '+973';
           this.user_mob = '';
           this.user_pwd = '';
-          this.router.navigateByUrl(`home/${res.userid}`);
+          this.router.navigateByUrl(`home`);
         } else if (res == 'wrongpwd') {
           this.errorToast('Wrong Password !');
         } else {

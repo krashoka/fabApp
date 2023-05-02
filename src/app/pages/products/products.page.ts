@@ -97,7 +97,7 @@ export class ProductsPage implements OnInit {
     // this.breadcrumbsFun(titles);
 
     // const title = this.route.snapshot.data['titles'];
-    const link = `${this.currentUrl}/products/${datas}-${titles}`;
+    const link = `${this.currentUrl}/products/${datas}-${slug}`;
 
     // Add the breadcrumb to the breadcrumb trail
     this.breadcrumbService.addBreadcrumb(titles, link);
@@ -107,15 +107,16 @@ export class ProductsPage implements OnInit {
     console.log('newTitttltltlt:', titles);
     if (parent == '0') {
       this.storage.set('catTitle', slug);
-      this.router.navigateByUrl(`products/${datas}`);
+      this.router.navigateByUrl(`products/${datas}-${slug}`);
     } else {
       this._apiService.sendCategory(data).subscribe((res: any) => {
         console.log('check empty: ', res);
         if (res == 'empty') {
           console.log('give res', res);
+          this.router.navigateByUrl(`products/${datas}-${slug}`);
         } else {
           // this.breadcrumbs.push(titles);
-          this.router.navigateByUrl(`products/${datas}-${titles}`);
+          this.router.navigateByUrl(`products/${datas}-${slug}`);
         }
       });
     }
@@ -200,46 +201,16 @@ export class ProductsPage implements OnInit {
     console.log('Share result:', shareRet);
   }
 
-  ngOnInit() {
-    // window.addEventListener('resize', this.onResize.bind(this));
-
-    // this.breadcrumbService;
-
-    this.storage.get('changeLang').then((val) => {
-      if (val.lang == 'en') {
-        this.english = true;
-        this.arabic = false;
-      } else if (val.lang == 'ar') {
-        this.arabic = true;
-        this.english = false;
-      }
-    });
-
-    this.storage.get('admin').then((val) => {
-      this.sessionUser = val.userid;
-    });
-
-    const slug = this.route.snapshot.paramMap.get('slug');
-
-    console.log('SlugValue:', slug);
-    let titles;
-    let id;
-
-    if (slug) {
-      titles = slug.replace(/[^a-zA-Z]/g, '');
-      id = slug.replace(/\D/g, '');
-    }
-
+  fetchAdsData(userIDs) {
     let cidData = {
-      cid: id,
+      uid: userIDs,
     };
-
     this._apiService.fetchAds(cidData).subscribe((res: any) => {
       console.log('Show Ad details:', res);
       // Displaying ads from database
       let dataLength = res.length;
 
-      this.totalAds = dataLength;
+      let count = 0;
 
       for (let i = 0; i < dataLength; i++) {
         let adTitle = '';
@@ -251,6 +222,8 @@ export class ProductsPage implements OnInit {
         let adAdmin;
         let adMobile;
         let timestamp;
+        let heartVisible;
+        let heartRedVisible;
 
         for (let key in res[i]) {
           if (key === 'addHeadings') {
@@ -281,6 +254,9 @@ export class ProductsPage implements OnInit {
               }
             }
           }
+
+          if (key === 'heartVisible') heartVisible = res[i][key];
+          if (key === 'heartRedVisible') heartRedVisible = res[i][key];
         }
 
         let itemObj = {};
@@ -298,15 +274,59 @@ export class ProductsPage implements OnInit {
           ad_id: ad_id,
           adMobile: adMobile,
           timestamp: this.timestamp(timestamp),
-          heartVisible: true,
-          heartRedVisible: false,
+          heartVisible: heartVisible,
+          heartRedVisible: heartRedVisible,
         };
 
-        if (this.sessionUser != data.adAdmin) {
+        if (userIDs != data.adAdmin) {
           this.adDetails.push(data);
+          count++;
         }
+
+        this.totalAds = count;
       }
     });
+  }
+
+  ngOnInit() {
+    // window.addEventListener('resize', this.onResize.bind(this));
+
+    // this.breadcrumbService;
+
+    this.storage.get('changeLang').then((val) => {
+      if (val.lang == 'en') {
+        this.english = true;
+        this.arabic = false;
+      } else if (val.lang == 'ar') {
+        this.arabic = true;
+        this.english = false;
+      }
+    });
+
+    this.storage.get('admin').then((val) => {
+      if (val != null) {
+        this.sessionUser = val.userid;
+        this.fetchAdsData(val.userid);
+      } else {
+        this.fetchAdsData(null);
+      }
+    });
+
+    const slug = this.route.snapshot.paramMap.get('slug');
+
+    console.log('SlugValue:', slug);
+    let titles;
+    let id;
+
+    if (slug) {
+      titles = slug.replace(/[^a-zA-Z]/g, '');
+      id = slug.replace(/\D/g, '');
+      console.log('ID Value:', id);
+    }
+
+    let cidData = {
+      cid: id,
+    };
 
     if (id == '0') {
       this.http.get('https://specbits.com/class2/fab/index').subscribe(
@@ -328,10 +348,15 @@ export class ProductsPage implements OnInit {
         this.categoryTitle = val;
       });
     } else {
-      this._apiService.sendCategory(cidData).subscribe((res: any) => {
-        this.categories = res;
-        console.log("What's response:", res);
-      });
+      this._apiService.sendCategory(cidData).subscribe(
+        (res: any) => {
+          if (res != 'empty') this.categories = res;
+          console.log("What's response:", res);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
 
       // const link = `${this.currentUrl}/products/${slug}`;
       // this.breadcrumbService.addBreadcrumb(titles, link);

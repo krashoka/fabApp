@@ -40,7 +40,7 @@
   </div>
 </ion-footer>
 
-<div class="moreSection" *ngIf="more">
+<div class="moreSection" *ngIf="showLogout">
   <ion-card class="welcome">
     <ion-text>Welcome {{username}}</ion-text>
     <ion-icon name="close-circle-outline" (click)="closeMore()"></ion-icon>

@@ -7,7 +7,7 @@ import { Storage } from '@ionic/storage-angular';
   templateUrl: './footer-tabs.page.html',
   styleUrls: ['./footer-tabs.page.scss'],
 })
-export class FooterTabsPage implements OnInit {
+export class FooterTabsPage {
   username: any;
   isLoggedIn = false;
 
@@ -15,13 +15,18 @@ export class FooterTabsPage implements OnInit {
     this.storage.create();
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {}
+
+  showLogout = false;
+
+  showMore() {
     this.storage.get('admin').then(
       (val) => {
-        if (val.loggedin) {
+        console.log('val:', val);
+        if (val != null) {
           this.username = val.username;
-          this.isLoggedIn = val.loggedin;
-        }
+          this.showLogout = true;
+        } else this.router.navigate(['login']);
       },
       (er) => {
         console.log(er);
@@ -29,15 +34,8 @@ export class FooterTabsPage implements OnInit {
     );
   }
 
-  more = false;
-
-  showMore() {
-    if (this.isLoggedIn) this.more = true;
-    else this.router.navigate(['login']);
-  }
-
   closeMore() {
-    this.more = false;
+    this.showLogout = false;
   }
 
   logout() {
@@ -46,7 +44,7 @@ export class FooterTabsPage implements OnInit {
     this.storage.get('admin').then((value) => {
       if (value == null) {
         this.router.navigate(['login']);
-        this.more = false;
+        this.showLogout = false;
       }
     });
   }

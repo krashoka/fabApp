@@ -119,6 +119,7 @@ export class NavbarPage implements OnInit {
           this.errorToast('Session Error');
         } else {
           let newData = {
+            loggedIn: true,
             username: res.username,
             userid: res.userid,
             phonecode: res.phonecode,
@@ -164,7 +165,7 @@ export class NavbarPage implements OnInit {
 
   goToStickyAds(datas: any, title: any) {
     this.storage.set('catTitle', title);
-    this.router.navigateByUrl(`products/${datas}`);
+    this.router.navigateByUrl(`products/${datas}-${title}`);
   }
 
   goToCommercialAds() {

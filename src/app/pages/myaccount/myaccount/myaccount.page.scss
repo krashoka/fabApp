@@ -205,6 +205,12 @@ $extra-large-screen: 1200px;
 
   .uploadTime {
     margin-top: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .adStatus {
+    font-size: 18px;
   }
 
   .adTitle {
@@ -517,6 +523,13 @@ $extra-large-screen: 1200px;
 
   .uploadTime {
     margin-top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .adStatus {
+    font-size: 22px;
   }
 
   .adTitle {
