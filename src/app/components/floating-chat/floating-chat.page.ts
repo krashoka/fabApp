@@ -106,27 +106,28 @@ export class FloatingChatPage implements OnInit {
   openFloatingChat() {
     this.storage.get('admin').then(
       (value) => {
-        if (value != null) this.onDropdownSelect = !this.onDropdownSelect;
-        else this.router.navigate(['login']);
+        if (value != null) {
+          this.onDropdownSelect = !this.onDropdownSelect;
 
-        let data = {
-          uid: value.userid,
-        };
-        this._apiService.openChat(data).subscribe(
-          (res: any) => {
-            this.chatCount = 0;
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
+          let data = {
+            uid: value.userid,
+          };
+          this._apiService.openChat(data).subscribe(
+            (res: any) => {
+              this.chatCount = 0;
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
 
-        setTimeout(() => {
-          this.content.nativeElement.scrollTo({
-            top: this.content.nativeElement.scrollHeight,
-            behavior: 'smooth',
-          });
-        }, 100);
+          setTimeout(() => {
+            this.content.nativeElement.scrollTo({
+              top: this.content.nativeElement.scrollHeight,
+              behavior: 'smooth',
+            });
+          }, 100);
+        } else this.router.navigate(['login']);
       },
       (err) => {
         console.log(err);

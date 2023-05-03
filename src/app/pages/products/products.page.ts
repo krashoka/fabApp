@@ -89,7 +89,7 @@ export class ProductsPage implements OnInit {
           comment: res,
         };
         this.storage.set('adId', data);
-        this.router.navigateByUrl(`product-details/${ad.ad_id}`);
+        this.router.navigateByUrl(`product-details/${ad.ad_id}-${ad.adAdmin}`);
       });
   }
 
@@ -255,8 +255,10 @@ export class ProductsPage implements OnInit {
             }
           }
 
-          if (key === 'heartVisible') heartVisible = res[i][key];
-          if (key === 'heartRedVisible') heartRedVisible = res[i][key];
+          if (key === 'fav') {
+            heartVisible = res[i][key].heartVisible;
+            heartRedVisible = res[i][key].heartRedVisible;
+          }
         }
 
         let itemObj = {};

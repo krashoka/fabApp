@@ -43,8 +43,8 @@ export class ProductDetailsPage {
 
   heart = true;
   heartRed = false;
-  checkFav = 'Add to ';
-  flag = false;
+  checkFav: any;
+  flag: any;
 
   waLink = 'https://wa.me/';
 
@@ -151,7 +151,7 @@ export class ProductDetailsPage {
           this.successToast('Added to your Favorites.');
           this.heart = false;
           this.heartRed = true;
-          this.checkFav = 'rmFav ';
+          this.checkFav = 'Remove from favorites ';
         } else if (res == 'fail') {
           this.errorToast('Failed adding to your Favorites!');
         } else if (res == 'noadd') {
@@ -179,7 +179,7 @@ export class ProductDetailsPage {
           this.successToast('Removed from your Favorites.');
           this.heart = true;
           this.heartRed = false;
-          this.checkFav = 'addFav ';
+          this.checkFav = 'Add to favorites';
         } else {
           this.errorToast('Error removing from Favorites!');
         }
@@ -296,45 +296,16 @@ export class ProductDetailsPage {
     console.log('Share result:', shareRet);
   }
 
-  ionViewWillEnter() {
-    // TESTING CODE FOR PROGRESS BAR
-    // setTimeout(() => {
-    // this.timeOnPage += 5000;
-    this.increaseCounter();
-    // }, 5000);
-    // ///////////////////////////
-
-    const slug = this.route.snapshot.paramMap.get('id');
-    this.adId = slug;
-
-    this.storage.get('admin').then(
-      (session) => {
-        this.sessionUser = session.userid;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-
-    // await this.storage.get('adId').then((val) => {
-    //   console.log('aDiD:', val);
-    //   this.adAdmin = val.adINFO.adAdmin;
-    //   this.adId = val.adINFO.ad_id;
-    //   this.adTitle = val.adINFO.adTitle;
-    //   this.price = val.adINFO.itemObj.Price;
-    //   this.prodDetails = val.adINFO.itemObj;
-    //   this.adDetail = val.adINFO.adDetail;
-    //   this.adImage = val.adINFO.imagesArray[0];
-    //   this.adMobile = val.adINFO.adMobile;
-    // });
-    // ***********************************************************
+  prodData(userId, slug) {
+    let data = {
+      uid: userId,
+    };
 
     let currAdItemInfo: any = [];
     let currAdItemLabel: any = [];
-    // let ad_id;
     let currAdItemObj = {};
 
-    this.http.get('https://specbits.com/class2/fab/adds').subscribe(
+    this.http.post('https://specbits.com/class2/fab/adds', data).subscribe(
       (res: any) => {
         console.log('Show Ad details:', res);
 
@@ -351,6 +322,8 @@ export class ProductDetailsPage {
           let adAdmin;
           let adMobile;
           let timestamp;
+          let heartVisible;
+          let heartRedVisible;
 
           for (let key in res[i]) {
             if (key === 'addHeadings') {
@@ -383,7 +356,6 @@ export class ProductDetailsPage {
                       currAdItemInfo.push(res[i][key][j][val]);
                     if (val == 'label')
                       currAdItemLabel.push(res[i][key][j][val]);
-                    // if (val == 'add_id') ad_id = res[i][key][j][val];
                   } else {
                     if (val == 'main_data') itemInfo.push(res[i][key][j][val]);
                     if (val == 'label') itemLabel.push(res[i][key][j][val]);
@@ -404,6 +376,29 @@ export class ProductDetailsPage {
                       imagesArray.push(res[i][key][j][val]);
                   }
                 }
+              }
+            }
+
+            if (key === 'fav') {
+              if (res[i][key].add_id == slug) {
+                heartVisible = res[i][key].heartVisible;
+                if (heartVisible) {
+                  this.checkFav = 'Add to favorites';
+                  this.heart = true;
+                  this.heartRed = false;
+                  this.flag = false;
+                }
+
+                heartRedVisible = res[i][key].heartRedVisible;
+                if (heartRedVisible) {
+                  this.checkFav = 'Remove from favorites';
+                  this.heart = false;
+                  this.heartRed = true;
+                  this.flag = true;
+                }
+              } else {
+                heartVisible = res[i][key].heartVisible;
+                heartRedVisible = res[i][key].heartRedVisible;
               }
             }
           }
@@ -429,8 +424,8 @@ export class ProductDetailsPage {
               ad_id: ad_id,
               adMobile: adMobile,
               timestamp: this.timestampFun(timestamp),
-              heartVisible: true,
-              heartRedVisible: false,
+              heartVisible: heartVisible,
+              heartRedVisible: heartRedVisible,
             };
 
             if (this.sessionUser != data.adAdmin) {
@@ -440,6 +435,7 @@ export class ProductDetailsPage {
         }
 
         console.log('adDataas:', this.adData);
+        console.log('adImage:', this.adImage);
       },
       (err) => {
         console.log(err);
@@ -447,85 +443,118 @@ export class ProductDetailsPage {
     );
 
     this.prodDetails = currAdItemObj;
+  }
+
+  ionViewWillEnter() {
+    // TESTING CODE FOR PROGRESS BAR
+    // setTimeout(() => {
+    // this.timeOnPage += 5000;
+    this.increaseCounter();
+    // }, 5000);
+    // ///////////////////////////
+
+    const slugData = this.route.snapshot.paramMap.get('id');
+    let values;
+
+    if (slugData != null) {
+      values = slugData.split('-');
+    }
+    const slug = values[0];
+    const adKaAdmin = values[1];
+    this.adId = slug;
+
+    this.storage.get('admin').then(
+      (session) => {
+        if (session != null) {
+          this.sessionUser = session.userid;
+          this.prodData(session.userid, slug);
+        } else {
+          this.prodData(null, slug);
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+
     // ///////////////////////////////////////////////////////////////////////
 
     this.storage.get('admin').then(
       (session) => {
-        this.sessionUser = session.userid;
+        if (session != null) {
+          console.log('adKaAdmin:', adKaAdmin);
+          if (session.userid == adKaAdmin) {
+            this.chatCardDisplay = true;
+            this.commentCardDisplay = false;
+            this.showBack = false;
+          }
+          // ////////////////////
+          let value = { aid: slug, uid: session.userid };
+          console.log('loading data:', value);
+          this.http
+            .post('https://specbits.com/class2/fab/fetch-comment', value)
+            .subscribe(
+              (com: any) => {
+                console.log('chaaaaat:', com);
 
-        if (session.userid == this.adKaAdmin) {
-          this.chatCardDisplay = true;
-          this.commentCardDisplay = false;
-          this.showBack = false;
-        }
-        // ////////////////////
-        let value = { aid: slug, uid: session.userid };
-        console.log('loading data:', value);
-        this.http
-          .post('https://specbits.com/class2/fab/fetch-comment', value)
-          .subscribe(
-            (com: any) => {
-              console.log('chaaaaat:', com);
-
-              // ///////////////////////////
-              console.log('admin session:', session);
-              if (session != null) {
-                console.log('User is in session');
-                this.adminSessionId = session.userid;
-                if (com.length != 0) {
-                  this.canComment = false;
-                  this.allComments = true;
-
-                  if (session.userid == this.adKaAdmin) {
-                    this.chatCardDisplay = true;
-                    this.commentCardDisplay = false;
-                    this.makeOffer = false;
-
-                    // Filtering number of users commented on a particular ad.
-                    for (let i = 0; i < com.length; i++) {
-                      
-                      let sameUser = com[i].user_id;
-                      console.log('sameUser:', sameUser);
-                      // let chats = {};
-                      // chats[sameUser]
-                      // chats['time'] = com[i].created_at;
-                      if(sameUser != this.adKaAdmin){
-                        this.chatUserList[sameUser] = com[i].username;
-                      }
-                      
-                    }
-
-                    console.log('chatUserList:', this.chatUserList);
-                  } else {
-                    this.chatCardDisplay = false;
-                    this.commentCardDisplay = true;
-                    this.comments = com;
-                    this.makeOffer = true;
-                    console.log('All comments:', this.comments);
-                  }
-                } else {
-                  if (session.userid == this.adKaAdmin) {
+                // ///////////////////////////
+                console.log('admin session:', session);
+                if (session != null) {
+                  console.log('User is in session');
+                  this.adminSessionId = session.userid;
+                  if (com.length != 0) {
                     this.canComment = false;
-                    this.allComments = false;
-                  } else {
-                    this.commentDisabled = false;
-                    this.canComment = true;
-                    this.allComments = false;
-                  }
-                }
+                    this.allComments = true;
 
-                this.sessionVal = true;
-                this.userid = session.userid;
-              } else {
-                this.commentDisabled = true;
-                this.canComment = true;
-                this.allComments = false;
+                    if (session.userid == adKaAdmin) {
+                      this.chatCardDisplay = true;
+                      this.commentCardDisplay = false;
+                      this.makeOffer = false;
+
+                      // Filtering number of users commented on a particular ad.
+                      for (let i = 0; i < com.length; i++) {
+                        let sameUser = com[i].user_id;
+                        console.log('sameUser:', sameUser);
+                        // let chats = {};
+                        // chats[sameUser]
+                        // chats['time'] = com[i].created_at;
+                        if (sameUser != adKaAdmin) {
+                          this.chatUserList[sameUser] = com[i].username;
+                        }
+                      }
+
+                      console.log('chatUserList:', this.chatUserList);
+                    } else {
+                      this.chatCardDisplay = false;
+                      this.commentCardDisplay = true;
+                      this.comments = com;
+                      this.makeOffer = true;
+                      console.log('All comments:', this.comments);
+                    }
+                  } else {
+                    if (session.userid == adKaAdmin) {
+                      this.canComment = false;
+                      this.allComments = false;
+                    } else {
+                      this.commentDisabled = false;
+                      this.canComment = true;
+                      this.allComments = false;
+                    }
+                  }
+
+                  this.sessionVal = true;
+                  this.userid = session.userid;
+                } else {
+                  this.commentDisabled = true;
+                  this.canComment = true;
+                  this.allComments = false;
+                }
+              },
+              (err) => {
+                console.log(err);
               }
-            },
-            (err) => {
-              console.log(err);
-            }
-          );
+            );
+        }
       },
       (err) => {
         console.log(err);
@@ -543,38 +572,47 @@ export class ProductDetailsPage {
       uid: key,
     };
 
+    console.log('kedy:', data);
+
     this._apiService.showUserChat(data).subscribe(
       (res: any) => {
         console.log('Fetched chats:', res);
         this.comments = [];
-        for (let i = 0; i < res.length; i++) {
-          let obj = {};
-          if (res[i].commenter == 'user') {
-            obj['commenter'] = 'owner';
-            obj['username'] = res[i].username;
-            obj['comment'] = res[i].comment;
-            this.comments.push(obj);
-          } else {
-            {
+        this.storage.get('admin').then((val) => {
+          for (let i = 0; i < res.length; i++) {
+            let obj = {};
+            if (res[i].commenter == 'user' && res[i].user_id == val.userid) {
               obj['commenter'] = 'user';
               obj['username'] = res[i].username;
               obj['comment'] = res[i].comment;
               this.comments.push(obj);
+            } else if (
+              res[i].commenter == 'user' &&
+              res[i].user_id != val.userid
+            ) {
+              {
+                obj['commenter'] = 'owner';
+                obj['username'] = res[i].username;
+                obj['comment'] = res[i].comment;
+                this.comments.push(obj);
+              }
             }
           }
-        }
-        // this.comments = res;
 
-        setTimeout(() => {
-          this.content.nativeElement.scrollTo({
-            top: this.content.nativeElement.scrollHeight,
-            behavior: 'smooth',
-          });
-        }, 100);
-        console.log('New Comments:', this.comments);
-        this.chatCardDisplay = false;
-        this.commentCardDisplay = true;
-        this.showBack = true;
+          setTimeout(() => {
+            this.content.nativeElement.scrollTo({
+              top: this.content.nativeElement.scrollHeight,
+              behavior: 'smooth',
+            });
+          }, 100);
+          this.chatCardDisplay = false;
+          this.commentCardDisplay = true;
+          this.showBack = true;
+
+          console.log('New Comments:', this.comments);
+        });
+
+        // this.comments = res;
       },
       (err) => {
         console.log(err);
@@ -616,6 +654,9 @@ export class ProductDetailsPage {
                     (res: any) => {
                       console.log('fetch comment: ', res);
                       this.comments = res;
+                      this.canComment = false;
+                      this.allComments = true;
+                      this.commentCardDisplay = true;
 
                       setTimeout(() => {
                         this.content.nativeElement.scrollTo({

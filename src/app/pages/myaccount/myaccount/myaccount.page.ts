@@ -75,7 +75,7 @@ export class MyaccountPage {
   }
 
   goToProductDetails(ad) {
-    this.router.navigateByUrl(`product-details/${ad.ad_id}`);
+    this.router.navigateByUrl(`product-details/${ad.ad_id}-${ad.adAdmin}`);
   }
 
   async share() {
@@ -259,20 +259,16 @@ export class MyaccountPage {
               this.adDetails.push(data);
               count++;
 
-              if(data.adStatus == "approved"){
-
+              if (data.adStatus == 'approved') {
               }
 
-              if(data.adStatus == "pending"){
-
+              if (data.adStatus == 'pending') {
               }
 
-              if(data.adStatus == "rejected"){
-
+              if (data.adStatus == 'rejected') {
               }
 
-              if(data.adStatus == "expired"){
-
+              if (data.adStatus == 'expired') {
               }
 
               let value = { aid: data.ad_id, uid: this.sessionUser };
@@ -318,6 +314,7 @@ export class MyaccountPage {
 
               let favData = {
                 title: res[i].title,
+                adAdmin: res[i].creatorID,
                 price: res[i].price,
                 timestamp: result,
                 images: res[i].images,

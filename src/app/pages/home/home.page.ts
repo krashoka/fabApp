@@ -157,7 +157,7 @@ export class HomePage {
   }
 
   goToProductDetails(ad) {
-    this.router.navigateByUrl(`product-details/${ad.ad_id}`);
+    this.router.navigateByUrl(`product-details/${ad.ad_id}-${ad.adAdmin}`);
 
     // let value = { aid: ad.ad_id, uid: this.sessionUser };
     // this.http
@@ -325,8 +325,6 @@ export class HomePage {
   }
 
   newData(userId) {
-    console.log('');
-
     let data = {
       uid: userId,
     };
@@ -384,8 +382,10 @@ export class HomePage {
               }
             }
 
-            if (key === 'heartVisible') heartVisible = res[i][key];
-            if (key === 'heartRedVisible') heartRedVisible = res[i][key];
+            if (key === 'fav') {
+              heartVisible = res[i][key].heartVisible;
+              heartRedVisible = res[i][key].heartRedVisible;
+            }
           }
 
           let itemObj = {};
@@ -410,14 +410,20 @@ export class HomePage {
 
           console.log('adDetails data:', data);
           console.log('checkuse:');
-          if (userId != data.adAdmin && data.adStatus == 'approved') {
+          if (userId != data.adAdmin && data.adStatus == 'approved' && userId != null) {
             this.adDetails.push(data);
             if (this.adDetails.length != 0) {
               this.showCommercialTitle = true;
               this.showStickyTitle = true;
             }
-          } else {
+          }
+          
+          if(userId == null){
             this.adDetails.push(data);
+            if (this.adDetails.length != 0) {
+              this.showCommercialTitle = true;
+              this.showStickyTitle = true;
+            }
           }
         }
 

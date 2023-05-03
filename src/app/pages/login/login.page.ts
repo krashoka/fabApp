@@ -39,6 +39,7 @@ export class LoginPage {
     this.http
       .get('https://specbits.com/class2/fab/country')
       .subscribe((res: any) => {
+        console.log('phoneCodes:', res);
         for (let i = 0; i < res.length; i++) {
           let data = {
             options: [{ value: res[i], label: '+' + res[i] }],

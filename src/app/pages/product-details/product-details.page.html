@@ -17,10 +17,10 @@
     <!-- Image -->
     <img class="imgProd" [src]="'https://specbits.com/class2/fab/'+adImage" />
 
-    <p class="navigationProd">
+    <!-- <p class="navigationProd">
       Home > Real Estate > Properties For Rent > Residential / investment >
       Villas / Houses
-    </p>
+    </p> -->
 
     <div class="productTitle">
       <p class="productLabel">{{adTitle}}</p>
@@ -139,7 +139,7 @@
           name="heart"
           *ngIf="heartRed"
         ></ion-icon>
-        <ion-text>{{checkFav | translate}}{{'fav' | translate}}</ion-text>
+        <ion-text>{{checkFav}}</ion-text>
       </div>
       <div (click)="share()">
         <ion-icon class="share" name="share-social"></ion-icon>
@@ -206,18 +206,20 @@
   </div>
 
   <div *ngIf="allComments">
-    <div style="display: flex; justify-content: space-between;">
-    <div>
-      <div class="seeComments" *ngIf="show" (click)="showComment()">
-        <p>See Chats</p>
-        <ion-icon name="caret-down"></ion-icon>
+    <div class="seeOrHideChats">
+      <div>
+        <div class="seeComments" *ngIf="show" (click)="showComment()">
+          <p>See Chats</p>
+          <ion-icon name="caret-down"></ion-icon>
+        </div>
+        <div class="seeComments" *ngIf="hide" (click)="showComment()">
+          <p>Hide Chats</p>
+          <ion-icon name="caret-up"></ion-icon>
+        </div>
       </div>
-      <div class="seeComments" *ngIf="hide" (click)="showComment()">
-        <p>Hide Chats</p>
-        <ion-icon name="caret-up"></ion-icon>
-      </div>
-    </div>
-    <ion-button *ngIf="showBack" (click)="goToChatCard()">Back</ion-button>
+      <ion-button *ngIf="showBack" size="small" (click)="goToChatCard()"
+        >Back</ion-button
+      >
     </div>
 
     <div *ngIf="commentDisplay" class="commentWidth">
@@ -304,7 +306,7 @@
           <p class="adsTitle">Easy to disassemble and install</p>
           <div class="adsPrice">
             <ion-label>2500</ion-label>
-            <ion-label class="currency">AED</ion-label>
+            <ion-label class="currency">KWD</ion-label>
           </div>
           <div class="adsButton">
             <div class="callBtn">
@@ -354,7 +356,7 @@
             <p class="adsTitle">{{ad.adTitle}}</p>
             <div class="adsPrice">
               <ion-label>{{ad.itemObj.Price}}</ion-label>
-              <ion-label class="currency">AED</ion-label>
+              <ion-label class="currency">KWD</ion-label>
             </div>
           </div>
         </div>
@@ -391,13 +393,30 @@
   <!-- --------- Footer Section -------- -->
 
   <div class="footerDiv">
-    <div>
+    <!-- <div>
       <ion-icon class="callIcon" name="call"></ion-icon>
       <ion-label class="contact">Call</ion-label>
     </div>
     <div>
       <ion-icon class="whatsappIcon" name="logo-whatsapp"></ion-icon>
       <ion-label class="contact">WhatsApp</ion-label>
+    </div> -->
+
+    <div>
+      <ion-button class="callMob" [href]="'tel:+' + adMobile">
+        <ion-icon name="call"></ion-icon>
+        <ion-text class="contact">Call</ion-text>
+      </ion-button>
+    </div>
+    <div>
+      <ion-button
+        class="whatsAppMob"
+        target="_blank"
+        [href]="waLink + adMobile"
+      >
+        <ion-icon name="logo-whatsapp"></ion-icon>
+        <ion-text class="contact">WhatsApp</ion-text>
+      </ion-button>
     </div>
   </div>
 

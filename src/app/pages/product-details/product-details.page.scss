@@ -237,11 +237,19 @@ $extra-large-screen: 1200px;
   .seeComments {
     font-size: 14px;
     color: #1d76de;
-    margin: 0 6% 30px;
+    margin: 0 6%;
     display: flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    min-width: 120px;
+  }
+
+  .seeOrHideChats {
+    margin: 0 3% 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .commentWidth {
@@ -549,19 +557,53 @@ $extra-large-screen: 1200px;
   }
 
   /********** FOOTER Section *****************/
-  .callIcon {
+  // .callIcon {
+  //   color: #007bff;
+  //   font-size: 18px;
+  // }
+
+  // .whatsappIcon {
+  //   color: #28a745;
+  //   font-size: 18px;
+  // }
+
+  .callMob {
+    width: 95%;
+    padding: 5px 0;
+    margin: auto;
     color: #007bff;
-    font-size: 18px;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
+    ion-icon {
+      font-size: 24px;
+    }
   }
 
-  .whatsappIcon {
+  .whatsAppMob {
+    width: 95%;
+    padding: 5px 0;
+    // font-size: 20px;
+    margin: auto;
     color: #28a745;
-    font-size: 18px;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
+    ion-icon {
+      font-size: 32px;
+    }
   }
 
   .contact {
-    font-size: 13px;
+    font-size: 18px;
     color: #484848;
+    margin-left: 10px;
   }
 
   .footerDiv {
@@ -1126,11 +1168,20 @@ $extra-large-screen: 1200px;
   .seeComments {
     font-size: 18px;
     color: #1d76de;
-    margin: 0 6% 15px;
+    margin: 0 6%;
     display: flex;
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    min-width: 150px;
+  }
+
+  .seeOrHideChats {
+    width: 50%;
+    margin-left: 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .commentWidth {
