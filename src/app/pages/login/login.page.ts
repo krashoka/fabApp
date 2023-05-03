@@ -46,9 +46,9 @@ export class LoginPage {
           };
           this.countries.push(data);
 
-          if (res[i] == 973) {
-            this.selectedCountry = this.countries[i].options[0].value;
-          }
+          // if (res[i] == 973) {
+          this.selectedCountry = this.countries[i].options[0].value;
+          // }
         }
       });
   }
