@@ -61,6 +61,7 @@ export class ProductDetailsPage {
   counter = 0;
   timeOnPage = 0;
   progressBarWidth = '0%';
+  showTimer = true;
   // ///////////////////
 
   // Offer making variables
@@ -274,17 +275,6 @@ export class ProductDetailsPage {
   //   // autoplay:true,
   // };
 
-  increaseCounter() {
-    this.counter++;
-    this.progressBarWidth = this.counter + '%'; // increase the width of the progress bar by 10% with each iteration
-    if (this.counter < 100) {
-      setTimeout(() => {
-        this.timeOnPage += 600;
-        this.increaseCounter();
-      }, 600);
-    }
-  }
-
   // ************* Share Function ******************
   async shareRelatedPost(adId) {
     const shareRet = await Share.share({
@@ -445,14 +435,40 @@ export class ProductDetailsPage {
     this.prodDetails = currAdItemObj;
   }
 
-  ionViewWillEnter() {
-    // TESTING CODE FOR PROGRESS BAR
-    // setTimeout(() => {
-    // this.timeOnPage += 5000;
-    this.increaseCounter();
-    // }, 5000);
-    // ///////////////////////////
+  increaseCounter(timer, slug) {
+    this.counter++;
+    this.progressBarWidth = this.counter + '%'; // increase the width of the progress bar by 10% with each iteration
+    if (this.counter < 100) {
+      setTimeout(() => {
+        // this.timeOnPage += 600;
+        this.increaseCounter(timer, slug);
+        // console.log('setTimer Counter Val:', this.counter);
+        // console.log('progressBarWidth:', this.progressBarWidth);
+      }, timer * 10);
+    } else {
+      console.log('Counter Val:', this.counter);
+      this.storage.get('admin').then(
+        (val) => {
+          console.log('session User:', val.userid);
+          if (val != null) {
+            let data = {
+              vid: val.userid,
+              aid: slug,
+            };
+            this._apiService.adViewPoint(data).subscribe((res: any) => {
+              console.log('Timer response:', res);
+            });
+            // this.showTimer = false;
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
+  }
 
+  ionViewWillEnter() {
     const slugData = this.route.snapshot.paramMap.get('id');
     let values;
 
@@ -468,8 +484,27 @@ export class ProductDetailsPage {
         if (session != null) {
           this.sessionUser = session.userid;
           this.prodData(session.userid, slug);
+
+          let timerData = {
+            vid: session.userid,
+            aid: slug,
+          };
+
+          //CODE FOR PROGRESS BAR
+          this._apiService.getAdTimer(timerData).subscribe(
+            (res: any) => {
+              if (res) {
+                this.increaseCounter(res, slug);
+              }
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+          // ///////////////////////////
         } else {
           this.prodData(null, slug);
+          this.showTimer = false;
         }
       },
       (err) => {

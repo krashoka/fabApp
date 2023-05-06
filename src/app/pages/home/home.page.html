@@ -42,15 +42,15 @@
   <!-- ---------- Crousel --------- -->
   <div id="homeTab">
     <div class="crousel" *ngIf="homeTabComponent">
-      <ion-slides [options]="option" class="topCrousel">
-        <ion-slide *ngFor="let ad of adDetails">
+      <swiper-container [slidesPerView]="1" [loop]="true" class="topCrousel">
+        <swiper-slide *ngFor="let ad of adDetails">
           <ion-card>
             <ion-img
               [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
             />
           </ion-card>
-        </ion-slide>
-      </ion-slides>
+        </swiper-slide>
+      </swiper-container>
 
       <!------------  SEARCH SECTION ------------>
       <ion-card class="search">
@@ -130,8 +130,14 @@
       </div>
     </ion-card>
 
-    <div class="commercialSlide">
-      <div *ngFor="let ad of adDetails">
+    <swiper-container
+      [slidesPerView]="4"
+      [spaceBetween]="40"
+      [loop]="true"
+      [autoplay]="{delay:1000}"
+      class="commercialSlide"
+    >
+      <swiper-slide *ngFor="let ad of adDetails">
         <ion-card>
           <img
             style="cursor: pointer"
@@ -179,8 +185,8 @@
             </div>
           </div>
         </ion-card>
-      </div>
-    </div>
+      </swiper-slide>
+    </swiper-container>
   </div>
 
   <!-- ---------- STICKY ADS for Desktop -------------- -->
@@ -199,8 +205,14 @@
       </div>
     </ion-card>
 
-    <div class="stickySlide">
-      <div *ngFor="let ad of adDetails; let i = index">
+    <swiper-container
+      [slidesPerView]="4"
+      [spaceBetween]="40"
+      [loop]="true"
+      [autoplay]="{delay:1000}"
+      class="stickySlide"
+    >
+      <swiper-slide *ngFor="let ad of adDetails; let i = index">
         <ion-card dir="ltr">
           <img
             (click)="goToProductDetails(ad)"
@@ -264,8 +276,8 @@
             </div>
           </div>
         </ion-card>
-      </div>
-    </div>
+      </swiper-slide>
+    </swiper-container>
   </div>
 
   <!-- --------- Sticky Ads for Mobile --------- -->

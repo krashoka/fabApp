@@ -12,8 +12,12 @@ import { FooterTabsPageModule } from '../../components/footer-tabs/footer-tabs.m
 import { FloatingChatPageModule } from '../../components/floating-chat/floating-chat.module';
 import { Select2Module } from 'ng-select2-component';
 import { TranslateModule } from '@ngx-translate/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+// import { Swiper } from 'swiper';
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
     FormsModule,

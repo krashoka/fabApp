@@ -14,8 +14,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [AppComponent],
   imports: [
     BrowserModule,

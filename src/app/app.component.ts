@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ApiService } from 'src/app/api.service';
 import { TranslateService } from '@ngx-translate/core';
+import { register } from 'swiper/element/bundle';
+
+register();
 
 @Component({
   selector: 'app-root',

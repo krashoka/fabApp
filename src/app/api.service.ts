@@ -136,9 +136,30 @@ export class ApiService {
     );
   }
 
-  fetchAdminData(data){
+  fetchAdminData(data) {
     return this.http.post(
       'https://specbits.com/class2/fab/active-user-info',
+      data
+    );
+  }
+
+  getAdTimer(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/get-adview-timer',
+      data
+    );
+  }
+
+  adViewPoint(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/update-adview-point',
+      data
+    );
+  }
+
+  fetchUserPoints(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/fetch-user-points-history',
       data
     );
   }

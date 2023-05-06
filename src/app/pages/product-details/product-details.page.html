@@ -55,7 +55,7 @@
     </p> -->
 
     <!-- TESTING CODE FOR PROGRESS BAR -->
-    <div class="progress-bar-container">
+    <div class="progress-bar-container" *ngIf="showTimer">
       <div class="progress-bar" [ngStyle]="{ width: progressBarWidth }"></div>
     </div>
     <!-- ----------------------------- -->

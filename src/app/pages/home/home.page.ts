@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import { TranslateService } from '@ngx-translate/core';
+// import { SwiperComponent } from 'swiper/types/shared';
 
 @Component({
   selector: 'app-home',
@@ -286,7 +287,6 @@ export class HomePage {
 
     this.storage.get('admin').then(
       (val) => {
-
         if (val != null) {
           console.log('data fetched');
           this.sessionUser = val.userid;
@@ -410,15 +410,19 @@ export class HomePage {
 
           console.log('adDetails data:', data);
           console.log('checkuse:');
-          if (userId != data.adAdmin && data.adStatus == 'approved' && userId != null) {
+          if (
+            userId != data.adAdmin &&
+            data.adStatus == 'approved' &&
+            userId != null
+          ) {
             this.adDetails.push(data);
             if (this.adDetails.length != 0) {
               this.showCommercialTitle = true;
               this.showStickyTitle = true;
             }
           }
-          
-          if(userId == null){
+
+          if (userId == null) {
             this.adDetails.push(data);
             if (this.adDetails.length != 0) {
               this.showCommercialTitle = true;
@@ -431,8 +435,14 @@ export class HomePage {
       });
   }
 
+  // @ViewChild('swiper') swiper: SwiperComponent;
+
   ngOnInit() {
     this.dataOnPageLoad();
+
+    // if (this.swiper) {
+    //   this.swiper.updateSwiper({});
+    // }
   }
 
   // async ionViewWillEnter() {
