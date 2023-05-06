@@ -42,15 +42,15 @@
   <!-- ---------- Crousel --------- -->
   <div id="homeTab">
     <div class="crousel" *ngIf="homeTabComponent">
-      <swiper-container [slidesPerView]="1" [loop]="true" class="topCrousel">
-        <swiper-slide *ngFor="let ad of adDetails">
+      <ion-slides [slidesPerView]="1" [loop]="true" class="topCrousel">
+        <ion-slide *ngFor="let ad of adDetails">
           <ion-card>
             <ion-img
               [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
             />
           </ion-card>
-        </swiper-slide>
-      </swiper-container>
+        </ion-slide>
+      </ion-slides>
 
       <!------------  SEARCH SECTION ------------>
       <ion-card class="search">
@@ -130,14 +130,11 @@
       </div>
     </ion-card>
 
-    <swiper-container
-      [slidesPerView]="4"
-      [spaceBetween]="40"
-      [loop]="true"
-      [autoplay]="{delay:1000}"
+    <ion-slides
+     [options]="option2"
       class="commercialSlide"
     >
-      <swiper-slide *ngFor="let ad of adDetails">
+      <ion-slide *ngFor="let ad of adDetails">
         <ion-card>
           <img
             style="cursor: pointer"
@@ -185,8 +182,8 @@
             </div>
           </div>
         </ion-card>
-      </swiper-slide>
-    </swiper-container>
+      </ion-slide>
+    </ion-slides>
   </div>
 
   <!-- ---------- STICKY ADS for Desktop -------------- -->
@@ -205,14 +202,11 @@
       </div>
     </ion-card>
 
-    <swiper-container
-      [slidesPerView]="4"
-      [spaceBetween]="40"
-      [loop]="true"
-      [autoplay]="{delay:1000}"
+    <ion-slides
+      [options]="option2"
       class="stickySlide"
     >
-      <swiper-slide *ngFor="let ad of adDetails; let i = index">
+      <ion-slide *ngFor="let ad of adDetails; let i = index">
         <ion-card dir="ltr">
           <img
             (click)="goToProductDetails(ad)"
@@ -276,8 +270,8 @@
             </div>
           </div>
         </ion-card>
-      </swiper-slide>
-    </swiper-container>
+      </ion-slide>
+    </ion-slides>
   </div>
 
   <!-- --------- Sticky Ads for Mobile --------- -->

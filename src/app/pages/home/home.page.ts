@@ -282,8 +282,9 @@ export class HomePage {
   }
 
   dataOnPageLoad() {
-    this.fetchAdminData();
+    
     window.addEventListener('resize', this.onResize.bind(this));
+    this.fetchAdminData();
 
     this.storage.get('admin').then(
       (val) => {

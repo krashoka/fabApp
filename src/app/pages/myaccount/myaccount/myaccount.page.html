@@ -86,7 +86,50 @@
           <div>
             <p class="uploadTime">
               <ion-text>{{ad.timestamp}}</ion-text>
-              <ion-text class="adStatus">{{ad.adStatus}}</ion-text>
+              <ion-text
+                class="adStatus"
+                *ngIf="ad.adStatus == 'approved'"
+                style="
+                  text-transform: capitalize;
+                  padding: 5px 10px;
+                  background-color: #198754;
+                  color: #fff;
+                "
+                >{{ad.adStatus}}</ion-text
+              >
+              <ion-text
+                class="adStatus"
+                *ngIf="ad.adStatus == 'rejected'"
+                style="
+                  text-transform: capitalize;
+                  padding: 5px 10px;
+                  background-color: #dc3545;
+                  color: #fff;
+                "
+                >{{ad.adStatus}}</ion-text
+              >
+              <ion-text
+                class="adStatus"
+                *ngIf="ad.adStatus == 'expired'"
+                style="
+                  text-transform: capitalize;
+                  padding: 5px 10px;
+                  background-color: #dc3545;
+                  color: #fff;
+                "
+                >{{ad.adStatus}}</ion-text
+              >
+              <ion-text
+                class="adStatus"
+                *ngIf="ad.adStatus == 'pending'"
+                style="
+                  text-transform: capitalize;
+                  padding: 5px 10px;
+                  background-color: #ffc107;
+                  color: #fff;
+                "
+                >{{ad.adStatus}}</ion-text
+              >
             </p>
             <h1 class="adTitle">{{ad.adTitle}}</h1>
             <p class="adPrice">
