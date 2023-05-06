@@ -191,4 +191,32 @@ export class ApiService {
       data
     );
   };
+
+  buyAdNow(data){
+    return this.http.post(
+      'https://specbits.com/class2/fab/buy-now',
+      data
+    );
+  };
+
+  fetchReferrals(data){
+    return this.http.post(
+      'https://specbits.com/class2/fab/fetch-myref',
+      data
+    );
+  };
+
+  fetchSellings(data){
+    return this.http.post(
+      'https://specbits.com/class2/fab/fetch-my-sellings',
+      data
+    );
+  };
+
+  fetchPurchases(data){
+    return this.http.post(
+      'https://specbits.com/class2/fab/fetch-my-purchases',
+      data
+    );
+  };
 }

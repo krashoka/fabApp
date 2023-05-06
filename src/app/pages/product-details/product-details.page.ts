@@ -487,7 +487,7 @@ export class ProductDetailsPage {
                 console.log('sendOffer response:', res);
                 if (res) {
                   this.successToast('Request sent successfully');
-                  this.inputOffer = false;
+                  // this.inputOffer = false;
                 }
               },
               (err) => {
@@ -538,6 +538,38 @@ export class ProductDetailsPage {
       if (offer.offeredUserId !== offeredUserId) {
         this.offeredUserIdStatus[offer.offeredUserId] = false;
       }
+    });
+  }
+
+  option2 = {
+    slidesPerView: 4,
+    // centeredSlides: true,
+    // loop: true,
+    spaceBetween: 40,
+    autoplay: true,
+  };
+
+  option3 = {
+    slidesPerView: 2,
+    // centeredSlides: true,
+    // loop: true,
+    spaceBetween: 2,
+    autoplay: true,
+  };
+
+  buyAdNow() {
+    let data = {
+      uid: this.sessionUser,
+      aid: this.adId,
+    };
+
+    this._apiService.buyAdNow(data).subscribe((res: any) => {
+      if(res){
+        this.successToast("Transaction successful");
+        this.router.navigate(['home']);
+      }
+    }, err => {
+      this.errorToast(err.error.message);
     });
   }
 

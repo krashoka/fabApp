@@ -6,7 +6,8 @@ $extra-large-screen: 1200px;
 @media (max-width: $small-screen) {
   /************** Hiding elements in Mobile View **************/
   .topNav,
-  .prodDetailsDesktop {
+  .prodDetailsDesktop,
+  #stickySliderDesktop {
     display: none;
   }
   .stickyAds {
@@ -53,6 +54,180 @@ $extra-large-screen: 1200px;
     text-align: left;
     line-height: 0.8rem;
     color: #1d76de;
+  }
+
+  // ************ Make Offer Section ************
+  .displayContact {
+    display: flex;
+    width: 100%;
+    height: 45px;
+    // border-top: 1px solid #dcdcdc;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  .displayContact > div:nth-child(1) {
+    border: 1px solid #dcdcdc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    // font-size: 20px;
+  }
+
+  .displayContact > div:nth-child(2) {
+    border: 1px solid #dcdcdc;
+    border-left: none;
+    width: 50%;
+    // font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .callDisplay {
+    width: 95%;
+    padding: 5px 0;
+    margin: auto;
+    color: #007bff;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    // gap: 20px;
+    justify-content: center;
+    font-size: 10px;
+    align-items: center;
+    text-transform: none !important;
+    ion-icon {
+      font-size: 24px;
+    }
+  }
+
+  .contactColor {
+    color: #484848;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .whatsappDisplay {
+    width: 95%;
+    padding: 5px 0;
+    font-size: 18px;
+    margin: auto;
+    color: #28a745;
+    --background: #fff !important;
+    --box-shadow: none !important;
+    display: flex;
+    // gap: 20px;
+    justify-content: center;
+    align-items: center;
+    text-transform: none !important;
+  }
+
+  .makeYourOffer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border: 1px solid #484848;
+  }
+
+  .makeYourOffer > ion-input {
+    height: 45px;
+    font-size: 18px;
+  }
+
+  .sendOffer {
+    background-color: #1d76de;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 25px;
+    height: 45px;
+    font-size: 18px;
+    border-left: 1px solid #484848;
+    cursor: pointer;
+  }
+
+  .buyNow {
+    background-color: #1d76de;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 25px;
+    height: 45px;
+    font-size: 18px;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  .offeredPrice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 16px;
+    font-weight: 700;
+    height: 45px;
+    border: 1px solid #484848;
+    margin-top: 15px;
+    letter-spacing: 1px;
+    cursor: pointer;
+  }
+
+  .pmo {
+    font-size: 18px;
+  }
+
+  .cmo {
+    font-size: 14px;
+    font-weight: normal;
+  }
+
+  .offerBtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #fcf0f0;
+    padding: 5px 10px;
+  }
+
+  .offerBtn > h2 {
+    margin: 0;
+    padding: 0;
+  }
+
+  .offerBtn > div {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    align-items: center;
+  }
+
+  .offerBtn > div > div:nth-child(1) {
+    background-color: #28a745;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+    height: 35px;
+    cursor: pointer;
+  }
+
+  .offerBtn > div > div:nth-child(2) {
+    background-color: #e30b1c;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+    height: 35px;
+    cursor: pointer;
   }
 
   // ************* Image ***********
@@ -386,7 +561,7 @@ $extra-large-screen: 1200px;
 
   // ////////////// Crousel Styling //////////
 
-  #stickySliderDesktop {
+  #stickySliderMob {
     // width: 100%;
     display: flex;
     gap: 30px;
@@ -394,13 +569,13 @@ $extra-large-screen: 1200px;
     margin: 0 6% 80px;
   }
 
-  #stickySliderDesktop > div {
+  #stickySliderMob > div {
     width: 50%;
     // padding-left: 100px !important;
     border-radius: 5px;
   }
 
-  #stickySliderDesktop ion-card {
+  #stickySliderMob ion-card {
     width: 100%;
     // height: 490px;
     box-shadow: none;
@@ -410,7 +585,7 @@ $extra-large-screen: 1200px;
     margin: 0;
   }
 
-  #stickySliderDesktop img {
+  #stickySliderMob img {
     object-fit: cover;
     width: 100%;
     height: 100px;
@@ -432,16 +607,6 @@ $extra-large-screen: 1200px;
     ion-icon {
       font-size: 14px;
     }
-  }
-
-  .heartStyle {
-    font-weight: bolder;
-    cursor: pointer;
-  }
-
-  .heartRedStyle {
-    color: #e30b1c;
-    cursor: pointer;
   }
 
   .locationSticky {
@@ -649,7 +814,8 @@ $extra-large-screen: 1200px;
   /************ Hiding elements in Destop View ********/
   .prodDetailsMob,
   #stickySliderMob,
-  .footerDiv {
+  .footerDiv,
+  #makeOfferMobile {
     display: none;
   }
 
@@ -1380,16 +1546,6 @@ $extra-large-screen: 1200px;
     ion-icon {
       font-size: 24px;
     }
-  }
-
-  .heartStyle {
-    font-weight: bolder;
-    cursor: pointer;
-  }
-
-  .heartRedStyle {
-    color: #e30b1c;
-    cursor: pointer;
   }
 
   .locationSticky {

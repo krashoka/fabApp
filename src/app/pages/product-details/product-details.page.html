@@ -8,9 +8,27 @@
   <div class="prodDetailsMob">
     <ion-card class="stickyAds">
       <ion-icon name="arrow-back" (click)="goBack()"></ion-icon>
-      <div>
-        <ion-icon class="header_icon" name="share-social"></ion-icon>
-        <ion-icon class="header_icon" name="heart-outline"></ion-icon>
+      <div style="display: flex; align-items: center">
+        <ion-icon
+          class="header_icon"
+          name="share-social"
+          (click)="share()"
+        ></ion-icon>
+        <!-- <ion-icon class="header_icon" name="heart-outline"></ion-icon> -->
+        <div (click)="favoritesToggle()">
+          <ion-icon
+            class="header_icon"
+            [ngClass]="{'heartStyle': heart}"
+            name="heart-outline"
+            *ngIf="heart"
+          ></ion-icon>
+          <ion-icon
+            style="font-size: 20px !important; padding: 0 5px; color: #e30b1c"
+            [ngClass]="{'heartRedStyle': heartRed}"
+            name="heart"
+            *ngIf="heartRed"
+          ></ion-icon>
+        </div>
       </div>
     </ion-card>
 
@@ -32,11 +50,81 @@
 
     <p class="days">{{timestamp}}</p>
 
+    <!-- Make Offer Section for mobile view -->
+
+    <div id="makeOfferMobile" style="margin: 30px 3%">
+      <div class="displayContact" *ngIf="makeOfferSection">
+        <div>
+          <ion-button class="callDisplay" [href]="'tel:+' + adMobile">
+            <ion-icon name="call"></ion-icon>
+            <ion-text class="contactColor">+{{adMobile}}</ion-text>
+          </ion-button>
+        </div>
+        <div>
+          <ion-button
+            class="whatsappDisplay"
+            target="_blank"
+            [href]="waLink + adMobile"
+          >
+            <ion-icon name="logo-whatsapp"></ion-icon>
+            <ion-text class="contactColor">WhatsApp</ion-text>
+          </ion-button>
+        </div>
+      </div>
+
+      <div>
+        <div class="makeYourOffer" *ngIf="inputOffer">
+          <ion-input
+            type="number"
+            [placeholder]="'makeOffer' | translate"
+            [(ngModel)]="priceOffered"
+          />
+          <div class="sendOffer" (click)="sendOffer()">
+            {{'send' | translate}}
+          </div>
+        </div>
+
+        <ion-card class="buyNow" *ngIf="buyNow" (click)="buyAdNow()"
+          >{{'buyNow' | translate}}</ion-card
+        >
+
+        <div *ngIf="offerPrice" style="height: 220px; overflow-y: scroll">
+          <div *ngFor="let offers of offeredPriceArray, let i = index">
+            <div
+              class="offeredPrice"
+              (click)="toggleAcceptReject(offers.offeredUserId, offers)"
+            >
+              <p>{{'offeredPrice' | translate}}</p>
+              <p>
+                <ion-text class="pmo">{{offers.offeredPrice}}</ion-text>
+                <ion-text class="cmo">KWD</ion-text>
+              </p>
+            </div>
+            <div
+              class="offerBtn"
+              *ngIf="offeredUserIdStatus[offers.offeredUserId]"
+            >
+              <h2>{{offers.offeredUser}}</h2>
+              <div>
+                <div (click)="acceptOrRejectOffer(offers.offeredUserId, 1)">
+                  {{'acceptOffer' | translate}}
+                </div>
+                <div (click)="acceptOrRejectOffer(offers.offeredUserId, 0)">
+                  {{'rejectOffer' | translate}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ---------------------------------- -->
+
     <!-- ------ Location ------------- -->
-    <div class="location">
+    <!-- <div class="location">
       <ion-icon name="location-sharp"></ion-icon>
       <ion-label>Abu Dhabi, Al Shamkha</ion-label>
-    </div>
+    </div> -->
 
     <!-- Product Details -->
     <div style="margin-left: 10px; margin-right: 10px">
@@ -113,7 +201,7 @@
             </div>
           </div>
 
-          <ion-card class="buyNow" *ngIf="buyNow"
+          <ion-card class="buyNow" *ngIf="buyNow" (click)="buyAdNow()"
             >{{'buyNow' | translate}}</ion-card
           >
 
@@ -175,10 +263,10 @@
     <p class="productLabel">{{'details' | translate}}</p>
 
     <!-- ------ Location ------------- -->
-    <div class="location">
+    <!-- <div class="location">
       <ion-icon name="location-sharp"></ion-icon>
       <ion-label>Abu Dhabi ,Mohammed Bin Zayed City</ion-label>
-    </div>
+    </div> -->
 
     <div class="itemDetails">
       <div *ngFor="let details of prodDetails | keyvalue">
@@ -319,36 +407,9 @@
 
   <!------------------------ SLIDER  ------------------>
 
-  <!-- <div style="margin-bottom: 60px" id="stickySliderMob">
-    <div>
-      <div class="adsCrousel">
-        <div class="adsBorder">
-          <img class="imgHeight" src="assets/images/crousel_img1.jpeg" />
-          <div class="dayAndHeart">
-            <ion-label>2 days ago</ion-label>
-            <ion-icon name="heart-outline"></ion-icon>
-          </div>
-          <p class="adsTitle">Easy to disassemble and install</p>
-          <div class="adsPrice">
-            <ion-label>2500</ion-label>
-            <ion-label class="currency">KWD</ion-label>
-          </div>
-          <div class="adsButton">
-            <div class="callBtn">
-              <ion-icon name="call"></ion-icon>
-            </div>
-            <div class="whatsappBtn">
-              <ion-icon name="logo-whatsapp"></ion-icon>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- ----------------- Slider for Desktop --------------- -->
-  <div id="stickySliderDesktop">
-    <div *ngFor="let ad of adData; let i = index">
+  <!-- ----------------- Slider for Mobile --------------- -->
+  <ion-slides [options]="option3" id="stickySliderMob">
+    <ion-slide *ngFor="let ad of adData; let i = index">
       <ion-card>
         <img
           (click)="goToProductDetails(ad)"
@@ -412,8 +473,77 @@
           </div>
         </div>
       </ion-card>
-    </div>
-  </div>
+    </ion-slide>
+  </ion-slides>
+
+  <!-- ----------------- Slider for Desktop --------------- -->
+  <ion-slides [options]="option2" id="stickySliderDesktop">
+    <ion-slide *ngFor="let ad of adData; let i = index">
+      <ion-card>
+        <img
+          (click)="goToProductDetails(ad)"
+          style="cursor: pointer"
+          [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
+        />
+        <div class="stickyContentHeight">
+          <div class="dayAndHeart">
+            <div>
+              <ion-label>{{ad.timestamp}}</ion-label>
+              <ion-label class="locationSticky">Abu Dhabi</ion-label>
+            </div>
+
+            <ion-icon
+              class="heartSize"
+              [ngClass]="{'heartStyle': !ad.heartRedVisible}"
+              name="heart-outline"
+              *ngIf="!ad.heartRedVisible"
+              (click)="addToFav(ad.ad_id, i)"
+            ></ion-icon>
+            <ion-icon
+              class="heartSize"
+              [ngClass]="{'heartRedStyle': !ad.heartVisible}"
+              name="heart"
+              *ngIf="!ad.heartVisible"
+              (click)="removeFromFav(ad.ad_id, i)"
+            ></ion-icon>
+          </div>
+          <div (click)="goToProductDetails(ad)" style="cursor: pointer">
+            <p class="adsTitle">{{ad.adTitle}}</p>
+            <div class="adsPrice">
+              <ion-label>{{ad.itemObj.Price}}</ion-label>
+              <ion-label class="currency">KWD</ion-label>
+            </div>
+          </div>
+        </div>
+        <div class="contactSticky">
+          <div>
+            <ion-button class="call" [href]="'tel:+' + ad.adMobile">
+              <ion-icon name="call"></ion-icon>
+            </ion-button>
+          </div>
+          <div>
+            <ion-button
+              class="whatsapp"
+              target="_blank"
+              [href]="waLink + ad.adMobile"
+            >
+              <ion-icon name="logo-whatsapp"></ion-icon>
+            </ion-button>
+          </div>
+
+          <div>
+            <ion-button
+              class="sharePost"
+              target="_blank"
+              (click)="shareRelatedPost(ad.ad_id)"
+            >
+              <ion-icon name="share-social"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
 
   <!-- --------- Footer Section -------- -->
 

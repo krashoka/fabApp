@@ -64,7 +64,7 @@
         >
       </ion-segment-button>
       <ion-segment-button value="referrals">
-        <ion-label>{{'navData.referrals' | translate}} (0)</ion-label>
+        <ion-label>{{'navData.referrals' | translate}} ({{refCount}})</ion-label>
       </ion-segment-button>
       <ion-segment-button value="purchases">
         <ion-label>{{'navData.purchases' | translate}} (0)</ion-label>
@@ -229,42 +229,12 @@
     <div *ngIf="selectedSegment === 'referrals'">
       <h1 *ngIf="emptyReferrals">0 referrals</h1>
       <div class="referralsCard" *ngIf="referrals">
-        <ion-card>
+        <ion-card *ngFor="let ref of myReferrals">
           <div class="userTitle">
             <ion-icon name="person-circle-sharp"></ion-icon>
-            <h1>Chandan</h1>
+            <h1>{{ref.username}}</h1>
           </div>
-          <p>joined 10 days ago</p>
-          <div class="contactBtns">
-            <div class="viewBtn"><ion-icon name="call"></ion-icon> Call</div>
-
-            <div class="waBtn">
-              <ion-icon name="logo-whatsapp"></ion-icon> WhatsApp
-            </div>
-          </div>
-        </ion-card>
-
-        <ion-card>
-          <div class="userTitle">
-            <ion-icon name="person-circle-sharp"></ion-icon>
-            <h1>Kishore</h1>
-          </div>
-          <p>joined 5 days ago</p>
-          <div class="contactBtns">
-            <div class="viewBtn"><ion-icon name="call"></ion-icon> Call</div>
-
-            <div class="waBtn">
-              <ion-icon name="logo-whatsapp"></ion-icon> WhatsApp
-            </div>
-          </div>
-        </ion-card>
-
-        <ion-card>
-          <div class="userTitle">
-            <ion-icon name="person-circle-sharp"></ion-icon>
-            <h1>Ashok</h1>
-          </div>
-          <p>joined 4 days ago</p>
+          <p>{{ref.joinedOn}}</p>
           <div class="contactBtns">
             <div class="viewBtn"><ion-icon name="call"></ion-icon> Call</div>
 

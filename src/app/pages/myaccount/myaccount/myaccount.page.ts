@@ -39,6 +39,8 @@ export class MyaccountPage {
 
   emptyReferrals = false;
   referrals = true;
+  myReferrals: any = [];
+  refCount = 0;
 
   myPoints = 0;
 
@@ -130,29 +132,41 @@ export class MyaccountPage {
   }
 
   fetchAdminData() {
-    this.storage.get('admin').then((val) => {
-      let data = {
-        uid: val.userid,
-      };
-
-      this._apiService.fetchAdminData(data).subscribe((res: any) => {
-        if (res == 'code-1') {
-          this.errorToast('User not found');
-        } else if (res == 'code-0') {
-          this.errorToast('Session Error');
-        } else {
-          let newData = {
-            username: res.username,
-            userid: res.userid,
-            phonecode: res.phonecode,
-            usermob: res.mobile,
-            referral: res.myref,
-            myPoints: res.mypoints,
+    this.storage.get('admin').then(
+      (val) => {
+        if (val != null) {
+          let data = {
+            uid: val.userid,
           };
-          this.storage.set('admin', newData);
+
+          this._apiService.fetchAdminData(data).subscribe(
+            (res: any) => {
+              if (res == 'code-1') {
+                this.errorToast('User not found');
+              } else if (res == 'code-0') {
+                this.errorToast('Session Error');
+              } else {
+                let newData = {
+                  username: res.username,
+                  userid: res.userid,
+                  phonecode: res.phonecode,
+                  usermob: res.mobile,
+                  referral: res.myref,
+                  myPoints: res.mypoints,
+                };
+                this.storage.set('admin', newData);
+              }
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
         }
-      });
-    });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   myAccountDataOnPageLoad() {
@@ -324,6 +338,54 @@ export class MyaccountPage {
               this.favorites.push(favData);
             }
           }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+
+      //************ SHOWING REFERRALS **************/
+      this._apiService.fetchReferrals(favData).subscribe(
+        (res: any) => {
+          console.log('referrals fetched:', res);
+          if (res.length > 0) {
+            this.refCount = res.length;
+            for (let i = 0; i < res.length; i++) {
+              let reffD = {
+                username: res[i].user_name,
+                joinedOn: this.timestamp(res[i].created_at),
+                mobile: res[i].phonecode + res[i].user_mob,
+              };
+
+              this.myReferrals.push(reffD);
+            }
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+
+      //************ SHOWING SELLINGS **************/
+      this._apiService.fetchSellings(favData).subscribe(
+        (res: any) => {
+          console.log('Sellings fetched:', res);
+
+          if (res.length > 0) {
+            for (let i = 0; i < res.length; i++) {
+              let selData = {};
+            }
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+
+      //************ SHOWING PURCHASES **************/
+      this._apiService.fetchPurchases(favData).subscribe(
+        (res: any) => {
+          console.log('Purchases fetched:', res);
         },
         (err) => {
           console.log(err);
