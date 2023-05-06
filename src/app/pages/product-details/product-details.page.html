@@ -82,7 +82,7 @@
           </ion-card> -->
         </div>
 
-        <div class="displayContact">
+        <div class="displayContact" *ngIf="makeOfferSection">
           <div>
             <ion-button class="callDisplay" [href]="'tel:+' + adMobile">
               <ion-icon name="call"></ion-icon>
@@ -102,25 +102,50 @@
         </div>
 
         <div>
-          <div class="makeYourOffer">
-            <ion-input type="number" [placeholder]="'makeOffer' | translate" />
-            <div class="sendOffer">{{'send' | translate}}</div>
+          <div class="makeYourOffer" *ngIf="inputOffer">
+            <ion-input
+              type="number"
+              [placeholder]="'makeOffer' | translate"
+              [(ngModel)]="priceOffered"
+            />
+            <div class="sendOffer" (click)="sendOffer()">
+              {{'send' | translate}}
+            </div>
           </div>
 
-          <div class="offeredPrice">
-            <p>{{'offeredPrice' | translate}}</p>
-            <p>
-              <ion-text class="pmo">5980000</ion-text>
-              <ion-text class="cmo">KWD</ion-text>
-            </p>
+          <ion-card class="buyNow" *ngIf="buyNow"
+            >{{'buyNow' | translate}}</ion-card
+          >
+
+          <div *ngIf="offerPrice" style="height: 320px; overflow-y: scroll">
+            <div *ngFor="let offers of offeredPriceArray, let i = index">
+              <div
+                class="offeredPrice"
+                (click)="toggleAcceptReject(offers.offeredUserId, offers)"
+              >
+                <p>{{'offeredPrice' | translate}}</p>
+                <p>
+                  <ion-text class="pmo">{{offers.offeredPrice}}</ion-text>
+                  <ion-text class="cmo">KWD</ion-text>
+                </p>
+              </div>
+              <div
+                class="offerBtn"
+                *ngIf="offeredUserIdStatus[offers.offeredUserId]"
+              >
+                <h2>{{offers.offeredUser}}</h2>
+                <div>
+                  <div (click)="acceptOrRejectOffer(offers.offeredUserId, 1)">
+                    {{'acceptOffer' | translate}}
+                  </div>
+                  <div (click)="acceptOrRejectOffer(offers.offeredUserId, 0)">
+                    {{'rejectOffer' | translate}}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- <div class="offerBtn">
-            <div>{{'acceptOffer' | translate}}</div>
-            <div>{{'rejectOffer' | translate}}</div>
-          </div> -->
         </div>
-
-        <ion-card class="buyNow">{{'buyNow' | translate}}</ion-card>
       </div>
     </div>
 

@@ -42,7 +42,7 @@
   <!-- ---------- Crousel --------- -->
   <div id="homeTab">
     <div class="crousel" *ngIf="homeTabComponent">
-      <ion-slides [slidesPerView]="1" [loop]="true" class="topCrousel">
+      <ion-slides [options]="option" class="topCrousel">
         <ion-slide *ngFor="let ad of adDetails">
           <ion-card>
             <ion-img
@@ -110,7 +110,10 @@
       >
         <ion-card class="icons" [innerHTML]="category.icon | safeHtml">
         </ion-card>
-        <p class="icon_title">{{ 'homeData.' + category.slug | translate }}</p>
+        <p class="icon_title">
+          <!-- {{ 'homeData.' + category.slug | translate }} -->
+          {{category.title}}
+        </p>
       </div>
     </div>
   </div>
@@ -130,10 +133,7 @@
       </div>
     </ion-card>
 
-    <ion-slides
-     [options]="option2"
-      class="commercialSlide"
-    >
+    <ion-slides [options]="option2" class="commercialSlide">
       <ion-slide *ngFor="let ad of adDetails">
         <ion-card>
           <img
@@ -202,10 +202,7 @@
       </div>
     </ion-card>
 
-    <ion-slides
-      [options]="option2"
-      class="stickySlide"
-    >
+    <ion-slides [options]="option2" class="stickySlide">
       <ion-slide *ngFor="let ad of adDetails; let i = index">
         <ion-card dir="ltr">
           <img

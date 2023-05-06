@@ -66,6 +66,14 @@ export class ProductDetailsPage {
 
   // Offer making variables
   makeOffer: any;
+  makeOfferSection = true;
+  inputOffer = true;
+  buyNow = false;
+  offerPrice = false;
+  priceOffered: any;
+  offerBtn = false;
+  offeredPriceArray: any = [];
+  offeredUserIdStatus = {};
   // ///////////////////////
 
   constructor(
@@ -440,24 +448,17 @@ export class ProductDetailsPage {
     this.progressBarWidth = this.counter + '%'; // increase the width of the progress bar by 10% with each iteration
     if (this.counter < 100) {
       setTimeout(() => {
-        // this.timeOnPage += 600;
         this.increaseCounter(timer, slug);
-        // console.log('setTimer Counter Val:', this.counter);
-        // console.log('progressBarWidth:', this.progressBarWidth);
       }, timer * 10);
     } else {
-      console.log('Counter Val:', this.counter);
       this.storage.get('admin').then(
         (val) => {
-          console.log('session User:', val.userid);
           if (val != null) {
             let data = {
               vid: val.userid,
               aid: slug,
             };
-            this._apiService.adViewPoint(data).subscribe((res: any) => {
-              console.log('Timer response:', res);
-            });
+            this._apiService.adViewPoint(data).subscribe((res: any) => {});
             // this.showTimer = false;
           }
         },
@@ -466,6 +467,78 @@ export class ProductDetailsPage {
         }
       );
     }
+  }
+
+  sendOffer() {
+    this.storage.get('admin').then(
+      (val) => {
+        if (val != null) {
+          if (this.priceOffered > 0) {
+            let data = {
+              aid: this.adId,
+              vid: this.sessionUser,
+              op: this.priceOffered,
+            };
+
+            this.priceOffered = '';
+
+            this._apiService.sendOffer(data).subscribe(
+              (res: any) => {
+                console.log('sendOffer response:', res);
+                if (res) {
+                  this.successToast('Request sent successfully');
+                  this.inputOffer = false;
+                }
+              },
+              (err) => {
+                console.log(err);
+                this.errorToast(err.error.message);
+              }
+            );
+          } else {
+            this.errorToast('Enter valid amount!');
+          }
+        } else {
+          this.router.navigate(['login']);
+        }
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }
+
+  acceptOrRejectOffer(visitorId, status) {
+    let data = {
+      aid: this.adId,
+      uid: this.sessionUser,
+      vid: visitorId,
+      res: status,
+    };
+
+    this._apiService.offerResponse(data).subscribe(
+      (res: any) => {
+        console.log('offerREsponsse Value:', res);
+        if (res) {
+          this.offeredPriceArray = [];
+          this.ionViewWillEnter();
+        }
+      },
+      (err) => {
+        this.errorToast(err.error.message);
+      }
+    );
+  }
+
+  toggleAcceptReject(offeredUserId: string, offers) {
+    this.offeredUserIdStatus[offeredUserId] =
+      !this.offeredUserIdStatus[offeredUserId];
+
+    this.offeredPriceArray.forEach((offer) => {
+      if (offer.offeredUserId !== offeredUserId) {
+        this.offeredUserIdStatus[offer.offeredUserId] = false;
+      }
+    });
   }
 
   ionViewWillEnter() {
@@ -522,6 +595,52 @@ export class ProductDetailsPage {
             this.chatCardDisplay = true;
             this.commentCardDisplay = false;
             this.showBack = false;
+
+            // makeOffer card display for ad owner
+            this.makeOfferSection = false;
+            this.inputOffer = false;
+            this.offerPrice = true;
+
+            let offerData = {
+              aid: slug,
+              uid: adKaAdmin,
+            };
+            this._apiService.getAdOffers(offerData).subscribe(
+              (res: any) => {
+                console.log('getOfferAd:', res);
+                if (res.length > 0) {
+                  for (let i = 0; i < res.length; i++) {
+                    let offerData = {
+                      offeredUserId: res[i].id,
+                      offeredUser: res[i].offered_by,
+                      offeredPrice: res[i].offered_value,
+                    };
+
+                    this.offeredPriceArray.push(offerData);
+                  }
+                }
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+          } else {
+            let getUserData = {
+              aid: slug,
+              uid: session.userid,
+            };
+
+            this._apiService.userAdOfferResponse(getUserData).subscribe(
+              (res: any) => {
+                if (res) {
+                  this.inputOffer = false;
+                  this.buyNow = true;
+                }
+              },
+              (err) => {
+                this.errorToast(err.error.message);
+              }
+            );
           }
           // ////////////////////
           let value = { aid: slug, uid: session.userid };

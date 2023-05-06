@@ -163,4 +163,32 @@ export class ApiService {
       data
     );
   }
+
+  sendOffer(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/make-new-offer',
+      data
+    );
+  }
+
+  getAdOffers(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/get-add-offers',
+      data
+    );
+  }
+
+  offerResponse(data) {
+    return this.http.post(
+      'https://specbits.com/class2/fab/offer-response',
+      data
+    );
+  }
+
+  userAdOfferResponse(data){
+    return this.http.post(
+      'https://specbits.com/class2/fab/get-user-add-offers',
+      data
+    );
+  };
 }

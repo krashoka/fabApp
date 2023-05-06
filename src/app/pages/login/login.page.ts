@@ -96,6 +96,8 @@ export class LoginPage {
           this.router.navigateByUrl(`home`);
         } else if (res == 'wrongpwd') {
           this.errorToast('Wrong Password !');
+        } else if (res == 'blocked') {
+          this.errorToast('Your account is blocked!');
         } else {
           this.errorToast('Number not registered!');
         }
