@@ -201,10 +201,11 @@ export class ProductsPage implements OnInit {
     console.log('Share result:', shareRet);
   }
 
-  fetchAdsData(userIDs) {
+  fetchAdsData(userIDs, id) {
     let cidData = {
-      uid: userIDs,
+      cid: id,
     };
+    console.log("fetch IDDD:", cidData);
     this._apiService.fetchAds(cidData).subscribe((res: any) => {
       console.log('Show Ad details:', res);
       // Displaying ads from database
@@ -305,14 +306,7 @@ export class ProductsPage implements OnInit {
       }
     });
 
-    this.storage.get('admin').then((val) => {
-      if (val != null) {
-        this.sessionUser = val.userid;
-        this.fetchAdsData(val.userid);
-      } else {
-        this.fetchAdsData(null);
-      }
-    });
+    
 
     const slug = this.route.snapshot.paramMap.get('slug');
 
@@ -329,6 +323,15 @@ export class ProductsPage implements OnInit {
     let cidData = {
       cid: id,
     };
+
+    this.storage.get('admin').then((val) => {
+      if (val != null) {
+        this.sessionUser = val.userid;
+        this.fetchAdsData(val.userid, id);
+      } else {
+        this.fetchAdsData(null, id);
+      }
+    });
 
     if (id == '0') {
       this.http.get('https://specbits.com/class2/fab/index').subscribe(
