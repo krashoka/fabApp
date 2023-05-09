@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
@@ -28,7 +28,8 @@ export class NavbarPage implements OnInit {
     private storage: Storage,
     private navController: NavController,
     private translateService: TranslateService,
-    private http: HttpClient
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef
   ) {
     this.storage.create();
     // this.translateService.use('en');
@@ -151,21 +152,21 @@ export class NavbarPage implements OnInit {
 
   ngOnInit() {
     this.fetchAdminData();
-    this.ionViewWillEnter();
+    this.cdr.detectChanges();
   }
 
-  ionViewWillEnter(){
-    this.storage.get('admin').then(
-      (val) => {
-        if (val != null) {
-          this.username = val.username;
-          this.showAccount = true;
-          this.showLogin = false;
-        }
-      }, err => {
-        console.log(err);
-      });
-  }
+  // ionViewWillEnter(){
+  //   this.storage.get('admin').then(
+  //     (val) => {
+  //       if (val != null) {
+  //         this.username = val.username;
+  //         this.showAccount = true;
+  //         this.showLogin = false;
+  //       }
+  //     }, err => {
+  //       console.log(err);
+  //     });
+  // }
 
   isElementActive(routePath: string): boolean {
     return this.router.url.includes(routePath);
