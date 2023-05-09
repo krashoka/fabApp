@@ -109,35 +109,38 @@ export class NavbarPage implements OnInit {
   fetchAdminData() {
     this.storage.get('admin').then(
       (val) => {
-        if(val != null){
-          
-        let data = {
-          uid: val.userid,
-        };
+        if (val != null) {
+          this.username = val.username;
+          this.showAccount = true;
+          this.showLogin = false;
 
-        this._apiService.fetchAdminData(data).subscribe(
-          (res: any) => {
-            if (res == 'code-1') {
-              this.errorToast('User not found');
-            } else if (res == 'code-0') {
-              this.errorToast('Session Error');
-            } else {
-              let newData = {
-                loggedIn: true,
-                username: res.username,
-                userid: res.userid,
-                phonecode: res.phonecode,
-                usermob: res.mobile,
-                referral: res.myref,
-                myPoints: res.mypoints,
-              };
-              this.storage.set('admin', newData);
+          let data = {
+            uid: val.userid,
+          };
+
+          this._apiService.fetchAdminData(data).subscribe(
+            (res: any) => {
+              if (res == 'code-1') {
+                this.errorToast('User not found');
+              } else if (res == 'code-0') {
+                this.errorToast('Session Error');
+              } else {
+                let newData = {
+                  loggedIn: true,
+                  username: res.username,
+                  userid: res.userid,
+                  phonecode: res.phonecode,
+                  usermob: res.mobile,
+                  referral: res.myref,
+                  myPoints: res.mypoints,
+                };
+                this.storage.set('admin', newData);
+              }
+            },
+            (err) => {
+              console.log(err);
             }
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
+          );
         }
       },
       (err) => {
@@ -148,20 +151,6 @@ export class NavbarPage implements OnInit {
 
   ngOnInit() {
     this.fetchAdminData();
-
-    this.storage.get('admin').then((val) => {
-      if (val != null) {
-        this.username = val.username;
-        this.showAccount = true;
-        this.showLogin = false;
-      }
-    });
-
-    // const value = await this.storage.get('admin');
-    // if (value != null) {
-    //   this.showAccount = true;
-    //   this.showLogin = false;
-    // }
   }
 
   isElementActive(routePath: string): boolean {
