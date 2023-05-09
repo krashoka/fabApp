@@ -438,7 +438,7 @@ export class HomePage {
 
   // @ViewChild('swiper') swiper: SwiperComponent;
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.dataOnPageLoad();
 
     // if (this.swiper) {

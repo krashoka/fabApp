@@ -151,6 +151,7 @@ export class NavbarPage implements OnInit {
 
   ngOnInit() {
     this.fetchAdminData();
+    this.ionViewWillEnter();
   }
 
   ionViewWillEnter(){
@@ -164,8 +165,6 @@ export class NavbarPage implements OnInit {
       }, err => {
         console.log(err);
       });
-
-      this.ngOnInit();
   }
 
   isElementActive(routePath: string): boolean {
