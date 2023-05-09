@@ -160,7 +160,14 @@ export class NavbarPage implements OnInit {
   }
 
   goToLogin() {
-    this.router.navigate(['login']);
+    this.storage.get('admin').then((val) => {
+      if(val!=null){
+        this.router.navigate(['home']);
+      }else{
+        this.router.navigate(['login']);
+      }
+    })
+    
   }
 
   goToHome() {
