@@ -150,8 +150,8 @@ export class NavbarPage implements OnInit {
     );
   }
 
-  async ngOnInit() {
-    await this.fetchAdminData();
+  ngOnInit() {
+    this.fetchAdminData();
     this.cdr.detectChanges();
   }
 
@@ -163,6 +163,7 @@ export class NavbarPage implements OnInit {
     this.storage.get('admin').then((val) => {
       if(val!=null){
         this.router.navigate(['home']);
+        this.ngOnInit();
       }else{
         this.router.navigate(['login']);
       }

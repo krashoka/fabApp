@@ -438,8 +438,8 @@ export class HomePage {
 
   // @ViewChild('swiper') swiper: SwiperComponent;
 
-  async ngOnInit() {
-    await this.dataOnPageLoad();
+  ngOnInit() {
+    this.dataOnPageLoad();
   }
 
   timestamp(time) {
