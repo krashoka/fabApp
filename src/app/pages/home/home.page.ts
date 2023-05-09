@@ -438,17 +438,9 @@ export class HomePage {
 
   // @ViewChild('swiper') swiper: SwiperComponent;
 
-  ngOnInit() {
-    this.dataOnPageLoad();
-
-    // if (this.swiper) {
-    //   this.swiper.updateSwiper({});
-    // }
+  async ngOnInit() {
+    await this.dataOnPageLoad();
   }
-
-  // async ionViewWillEnter() {
-  //   await this.dataOnPageLoad();
-  // }
 
   timestamp(time) {
     const timestamp = new Date(time).getTime();
