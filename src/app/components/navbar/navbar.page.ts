@@ -155,19 +155,6 @@ export class NavbarPage implements OnInit {
     this.cdr.detectChanges();
   }
 
-  // ionViewWillEnter(){
-  //   this.storage.get('admin').then(
-  //     (val) => {
-  //       if (val != null) {
-  //         this.username = val.username;
-  //         this.showAccount = true;
-  //         this.showLogin = false;
-  //       }
-  //     }, err => {
-  //       console.log(err);
-  //     });
-  // }
-
   isElementActive(routePath: string): boolean {
     return this.router.url.includes(routePath);
   }
