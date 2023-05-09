@@ -36,6 +36,14 @@ export class LoginPage {
   }
 
   ionViewWillEnter() {
+    this.storage.get('admin').then(val => {
+      if(val != null){
+        this.router.navigateByUrl('home');
+      }
+    },err => {
+      console.log(err);
+    })
+
     this.http
       .get('https://specbits.com/class2/fab/country')
       .subscribe((res: any) => {

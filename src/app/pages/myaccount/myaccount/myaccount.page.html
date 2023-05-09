@@ -67,10 +67,10 @@
         <ion-label>{{'navData.referrals' | translate}} ({{refCount}})</ion-label>
       </ion-segment-button>
       <ion-segment-button value="purchases">
-        <ion-label>{{'navData.purchases' | translate}} (0)</ion-label>
+        <ion-label>{{'navData.purchases' | translate}} ({{purchaseCount}})</ion-label>
       </ion-segment-button>
       <ion-segment-button value="sellings">
-        <ion-label>{{'navData.sellings' | translate}} (0)</ion-label>
+        <ion-label>{{'navData.sellings' | translate}} ({{sellCount}})</ion-label>
       </ion-segment-button>
     </div>
   </ion-segment>
@@ -132,15 +132,15 @@
               >
             </p>
             <h1 class="adTitle">{{ad.adTitle}}</h1>
-            <p class="adPrice">
-              {{ad.itemObj.Price}} <ion-text class="currency">KWD</ion-text>
+            <p class="priceTag">
+              <ion-text class="currency">Amount:  </ion-text>{{ad.itemObj.Price}} KWD
             </p>
             <div class="adBtns">
               <div class="viewBtn" (click)="goToProductDetails(ad)">
                 <ion-icon name="eye-sharp"></ion-icon> View
               </div>
               <div>
-                <ion-button class="editBtn" [id]="ad.ad_id">
+                <ion-button class="editBtn">
                   <ion-icon name="pencil-sharp"></ion-icon>Edit
                 </ion-button>
               </div>
@@ -148,25 +148,6 @@
                 <ion-icon name="trash-outline"></ion-icon> Delete
               </div>
             </div>
-
-            <!-- Modal to Edit -->
-            <ion-modal id="example-modal" #modal [trigger]="ad.ad_id">
-              <ng-template>
-                <ion-content>
-                  <div>
-                    <ion-text>Ad Title</ion-text>
-                    <ion-input type="text" placeholder="Enter New Ad Title" />
-                  </div>
-                  <div>
-                    <ion-text>Ad Description</ion-text>
-                    <ion-input
-                      type="text"
-                      placeholder="Enter New Ad Description"
-                    />
-                  </div>
-                </ion-content>
-              </ng-template>
-            </ion-modal>
           </div>
         </ion-card>
       </div>
@@ -184,8 +165,8 @@
           <div>
             <p class="uploadTime">{{chat.timestamp}}</p>
             <h1 class="adTitle">{{chat.adTitle}}</h1>
-            <p class="adPrice">
-              {{chat.itemObj.Price}} <ion-text class="currency">KWD</ion-text>
+            <p class="priceTag">
+              <ion-text class="currency">Amount:  </ion-text>{{chat.itemObj.Price}} KWD
             </p>
             <div class="adBtns">
               <div class="viewBtn" (click)="goToProductDetails(chat)">
@@ -209,8 +190,8 @@
           <div>
             <p class="uploadTime">{{fav.timestamp}}</p>
             <h1 class="adTitle">{{fav.title}}</h1>
-            <p class="adPrice">
-              {{fav.price}} <ion-text class="currency">KWD</ion-text>
+            <p class="priceTag">
+              <ion-text class="currency">Amount:  </ion-text>{{fav.price}} KWD
             </p>
             <div class="adBtns">
               <div class="viewBtn" (click)="goToProductDetails(fav)">
@@ -236,7 +217,10 @@
           </div>
           <p>{{ref.joinedOn}}</p>
           <div class="contactBtns">
-            <div class="viewBtn"><ion-icon name="call"></ion-icon> Call</div>
+            <div class="viewBtn">
+              <ion-button class="call">
+                <ion-icon name="call"></ion-icon> Call
+              </ion-button></div>
 
             <div class="waBtn">
               <ion-icon name="logo-whatsapp"></ion-icon> WhatsApp
@@ -248,24 +232,22 @@
 
     <!-- MY PURCHASES -->
     <div *ngIf="selectedSegment === 'purchases'">
-      <h1 *ngIf="emptyFavAds">No purchase made yet.</h1>
-      <div *ngIf="favAds" class="cardDisplayMargin">
-        <ion-card class="myAds" *ngFor="let fav of favorites">
+      <h1 *ngIf="emptyPurchases">No purchase made yet.</h1>
+      <div *ngIf="purchases" class="cardDisplayMargin">
+        <ion-card class="myAds" *ngFor="let purchase of purchasesData">
           <img
-            [src]="'https://specbits.com/class2/fab/'+ fav.images[0].image_name"
+            [src]="'https://specbits.com/class2/fab/'+ purchase.image"
           />
 
           <div>
-            <p class="uploadTime">{{fav.timestamp}}</p>
-            <h1 class="adTitle">{{fav.title}}</h1>
-            <p class="adPrice">
-              {{fav.price}} <ion-text class="currency">KWD</ion-text>
+            <h1 class="adTitle">{{purchase.title}}</h1>
+            <p class="priceTag">
+              <ion-text class="currency">Amount:  </ion-text>{{purchase.price}} KWD
             </p>
-            <div class="adBtns">
-              <div class="viewBtn" (click)="goToProductDetails(fav)">
-                <ion-icon name="eye-sharp"></ion-icon> View
-              </div>
-            </div>
+            <p class="adPrice">
+              <ion-text class="tag">Seller:  <ion-text class="tagName">{{purchase.sellerName}} </ion-text></ion-text>
+              <ion-text class="uploadTime">{{purchase.timestamp}}</ion-text>
+            </p>
           </div>
         </ion-card>
       </div>
@@ -273,24 +255,22 @@
 
     <!-- MY SELLINGS -->
     <div *ngIf="selectedSegment === 'sellings'">
-      <h1 *ngIf="emptyFavAds">No sellings made yet.</h1>
-      <div *ngIf="favAds" class="cardDisplayMargin">
-        <ion-card class="myAds" *ngFor="let fav of favorites">
+      <h1 *ngIf="emptySellings">No sellings made yet.</h1>
+      <div *ngIf="sellings" class="cardDisplayMargin">
+        <ion-card class="myAds" *ngFor="let sell of sellingsData">
           <img
-            [src]="'https://specbits.com/class2/fab/'+ fav.images[0].image_name"
+            [src]="'https://specbits.com/class2/fab/'+ sell.image"
           />
 
           <div>
-            <p class="uploadTime">{{fav.timestamp}}</p>
-            <h1 class="adTitle">{{fav.title}}</h1>
-            <p class="adPrice">
-              {{fav.price}} <ion-text class="currency">KWD</ion-text>
+            <h1 class="adTitle">{{sell.title}}</h1>
+            <p class="priceTag">
+              <ion-text class="currency">Amount:  </ion-text>{{sell.price}} KWD
             </p>
-            <div class="adBtns">
-              <div class="viewBtn" (click)="goToProductDetails(fav)">
-                <ion-icon name="eye-sharp"></ion-icon> View
-              </div>
-            </div>
+            <p class="adPrice">
+              <ion-text class="tag">Buyer:  <ion-text class="tagName">{{sell.buyerName}} </ion-text></ion-text>
+              <ion-text class="uploadTime">{{sell.timestamp}}</ion-text>
+            </p>
           </div>
         </ion-card>
       </div>

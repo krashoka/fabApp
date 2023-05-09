@@ -37,10 +37,20 @@ export class MyaccountPage {
   myAdsCount = 0;
   myChatsCount = 0;
 
-  emptyReferrals = false;
-  referrals = true;
+  emptyReferrals = true;
+  referrals = false;
   myReferrals: any = [];
   refCount = 0;
+
+  emptySellings = true;
+  sellings = false;
+  sellingsData: any = [];
+  sellCount = 0;
+
+  emptyPurchases = true;
+  purchases = false;
+  purchasesData: any = [];
+  purchaseCount = 0;
 
   myPoints = 0;
 
@@ -196,7 +206,7 @@ export class MyaccountPage {
           this.adDetails = [];
           this.chatsOnAd = [];
 
-          if (res) {
+          if (res.length > 0) {
             this.myAds = true;
             this.emptyMyAds = false;
           }
@@ -318,7 +328,7 @@ export class MyaccountPage {
 
           this.favorites = [];
 
-          if (res) {
+          if (res.length > 0) {
             this.emptyFavAds = false;
             this.favAds = true;
             this.favAdsCount = res.length;
@@ -348,7 +358,11 @@ export class MyaccountPage {
       this._apiService.fetchReferrals(favData).subscribe(
         (res: any) => {
           console.log('referrals fetched:', res);
+          this.myReferrals = [];
+
           if (res.length > 0) {
+            this.referrals = true;
+            this.emptyReferrals = false;
             this.refCount = res.length;
             for (let i = 0; i < res.length; i++) {
               let reffD = {
@@ -371,9 +385,25 @@ export class MyaccountPage {
         (res: any) => {
           console.log('Sellings fetched:', res);
 
+          this.sellingsData = [];
+
           if (res.length > 0) {
+            this.sellCount = res.length;
+            this.sellings = true;
+            this.emptySellings = false;
+
             for (let i = 0; i < res.length; i++) {
-              let selData = {};
+              let result = this.timestamp(res[i].timestamp);
+
+              let sellData = {
+                title: res[i].addname,
+                buyerName: res[i].buyerName,
+                price: res[i].price,
+                timestamp: result,
+                image: res[i].image,
+              };
+
+              this.sellingsData.push(sellData);
             }
           }
         },
@@ -386,6 +416,27 @@ export class MyaccountPage {
       this._apiService.fetchPurchases(favData).subscribe(
         (res: any) => {
           console.log('Purchases fetched:', res);
+          this.purchasesData = [];
+
+          if (res.length > 0) {
+            this.purchaseCount = res.length;
+            this.purchases = true;
+            this.emptyPurchases = false;
+
+            for (let i = 0; i < res.length; i++) {
+              let result = this.timestamp(res[i].timestamp);
+
+              let purchaseData = {
+                title: res[i].addname,
+                sellerName: res[i].sellerName,
+                price: res[i].price,
+                timestamp: result,
+                image: res[i].image,
+              };
+
+              this.purchasesData.push(purchaseData);
+            }
+          }
         },
         (err) => {
           console.log(err);

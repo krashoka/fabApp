@@ -6,12 +6,21 @@ import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/app/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { Share } from '@capacitor/share';
+import { GoSell } from "@tap-payments/gosell";
+
+// GoSell.init({
+//   publishableKey: 'YOUR_PUBLISHABLE_KEY',
+//   productionMode: false,
+//   language: 'en',
+//   merchantID: 'YOUR_MERCHANT_ID'
+// });
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.page.html',
   styleUrls: ['./product-details.page.scss'],
 })
+
 export class ProductDetailsPage {
   adTitle: any;
   adDetail: any;
@@ -87,6 +96,48 @@ export class ProductDetailsPage {
   ) {
     this.storage.create();
   }
+
+  buyAdNow() {
+    let data = {
+      uid: this.sessionUser,
+      aid: this.adId,
+    };
+
+    this._apiService.buyAdNow(data).subscribe((res: any) => {
+      if(res){
+        console.log("Buy Now Response: ", res);
+        // this.successToast("Transaction successful");
+        window.location.href = res;
+      }
+    }, err => {
+      this.errorToast(err.error.message);
+    });
+  }
+
+  // async buyAdNow() {
+  //   try {
+  //     const charge = await GoSell.charge.create({
+  //       amount: 100,
+  //       currency: 'AED',
+  //       customer: {
+  //         first_name: 'John',
+  //         last_name: 'Doe',
+  //         email: 'john.doe@example.com',
+  //         phone: {
+  //           country_code: 'AE',
+  //           number: '0555555555'
+  //         }
+  //       },
+  //       source: {
+  //         id: 'tok_XXXXXXXXXXXXXX'
+  //       },
+  //       description: 'Test Payment'
+  //     });
+  //     console.log(charge);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   goToCommercialAds() {
     this.router.navigate(['commercialads']);
@@ -557,21 +608,7 @@ export class ProductDetailsPage {
     autoplay: true,
   };
 
-  buyAdNow() {
-    let data = {
-      uid: this.sessionUser,
-      aid: this.adId,
-    };
-
-    this._apiService.buyAdNow(data).subscribe((res: any) => {
-      if(res){
-        this.successToast("Transaction successful");
-        this.router.navigate(['home']);
-      }
-    }, err => {
-      this.errorToast(err.error.message);
-    });
-  }
+  
 
   ionViewWillEnter() {
     const slugData = this.route.snapshot.paramMap.get('id');

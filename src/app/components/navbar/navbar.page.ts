@@ -112,8 +112,14 @@ export class NavbarPage implements OnInit {
       (val) => {
         if (val != null) {
           this.username = val.username;
-          this.showAccount = true;
-          this.showLogin = false;
+          
+          setTimeout(()=>{
+            setInterval(()=>{
+              this.showAccount = true;
+              this.showLogin = false;
+            }, 100);
+          },100);
+          
 
           let data = {
             uid: val.userid,
@@ -148,11 +154,12 @@ export class NavbarPage implements OnInit {
         console.log(err);
       }
     );
+
+    this.cdr.detectChanges();
   }
 
   ngOnInit() {
     this.fetchAdminData();
-    this.cdr.detectChanges();
   }
 
   isElementActive(routePath: string): boolean {
