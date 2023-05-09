@@ -150,8 +150,8 @@ export class NavbarPage implements OnInit {
     );
   }
 
-  ngOnInit() {
-    this.fetchAdminData();
+  async ngOnInit() {
+    await this.fetchAdminData();
     this.cdr.detectChanges();
   }
 
