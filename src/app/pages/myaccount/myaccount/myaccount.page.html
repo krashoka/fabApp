@@ -147,6 +147,9 @@
               <div class="deleteBtn">
                 <ion-icon name="trash-outline"></ion-icon> Delete
               </div>
+              <div class="viewBtn" (click)="openAnalytics(ad.adTitle)">
+                <ion-icon name="eye-sharp"></ion-icon> View
+              </div>
             </div>
           </div>
         </ion-card>
@@ -284,3 +287,113 @@
 
   <app-floating-chat></app-floating-chat>
 </ion-content>
+
+<div
+  class="notificationDropdown"
+  *ngIf="analyticsSidebar"
+  [dir]="'dir' | translate"
+>
+  <div>
+    <div class="myNotification">
+      <h1>{{adName}}</h1>
+      <ion-icon
+        name="close-circle-outline"
+        class="close"
+        (click)="dismissAnalytics()"
+      ></ion-icon>
+    </div>
+
+    <ion-card>
+      <h5>Kishore commented on your ad</h5>
+      <div class="notifDetails">
+        <p>10 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card>
+      <h5>You received new referral point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+    <ion-card>
+      <h5>You received point</h5>
+      <div class="notifDetails">
+        <p>3 minutes ago</p>
+        <div>
+          <ion-text>view details</ion-text>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </div>
+      </div>
+    </ion-card>
+  </div>
+</div>

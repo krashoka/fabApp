@@ -19,18 +19,34 @@ $extra-large-screen: 1200px;
     font-weight: 700;
   }
 
-  .choosePlan {
+  .plansDisplay{
     width: 55%;
     margin: 30px auto;
-    display: flex;
-    justify-content: space-between;
-    // grid-template-columns: repeat(2, 1fr);
-    // justify-content: center;
+  }
+
+  .choosePlan {
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .descPadding{
+    // padding: 0 10px;
+    font-size: 18px;
+    color: #2b2f33;
+  }
+
+  ul {
+    list-style-type: square;  
+  }
+
+  ul > li{
+    padding: 4px;
   }
 
   .card {
-    width: 40%;
-    // border: 1px solid #b8b5b5;
     height: 300px;
     padding: 0 !important;
   }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PipesModule } from './safe.module';
 
 import { IonicModule } from '@ionic/angular';
 
@@ -16,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     IonicModule,
+    PipesModule,
     TranslateModule,
     ChoosePlanPageRoutingModule,
     NavbarPageModule,

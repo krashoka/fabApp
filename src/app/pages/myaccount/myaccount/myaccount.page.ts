@@ -54,6 +54,9 @@ export class MyaccountPage {
 
   myPoints = 0;
 
+  analyticsSidebar = false;
+  adName: any;
+
   segmentChanged(event) {
     this.selectedSegment = event.detail.value;
     // console.log('SelectedSegment:', this.selectedSegment);
@@ -70,6 +73,16 @@ export class MyaccountPage {
     private _apiService: ApiService
   ) {
     this.storage.create();
+  }
+
+  // My Notification SideMenu
+  openAnalytics(title) {
+    this.analyticsSidebar = !this.analyticsSidebar;
+    this.adName = title;
+  }
+
+  dismissAnalytics() {
+    this.analyticsSidebar = !this.analyticsSidebar;
   }
 
   goToProfile() {

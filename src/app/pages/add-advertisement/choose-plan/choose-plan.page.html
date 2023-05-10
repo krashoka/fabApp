@@ -8,28 +8,40 @@
     <p>Choose your ad type, installed or free</p>
   </div>
 
-  <div class="choosePlan">
-    <ion-card class="card">
-      <div class="cardTitle">
-        <h2>Premium</h2>
-      </div>
+  <div class="plansDisplay">
+    <div class="choosePlan">
+      <ion-card class="card">
+        <div class="freeCard">
+          <h2>Free</h2>
+        </div>
 
-      <p>Pre Ad</p>
-      <p>40 AED / 3 days</p>
+        <p>Ad Free</p>
+        <p>FREE</p>
+        <div class="descPadding">
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+          </ul>
+        </div>
 
-      <div class="choose">Choose</div>
-    </ion-card>
+        <div class="chooseFree" (click)="choosePlan(0)">Choose</div>
+      </ion-card>
 
-    <ion-card class="card">
-      <div class="freeCard">
-        <h2>Free</h2>
-      </div>
+      <ion-card class="card" *ngFor="let plan of planCards">
+        <div class="cardTitle">
+          <h2>{{plan.title}}</h2>
+        </div>
 
-      <p>Ad Free</p>
-      <p>FREE</p>
+        <p>Per Ad</p>
+        <p>{{plan.heading}}</p>
 
-      <div class="chooseFree">Choose</div>
-    </ion-card>
+        <div class="descPadding" [innerHTML]="plan.description | safeHtml"></div>
+
+        <div class="choose" (click)="choosePlan(plan.id)">Choose</div>
+      </ion-card>
+    </div>
   </div>
 
   <!-- ------------ FOOTER Section --------- -->

@@ -49,11 +49,12 @@
     </ion-grid></ion-card
   >
   <ion-card *ngIf="showPoints" class="pointSection"
-    ><h1 class="availPoints">Available Points to Redeem - {{myPoints}}</h1>
+    ><h1 class="availPoints">{{heading}}</h1>
+    <h3 class="pointsVal">{{subHeading}}</h3>
     <div class="enterPoints">
-      <ion-input type="number" placeholder="Enter points to redeem" />
+      <ion-input type="number" placeholder="Enter points to redeem" [(ngModel)]="inputVal"/>
     </div>
-    <div class="submit">Submit</div>
+    <div class="submit" (click)="submit()">Submit</div>
   </ion-card>
 
   <!-- Footer Section -->

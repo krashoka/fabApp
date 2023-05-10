@@ -219,4 +219,37 @@ export class ApiService {
       data
     );
   };
+
+  redeemOnLoad(){
+    return this.http.get(
+      'https://specbits.com/class2/fab/redeem-on-load'
+    );
+  };
+
+  makeRedeemRequest(data){
+    return this.http.post(
+      'https://specbits.com/class2/fab/make-redeem-request',
+      data
+    );
+  };
+
+  fetchMembership(){
+    return this.http.get(
+      'https://specbits.com/class2/fab/fetch-memberships'
+    );
+  };
+
+  choosePlan(data){
+    return this.http.post(
+      'https://specbits.com/class2/fab/choose-plan',
+      data
+    );
+  };
+
+  buyPlan(data){
+    return this.http.post(
+      'https://specbits.com/class2/fab/buy-plan',
+      data
+    );
+  }
 }

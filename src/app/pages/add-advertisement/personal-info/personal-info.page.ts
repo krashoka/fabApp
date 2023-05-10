@@ -98,14 +98,13 @@ export class PersonalInfoPage implements OnInit {
           (res: any) => {
             console.log('Personal Information: ', res);
             if (res.msg == 'success') {
-              this.successToast('Ad Posted Successfully.');
-              this.router.navigate(['home']);
+              this.successToast('Personal details added Successfully.');
+              this.router.navigate(['choose-plan']);
             } else {
               this.errorToast('Ad Posting Failed. Try Again!');
             }
           },
           (err: any) => {
-            console.log('Error in posting: ', err);
             this.errorToast('Something went wrong!');
           }
         );

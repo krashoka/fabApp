@@ -213,7 +213,15 @@ const routes: Routes = [
         (m) => m.MyPointsPageModule
       ),
     canLoad: [AuthImplementsGuard],
+  },  {
+    path: 'success',
+    loadChildren: () => import('./pages/successFail/success/success.module').then( m => m.SuccessPageModule)
   },
+  {
+    path: 'failed',
+    loadChildren: () => import('./pages/successFail/failed/failed.module').then( m => m.FailedPageModule)
+  },
+
 ];
 
 @NgModule({
