@@ -133,6 +133,7 @@ export class MyPointsPage implements OnInit {
                   usermob: res.mobile,
                   referral: res.myref,
                   myPoints: res.mypoints,
+                  notifications: res.notifications
                 };
                 this.storage.set('admin', newData);
               }
@@ -162,6 +163,7 @@ export class MyPointsPage implements OnInit {
             (res: any) => {
               console.log('User Points:', res);
               if (res.length > 0) {
+                this.pointsData = [];
                 for (let i = 0; i < res.length; i++) {
                   let adTitle = '';
                   if (res[i].add_title) {

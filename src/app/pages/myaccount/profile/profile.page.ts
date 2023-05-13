@@ -120,6 +120,7 @@ export class ProfilePage {
             usermob: res.mobile,
             referral: res.myref,
             myPoints: res.mypoints,
+            notifications: res.notifications
           };
           this.storage.set('admin', newData);
 

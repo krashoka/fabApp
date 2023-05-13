@@ -59,7 +59,6 @@ export class MyaccountPage {
 
   segmentChanged(event) {
     this.selectedSegment = event.detail.value;
-    // console.log('SelectedSegment:', this.selectedSegment);
     this.router.navigateByUrl(`/myaccount/${this.selectedSegment}`);
   }
 
@@ -110,7 +109,6 @@ export class MyaccountPage {
       url: 'https://fabapp-47874.web.app/fabApp/signup',
       dialogTitle: 'Share with friends', // optional
     });
-    console.log('Share result:', shareRet);
   }
 
   removeFromFavorites(adid) {
@@ -176,6 +174,7 @@ export class MyaccountPage {
                   usermob: res.mobile,
                   referral: res.myref,
                   myPoints: res.mypoints,
+                  notifications: res.notifications
                 };
                 this.storage.set('admin', newData);
               }
@@ -196,13 +195,10 @@ export class MyaccountPage {
     this.fetchAdminData();
 
     this.selectedSegment = this.route.snapshot.paramMap.get('slug');
-    // console.log('Segment VAl:', this.selectedSegment);
-    // if (this.selectedSegment == null) this.selectedSegment = 'ads';
 
     // *********** Showing Only user ads *************
     this.storage.get('admin').then((val) => {
       this.sessionUser = val.userid;
-      // });
 
       let mobile = '+' + val.phonecode + ' ' + val.usermob;
       this.mobNumber = mobile;
@@ -214,7 +210,8 @@ export class MyaccountPage {
       this.http
         .get('https://specbits.com/class2/fab/adds')
         .subscribe((res: any) => {
-          console.log('Show ads data:', res);
+
+          console.log("received daTa:", res);
 
           this.adDetails = [];
           this.chatsOnAd = [];
@@ -225,7 +222,6 @@ export class MyaccountPage {
           }
 
           let count = 0;
-          // let chatCount = 0;
           // Displaying ads from database
           let dataLength = res.length;
           for (let i = 0; i < dataLength; i++) {
@@ -259,7 +255,6 @@ export class MyaccountPage {
                     if (val == 'label') itemLabel.push(res[i][key][j][val]);
                     if (val == 'add_id') ad_id = res[i][key][j][val];
                   }
-                  // }
                 }
               }
 
@@ -269,7 +264,6 @@ export class MyaccountPage {
                     if (val == 'image_name')
                       imagesArray.push(res[i][key][j][val]);
                   }
-                  // }
                 }
               }
             }
@@ -296,26 +290,13 @@ export class MyaccountPage {
               this.adDetails.push(data);
               count++;
 
-              if (data.adStatus == 'approved') {
-              }
-
-              if (data.adStatus == 'pending') {
-              }
-
-              if (data.adStatus == 'rejected') {
-              }
-
-              if (data.adStatus == 'expired') {
-              }
-
               let value = { aid: data.ad_id, uid: this.sessionUser };
               this.http
                 .post('https://specbits.com/class2/fab/fetch-comment', value)
                 .subscribe((com: any) => {
-                  console.log('comment data for chat:', com);
 
                   if (com != null) {
-                    // this.myChatsCount++;
+                    this.myChatsCount = com.length;
                     this.emptyChats = false;
                     this.chats = true;
                     this.chatsOnAd.push(data);
@@ -324,9 +305,10 @@ export class MyaccountPage {
             }
           }
 
-          this.myAdsCount = count;
+          console.log("adDetailssss:", this.adDetails);
+          
 
-          console.log('Total ad Data:', this.adDetails);
+          this.myAdsCount = count;
         });
 
       //************ SHOWING FAVORITES ADS **************/
@@ -337,7 +319,6 @@ export class MyaccountPage {
 
       this._apiService.fetchFavorites(favData).subscribe(
         (res: any) => {
-          console.log('Show fav:', res);
 
           this.favorites = [];
 
@@ -370,7 +351,7 @@ export class MyaccountPage {
       //************ SHOWING REFERRALS **************/
       this._apiService.fetchReferrals(favData).subscribe(
         (res: any) => {
-          console.log('referrals fetched:', res);
+
           this.myReferrals = [];
 
           if (res.length > 0) {
@@ -396,7 +377,6 @@ export class MyaccountPage {
       //************ SHOWING SELLINGS **************/
       this._apiService.fetchSellings(favData).subscribe(
         (res: any) => {
-          console.log('Sellings fetched:', res);
 
           this.sellingsData = [];
 
@@ -428,7 +408,7 @@ export class MyaccountPage {
       //************ SHOWING PURCHASES **************/
       this._apiService.fetchPurchases(favData).subscribe(
         (res: any) => {
-          console.log('Purchases fetched:', res);
+          
           this.purchasesData = [];
 
           if (res.length > 0) {

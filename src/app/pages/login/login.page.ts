@@ -87,6 +87,7 @@ export class LoginPage {
 
     this._apiService.loginUser(data).subscribe(
       (res: any) => {
+        console.log("login response:", res);
         if (res.loggedin) {
           let data = {
             loggedIn: true,
@@ -96,7 +97,9 @@ export class LoginPage {
             usermob: res.mobile,
             referral: res.myref,
             myPoints: res.mypoints,
+            notifications: res.notifications
           };
+          console.log("logindddsdDAta:", data);
           this.storage.set('admin', data);
           this.selectedCountry = '+973';
           this.user_mob = '';

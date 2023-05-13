@@ -97,7 +97,6 @@ export class ProductDetailsPage {
 
     this._apiService.buyAdNow(data).subscribe((res: any) => {
       if(res){
-        console.log("Buy Now Response: ", res);
         window.location.href = res;
       }
     }, err => {
@@ -132,7 +131,6 @@ export class ProductDetailsPage {
       url: `https://fabapp-47874.web.app/fabApp/product-details/${this.adId}`,
       dialogTitle: 'Share with friends', // optional
     });
-    console.log('Share result:', shareRet);
   }
 
   readDetailsMore() {
@@ -308,7 +306,6 @@ export class ProductDetailsPage {
       url: `https://fabapp-47874.web.app/fabApp/product-details/${adId}`,
       dialogTitle: 'Share with friends', // optional
     });
-    console.log('Share result:', shareRet);
   }
 
   prodData(userId, slug) {
@@ -322,7 +319,7 @@ export class ProductDetailsPage {
 
     this.http.post('https://specbits.com/class2/fab/adds', data).subscribe(
       (res: any) => {
-        console.log('Show Ad details:', res);
+        // console.log('Show Ad details:', res);
 
         this.adData = [];
         // Displaying ads from database
@@ -448,9 +445,6 @@ export class ProductDetailsPage {
             }
           }
         }
-
-        console.log('adDataas:', this.adData);
-        console.log('adImage:', this.adImage);
       },
       (err) => {
         console.log(err);
@@ -501,7 +495,6 @@ export class ProductDetailsPage {
 
             this._apiService.sendOffer(data).subscribe(
               (res: any) => {
-                console.log('sendOffer response:', res);
                 if (res) {
                   this.successToast('Request sent successfully');
                   // this.inputOffer = false;
@@ -535,7 +528,6 @@ export class ProductDetailsPage {
 
     this._apiService.offerResponse(data).subscribe(
       (res: any) => {
-        console.log('offerREsponsse Value:', res);
         if (res) {
           this.offeredPriceArray = [];
           this.ionViewWillEnter();
@@ -625,7 +617,6 @@ export class ProductDetailsPage {
     this.storage.get('admin').then(
       (session) => {
         if (session != null) {
-          console.log('adKaAdmin:', adKaAdmin);
           if (session.userid == adKaAdmin) {
             this.chatCardDisplay = true;
             this.commentCardDisplay = false;
@@ -642,7 +633,6 @@ export class ProductDetailsPage {
             };
             this._apiService.getAdOffers(offerData).subscribe(
               (res: any) => {
-                console.log('getOfferAd:', res);
                 if (res.length > 0) {
                   for (let i = 0; i < res.length; i++) {
                     let offerData = {
@@ -679,17 +669,14 @@ export class ProductDetailsPage {
           }
           // ////////////////////
           let value = { aid: slug, uid: session.userid };
-          console.log('loading data:', value);
           this.http
             .post('https://specbits.com/class2/fab/fetch-comment', value)
             .subscribe(
               (com: any) => {
-                console.log('chaaaaat:', com);
+                console.log("fetch comment:", com);
 
                 // ///////////////////////////
-                console.log('admin session:', session);
                 if (session != null) {
-                  console.log('User is in session');
                   this.adminSessionId = session.userid;
                   if (com.length != 0) {
                     this.canComment = false;
@@ -703,22 +690,18 @@ export class ProductDetailsPage {
                       // Filtering number of users commented on a particular ad.
                       for (let i = 0; i < com.length; i++) {
                         let sameUser = com[i].user_id;
-                        console.log('sameUser:', sameUser);
-                        // let chats = {};
-                        // chats[sameUser]
-                        // chats['time'] = com[i].created_at;
                         if (sameUser != adKaAdmin) {
                           this.chatUserList[sameUser] = com[i].username;
                         }
                       }
 
-                      console.log('chatUserList:', this.chatUserList);
+                      // console.log('chatUserList:', this.chatUserList);
                     } else {
                       this.chatCardDisplay = false;
                       this.commentCardDisplay = true;
                       this.comments = com;
                       this.makeOffer = true;
-                      console.log('All comments:', this.comments);
+                      // console.log('All comments:', this.comments);
                     }
                   } else {
                     if (session.userid == adKaAdmin) {
@@ -761,11 +744,9 @@ export class ProductDetailsPage {
       uid: key,
     };
 
-    console.log('kedy:', data);
-
     this._apiService.showUserChat(data).subscribe(
       (res: any) => {
-        console.log('Fetched chats:', res);
+        // console.log('Fetched chats:', res);
         this.comments = [];
         this.storage.get('admin').then((val) => {
           for (let i = 0; i < res.length; i++) {
@@ -798,7 +779,7 @@ export class ProductDetailsPage {
           this.commentCardDisplay = true;
           this.showBack = true;
 
-          console.log('New Comments:', this.comments);
+          // console.log('New Comments:', this.comments);
         });
 
         // this.comments = res;
@@ -837,6 +818,7 @@ export class ProductDetailsPage {
                 this.showUserChat(this.commentedUserId);
               } else {
                 let value = { aid: this.adId, uid: this.userid };
+                console.log("checking userid:", value);
                 this.http
                   .post('https://specbits.com/class2/fab/fetch-comment', value)
                   .subscribe(

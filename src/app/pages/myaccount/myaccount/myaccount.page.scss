@@ -622,13 +622,9 @@ $extra-large-screen: 1200px;
 
   .myAds > div {
     width: 100%;
-    padding: 25px;
-    // margin-left: 15px;
-    // margin-right: 15px;
-    // border: 1px solid green;
+    padding: 15px;
     display: flex;
     flex-direction: column;
-    // gap: 10px;
     background-color: #fcf0f0;
   }
 
@@ -681,7 +677,8 @@ $extra-large-screen: 1200px;
 
   .adBtns {
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    // gap: 10px;
     margin-top: 20px;
   }
 
@@ -696,7 +693,7 @@ $extra-large-screen: 1200px;
 
       ion-icon {
         font-size: 18px;
-        margin-right: 10px;
+        margin-right: 5px;
       }
     }
     cursor: pointer;

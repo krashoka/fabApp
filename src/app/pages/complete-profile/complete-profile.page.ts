@@ -80,6 +80,7 @@ export class CompleteProfilePage implements OnInit {
             usermob: res.usermob,
             referral: res.myref,
             myPoints: res.mypoints,
+            notifications: res.notifications
           };
 
           this.storage.set('admin', data);

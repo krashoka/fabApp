@@ -205,7 +205,7 @@ export class ProductsPage implements OnInit {
     let cidData = {
       cid: id,
     };
-    console.log("fetch IDDD:", cidData);
+    console.log('fetch IDDD:', cidData);
     this._apiService.fetchAds(cidData).subscribe((res: any) => {
       console.log('Show Ad details:', res);
       // Displaying ads from database
@@ -296,17 +296,22 @@ export class ProductsPage implements OnInit {
 
     // this.breadcrumbService;
 
-    this.storage.get('changeLang').then((val) => {
-      if (val.lang == 'en') {
-        this.english = true;
-        this.arabic = false;
-      } else if (val.lang == 'ar') {
-        this.arabic = true;
-        this.english = false;
+    this.storage.get('changeLang').then(
+      (val) => {
+        if (val) {
+          if (val.lang == 'en') {
+            this.english = true;
+            this.arabic = false;
+          } else if (val.lang == 'ar') {
+            this.arabic = true;
+            this.english = false;
+          }
+        }
+      },
+      (err) => {
+        console.log(err);
       }
-    });
-
-    
+    );
 
     const slug = this.route.snapshot.paramMap.get('slug');
 

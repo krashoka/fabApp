@@ -252,4 +252,11 @@ export class ApiService {
       data
     );
   }
+
+  clearNotification(data){
+    return this.http.post(
+      'https://specbits.com/class2/fab/clear-notif',
+      data
+    );
+  };
 }
