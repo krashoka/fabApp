@@ -313,8 +313,6 @@ export class ProductDetailsPage {
       uid: userId,
     };
 
-    
-
     let currAdItemInfo: any = [];
     let currAdItemLabel: any = [];
     let currAdItemObj = {};
@@ -755,12 +753,12 @@ export class ProductDetailsPage {
 
     this._apiService.showUserChat(data).subscribe(
       (res: any) => {
-        // console.log('Fetched chats:', res);
+        console.log('show me chats:', res);
         this.comments = [];
         this.storage.get('admin').then((val) => {
           for (let i = 0; i < res.length; i++) {
             let obj = {};
-            if (res[i].commenter == 'user' && res[i].user_id == val.userid) {
+            if (res[i].commenter == 'owner' && res[i].user_id == val.userid) {
               obj['commenter'] = 'user';
               obj['username'] = res[i].username;
               obj['comment'] = res[i].comment;
