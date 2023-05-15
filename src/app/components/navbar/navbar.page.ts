@@ -236,6 +236,16 @@ export class NavbarPage implements OnInit {
       this.router.navigateByUrl(`/product-details/${aid}-${notifFrom}`);
       this.onNotificationSelect = !this.onNotificationSelect;
     }
+
+    if(notifFor == 4){
+      this.router.navigateByUrl(`/myaccount/purchases`);
+      this.onNotificationSelect = !this.onNotificationSelect;
+    }
+
+    if(notifFor == 5){
+      this.router.navigateByUrl(`/myaccount/sellings`);
+      this.onNotificationSelect = !this.onNotificationSelect;
+    }
   }
 
   goToLogin() {
