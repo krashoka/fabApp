@@ -234,8 +234,9 @@ $extra-large-screen: 1200px;
 
   .imgProd {
     width: 100% !important;
-    // height: 180px;
+    height: 200px;
     object-fit: contain;
+    margin-bottom: 20px;
   }
 
   // *************** Product Title **********

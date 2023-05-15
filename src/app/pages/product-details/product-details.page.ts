@@ -20,7 +20,7 @@ export class ProductDetailsPage {
   adId: any;
   price: any;
   prodDetails: any;
-  adImage: any;
+  adImage: any = [];
   timestamp: any;
   commentDisabled = true;
   commentValue: any;
@@ -313,14 +313,16 @@ export class ProductDetailsPage {
       uid: userId,
     };
 
+    
+
     let currAdItemInfo: any = [];
     let currAdItemLabel: any = [];
     let currAdItemObj = {};
 
     this.http.post('https://specbits.com/class2/fab/adds', data).subscribe(
       (res: any) => {
-        // console.log('Show Ad details:', res);
-
+        console.log('New Ad details:', res);
+        let flag = false;
         this.adData = [];
         // Displaying ads from database
         let dataLength = res.length;
@@ -343,6 +345,11 @@ export class ProductDetailsPage {
                 this.adTitle = res[i][key].add_title;
                 this.adDetail = res[i][key].add_detail;
                 this.adKaAdmin = res[i][key].user_id;
+                flag = true;
+                if(res[i][key].add_purchase_status == 1 && res[i][key].add_status != 'approved'){
+                  this.router.navigateByUrl('home');
+                  this.errorToast("Ad doesn't exists");
+                }
               } else {
                 adTitle = res[i][key].add_title;
                 adDetail = res[i][key].add_detail;
@@ -380,14 +387,11 @@ export class ProductDetailsPage {
 
             if (key === 'addImage') {
               for (let j = 0; j < res[i][key].length; j++) {
-                for (let val in res[i][key][j]) {
-                  if (res[i][key][0].add_id == slug) {
-                    this.adImage = res[i][key][0].image_name;
+                  if (res[i][key][j].add_id == slug) {
+                    this.adImage.push(res[i][key][j].image_name);
                   } else {
-                    if (val == 'image_name')
-                      imagesArray.push(res[i][key][j][val]);
+                      imagesArray.push(res[i][key][j].image_name);
                   }
-                }
               }
             }
 
@@ -444,6 +448,11 @@ export class ProductDetailsPage {
               this.adData.push(data);
             }
           }
+        }
+
+        if(!flag){
+          this.router.navigateByUrl('home');
+          this.errorToast("Ad doesn't exists");
         }
       },
       (err) => {
@@ -625,7 +634,6 @@ export class ProductDetailsPage {
             // makeOffer card display for ad owner
             this.makeOfferSection = false;
             this.inputOffer = false;
-            this.offerPrice = true;
 
             let offerData = {
               aid: slug,
@@ -634,6 +642,7 @@ export class ProductDetailsPage {
             this._apiService.getAdOffers(offerData).subscribe(
               (res: any) => {
                 if (res.length > 0) {
+                  this.offerPrice = true;
                   for (let i = 0; i < res.length; i++) {
                     let offerData = {
                       offeredUserId: res[i].id,
@@ -914,4 +923,11 @@ export class ProductDetailsPage {
 
     return result;
   }
+
+  option = {
+    slidesPerView: 1,
+    autoplay: true,
+    spaceBetween: 40,
+    pager: true
+  };
 }

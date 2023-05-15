@@ -258,7 +258,8 @@ $extra-large-screen: 1200px;
   }
 
   .adBtns {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 5px;
     justify-content: space-between;
     margin-top: 15px;
@@ -287,6 +288,7 @@ $extra-large-screen: 1200px;
     padding: 0 20px 0 10px;
     height: 40px;
     align-items: center;
+    justify-content: center;
     font-size: 14px;
     border-radius: 5px;
     background-color: #007bff;
@@ -296,6 +298,7 @@ $extra-large-screen: 1200px;
 
   .deleteBtn {
     display: flex;
+    justify-content: center;
     gap: 5px;
     padding: 0 20px 0 10px;
     font-size: 14px;

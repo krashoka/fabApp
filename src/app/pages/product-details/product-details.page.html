@@ -33,7 +33,13 @@
     </ion-card>
 
     <!-- Image -->
-    <img class="imgProd" [src]="'https://specbits.com/class2/fab/'+adImage" />
+    <ion-slides [options]="option"
+          ><ion-slide *ngFor="let img of adImage">
+            <img
+              class="imgProd"
+              [src]="'https://specbits.com/class2/fab/'+img"
+            /> </ion-slide
+        ></ion-slides>
 
     <!-- <p class="navigationProd">
       Home > Real Estate > Properties For Rent > Residential / investment >
@@ -154,10 +160,13 @@
     <div class="imgAndPriceDiv">
       <div>
         <!-- Image -->
-        <img
-          class="imgProd"
-          [src]="'https://specbits.com/class2/fab/'+adImage"
-        />
+        <ion-slides [options]="option"
+          ><ion-slide *ngFor="let img of adImage">
+            <img
+              class="imgProd"
+              [src]="'https://specbits.com/class2/fab/'+img"
+            /> </ion-slide
+        ></ion-slides>
       </div>
       <div>
         <div class="priceOffer">

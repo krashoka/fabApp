@@ -410,8 +410,6 @@ export class HomePage {
             heartRedVisible: heartRedVisible,
           };
 
-          console.log('adDetails data:', data);
-          console.log('checkuse:');
           if (
             userId != data.adAdmin &&
             data.adStatus == 'approved' &&

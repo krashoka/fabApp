@@ -137,7 +137,6 @@ export class NavbarPage implements OnInit {
           this.userKaId = val.userid;
 
           // fetching notifications
-          console.log("vallslslsl:", val);
           this.notificationCount = 0;
 
           this.notifications = [];
@@ -157,7 +156,6 @@ export class NavbarPage implements OnInit {
             this.notifications.push(notifData);
           }
 
-          console.log("notification Data:", this.notifications);
           // ////////////////////
           
           setTimeout(()=>{
@@ -174,7 +172,6 @@ export class NavbarPage implements OnInit {
 
           this._apiService.fetchAdminData(data).subscribe(
             (res: any) => {
-              console.log("navbar:", res)
               if (res == 'code-1') {
                 this.errorToast('User not found');
               } else if (res == 'code-0') {
