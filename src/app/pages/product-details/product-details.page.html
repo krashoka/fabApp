@@ -34,12 +34,12 @@
 
     <!-- Image -->
     <ion-slides [options]="option"
-          ><ion-slide *ngFor="let img of adImage">
-            <img
-              class="imgProd"
-              [src]="'https://specbits.com/class2/fab/'+img"
-            /> </ion-slide
-        ></ion-slides>
+      ><ion-slide *ngFor="let img of adImage">
+        <img
+          class="imgProd"
+          [src]="'https://specbits.com/class2/fab/'+img"
+        /> </ion-slide
+    ></ion-slides>
 
     <!-- <p class="navigationProd">
       Home > Real Estate > Properties For Rent > Residential / investment >
@@ -154,7 +154,7 @@
     </div>
     <!-- ----------------------------- -->
 
-    <p class="days">{{timestamp}}</p>
+    <p class="days"><span dir="ltr">{{timestamp}}</span></p>
 
     <p class="productLabel">{{adTitle}}</p>
     <div class="imgAndPriceDiv">
@@ -327,15 +327,15 @@
     </div>
   </div>
 
-  <div *ngIf="allComments">
+  <div *ngIf="allComments" class="allCommentMargin">
     <div class="seeOrHideChats">
       <div>
         <div class="seeComments" *ngIf="show" (click)="showComment()">
-          <p>See Chats</p>
+          <p>{{'seeChats' | translate}}</p>
           <ion-icon name="caret-down"></ion-icon>
         </div>
         <div class="seeComments" *ngIf="hide" (click)="showComment()">
-          <p>Hide Chats</p>
+          <p>{{'hideChats' | translate}}</p>
           <ion-icon name="caret-up"></ion-icon>
         </div>
       </div>
@@ -400,9 +400,9 @@
               type="text"
               [(ngModel)]="commentValue"
               class="reply"
-              placeholder="Type a message"
+              [placeholder]="'typeMessage' | translate"
             />
-            <button class="replyBtn" (click)="addComment()">Reply</button>
+            <button class="replyBtn" (click)="addComment()">{{'reply' | translate}}</button>
           </div>
         </div>
       </div>
@@ -427,9 +427,8 @@
         />
         <div class="stickyContentHeight">
           <div class="dayAndHeart">
-            <div>
+            <div dir="ltr">
               <ion-label>{{ad.timestamp}}</ion-label>
-              <ion-label class="locationSticky">Abu Dhabi</ion-label>
             </div>
 
             <ion-icon
@@ -450,8 +449,10 @@
           <div (click)="goToProductDetails(ad)" style="cursor: pointer">
             <p class="adsTitle">{{ad.adTitle}}</p>
             <div class="adsPrice">
-              <ion-label>{{ad.itemObj.Price}}</ion-label>
-              <ion-label class="currency">KWD</ion-label>
+              <span dir="ltr">
+                <ion-label>{{ad.itemObj.Price}} </ion-label>
+                <ion-label class="currency">KWD</ion-label>
+              </span>
             </div>
           </div>
         </div>
@@ -496,9 +497,8 @@
         />
         <div class="stickyContentHeight">
           <div class="dayAndHeart">
-            <div>
+            <div dir="ltr">
               <ion-label>{{ad.timestamp}}</ion-label>
-              <ion-label class="locationSticky">Abu Dhabi</ion-label>
             </div>
 
             <ion-icon
@@ -519,8 +519,10 @@
           <div (click)="goToProductDetails(ad)" style="cursor: pointer">
             <p class="adsTitle">{{ad.adTitle}}</p>
             <div class="adsPrice">
-              <ion-label>{{ad.itemObj.Price}}</ion-label>
-              <ion-label class="currency">KWD</ion-label>
+              <span dir="ltr">
+                <ion-label>{{ad.itemObj.Price}} </ion-label>
+                <ion-label class="currency">KWD</ion-label>
+              </span>
             </div>
           </div>
         </div>

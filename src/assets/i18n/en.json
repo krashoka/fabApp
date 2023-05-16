@@ -140,5 +140,32 @@
     "chat": "Chat",
     "typeChat": "Type to chat",
     "startChat": "Start Chat",
-    "relatedPosts": "Related Posts"
+    "relatedPosts": "Related Posts",
+    "myNotification": "My Notifications",
+    "viewDetails": "view details",
+    "reply": "Reply",
+    "typeMessage": "Type a message",
+    "seeChats": "See Chats",
+    "hideChats": "Hide Chats",
+
+    "myAccount": {
+        "noAdsPosted": "No Ads Posted Yet",
+        "amount": "Amount",
+        "view": "View",
+        "edit": "Edit",
+        "delete": "Delete",
+        "analytics": "Analytics",
+        "noChatsAdded": "No chats added",
+        "viewChats": "View Chats",
+        "noFavorites": "Nothing in Favorites",
+        "remove": "Remove",
+        "noReferrals": "No Referrals",
+        "noPurchase": "No Purchase made yet",
+        "seller": "Seller",
+        "noSelling": "No Selling made yet",
+        "buyer": "Buyer",
+        "redeemPoints": "Redeem Points",
+        "enterPoints": "Enter points to redeem",
+        "submit": "Submit"
+    }
 }

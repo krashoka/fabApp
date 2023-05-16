@@ -29,7 +29,7 @@
         </div>
       </div>
 
-      <div class="notification" (click)="openNotificationTab()">
+      <div class="notification" (click)="openNotificationTab()" style="width:61px">
         <div>
           <ion-icon name="notifications"></ion-icon>
         </div>
@@ -155,7 +155,7 @@
 >
   <div>
     <div class="myNotification">
-      <h1>My Notifications</h1>
+      <h1>{{'myNotification' | translate}}</h1>
       <ion-icon
         name="close-circle-outline"
         class="close"
@@ -168,7 +168,7 @@
       <div class="notifDetails">
         <p>{{msg.notifTime}}</p>
         <div *ngIf="msg.notifFor != '0'" (click)="viewDetails(msg.notifFor, msg.aid, msg.notifFrom)">
-          <ion-text>view details</ion-text>
+          <ion-text>{{'viewDetails' | translate}}</ion-text>
           <ion-icon name="chevron-forward"></ion-icon>
         </div>
       </div>

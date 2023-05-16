@@ -16,7 +16,7 @@
       <ion-card-title class="userName">
         <ion-text>{{username}}</ion-text>
         <div>
-          <div class="points" (click)="goToMyPoints()">
+          <div class="points" (click)="goToMyPoints()" dir="ltr">
             <p>{{myPoints}}</p>
             <p>{{'myProfile.myPoints' | translate}}</p>
           </div>
@@ -31,7 +31,7 @@
       <ion-card-subtitle class="contactNum">
         <div>
           <ion-icon name="call" class="call"></ion-icon>
-          <ion-text>{{mobNumber}}</ion-text>
+          <ion-text dir="ltr"> {{mobNumber}}</ion-text>
         </div>
         <p class="referralCode">
           {{'myProfile.refCode' | translate}} - <span> {{referralCode}}</span>
@@ -78,14 +78,14 @@
   <div class="myData">
     <!-- MY ADS -->
     <div *ngIf="selectedSegment === 'ads'">
-      <h1 *ngIf="emptyMyAds">No Ads Posted Yet.</h1>
+      <h1 *ngIf="emptyMyAds">{{'myAccount.noAdsPosted' | translate}}</h1>
       <div *ngIf="myAds" class="cardDisplayMargin">
         <ion-card class="myAds" *ngFor="let ad of adDetails">
           <img [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]" />
 
           <div>
             <p class="uploadTime">
-              <ion-text>{{ad.timestamp}}</ion-text>
+              <ion-text dir="ltr">{{ad.timestamp}}</ion-text>
               <ion-text
                 class="adStatus"
                 *ngIf="ad.adStatus == 'approved'"
@@ -133,22 +133,22 @@
             </p>
             <h1 class="adTitle">{{ad.adTitle}}</h1>
             <p class="priceTag">
-              <ion-text class="currency">Amount:  </ion-text>{{ad.itemObj.Price}} KWD
+              <ion-text class="currency" [dir]="'dir' | translate">{{'myAccount.amount' | translate}}:  </ion-text><span dir='ltr'>{{ad.itemObj.Price}} KWD</span>
             </p>
             <div class="adBtns">
               <div class="viewBtn" (click)="goToProductDetails(ad)">
-                <ion-icon name="eye-sharp"></ion-icon> View
+                <ion-icon name="eye-sharp"></ion-icon> {{'myAccount.view' | translate}}
               </div>
               <div>
                 <ion-button class="editBtn">
-                  <ion-icon name="pencil-sharp"></ion-icon>Edit
+                  <ion-icon name="pencil-sharp"></ion-icon>{{'myAccount.edit' | translate}}
                 </ion-button>
               </div>
               <div class="deleteBtn">
-                <ion-icon name="trash-outline"></ion-icon> Delete
+                <ion-icon name="trash-outline"></ion-icon> {{'myAccount.delete' | translate}}
               </div>
               <div class="viewBtn" (click)="openAnalytics(ad.adTitle, ad.ad_id)">
-                <ion-icon name="eye-sharp"></ion-icon> Analytics
+                <ion-icon name="analytics-outline"></ion-icon> {{'myAccount.analytics' | translate}}
               </div>
             </div>
           </div>
@@ -158,7 +158,7 @@
 
     <!-- MY CHATS -->
     <div *ngIf="selectedSegment === 'chats'">
-      <h1 *ngIf="emptyChats">No chats added</h1>
+      <h1 *ngIf="emptyChats">{{'myAccount.noChatsAdded' | translate}}</h1>
       <div *ngIf="chats" class="cardDisplayMargin">
         <ion-card class="myAds" *ngFor="let chat of chatsOnAd">
           <img
@@ -166,14 +166,14 @@
           />
 
           <div>
-            <p class="uploadTime">{{chat.timestamp}}</p>
+            <p class="uploadTime"><span dir="ltr">{{chat.timestamp}}</span></p>
             <h1 class="adTitle">{{chat.adTitle}}</h1>
             <p class="priceTag">
-              <ion-text class="currency">Amount:  </ion-text>{{chat.itemObj.Price}} KWD
+              <ion-text class="currency">{{'myAccount.amount' | translate}}:  </ion-text><span dir='ltr'>{{chat.itemObj.Price}} KWD</span>
             </p>
             <div class="adBtns">
               <div class="viewBtn" (click)="goToProductDetails(chat)">
-                <ion-icon name="eye-sharp"></ion-icon> View Chats
+                <ion-icon name="eye-sharp"></ion-icon> {{'myAccount.viewChats' | translate}}
               </div>
             </div>
           </div>
@@ -183,7 +183,7 @@
 
     <!-- MY FAVORITES -->
     <div *ngIf="selectedSegment === 'favorites'">
-      <h1 *ngIf="emptyFavAds">Empty List</h1>
+      <h1 *ngIf="emptyFavAds">{{'myAccount.noFavorites' | translate}}</h1>
       <div *ngIf="favAds" class="cardDisplayMargin">
         <ion-card class="myAds" *ngFor="let fav of favorites">
           <img
@@ -191,17 +191,17 @@
           />
 
           <div>
-            <p class="uploadTime">{{fav.timestamp}}</p>
+            <p class="uploadTime"><span dir="ltr">{{fav.timestamp}}</span></p>
             <h1 class="adTitle">{{fav.title}}</h1>
             <p class="priceTag">
-              <ion-text class="currency">Amount:  </ion-text>{{fav.price}} KWD
+              <ion-text class="currency">{{'myAccount.amount' | translate}}:  </ion-text><span dir='ltr'>{{fav.price}} KWD</span>
             </p>
             <div class="adBtns">
               <div class="viewBtn" (click)="goToProductDetails(fav)">
-                <ion-icon name="eye-sharp"></ion-icon> View
+                <ion-icon name="eye-sharp"></ion-icon> {{'myAccount.view' | translate}}
               </div>
               <div class="deleteBtn" (click)="removeFromFavorites(fav.ad_id)">
-                <ion-icon name="trash-outline"></ion-icon> Remove
+                <ion-icon name="trash-outline"></ion-icon> {{'myAccount.remove' | translate}}
               </div>
             </div>
           </div>
@@ -211,7 +211,7 @@
 
     <!-- MY REFERRALS -->
     <div *ngIf="selectedSegment === 'referrals'">
-      <h1 *ngIf="emptyReferrals">0 referrals</h1>
+      <h1 *ngIf="emptyReferrals">{{'myAccount.noReferrals' | translate}}</h1>
       <div class="referralsCard" *ngIf="referrals">
         <ion-card *ngFor="let ref of myReferrals">
           <div class="userTitle">
@@ -235,7 +235,7 @@
 
     <!-- MY PURCHASES -->
     <div *ngIf="selectedSegment === 'purchases'">
-      <h1 *ngIf="emptyPurchases">No purchase made yet.</h1>
+      <h1 *ngIf="emptyPurchases">{{'myAccount.noPurchase' | translate}}</h1>
       <div *ngIf="purchases" class="cardDisplayMargin">
         <ion-card class="myAds" *ngFor="let purchase of purchasesData">
           <img
@@ -245,11 +245,11 @@
           <div>
             <h1 class="adTitle">{{purchase.title}}</h1>
             <p class="priceTag">
-              <ion-text class="currency">Amount:  </ion-text>{{purchase.price}} KWD
+              <ion-text class="currency">{{'myAccount.amount' | translate}}:  </ion-text><span dir='ltr'>{{purchase.price}} KWD</span>
             </p>
             <p class="adPrice">
-              <ion-text class="tag">Seller:  <ion-text class="tagName">{{purchase.sellerName}} </ion-text></ion-text>
-              <ion-text class="uploadTime">{{purchase.timestamp}}</ion-text>
+              <ion-text class="tag"><span>{{'myAccount.seller' | translate}}:</span>  <ion-text class="tagName" dir="rtl">{{purchase.sellerName}} </ion-text></ion-text>
+              <ion-text class="uploadTime" dir="ltr">{{purchase.timestamp}}</ion-text>
             </p>
           </div>
         </ion-card>
@@ -258,7 +258,7 @@
 
     <!-- MY SELLINGS -->
     <div *ngIf="selectedSegment === 'sellings'">
-      <h1 *ngIf="emptySellings">No sellings made yet.</h1>
+      <h1 *ngIf="emptySellings">{{'myAccount.noSelling' | translate}}</h1>
       <div *ngIf="sellings" class="cardDisplayMargin">
         <ion-card class="myAds" *ngFor="let sell of sellingsData">
           <img
@@ -268,11 +268,11 @@
           <div>
             <h1 class="adTitle">{{sell.title}}</h1>
             <p class="priceTag">
-              <ion-text class="currency">Amount:  </ion-text>{{sell.price}} KWD
+              <ion-text class="currency">{{'myAccount.amount' | translate}}:  </ion-text><span dir='ltr'>{{sell.price}} KWD</span>
             </p>
             <p class="adPrice">
-              <ion-text class="tag">Buyer:  <ion-text class="tagName">{{sell.buyerName}} </ion-text></ion-text>
-              <ion-text class="uploadTime">{{sell.timestamp}}</ion-text>
+              <ion-text class="tag"><span>{{'myAccount.buyer' | translate}}:</span>  <ion-text class="tagName" dir="rtl">{{sell.buyerName}} </ion-text></ion-text>
+              <ion-text class="uploadTime" dir="ltr">{{sell.timestamp}}</ion-text>
             </p>
           </div>
         </ion-card>

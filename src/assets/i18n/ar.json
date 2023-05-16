@@ -140,5 +140,32 @@
     "chat": "محادثة",
     "typeChat": "اكتب للدردشة",
     "startChat": "ابدأ الدردشة",
-    "relatedPosts": "المنشورات ذات الصلة"
+    "relatedPosts": "المنشورات ذات الصلة",
+    "myNotification": "الإشعارات الخاصة بي",
+    "viewDetails": "عرض التفاصيل",
+    "reply": "رد",
+    "typeMessage": "اكتب رسالة",
+    "seeChats": "انظر الدردشات",
+    "hideChats": "إخفاء الدردشات",
+
+    "myAccount": {
+        "noAdsPosted": "لم يتم نشر أي إعلانات حتى الآن",
+        "amount": "كمية",
+        "view": "منظر",
+        "edit": "يحرر",
+        "delete": "يمسح",
+        "analytics": "تحليلات",
+        "noChatsAdded": "لا توجد محادثات مضافة",
+        "viewChats": "مشاهدة الدردشات",
+        "noFavorites": "لا شيء في المفضلة",
+        "remove": "يزيل",
+        "noReferrals": "لا إحالات",
+        "noPurchase": "لم يتم الشراء حتى الآن",
+        "seller": "تاجر",
+        "noSelling": "لم يتم البيع بعد",
+        "buyer": "مشتر",
+        "redeemPoints": "استبدال النقاط",
+        "enterPoints": "أدخل النقاط لاستبدالها",
+        "submit": "يُقدِّم"
+    }
 }

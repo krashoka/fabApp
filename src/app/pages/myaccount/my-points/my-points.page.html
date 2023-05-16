@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [dir]="'dir' | translate">
   <!-- Header for Large screen -->
   <app-navbar class="topNav"></app-navbar>
   <!-- ------------------------------------------------ -->
@@ -16,12 +16,12 @@
       <ion-card-title class="userName">
         <ion-text>{{username}}</ion-text>
         <div>
-          <div class="points" (click)="onClickPoints()" *ngIf="showPoints">
+          <div class="points" (click)="onClickPoints()" *ngIf="showPoints" dir="ltr">
             <p>{{myPoints}}</p>
-            <p>My Points</p>
+            <p>{{'myProfile.myPoints' | translate}}</p>
           </div>
           <p class="redeem" (click)="onClickRedeem()" *ngIf="showRedeem">
-            Redeem Points
+            {{'myAccount.redeemPoints' | translate}}
           </p>
         </div>
       </ion-card-title>
@@ -52,9 +52,9 @@
     ><h1 class="availPoints">{{heading}}</h1>
     <h3 class="pointsVal">{{subHeading}}</h3>
     <div class="enterPoints">
-      <ion-input type="number" placeholder="Enter points to redeem" [(ngModel)]="inputVal"/>
+      <ion-input type="number" [placeholder]="'myAccount.enterPoints' | translate" [(ngModel)]="inputVal"/>
     </div>
-    <div class="submit" (click)="submit()">Submit</div>
+    <div class="submit" (click)="submit()">{{'myAccount.submit' | translate}}</div>
   </ion-card>
 
   <!-- Footer Section -->

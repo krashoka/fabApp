@@ -235,8 +235,9 @@
             <div (click)="goToProductDetails(ad)" style="cursor: pointer">
               <p class="adsTitle">{{ad.adTitle}}</p>
               <div class="adsPrice">
-                <ion-label>{{ad.itemObj.Price}}</ion-label>
-                <ion-label class="currency">KWD</ion-label>
+                <span dir="ltr"><ion-label>{{ad.itemObj.Price}} </ion-label>
+                  <ion-label class="currency">KWD</ion-label></span>
+                
               </div>
             </div>
           </div>

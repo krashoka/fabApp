@@ -621,7 +621,7 @@ $extra-large-screen: 1200px;
   }
 
   .adsTitle {
-    text-align: left;
+    display: flex;
     font-size: 14px;
     font-weight: 700;
     color: #484848;
@@ -631,7 +631,6 @@ $extra-large-screen: 1200px;
 
   .adsPrice {
     display: flex;
-    justify-content: left;
     align-items: first baseline;
     gap: 5px;
     font-size: 14px;
@@ -1560,7 +1559,8 @@ $extra-large-screen: 1200px;
   }
 
   .adsTitle {
-    text-align: left;
+    display: flex;
+    // text-align: left;
     font-size: 18px;
     font-weight: 700;
     color: #484848;
@@ -1570,7 +1570,7 @@ $extra-large-screen: 1200px;
 
   .adsPrice {
     display: flex;
-    justify-content: left;
+    // justify-content: left;
     align-items: first baseline;
     gap: 5px;
     font-size: 18px;
@@ -1659,6 +1659,10 @@ $extra-large-screen: 1200px;
     justify-content: center;
     align-items: center;
     text-transform: none !important;
+  }
+
+  .allCommentMargin{
+    margin-right: 6%;
   }
 
   //*********** Floating Chat Icon **************
