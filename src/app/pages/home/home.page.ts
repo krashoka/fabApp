@@ -38,6 +38,9 @@ export class HomePage {
 
   waLink = 'https://wa.me/';
 
+  english = true;
+  arabic = false;
+
   constructor(
     private router: Router,
     public http: HttpClient,
@@ -53,6 +56,7 @@ export class HomePage {
     // **************** For Categories Icons Section *****************
     this.http.get('https://specbits.com/class2/fab/index').subscribe(
       (res: any) => {
+        console.log("categoriesResponse:", res);
         this.categories = res;
 
         for (let i = 0; i < res.length; i++) {
@@ -436,6 +440,22 @@ export class HomePage {
   }
 
   // @ViewChild('swiper') swiper: SwiperComponent;
+
+  ionViewDidEnter() {
+    this.storage.get('changeLang').then((val) => {
+      if (val) {
+        if (val.lang === 'en') {
+          this.english = true;
+          this.arabic = false;
+        } else if (val.lang === 'ar') {
+          this.arabic = true;
+          this.english = false;
+        }
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
 
   ngOnInit() {
     this.dataOnPageLoad();

@@ -291,27 +291,34 @@ export class ProductsPage implements OnInit {
     });
   }
 
+  ionViewDidEnter() {
+    this.storage.get('changeLang').then((val) => {
+      if (val) {
+        if (val.lang === 'en') {
+          this.english = true;
+          this.arabic = false;
+        } else if (val.lang === 'ar') {
+          this.arabic = true;
+          this.english = false;
+        }
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+
   ngOnInit() {
     // window.addEventListener('resize', this.onResize.bind(this));
 
     // this.breadcrumbService;
-
-    this.storage.get('changeLang').then(
-      (val) => {
-        if (val) {
-          if (val.lang == 'en') {
-            this.english = true;
-            this.arabic = false;
-          } else if (val.lang == 'ar') {
-            this.arabic = true;
-            this.english = false;
-          }
-        }
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    // let ct = 0;
+    // setTimeout(() => {
+    //   let cnt = setInterval(() => {
+    //     this.ionViewDidEnter();
+    //     ct++;
+    //     if (ct == 10) clearInterval(cnt);
+    //   }, 100);
+    // }, 100);
 
     const slug = this.route.snapshot.paramMap.get('slug');
 

@@ -259,4 +259,11 @@ export class ApiService {
       data
     );
   };
+
+  openAnalytics(data){
+    return this.http.post(
+      'https://specbits.com/class2/fab/ads-analytics',
+      data
+    );
+  };
 }

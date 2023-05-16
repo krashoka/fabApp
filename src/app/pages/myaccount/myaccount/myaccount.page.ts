@@ -57,6 +57,10 @@ export class MyaccountPage {
   analyticsSidebar = false;
   adName: any;
 
+  adViewCount = 0;
+  analyticArray: any = [];
+
+
   segmentChanged(event) {
     this.selectedSegment = event.detail.value;
     this.router.navigateByUrl(`/myaccount/${this.selectedSegment}`);
@@ -75,9 +79,34 @@ export class MyaccountPage {
   }
 
   // My Notification SideMenu
-  openAnalytics(title) {
+  openAnalytics(title, adid) {
     this.analyticsSidebar = !this.analyticsSidebar;
     this.adName = title;
+
+    let analytic = {
+      aid: adid
+    }
+
+    console.log("checking analytics:", analytic);
+    this.adViewCount = 0;
+    this.analyticArray = [];
+
+    this._apiService.openAnalytics(analytic).subscribe((res:any) => {
+      console.log("analytics response:", res)
+      if(res.length > 0){
+        this.adViewCount = res.length;
+        for(let i=0; i<res.length; i++){
+          let data = {
+            viewerName: res[i].viewerName,
+            time: this.timestamp(res[i].time)
+          }
+
+          this.analyticArray.push(data);
+        }
+      }
+    }, err=>{
+      console.log(err);
+    })
   }
 
   dismissAnalytics() {

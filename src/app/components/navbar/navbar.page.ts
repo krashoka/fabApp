@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/api.service';
 import { CookieService } from 'ngx-cookie-service';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
+import { event } from 'jquery';
 
 @Component({
   selector: 'app-navbar',
@@ -35,14 +36,29 @@ export class NavbarPage implements OnInit {
     private cdr: ChangeDetectorRef
   ) {
     this.storage.create();
-    // this.translateService.use('en');
-    this.translateService.setDefaultLang('en');
+    this.translateService.setDefaultLang('en'); // set default language
+    // retrieve stored language
+    this.storage.get('changeLang').then((lang) => {
+      if (lang) {
+        this.translateService.use(lang.lang); // set stored language
+        // toggle language buttons based on the stored language
+        this.engFlag = lang.lang !== 'en';
+        this.arabicFlag = lang.lang !== 'ar';
+      }
+    });
+
+    // this.storage.remove('changeLang');
   }
 
   translate(event) {
     this.translateService.use(event);
-    this.engFlag = !this.engFlag;
-    this.arabicFlag = !this.arabicFlag;
+    if (event === 'ar') {
+      this.engFlag = true;
+      this.arabicFlag = false;
+    } else if (event === 'en') {
+      this.engFlag = false;
+      this.arabicFlag = true;
+    }
     let lang = { lang: event };
     this.storage.set('changeLang', lang);
   }
@@ -71,18 +87,18 @@ export class NavbarPage implements OnInit {
   openNotificationTab() {
     this.onNotificationSelect = !this.onNotificationSelect;
     let data = {
-      uid: this.userKaId
-    }
+      uid: this.userKaId,
+    };
 
-    console.log("ttttttt:", data);
-    this._apiService.clearNotification(data).subscribe((res:any)=>{
-      console.log("get View Details:", res);
+    console.log('ttttttt:', data);
+    this._apiService.clearNotification(data).subscribe((res: any) => {
+      console.log('get View Details:', res);
     });
 
     // let counter = 0;
 
     // setTimeout(()=>{
-      
+
     //   let count = setInterval(()=>{
     //     this.ngOnInit();
     //     counter++;
@@ -140,8 +156,8 @@ export class NavbarPage implements OnInit {
           this.notificationCount = 0;
 
           this.notifications = [];
-          for(let i=0; i<val.notifications.length; i++){
-            if(val.notifications[i].notif_seen_flag == 0){
+          for (let i = 0; i < val.notifications.length; i++) {
+            if (val.notifications[i].notif_seen_flag == 0) {
               this.notificationCount++;
             }
             let notifData = {
@@ -151,20 +167,19 @@ export class NavbarPage implements OnInit {
               aid: val.notifications[i].aid,
               notifFrom: val.notifications[i].notif_from,
               seenFlag: val.notifications[i].notif_seen_flag,
-            }
+            };
 
             this.notifications.push(notifData);
           }
 
           // ////////////////////
-          
-          setTimeout(()=>{
-            setInterval(()=>{
+
+          setTimeout(() => {
+            setInterval(() => {
               this.showAccount = true;
               this.showLogin = false;
             }, 100);
-          },100);
-          
+          }, 100);
 
           let data = {
             uid: val.userid,
@@ -185,7 +200,7 @@ export class NavbarPage implements OnInit {
                   usermob: res.mobile,
                   referral: res.myref,
                   myPoints: res.mypoints,
-                  notifications: res.notifications
+                  notifications: res.notifications,
                 };
                 this.storage.set('admin', newData);
               }
@@ -206,43 +221,41 @@ export class NavbarPage implements OnInit {
 
   ngOnInit() {
     let counter = 0;
-    setTimeout(()=>{
-      
-      let count = setInterval(()=>{
+    setTimeout(() => {
+      let count = setInterval(() => {
         this.fetchAdminData();
         counter++;
-        if(counter == 10) clearInterval(count);
+        if (counter == 10) clearInterval(count);
       }, 100);
-    },100);
-    
+    }, 100);
   }
 
   isElementActive(routePath: string): boolean {
     return this.router.url.includes(routePath);
   }
 
-  viewDetails(notifFor, aid, notifFrom){
-    if(notifFor == 1){
+  viewDetails(notifFor, aid, notifFrom) {
+    if (notifFor == 1) {
       this.router.navigateByUrl(`/product-details/${aid}-${this.userKaId}`);
       this.onNotificationSelect = !this.onNotificationSelect;
     }
 
-    if(notifFor == 2){
+    if (notifFor == 2) {
       this.router.navigateByUrl(`/myaccount/ads`);
       this.onNotificationSelect = !this.onNotificationSelect;
     }
 
-    if(notifFor == 3){
+    if (notifFor == 3) {
       this.router.navigateByUrl(`/product-details/${aid}-${notifFrom}`);
       this.onNotificationSelect = !this.onNotificationSelect;
     }
 
-    if(notifFor == 4){
+    if (notifFor == 4) {
       this.router.navigateByUrl(`/myaccount/purchases`);
       this.onNotificationSelect = !this.onNotificationSelect;
     }
 
-    if(notifFor == 5){
+    if (notifFor == 5) {
       this.router.navigateByUrl(`/myaccount/sellings`);
       this.onNotificationSelect = !this.onNotificationSelect;
     }
@@ -250,14 +263,13 @@ export class NavbarPage implements OnInit {
 
   goToLogin() {
     this.storage.get('admin').then((val) => {
-      if(val!=null){
+      if (val != null) {
         this.router.navigate(['home']);
         this.ngOnInit();
-      }else{
+      } else {
         this.router.navigate(['login']);
       }
-    })
-    
+    });
   }
 
   goToHome() {

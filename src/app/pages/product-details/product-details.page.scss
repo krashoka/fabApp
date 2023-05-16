@@ -443,7 +443,7 @@ $extra-large-screen: 1200px;
   }
 
   .commentFlowChat {
-    height: 180px;
+    height: 210px;
     overflow: auto;
   }
 
@@ -459,7 +459,7 @@ $extra-large-screen: 1200px;
     max-width: 70%;
     border-radius: 0 25px 25px;
     border: 1px solid #dedede;
-    padding: 15px;
+    padding: 5px;
     display: flex;
     gap: 15px;
     background-color: #e6e9eb;
@@ -477,7 +477,7 @@ $extra-large-screen: 1200px;
     max-width: 70%;
     border-radius: 25px 0 25px 25px;
     border: 1px solid #dedede;
-    padding: 15px;
+    padding: 5px;
     display: flex;
     float: right;
     justify-content: right;

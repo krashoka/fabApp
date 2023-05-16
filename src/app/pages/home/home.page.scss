@@ -166,7 +166,7 @@ $extra-large-screen: 1200px;
   .adsTitle {
     color: #343a40;
     font-size: 10px;
-    text-align: left;
+    // text-align: left;
     font-weight: 600;
     margin: 0;
     padding: 0 5px;
@@ -175,7 +175,7 @@ $extra-large-screen: 1200px;
   .adsPrice {
     font-size: 14px;
     font-weight: 700;
-    text-align: left;
+    // text-align: left;
     padding: 10px 5px;
   }
 
@@ -674,7 +674,8 @@ $extra-large-screen: 1200px;
   }
 
   .adsTitle {
-    text-align: left;
+    display: flex;
+    // text-align: left;
     font-size: 18px;
     font-weight: 700;
     color: #484848;
@@ -684,7 +685,7 @@ $extra-large-screen: 1200px;
 
   .adsPrice {
     display: flex;
-    justify-content: left;
+    // justify-content: left;
     align-items: first baseline;
     gap: 5px;
     font-size: 18px;
