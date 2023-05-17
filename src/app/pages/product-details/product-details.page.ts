@@ -12,7 +12,6 @@ import { Share } from '@capacitor/share';
   templateUrl: './product-details.page.html',
   styleUrls: ['./product-details.page.scss'],
 })
-
 export class ProductDetailsPage {
   adTitle: any;
   adDetail: any;
@@ -77,6 +76,9 @@ export class ProductDetailsPage {
   offeredUserIdStatus = {};
   // ///////////////////////
 
+  english = true;
+  arabic = false;
+
   constructor(
     private router: Router,
     private navCtrl: NavController,
@@ -95,13 +97,16 @@ export class ProductDetailsPage {
       aid: this.adId,
     };
 
-    this._apiService.buyAdNow(data).subscribe((res: any) => {
-      if(res){
-        window.location.href = res;
+    this._apiService.buyAdNow(data).subscribe(
+      (res: any) => {
+        if (res) {
+          window.location.href = res;
+        }
+      },
+      (err) => {
+        this.errorToast(err.error.message);
       }
-    }, err => {
-      this.errorToast(err.error.message);
-    });
+    );
   }
 
   goToCommercialAds() {
@@ -344,7 +349,10 @@ export class ProductDetailsPage {
                 this.adDetail = res[i][key].add_detail;
                 this.adKaAdmin = res[i][key].user_id;
                 flag = true;
-                if(res[i][key].add_purchase_status == 1 && res[i][key].add_status != 'approved'){
+                if (
+                  res[i][key].add_purchase_status == 1 &&
+                  res[i][key].add_status != 'approved'
+                ) {
                   this.router.navigateByUrl('home');
                   this.errorToast("Ad doesn't exists");
                 }
@@ -385,11 +393,11 @@ export class ProductDetailsPage {
 
             if (key === 'addImage') {
               for (let j = 0; j < res[i][key].length; j++) {
-                  if (res[i][key][j].add_id == slug) {
-                    this.adImage.push(res[i][key][j].image_name);
-                  } else {
-                      imagesArray.push(res[i][key][j].image_name);
-                  }
+                if (res[i][key][j].add_id == slug) {
+                  this.adImage.push(res[i][key][j].image_name);
+                } else {
+                  imagesArray.push(res[i][key][j].image_name);
+                }
               }
             }
 
@@ -448,7 +456,7 @@ export class ProductDetailsPage {
           }
         }
 
-        if(!flag){
+        if (!flag) {
           this.router.navigateByUrl('home');
           this.errorToast("Ad doesn't exists");
         }
@@ -509,7 +517,8 @@ export class ProductDetailsPage {
               },
               (err) => {
                 console.log(err);
-                this.errorToast(err.error.message);
+                if (this.english) this.errorToast(err.error.message);
+                if (this.arabic) this.errorToast(err.error.msgarb);
               }
             );
           } else {
@@ -573,7 +582,24 @@ export class ProductDetailsPage {
     autoplay: true,
   };
 
-  
+  ionViewDidEnter() {
+    this.storage
+      .get('changeLang')
+      .then((val) => {
+        if (val) {
+          if (val.lang === 'en') {
+            this.english = true;
+            this.arabic = false;
+          } else if (val.lang === 'ar') {
+            this.arabic = true;
+            this.english = false;
+          }
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   ionViewWillEnter() {
     const slugData = this.route.snapshot.paramMap.get('id');
@@ -680,7 +706,7 @@ export class ProductDetailsPage {
             .post('https://specbits.com/class2/fab/fetch-comment', value)
             .subscribe(
               (com: any) => {
-                console.log("fetch comment:", com);
+                console.log('fetch comment:', com);
 
                 // ///////////////////////////
                 if (session != null) {
@@ -825,7 +851,7 @@ export class ProductDetailsPage {
                 this.showUserChat(this.commentedUserId);
               } else {
                 let value = { aid: this.adId, uid: this.userid };
-                console.log("checking userid:", value);
+                console.log('checking userid:', value);
                 this.http
                   .post('https://specbits.com/class2/fab/fetch-comment', value)
                   .subscribe(
@@ -926,6 +952,6 @@ export class ProductDetailsPage {
     slidesPerView: 1,
     autoplay: true,
     spaceBetween: 40,
-    pager: true
+    pager: true,
   };
 }

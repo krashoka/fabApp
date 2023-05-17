@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [dir]="'dir' | translate">
   <!-- Header for Large screen -->
   <app-navbar class="topNav"></app-navbar>
   <!-- ------------------------------------------------ -->
@@ -6,9 +6,9 @@
   <ion-card class="profile">
     <ion-card-header>
       <ion-card-title class="editProfile">
-        <ion-text>Edit Profile</ion-text>
+        <ion-text>{{'profile.editProfile' | translate}}</ion-text>
         <div class="editIcon" (click)="goToMyAccount()">
-          <ion-text class="edit">Back to my account</ion-text>
+          <ion-text class="edit">{{'profile.backToAccount' | translate}}</ion-text>
           <ion-icon name="chevron-forward-outline"></ion-icon>
         </div>
       </ion-card-title>
@@ -19,42 +19,41 @@
     <div>
       <div class="username">
         <ion-icon name="person-circle-sharp"></ion-icon>
-        <ion-text>User name</ion-text>
+        <ion-text>{{'profile.username' | translate}}</ion-text>
       </div>
-      <p class="usernameTip">Enter your full name, nickname or business name</p>
+      <p class="usernameTip">{{'profile.userNameDesc' | translate}}</p>
 
-      <p class="name">Current name</p>
+      <p class="name">{{'profile.currentName' | translate}}</p>
       <div class="currentName">{{username}}</div>
 
-      <p class="name">New name</p>
+      <p class="name">{{'profile.newName' | translate}}</p>
       <ion-input
         type="text"
         class="inputField"
-        placeholder="Enter your new name"
+        [placeholder]="'profile.enterName' | translate"
         [(ngModel)]="newName"
       />
 
       <div class="save_empty">
-        <div class="save" (click)="changeName()">save</div>
-        <div class="empty" (click)="emptyName()">Empty fields</div>
+        <div class="save" (click)="changeName()">{{'profile.save' | translate}}</div>
+        <div class="empty" (click)="emptyName()">{{'profile.emptyFields' | translate}}</div>
       </div>
     </div>
 
     <div>
       <div class="username">
         <ion-icon name="lock-closed"></ion-icon>
-        <ion-text>Password</ion-text>
+        <ion-text>{{'profile.password' | translate}}</ion-text>
       </div>
       <p class="usernameTip">
-        It's a good idea to use a strong password that you don't use anywhere
-        else
+        {{'profile.passwordDesc' | translate}}
       </p>
 
-      <p class="name">Current Password</p>
+      <p class="name">{{'profile.currentPassword' | translate}}</p>
       <div class="passwordField">
         <ion-input
           [type]="typePassword"
-          placeholder="Enter the password"
+          [placeholder]="'profile.enterPassword' | translate"
           [(ngModel)]="currentPassword"
         ></ion-input>
         <ion-icon
@@ -71,11 +70,11 @@
         ></ion-icon>
       </div>
 
-      <p class="name">New Password</p>
+      <p class="name">{{'profile.newPassword' | translate}}</p>
       <div class="passwordField">
         <ion-input
           [type]="typeNewPassword"
-          placeholder="Enter the password"
+          [placeholder]="'profile.enterPassword' | translate"
           [(ngModel)]="newPassword"
         ></ion-input>
         <ion-icon
@@ -92,11 +91,11 @@
         ></ion-icon>
       </div>
 
-      <p class="name">Confirm the new password</p>
+      <p class="name">{{'profile.confirmPassword' | translate}}</p>
       <div class="passwordField">
         <ion-input
           [type]="typeConfirmPassword"
-          placeholder="Confirm the new password"
+          [placeholder]="'profile.confirmPassword' | translate"
           [(ngModel)]="confirmPassword"
         ></ion-input>
         <ion-icon
@@ -114,8 +113,8 @@
       </div>
 
       <div class="save_empty">
-        <div class="save" (click)="changePassword()">save</div>
-        <div class="empty" (click)="emptyPassword()">Empty fields</div>
+        <div class="save" (click)="changePassword()">{{'profile.save' | translate}}</div>
+        <div class="empty" (click)="emptyPassword()">{{'profile.emptyFields' | translate}}</div>
       </div>
     </div>
   </ion-card>

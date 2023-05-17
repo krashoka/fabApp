@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { FloatingChatPageRoutingModule } from './floating-chat-routing.module';
 
+import { TranslateModule } from '@ngx-translate/core';
 import { FloatingChatPage } from './floating-chat.page';
 
 @NgModule({
@@ -13,6 +14,7 @@ import { FloatingChatPage } from './floating-chat.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     FloatingChatPageRoutingModule,
   ],
   declarations: [FloatingChatPage],

@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/api.service';
 import { CookieService } from 'ngx-cookie-service';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
-import { event } from 'jquery';
+import { SharedService } from 'src/app/shared.service';
 
 @Component({
   selector: 'app-navbar',
@@ -33,7 +33,8 @@ export class NavbarPage implements OnInit {
     private navController: NavController,
     private translateService: TranslateService,
     private http: HttpClient,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private sharedService: SharedService
   ) {
     this.storage.create();
     this.translateService.setDefaultLang('en'); // set default language
@@ -60,7 +61,13 @@ export class NavbarPage implements OnInit {
       this.arabicFlag = true;
     }
     let lang = { lang: event };
-    this.storage.set('changeLang', lang);
+    this.storage.set('changeLang', lang).then(() => {
+      console.log('Value set successfully.');
+    }).catch((error) => {
+      console.error('Error setting value:', error);
+    });
+
+    this.sharedService.buttonClicked.emit();
   }
 
   // Change direction from ltr to rtl in arabic language

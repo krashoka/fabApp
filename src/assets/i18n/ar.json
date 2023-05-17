@@ -167,5 +167,27 @@
         "redeemPoints": "استبدال النقاط",
         "enterPoints": "أدخل النقاط لاستبدالها",
         "submit": "يُقدِّم"
-    }
+    },
+
+    "profile":{
+        "editProfile": "تعديل الملف الشخصي",
+        "backToAccount": "العودة إلى حسابي",
+        "username": "اسم المستخدم",
+        "userNameDesc": "أدخل اسمك الكامل أو لقبك أو اسم عملك",
+        "password": "كلمة المرور",
+        "passwordDesc": "من الجيد استخدام كلمة مرور قوية لا تستخدمها في أي مكان آخر",
+        "currentName": "الاسم الحالي",
+        "currentPassword": "كلمة السر الحالية",
+        "enterPassword": "أدخل كلمة المرور",
+        "newName": "اسم جديد",
+        "newPassword": "كلمة المرور الجديدة",
+        "enterName": "أدخل اسمك الجديد",
+        "confirmPassword": "قم بتأكيد كلمة المرور الجديدة",
+        "save": "يحفظ",
+        "emptyFields": "الحقول الفارغة"
+    },
+
+    "chatWithAdmin": "الدردشة مع المسؤول",
+    "admin": "مسؤل",
+    "you": "أنت"
 }

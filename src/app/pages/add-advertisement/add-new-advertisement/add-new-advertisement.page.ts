@@ -6,13 +6,20 @@ import { DataService } from 'src/app/data.service';
 import { Storage } from '@ionic/storage-angular';
 import { NavController } from '@ionic/angular';
 
+import { SharedService } from 'src/app/shared.service';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-add-new-advertisement',
   templateUrl: './add-new-advertisement.page.html',
   styleUrls: ['./add-new-advertisement.page.scss'],
 })
 export class AddNewAdvertisementPage implements OnInit {
+  public buttonClickSubscription: Subscription;
+
   categories: any = [];
+  english = true;
+  arabic = false;
 
   constructor(
     private router: Router,
@@ -20,7 +27,8 @@ export class AddNewAdvertisementPage implements OnInit {
     private navController: NavController,
     public _apiService: ApiService,
     private dataService: DataService,
-    private storage: Storage
+    private storage: Storage,
+    private sharedService: SharedService
   ) {
     this.storage.create();
 
@@ -33,6 +41,24 @@ export class AddNewAdvertisementPage implements OnInit {
         console.log('ErrorMessage: ', error);
       }
     );
+
+    this.buttonClickSubscription = this.sharedService.buttonClicked.subscribe(() => {
+      // Update the UI here
+      this.storage.get('changeLang').then((val) => {
+        if (val) {
+          if (val.lang === 'ar') {
+            this.english = true;
+            this.arabic = false;
+          } else if (val.lang === 'en') {
+            this.arabic = true;
+            this.english = false;
+          }
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+    
+    });
   }
 
   goToCommercialAds() {

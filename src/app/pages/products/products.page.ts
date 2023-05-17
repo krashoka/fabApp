@@ -8,12 +8,18 @@ import { ActivatedRoute } from '@angular/router';
 import { BreadcrumbService } from 'src/app/breadcrumb.service';
 import { Share } from '@capacitor/share';
 
+import { SharedService } from 'src/app/shared.service';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.page.html',
   styleUrls: ['./products.page.scss'],
 })
 export class ProductsPage implements OnInit {
+
+  public buttonClickSubscription: Subscription;
+
   adDetails: any = [];
 
   categoryTitle: any;
@@ -49,13 +55,31 @@ export class ProductsPage implements OnInit {
     public _apiService: ApiService,
     private toastCtrl: ToastController,
     private route: ActivatedRoute,
-    public breadcrumbService: BreadcrumbService
+    public breadcrumbService: BreadcrumbService,
+    private sharedService: SharedService
   ) {
     this.storage.create();
 
     // this.currentUrl = this.router.url;
 
     this.breadcrumbs = this.breadcrumbService.getBreadcrumbs();
+
+    this.buttonClickSubscription = this.sharedService.buttonClicked.subscribe(() => {
+      // Update the UI here
+      this.storage.get('changeLang').then((val) => {
+        if (val) {
+          if (val.lang === 'ar') {
+            this.english = true;
+            this.arabic = false;
+          } else if (val.lang === 'en') {
+            this.arabic = true;
+            this.english = false;
+          }
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+    });
   }
 
   // breadcrumbsFun(titles) {

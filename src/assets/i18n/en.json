@@ -167,5 +167,27 @@
         "redeemPoints": "Redeem Points",
         "enterPoints": "Enter points to redeem",
         "submit": "Submit"
-    }
+    },
+
+    "profile":{
+        "editProfile": "Edit Profile",
+        "backToAccount": "Back to my account",
+        "username": "User name",
+        "userNameDesc": "Enter your full name, nickname or business name",
+        "password": "Password",
+        "passwordDesc": "It's a good idea to use a strong password that you don't use anywhere else",
+        "currentName": "Current Name",
+        "currentPassword": "Current Password",
+        "enterPassword": "Enter the password",
+        "newName": "New Name",
+        "newPassword": "New Password",
+        "enterName": "Enter your new name",
+        "confirmPassword": "Confirm the new password",
+        "save": "save",
+        "emptyFields": "Empty fields"
+    },
+
+    "chatWithAdmin": "Chat With Admin",
+    "admin": "Admin",
+    "you": "You"
 }

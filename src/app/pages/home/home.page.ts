@@ -10,6 +10,8 @@ import { NavController } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import { TranslateService } from '@ngx-translate/core';
 // import { SwiperComponent } from 'swiper/types/shared';
+import { SharedService } from 'src/app/shared.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  public buttonClickSubscription: Subscription;
   // showCommercial= false;
   // showHomeContent = true;
   pageLoaded = false;
@@ -49,7 +52,8 @@ export class HomePage {
     private _apiService: ApiService,
     private route: ActivatedRoute,
     private navController: NavController,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private sharedService: SharedService
   ) {
     this.storage.create();
 
@@ -74,6 +78,24 @@ export class HomePage {
         console.log('ErrorMessage: ', error);
       }
     );
+
+
+    this.buttonClickSubscription = this.sharedService.buttonClicked.subscribe(() => {
+      // Update the UI here
+      this.storage.get('changeLang').then((val) => {
+        if (val) {
+          if (val.lang === 'ar') {
+            this.english = true;
+            this.arabic = false;
+          } else if (val.lang === 'en') {
+            this.arabic = true;
+            this.english = false;
+          }
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+    });
   }
 
   search(text: string) {
@@ -455,6 +477,7 @@ export class HomePage {
     }).catch((err) => {
       console.log(err);
     });
+    
   }
 
   ngOnInit() {

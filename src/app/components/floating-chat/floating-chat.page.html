@@ -12,7 +12,7 @@
 <div class="accountDropdown" *ngIf="onDropdownSelect">
   <div>
     <div class="chatAdmin">
-      <h1>Chat With Admin</h1>
+      <h1>{{'chatWithAdmin' | translate}}</h1>
       <ion-icon
         name="close-circle-outline"
         class="close"
@@ -32,7 +32,7 @@
               </div>
 
               <div>
-                <ion-text>Admin</ion-text>
+                <ion-text>{{'admin' | translate}}</ion-text>
                 <p>{{chat.message}}</p>
               </div>
             </div>
@@ -44,7 +44,7 @@
                 <ion-icon class="avatar" name="person-circle"></ion-icon>
               </div>
               <div>
-                <ion-text>You</ion-text>
+                <ion-text>{{'you' | translate}}</ion-text>
                 <p>{{chat.message}}</p>
               </div>
 
@@ -59,11 +59,11 @@
       <ion-input
         type="text"
         [(ngModel)]="chatMsg"
-        placeholder="Type a message..."
+        [placeholder]="'typeMessage' | translate"
         (keyup.enter)="sendChat()"
       />
       <div (click)="sendChat()">
-        <ion-text>Send</ion-text>
+        <ion-text>{{'send' | translate}}</ion-text>
       </div>
     </div>
   </div>
