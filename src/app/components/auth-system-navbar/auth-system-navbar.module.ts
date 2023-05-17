@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { AuthSystemNavbarPageRoutingModule } from './auth-system-navbar-routing.module';
 
 import { AuthSystemNavbarPage } from './auth-system-navbar.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     AuthSystemNavbarPageRoutingModule,
   ],
   declarations: [AuthSystemNavbarPage],

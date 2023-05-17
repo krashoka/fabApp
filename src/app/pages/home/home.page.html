@@ -26,7 +26,7 @@
         (click)="onHomeClick()"
         [ngClass]="{'clicked': onHomeSelect, 'select': homeNotSelect}"
       >
-        Home Page
+        {{'homePage' | translate}}
       </div>
       <div
         id="commercialTab"
@@ -34,7 +34,7 @@
         (click)="onCommercialClick()"
         [ngClass]="{'clicked': onCommercialSelect}"
       >
-        Commercial ads
+      {{'commercialAds' | translate}}
       </div>
     </div>
   </ion-card>
@@ -277,7 +277,7 @@
     <div *ngIf="homeTabComponent">
       <!-- <div id="stickyTab" *ngIf="showHomeContent"> -->
       <ion-card id="stickyAds">
-        <ion-label>Sticky Ads</ion-label>
+        <ion-label>{{'homeData.stickyAds' | translate}}</ion-label>
         <ion-icon
           name="arrow-forward-outline"
           (click)="goToStickyAds(0, 'all-newest')"
@@ -300,7 +300,7 @@
                 [src]="'https://specbits.com/class2/fab/'+ ad.imagesArray[0]"
               />
               <div class="dayAndHeart">
-                <ion-label>{{ad.timestamp}}</ion-label>
+                <ion-label dir="ltr">{{ad.timestamp}}</ion-label>
                 <ion-icon
                   class="heartSize"
                   [ngClass]="{'heartStyle': !ad.heartRedVisible}"
@@ -318,8 +318,8 @@
               </div>
               <p class="adsTitle">{{ad.adTitle}}</p>
               <div class="adsPrice">
-                <ion-label>{{ad.itemObj.Price}}</ion-label>
-                <ion-label class="currency">KWD</ion-label>
+                <span dir="ltr"><ion-label>{{ad.itemObj.Price}} </ion-label>
+                  <ion-label class="currency">KWD</ion-label></span>
               </div>
               <div class="adsButton">
                 <div>

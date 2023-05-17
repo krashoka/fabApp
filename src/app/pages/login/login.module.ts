@@ -9,12 +9,14 @@ import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
 import { AuthSystemNavbarPageModule } from '../../components/auth-system-navbar/auth-system-navbar.module';
 import { Select2Module } from 'ng-select2-component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     LoginPageRoutingModule,
     AuthSystemNavbarPageModule,
     Select2Module,

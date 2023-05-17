@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [dir]="'dir' | translate">
   <app-auth-system-navbar></app-auth-system-navbar>
 
   <div class="loginLayout">
@@ -7,14 +7,14 @@
     </div>
 
     <div>
-      <h1 class="create">Sign in</h1>
+      <h1 class="create">{{'loginPage.signIn' | translate}}</h1>
 
       <div class="phoneNumberLabel">
         <ion-icon name="call"></ion-icon>
-        <ion-text>Phone Number</ion-text>
+        <ion-text>{{'loginPage.phoneNumber' | translate}}</ion-text>
       </div>
 
-      <div class="mobNumber">
+      <div class="mobNumber" dir="ltr">
         <div class="countryCode">
           <select2
             [overlay]="overlay"
@@ -26,21 +26,21 @@
         </div>
         <ion-input
           type="number"
-          placeholder="Enter a mobile number"
+          [placeholder]="'loginPage.enterMobile' | translate"
           [(ngModel)]="user_mob"
         ></ion-input>
       </div>
 
       <div class="phoneNumberLabel">
         <ion-icon name="key"></ion-icon>
-        <ion-text>Password</ion-text>
+        <ion-text>{{'loginPage.password' | translate}}</ion-text>
       </div>
 
       <div class="passwordField">
         <ion-input
           [type]="typePassword"
           [(ngModel)]="user_pwd"
-          placeholder="Enter the password"
+          [placeholder]="'loginPage.enterPassword' | translate"
           (keyup.enter)="loginUser()"
         ></ion-input>
         <ion-icon
@@ -58,7 +58,7 @@
       </div>
 
       <p class="forgotPassword" routerLink="/forgot-password">
-        Forgot your password?
+        {{'loginPage.forgotPassword' | translate}}
       </p>
 
       <ion-button
@@ -66,25 +66,25 @@
         expand="block"
         class="signinBtn"
         (click)="loginUser()"
-        >Sign in</ion-button
+        >{{'loginPage.signIn' | translate}}</ion-button
       >
     </div>
   </div>
 
   <div class="footerText">
     <p>
-      Don't have an account?
+      {{'loginPage.noAccount' | translate}}
       <ion-text class="signinDifficulty" routerLink="/signup"
-        >Create your account now</ion-text
+        >{{'loginPage.createAccount' | translate}}</ion-text
       >
     </p>
-    <p class="signinDifficulty">Are you facing any problem or difficulties?</p>
+    <p class="signinDifficulty">{{'loginPage.facingDifficulty' | translate}}</p>
   </div>
 
   <div class="footerBottom">
     <p style="text-decoration: underline; cursor: pointer">
-      Terms of Use and Privacy Policy
+      {{'loginPage.terms' | translate}}
     </p>
-    <p>Copyright © fab.net 2023 All Rights Reserved</p>
+    <p>{{'loginPage.copyright' | translate}}</p>
   </div>
 </ion-content>

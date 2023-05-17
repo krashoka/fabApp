@@ -46,9 +46,10 @@ export class NavbarPage implements OnInit {
         this.engFlag = lang.lang !== 'en';
         this.arabicFlag = lang.lang !== 'ar';
       }
+    })
+    .catch((error) => {
+      console.error('Error setting value:', error);
     });
-
-    // this.storage.remove('changeLang');
   }
 
   translate(event) {

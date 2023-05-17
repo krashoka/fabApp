@@ -189,5 +189,48 @@
 
     "chatWithAdmin": "الدردشة مع المسؤول",
     "admin": "مسؤل",
-    "you": "أنت"
+    "you": "أنت",
+    "language": "لغة",
+    "logout": "تسجيل خروج",
+    "welcome": "مرحباً",
+    "homePage": "الصفحة الرئيسية",
+    "commercialAds": "الإعلانات التجارية",
+    "home": "بيت",
+    "myaccount": "حسابي",
+    "addYourAd": "أضف إعلانك",
+    "chats": "الدردشات",
+    "more": "أكثر",
+
+    "loginPage": {
+        "signIn": "تسجيل الدخول",
+        "phoneNumber": "رقم التليفون",
+        "enterMobile": "أدخل رقم الهاتف",
+        "password": "كلمة المرور",
+        "enterPassword": "أدخل كلمة المرور",
+        "forgotPassword": "نسيت كلمة السر؟",
+        "noAccount": "ليس لديك حساب؟",
+        "createAccount": "قم بإنشاء حسابك الآن",
+        "facingDifficulty": "هل تواجه أي مشكلة أو صعوبات؟",
+        "terms": "شروط الاستخدام و سياسة الخصوصية",
+        "copyright": "حقوق الطبع والنشر © fab.net 2023 جميع الحقوق محفوظة"
+    },
+
+    "signUp": {
+        "createAccount": "انشاء حساب جديد",
+        "validNumber": "يرجى إدخال رقم هاتف صالح",
+        "toReceive": "حتى تتمكن من استلام رمز التفعيل من خلاله",
+        "vCode": "رمز التحقق",
+        "phoneNumber": "رقم التليفون",
+        "enterMobile": "أدخل رقم الهاتف",
+        "enterVcode": "أدخل رمز التحقق",
+        "enterRcode": "أدخل رمز الإحالة",
+        "sendVcode": "أرسل رمز التحقق",
+        "verifyCode": "التحقق من كود",
+        "haveAccount": "هل لديك حساب؟",
+        "signIn": "تسجيل الدخول",
+        "facingDifficulty": "هل تواجه أي مشكلة أو صعوبات؟",
+        "terms": "شروط الاستخدام و سياسة الخصوصية",
+        "copyright": "حقوق الطبع والنشر © fab.net 2023 جميع الحقوق محفوظة"
+
+    }
 }

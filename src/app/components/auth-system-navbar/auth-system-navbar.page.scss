@@ -23,6 +23,13 @@ $extra-large-screen: 1200px;
     color: #007bff;
   }
 
+  .langImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
   #fabLogoImg {
     width: 70px;
     height: 40px;
@@ -47,6 +54,13 @@ $extra-large-screen: 1200px;
     gap: 5px;
     font-size: 14px;
     color: #007bff;
+    cursor: pointer;
+  }
+
+  .langImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
     cursor: pointer;
   }
 

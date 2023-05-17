@@ -4,7 +4,7 @@
       <div>
         <ion-icon name="home"></ion-icon>
       </div>
-      <p class="icon_title">Home</p>
+      <p class="icon_title">{{'home' | translate}}</p>
     </div>
 
     <div
@@ -14,40 +14,56 @@
       <div>
         <ion-icon name="person-circle"></ion-icon>
       </div>
-      <p class="icon_title">My account</p>
+      <p class="icon_title">{{'myaccount' | translate}}</p>
     </div>
 
     <div id="addButton">
       <div id="addIcon" (click)="goToAddNewAd()">
         <ion-icon name="close-outline" color="light"></ion-icon>
       </div>
-      <p class="icon_title" style="padding-top: 20px">Add your ad</p>
+      <p class="icon_title" style="padding-top: 20px">{{'addYourAd' | translate}}</p>
     </div>
 
     <div (click)="goToChats()">
       <div>
         <ion-icon name="chatbubbles"></ion-icon>
       </div>
-      <p class="icon_title">Chats</p>
+      <p class="icon_title">{{'chats' | translate}}</p>
     </div>
 
     <div (click)="showMore()">
       <div>
         <ion-icon name="menu"></ion-icon>
       </div>
-      <p class="icon_title">More</p>
+      <p class="icon_title">{{'more' | translate}}</p>
     </div>
   </div>
 </ion-footer>
 
-<div class="moreSection" *ngIf="showLogout">
+<div class="moreSection" *ngIf="showLogout" [dir]="'dir' | translate">
   <ion-card class="welcome">
-    <ion-text>Welcome {{username}}</ion-text>
+    <ion-text>{{'welcome' | translate}} {{username}}</ion-text>
     <ion-icon name="close-circle-outline" (click)="closeMore()"></ion-icon>
   </ion-card>
 
+  <ion-card class="logout">
+    <ion-text>{{'language' | translate}}</ion-text>
+    <ion-img
+      *ngIf="arabicFlag"
+      class="langImg"
+      (click)="translate('ar')"
+      src="../../../assets/images/arabicLang.png"
+    ></ion-img>
+    <ion-img
+      *ngIf="engFlag"
+      class="langImg"
+      (click)="translate('en')"
+      src="../../../assets/images/eng.png"
+    ></ion-img>
+  </ion-card>
+
   <ion-card class="logout" (click)="logout()">
-    <ion-text>Logout</ion-text>
+    <ion-text>{{'logout' | translate}}</ion-text>
     <ion-icon name="exit-outline"></ion-icon>
   </ion-card>
 </div>

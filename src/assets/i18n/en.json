@@ -189,5 +189,47 @@
 
     "chatWithAdmin": "Chat With Admin",
     "admin": "Admin",
-    "you": "You"
+    "you": "You",
+    "language": "Language",
+    "logout": "Logout",
+    "welcome": "Welcome",
+    "homePage": "Home Page",
+    "commercialAds": "Commercial Ads",
+    "home": "Home",
+    "myaccount": "My Account",
+    "addYourAd": "Add your ad",
+    "chats": "Chats",
+    "more": "More",
+
+    "loginPage": {
+        "signIn": "Sign in",
+        "phoneNumber": "Phone Number",
+        "enterMobile": "Enter a phone number",
+        "password": "Password",
+        "enterPassword": "Enter the password",
+        "forgotPassword": "Forgot your password?",
+        "noAccount": "Don't have an account?",
+        "createAccount": "Create your account now",
+        "facingDifficulty": "Are you facing any problem or difficulties?",
+        "terms": "Terms of Use and Privacy Policy",
+        "copyright": "Copyright © fab.net 2023 All Rights Reserved"
+    },
+
+    "signUp": {
+        "createAccount": "Create a new account",
+        "validNumber": "Please enter a valid phone number",
+        "toReceive": "So you can receive the activation code through it",
+        "vCode": "Verification Code",
+        "phoneNumber": "Phone Number",
+        "enterMobile": "Enter a phone number",
+        "enterVcode": "Enter verification code",
+        "enterRcode": "Enter Referal code",
+        "sendVcode": "Send the verification code",
+        "verifyCode": "Verify Code",
+        "haveAccount": "Do you have an account?",
+        "signIn": "Sign in",
+        "facingDifficulty": "Are you facing any problem or difficulties?",
+        "terms": "Terms of Use and Privacy Policy",
+        "copyright": "Copyright © fab.net 2023 All Rights Reserved"
+    }
 }

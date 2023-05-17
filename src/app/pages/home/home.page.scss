@@ -67,22 +67,26 @@ $extra-large-screen: 1200px;
   }
 
   /// slider styling
-  ion-slides {
+
+  .topCrousel {
+    width: 100%;
+    height: 180px;
+    margin-top: 10px;
+
     ion-card {
       width: 100%;
-      height: 180px;
       box-shadow: none;
-      border-radius: 12px;
-
-      img {
-        object-fit: cover;
-        width: 100%;
-        height: 160px;
-        border-radius: 12px;
-        // transform: scale(1.1, 1.1) rotate(1deg);
-        transition: 600ms all ease-in-out;
-      }
+      margin: 0;
+      height: 100%;
     }
+  }
+
+  .topCrousel img {
+    object-fit: cover;
+    width: 100%;
+    // transform: scale(1.1, 1.1) rotate(1deg);
+    transition: 600ms all ease-in-out;
+    height: auto;
   }
 
   /// Slider styling ends here
@@ -164,6 +168,7 @@ $extra-large-screen: 1200px;
   }
 
   .adsTitle {
+    display: flex;
     color: #343a40;
     font-size: 10px;
     // text-align: left;
@@ -173,8 +178,10 @@ $extra-large-screen: 1200px;
   }
 
   .adsPrice {
+    display: flex;
     font-size: 14px;
     font-weight: 700;
+    align-items: center;
     // text-align: left;
     padding: 10px 5px;
   }
@@ -411,31 +418,30 @@ $extra-large-screen: 1200px;
 
   .topCrousel {
     width: 55%;
-    height: 360px;
+    height: 400px;
     text-align: right;
     margin-top: 190px;
-  }
+    
+    ion-slide {
+      border-radius: 12px;
+    }
 
-  .topCrousel ion-slide {
-    // width: 40%;
-    padding-left: 100px !important;
-    border-radius: 12px;
-  }
-
-  .topCrousel ion-card {
-    width: 100%;
-    height: 360px;
-    box-shadow: none;
-    border-radius: 12px;
+    ion-card {
+      width: 100%;
+      box-shadow: none;
+      border-radius: 12px;
+      margin: 0;
+      height: 100%;
+    }
   }
 
   .topCrousel img {
     object-fit: cover;
     width: 100%;
-    height: 360px;
     border-radius: 12px;
     // transform: scale(1.1, 1.1) rotate(1deg);
     transition: 600ms all ease-in-out;
+    height: auto;
   }
 
   // ****************** Search Section ************

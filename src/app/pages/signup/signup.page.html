@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content [dir]="'dir' | translate">
   <app-auth-system-navbar></app-auth-system-navbar>
 
   <div class="signupLayout">
@@ -8,19 +8,19 @@
 
     <div>
       <ion-text class="signupText">
-        <h1 class="create">Create a new account</h1>
-        <p>Please enter a valid phone number</p>
-        <p>So you can receive the activation code through it</p>
+        <h1 class="create">{{'signUp.createAccount' | translate}}</h1>
+        <p>{{'signUp.validNumber' | translate}}</p>
+        <p>{{'signUp.toReceive' | translate}}</p>
       </ion-text>
 
-      <h3 *ngIf="showCode" style="text-align: center">Verification Code: {{verificationCode}}</h3>
+      <h3 *ngIf="showCode" style="text-align: center">{{'signUp.vCode' | translate}}: {{verificationCode}}</h3>
 
       <div class="phoneNumberLabel">
         <ion-icon name="call"></ion-icon>
-        <ion-text>Phone Number</ion-text>
+        <ion-text>{{'signUp.phoneNumber' | translate}}</ion-text>
       </div>
 
-      <div class="mobNumber">
+      <div class="mobNumber" dir="ltr">
         <div class="countryCode">
           <select2
             [overlay]="overlay"
@@ -34,7 +34,7 @@
 
         <ion-input
           type="number"
-          placeholder="Enter a phone number"
+          [placeholder]="'signUp.enterMobile' | translate"
           [(ngModel)]="user_mob"
           [disabled]="isInputDisabled"
         ></ion-input>
@@ -43,7 +43,7 @@
       <div class="verify" *ngIf="isVerify">
         <ion-input
           type="text"
-          placeholder="Enter verification code"
+          [placeholder]="'signUp.enterVcode' | translate"
           [(ngModel)]="vcode"
         ></ion-input>
       </div>
@@ -51,7 +51,7 @@
       <div class="verify" *ngIf="showSendVerify">
         <ion-input
           type="text"
-          placeholder="Enter Referal code"
+          [placeholder]="'signUp.enterRcode' | translate"
           [(ngModel)]="referalCode"
         ></ion-input>
       </div>
@@ -62,7 +62,7 @@
         class="verifyBtn"
         *ngIf="showSendVerify"
         (click)="sendVerify()"
-        >Send the verification code</ion-button
+        >{{'signUp.sendVcode' | translate}}</ion-button
       >
 
       <ion-button
@@ -71,23 +71,23 @@
         class="verifyBtn"
         *ngIf="isVerify"
         (click)="verifyCode()"
-        >Verify Code</ion-button
+        >{{'signUp.verifyCode' | translate}}</ion-button
       >
     </div>
   </div>
 
   <div class="footerText">
     <p>
-      Do you have an account?
-      <ion-text class="signupDifficulty" routerLink="/login">Sign in</ion-text>
+      {{'signUp.haveAccount' | translate}}
+      <ion-text class="signupDifficulty" routerLink="/login">{{'signUp.signIn' | translate}}</ion-text>
     </p>
-    <p class="signupDifficulty">Are you facing any problem or difficulties?</p>
+    <p class="signupDifficulty">{{'signUp.facingDifficulty' | translate}}</p>
   </div>
 
   <div class="footerBottom">
     <p style="text-decoration: underline; cursor: pointer">
-      Terms of Use and Privacy Policy
+      {{'signUp.terms' | translate}}
     </p>
-    <p>Copyright © fab.net 2023 All Rights Reserved</p>
+    <p>{{'signUp.copyright' | translate}}</p>
   </div>
 </ion-content>

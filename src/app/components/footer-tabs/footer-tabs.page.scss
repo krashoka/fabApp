@@ -28,6 +28,13 @@ $small-screen: 576px;
     }
   }
 
+  .langImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
   #addIcon {
     background-color: #e30b1c;
     width: 37px;

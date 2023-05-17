@@ -5,7 +5,17 @@
     src="../../../assets/images/fabLogo.png"
   ></ion-img>
   <div>
-    <ion-text>English</ion-text>
-    <ion-icon name="caret-down"></ion-icon>
+    <ion-img
+      *ngIf="arabicFlag"
+      class="langImg"
+      (click)="translate('ar')"
+      src="../../../assets/images/arabicLang.png"
+    ></ion-img>
+    <ion-img
+      *ngIf="engFlag"
+      class="langImg"
+      (click)="translate('en')"
+      src="../../../assets/images/eng.png"
+    ></ion-img>
   </div>
 </ion-card>

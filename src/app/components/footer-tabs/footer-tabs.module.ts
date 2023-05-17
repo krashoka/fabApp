@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { FooterTabsPageRoutingModule } from './footer-tabs-routing.module';
 
 import { FooterTabsPage } from './footer-tabs.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     FooterTabsPageRoutingModule,
   ],
   declarations: [FooterTabsPage],
